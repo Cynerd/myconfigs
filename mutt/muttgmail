@@ -1,0 +1,7 @@
+# vim: set filetype=muttrc:
+color status red default
+set folder = "~/.mail/gmail"
+source ~/.mutt/mailboxes
+set spoolfile = "+INBOX"
+set record = "+Sent\ Items"
+set postponed = "+Drafts"

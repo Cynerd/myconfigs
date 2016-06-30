@@ -1,0 +1,10 @@
+#!/bin/bash
+if [ -n "`mpc status | grep -E "(playing|paused)"`" ]; then
+	echo `mpc -f "%artist%, %album%, %title%" status | head -1`
+	echo
+	if [ -n `mpc status | grep playing` ]; then
+		echo "#ffff00"
+	elif [ -n `mpc status | grep paused` ]; then
+		echo "#00ff00"
+	fi
+fi

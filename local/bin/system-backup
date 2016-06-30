@@ -1,0 +1,58 @@
+#!/bin/bash
+# vim:ft=sh
+# New line separated list of all directories to backup
+read -d '' DIRS <<-"_EOF_"
+/etc
+/home
+/home_hdd
+_EOF_
+# Directory where backup will be stored
+BACKUP=backup
+# Directory where backup will be mounted
+MBACKUP=/media/backup-hdd
+# UUID of disk
+UUID=21e0c8dd-77cc-44f1-b2bd-bb238d142e7f
+####################################################################
+# Check if running as root
+if [ `id -u` -ne "0" ]; then
+	echo Please run this as root.
+	exit 1
+fi
+# Mount backup disk if available
+PART=$(lsblk -fpl | grep "$UUID" | awk '{print $1}')
+if [ -z "$PART" ]; then
+	echo Disk not detected. Exiting
+	exit -1
+fi
+MPATH=$(lsblk -lp | grep "$PART" | awk '{print$7}')
+if [ -n "$MPATH" ]; then
+	echo Disk already mounted to $MPATH. Continuing with that.
+else
+	MPATH=$MBACKUP
+	mkdir -p "$MPATH"
+	mount "$PART" "$MPATH"
+fi
+
+mkdir -p "$MPATH/$BACKUP"
+while read -r DIR; do
+	echo Backing up: $DIR
+	rdiff-backup -b --exclude-device-files --exclude-fifos --exclude-sockets \
+		--terminal-verbosity=5 --print-statistics \
+		"$DIR" "$MPATH/$BACKUP/$(basename $DIR)/"
+	rdiff-backup --remove-older-than 100D --force \
+		--terminal-verbosity=5 --print-statistics \
+		"$MPATH/$BACKUP/$(basename $DIR)/"
+done <<< "$DIRS"
+
+# If we were mounting it, we should unmount it
+if [ "$MBACKUP" = "$MPATH" ]; then
+	umount "$MPATH"
+fi
+
+date +"%Y%m%d" > /home/cynerd/.backup_date
+pkill -RTMIN+13 i3blocks
+
+sync
+
+echo
+echo Backup finished

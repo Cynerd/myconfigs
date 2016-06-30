@@ -1,0 +1,7 @@
+[user]
+	name = Karel Kočí
+	email = cynerd@email.cz
+[push]
+	default = simple
+[core]
+	editor = vim

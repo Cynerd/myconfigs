@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ -e /proc/acpi/bbswitch ]; then
+	if [ -n "`cat /proc/acpi/bbswitch | grep ON`" ]; then
+		echo OPTIMUS
+		echo OP
+		echo '#ffff00'
+	fi
+fi

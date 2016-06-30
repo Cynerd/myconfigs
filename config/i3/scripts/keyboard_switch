@@ -1,0 +1,14 @@
+#!/bin/bash
+active=`~/.config/i3/scripts/keyboard_layout`
+
+case "$active" in
+	us)
+		setxkbmap cz_qwerty
+		;;
+	cz_qwerty)
+		setxkbmap us
+		;;
+esac
+
+# Send update to i3blocks
+pkill -RTMIN+11 i3blocks

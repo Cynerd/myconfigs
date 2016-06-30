@@ -1,0 +1,47 @@
+#!/bin/bash
+
+if [[ -n "$BLOCK_BUTTON" ]]; then
+	nohup urxvt -title "System backup" -hold -e sudo system-backup 2>&1 >/dev/null &
+fi
+
+state=5
+if [[ -e ~/.backup_date ]]; then
+	today=$(date +"%Y%m%d")
+	prev=$(date -d `cat ~/.backup_date` +"%Y%m%d")
+	dif=$(expr $today - $prev)
+	if [[ $dif -ge 30 ]]; then
+		state=4
+	elif [[ $dif -ge 20 ]]; then
+		state=3
+	elif [[ $dif -ge 5 ]]; then
+		state=2
+	elif [[ $dif -ge 2 ]]; then
+		state=1
+	else
+		state=0
+	fi
+fi
+
+if [[ $state -eq 0 ]]; then
+	exit 0
+fi
+
+echo "Do backup"
+echo "Backup"
+case $state in
+	1)
+		echo
+		;;
+	2)
+		echo "#ffff00"
+		;;
+	3)
+		echo "#ff8a00"
+		;;
+	4)
+		echo "#ff5000"
+		;;
+	5)
+		echo "#ff0000"
+		;;
+esac

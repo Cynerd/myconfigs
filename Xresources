@@ -1,0 +1,50 @@
+!  XTerm ##
+XTerm*metaSendsEscape: true
+XTerm*locale: true
+Xterm*saveLines: 4096
+XTerm*reverseVideo: on
+Xterm*faceName: Liberation Mono:size=10:antialias=true
+Xterm*borderWidth: 0
+! unicode rxvt ##
+URxvt*background: black
+URxvt*foreground: white
+URxvt*color0: black
+URxvt*color1: red3
+URxvt*color2: green3
+URxvt*color3: yellow3
+URxvt*color4: blue2
+URxvt*color5: magenta3
+URxvt*color6: cyan3
+URxvt*color7: gray90
+URxvt*color8: grey50
+URxvt*color9: red
+URxvt*color10: green
+URxvt*color11: yellow
+!URxvt*color12: blue
+URxvt*color12: rgb:5c/5c/ff
+URxvt*color13: magenta
+URxvt*color14: cyan
+URxvt*color15: white
+! scrollbar style - rxvt (default), plain (most compact), next, or xterm
+!URxvt.scrollstyle: plain
+URxvt.scrollBar: false
+! do not scroll with output
+URxvt*scrollTtyOutput: false
+! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt*scrollWithBuffer: true
+! scroll back to the bottom on keypress
+URxvt*scrollTtyKeypress: true
+! Disable scrollback for secondary screens
+URxvt*secondaryScreen: 1
+URxvt*secondaryScroll: 0
+! Font
+URxvt*font: xft:mono:size=10
+URxvt*perl-ext-common:  default,clipboard,vtwheel,resize-font
+URxvt*resize-font*smaller: C-Down
+URxvt*resize-font*bigger: C-Up
+
+URxvt*iso14755: False
+URxvt*keysym*Shift-Control-C: perl:clipboard:copy
+URxvt*keysym*Shift-Control-V: perl:clipboard:paste
+URxvt*clipboard*copycmd:  xsel -ib
+URxvt*clipboard*pastecmd: xsel -ob

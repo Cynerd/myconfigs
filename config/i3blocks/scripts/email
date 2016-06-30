@@ -1,0 +1,5 @@
+#!/bin/bash
+
+email-unread -s | tr "\n" " " |  sed 's/[ ]*$/\n/'
+echo
+echo "#ffff00"
