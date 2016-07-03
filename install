@@ -18,14 +18,15 @@ if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst bashrc $WHOME/.bashrc
 fi
 
-read -p "Install Bashrc to root? (Y/n) "
-if [[ $REPLY =~ ^[Yy]?$ ]]; then
-	sudo inst bashrc /root/.bashrc
-fi
+# This doesn't work. sudo can't be called on function
+#read -p "Install Bashrc to root? (Y/n) "
+#if [[ $REPLY =~ ^[Yy]?$ ]]; then
+	#sudo inst bashrc /root/.bashrc
+#fi
 
 read -p "Install GIT configuration? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
-	sudo inst gitconfig $WHOME/.gitconfig
+	inst gitconfig $WHOME/.gitconfig
 fi
 
 read -p "Install VIM scripts? (Y/n) "
