@@ -1,5 +1,6 @@
 xrdb -merge -I$HOME ~/.Xresources
 #xmodmap ~/.speedswapper
+setxkbmap -option caps:escape
 
 #srandrd ~/.bin/mxrandr
 mxrandr
