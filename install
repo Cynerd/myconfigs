@@ -46,6 +46,11 @@ if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst local/bin/mxrandr $WHOME/.local/bin/mxrandr
 fi
 
+read -p "Install Conkeror configuration? (Y/n) "
+if [[ $REPLY =~ ^[Yy]?$ ]]; then
+	inst conkerorrc $WHOME/.conkerorrc
+fi
+
 read -p "Install MPD configuration? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst config/mpd $WHOME/.config/mpd
