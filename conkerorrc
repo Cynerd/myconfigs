@@ -1,4 +1,9 @@
 // vim:ft=javascript
+require("theme.js");
+theme_load_paths.unshift("~/.conkeror/");
+theme_unload("default");
+theme_load("theme");
+//theme_load("conkeror-theme-zenburn");
 
 require("session.js");
 session_auto_save_auto_load = true;
@@ -6,11 +11,22 @@ session_auto_save_auto_load = true;
 require("favicon.js");
 require("new-tabs.js");
 tab_bar_show_icon = true;
-tab_bar_show_index = true;
+tab_bar_show_index = false;
+
+require("clicks-in-new-buffer.js");
+
+require("opensearch.js");
+define_opensearch_webjump("?", "duckduckgo.xml");
+define_opensearch_webjump("?g", "google.xml");
+define_opensearch_webjump("?w", "wikipedia.xml");
+define_opensearch_webjump("?e", "eBay.xml");
 
 url_completion_use_history = true;
+url_remoting_fn = load_url_in_new_buffer;
+download_buffer_automatic_open_target = OPEN_NEW_BUFFER_BACKGROUND;
 
-define_opensearch_webjump("ddg", "ddg.xml");
+// Set zoom to 90% (this is normal zoom don't know why default seems to be 110% or so.
+session_pref("layout.css.devPixelsPerPx", "0.9");
 
 /////////////////////////////////////////////////////////////////////////////////
 // reopening closed buffers

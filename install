@@ -49,6 +49,7 @@ fi
 read -p "Install Conkeror configuration? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst conkerorrc $WHOME/.conkerorrc
+	inst conkeror $WHOME/.conkeror
 fi
 
 read -p "Install MPD configuration? (Y/n) "
