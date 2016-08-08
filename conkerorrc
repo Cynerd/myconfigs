@@ -20,6 +20,10 @@ define_opensearch_webjump("?g", "google.xml");
 define_opensearch_webjump("?w", "wikipedia.xml");
 define_opensearch_webjump("?e", "eBay.xml");
 
+external_content_handlers.set("application/pdf", "okular");
+external_content_handlers.set("video/*", "vlc");
+editor_shell_command = "urxvt -e vi";
+
 url_completion_use_history = true;
 url_remoting_fn = load_url_in_new_buffer;
 download_buffer_automatic_open_target = OPEN_NEW_BUFFER_BACKGROUND;
