@@ -22,7 +22,7 @@ define_opensearch_webjump("?e", "eBay.xml");
 
 external_content_handlers.set("application/pdf", "okular");
 external_content_handlers.set("video/*", "vlc");
-editor_shell_command = "urxvt -e vi";
+editor_shell_command = "urxvt -e vim";
 
 url_completion_use_history = true;
 url_remoting_fn = load_url_in_new_buffer;

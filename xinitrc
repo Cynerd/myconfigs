@@ -1,6 +1,7 @@
 xrdb -merge -I$HOME ~/.Xresources
-#xmodmap ~/.speedswapper
 setxkbmap -option caps:escape
+
+export QT_STYLE_OVERRIDE='gtk2'
 
 #srandrd ~/.bin/mxrandr
 mxrandr

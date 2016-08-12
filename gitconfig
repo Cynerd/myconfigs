@@ -5,3 +5,7 @@
 	default = simple
 [core]
 	editor = vim
+[commit]
+        gpgsign = true
+[merge]
+        tool = vimdiff
