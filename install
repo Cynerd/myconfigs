@@ -1,10 +1,6 @@
 #!/bin/bash
 
-WDIR=`pwd`
 cd `dirname $0`
-
-IUSER=`whoami`
-WHOME=`cd ~ && pwd`
 
 function inst {
 	SOURCE=$1
@@ -15,54 +11,53 @@ function inst {
 
 read -p "Install Bashrc? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
-	inst bashrc $WHOME/.bashrc
+	inst bashrc ~/.bashrc
 fi
-
-# This doesn't work. sudo can't be called on function
-#read -p "Install Bashrc to root? (Y/n) "
-#if [[ $REPLY =~ ^[Yy]?$ ]]; then
-	#sudo inst bashrc /root/.bashrc
-#fi
 
 read -p "Install GIT configuration? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
-	inst gitconfig $WHOME/.gitconfig
+	inst gitconfig ~/.gitconfig
 fi
 
 read -p "Install VIM scripts? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
-	inst vimrc $WHOME/.vimrc
-	inst vim $WHOME/.vim
+	inst vimrc ~/.vimrc
+	inst vim ~/.vim
 	echo "Please don't forget to setup YouCompleteMe"
 fi
 
-read -p "Install i3 configuration? (Y/n) "
+read -p "Install i3 configuration and related tools? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
-	inst xinitrc $WHOME/.xinitrc
-	inst Xresources $WHOME/.Xresources
-	inst config/i3 $WHOME/.config/i3
-	inst config/i3blocks $WHOME/.config/i3blocks
-	inst config/i3status $WHOME/.config/i3status
-	inst local/bin/mxrandr $WHOME/.local/bin/mxrandr
+	inst xinitrc ~/.xinitrc
+	inst Xresources ~/.Xresources
+	inst config/i3/ ~/.config/i3
+	inst config/i3blocks/ ~/.config/i3blocks
+	inst config/i3status/ ~/.config/i3status
+	inst local/bin/mxrandr ~/.local/bin/mxrandr
 fi
 
 read -p "Install Conkeror configuration? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
-	inst conkerorrc $WHOME/.conkerorrc
-	inst conkeror $WHOME/.conkeror
+	inst conkerorrc ~/.conkerorrc
+	inst conkeror/ ~/.conkeror
 fi
 
 read -p "Install MPD configuration? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
-	inst config/mpd $WHOME/.config/mpd
+	inst config/mpd/ ~/.config/mpd
+fi
+
+read -p "Install Mopidy configuration? (Y/n) "
+if [[ $REPLY =~ ^[Yy]?$ ]]; then
+	inst config/mopidy/ ~/.config/mopidy
 fi
 
 read -p "Install backup script? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
-	inst local/bin/system-backup $WHOME/.local/bin/system-backup
+	inst local/bin/system-backup ~/.local/bin/system-backup
 fi
 
 read -p "Install Eagle CAD configuration? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
-	inst eaglerc $WHOME/.eaglerc
+	inst eaglerc ~/.eaglerc
 fi
