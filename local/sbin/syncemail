@@ -1,0 +1,36 @@
+#!/usr/bin/python2
+# This starts offlineimap, but first it requests passwords from pass by user
+# notification launching script at front.
+import os
+import sys
+import subprocess
+from offlineimap import OfflineImap
+
+frontscript = """
+echo "Asking for gpg password to access pass" 1>&2
+pass mail/cynerd@email.cz
+echo "All done" 1>&2
+"""
+annoyme = [
+		  os.path.expanduser("~/.local/sbin/annoyme-request"),
+		  "syncemail",
+		  "Imap email synchronization service password request."
+		  ]
+
+anproc = subprocess.Popen(annoyme, stdin=subprocess.PIPE,
+                          stdout=subprocess.PIPE)
+anproc.stdin.write(frontscript)
+anproc.stdin.close()
+output = anproc.stdout.read().splitlines()
+excode = anproc.wait()
+
+if excode != 0:
+    print("Authentication failed. Please start emailsync again")
+    sys.exit(1)
+print(output)
+
+sys.argv.append('-k')
+sys.argv.append('Repository_email-remote:remotepass=' + output[0])
+
+
+OfflineImap().run()

@@ -1,0 +1,10 @@
+[Unit]
+Description=Email synchronization
+
+[Service]
+ExecStart=/home/cynerd/.local/sbin/syncemail
+KillSignal=SIGUSR2
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
