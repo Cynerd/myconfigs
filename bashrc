@@ -42,7 +42,10 @@ PS1='$(
 if [ `id -u` -eq "0" ]; then
 	echo -n "\[\e[1;31m\]\u@\h:\[\e[1;34m\]\W\[\e[1;31m\]\$\[\e[0m\] "
 else
-	echo -n "\[\e[1;32m\]\u@\h:\[\e[1;34m\]\W\[\e[1;32m\]\$\[\e[0m\] "
+	if ls .annoyme/*.pid 2>/dev/null >/dev/null; then
+		ANNOYME_PS="\[\e[1;31m\]!\[\e[0m\]"
+	fi
+	echo -n "$ANNOYME_PS\[\e[1;32m\]\u@\h:\[\e[1;34m\]\W\[\e[1;32m\]\$\[\e[0m\] "
 fi)'
 
 PROMPT_COMMAND='
