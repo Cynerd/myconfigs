@@ -2,15 +2,15 @@
 
 DOT_ANNOYME=~/.annoyme
 
-for NAME in `ls | grep -E '.pid$' | sed 's/\.pid$//'`; do
+for NAME in `ls "$DOT_ANNOYME" | grep -E '.pid$' | sed 's/\.pid$//'`; do
 	echo -e "\033[0;31m$NAME:\033[0m" `cat "$DOT_ANNOYME/$NAME.desc"`
 	echo -ne "\033[0;1m Y/n: \033[0;0m"
 	read
 	if [[ $REPLY =~ ^[Yy]?$ ]]; then
 		if $DOT_ANNOYME/$NAME.script > "$DOT_ANNOYME/$NAME.out"; then
-			kill -SIGUSR1 `cat $NAME.pid`
+			kill -SIGUSR1 `cat "$DOT_ANNOYME/$NAME.pid"`
 		else
-			kill -SIGUSR2 `cat $NAME.pid`
+			kill -SIGUSR2 `cat "$DOT_ANNOYME/$NAME.pid"`
 		fi
 	fi
 	echo
