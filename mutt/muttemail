@@ -1,7 +1,8 @@
 # vim: set filetype=muttrc:
 color status green default
 set folder = "~/.mail/email"
-source ~/.mutt/mailboxes
 set spoolfile = "+INBOX"
-set record = "+Sent\ Items"
-set postponed = "+Drafts"
+set record = "+sent"
+set postponed = "+drafts"
+set from = "cynerd@email.cz"
+set sendmail="/usr/bin/msmtp -a email"

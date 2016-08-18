@@ -21,10 +21,3 @@ status_backend = sqlite
 autorefresh = 5
 quick = 5
 
-[mbnames]
-enabled = yes
-filename = ~/.mutt/mailboxes
-header = "mailboxes "
-peritem = "+%(foldername)s"
-sep = " "
-footer = "\n"
