@@ -26,6 +26,21 @@ if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	echo "Please don't forget to setup YouCompleteMe"
 fi
 
+read -p "Install email synchronization? (Y/n) "
+if [[ $REPLY =~ ^[Yy]?$ ]]; then
+	inst local/bin/annoyme ~/.local/bin/
+	inst local/sbin/annoyme-request ~/.local/sbin/
+	inst local/sbin/syncemail ~/.local/sbin/
+	inst config/offlineimap/ ~/.config/offlineimap
+	inst config/systemd/user/syncemail.service ~/.config/systemd/user
+fi
+
+read -p "Install mutt configuration? (Y/n) "
+if [[ $REPLY =~ ^[Yy]?$ ]]; then
+	inst mutt/ ~/.mutt
+	inst urlview ~/.urlview
+fi
+
 read -p "Install i3 configuration and related tools? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst xinitrc ~/.xinitrc
