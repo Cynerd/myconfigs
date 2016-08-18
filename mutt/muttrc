@@ -3,27 +3,25 @@ set my_name="Karel Kočí"
 
 hdr_order Date From To Cc #Sorting emails by the given criteria (from left to right)
 set pager_index_lines= 5
-set sort = 'threads'
-set sort_aux = 'last-date-received'
+set sort=reverse-threads
+set sort_aux=last-date-received
 
-#set mbox_type=Maildir
-#set folder = "~/.mail"
-#set spoolfile = "+gmail/Inbox"
-#set record = "+gmail/Sent"
-#set postponed = "+gmail/Drafts"
-#set header_cache=~/.cache/mutt
-#
-#set folder = "~/.imail"
-#source ~/.mutt/mailboxes
-#set spoolfile = "+gmail/INBOX"
-#set record = "+gmail/Sent\ Items"
-#set postponed = "+gmail/Drafts"
+set mailcap_path 	= ~/.mutt/mailcap
+auto_view text/html
+alternative_order text/enriched text/plain text/html 
+macro attach 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && conkeror ~/.cache/mutt/mail.html && rm ~/.cache/mutt/mail.html<enter>"
 
-macro index <F2> ':source ~/.mutt/muttgmail<enter>c~/.mail/gmail/INBOX<enter>'
+source ~/.mutt/gpg.rc
+set pgp_use_gpg_agent = yes
+set pgp_sign_as = 2B1F70F95F1B48DA2265A7FAA6BC8B8CEB31659B
+set pgp_timeout = 3600
+set crypt_autosign = yes
+set crypt_replyencrypt = yes
+
+
 macro index <F3> ':source ~/.mutt/muttemail<enter>c~/.mail/email/INBOX<enter>'
-macro index <F4> ':source ~/.mutt/muttfel<enter>c~/.mail/fel/INBOX<enter>'
 
 source ~/.mutt/color
 
-# As default open gmail
-source ~/.mutt/muttgmail
+# As default open email
+source ~/.mutt/muttemail
