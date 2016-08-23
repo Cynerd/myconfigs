@@ -30,7 +30,7 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec urxvt
-bindsym $mod+Shift+Return exec pidgin & conkeror
+bindsym $mod+Shift+Return exec conkeror & pidgin
 
 # kill focused window
 bindsym $mod+q kill
@@ -133,7 +133,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 bindsym $mod+Shift+grave move container to workspace web
 bindsym $mod+Shift+underscore move container to workspace t
 
-assign [class="Firefox"] web
+#assign [class="Firefox"] web
 for_window [class="Pidgin"] move scratchpad
 
 # reload the configuration file

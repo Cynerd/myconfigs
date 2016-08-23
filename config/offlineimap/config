@@ -20,4 +20,5 @@ remoterepository = email-remote
 status_backend = sqlite
 autorefresh = 5
 quick = 5
+postsynchook = ~/.local/sbin/newmail-notify
 

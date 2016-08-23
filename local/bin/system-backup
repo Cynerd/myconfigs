@@ -25,6 +25,7 @@ if [ -z "$PART" ]; then
 	exit -1
 fi
 MPATH=$(lsblk -lp | grep "$PART" | awk '{print$7}')
+# TODO check if this is not in backupped path
 if [ -n "$MPATH" ]; then
 	echo Disk already mounted to $MPATH. Continuing with that.
 else

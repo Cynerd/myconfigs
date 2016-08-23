@@ -1,6 +1,7 @@
 [user]
 	name = Karel Kočí
 	email = cynerd@email.cz
+	signingkey = A6BC8B8CEB31659B
 [push]
 	default = simple
 [core]
@@ -8,4 +9,8 @@
 [commit]
         gpgsign = true
 [merge]
-        tool = vimdiff
+	tool = vimdiff
+[pull]
+	ff = only
+[commit]
+	gpgSign = true

@@ -151,9 +151,9 @@ command=~/.config/i3blocks/scripts/battery
 #instance=1
 interval=30
 
-#[email]
-#command=~/.config/i3blocks/scripts/email
-#interval=30
+[email]
+command=~/.config/i3blocks/scripts/email
+interval=30
 
 # Date Time
 #

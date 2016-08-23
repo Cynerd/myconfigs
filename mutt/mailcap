@@ -9,3 +9,6 @@ text/html; w3m -v -F -T text/html "%s"; nametemplate=%s.html; needsterminal
 ##auto_view will use the entry with the copiousoutput part:
 text/html; lynx -stdin -dump -force_html ; copiousoutput
 
+image/*; feh %s
+application/pdf; okular %s
+
