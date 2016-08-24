@@ -9,7 +9,7 @@ else
 fi
 
 for account in $(ls "$EMAIL"); do
-	cd $EMAIL/$account
+	if ! cd $EMAIL/$account; then continue; fi
 	COUNT="0"
 	COUNT=$(find . -name new -type d -print0 |
 	while read -d $'\0' folder; do
