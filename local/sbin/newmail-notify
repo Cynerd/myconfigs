@@ -13,9 +13,10 @@ for account in `ls`; do
 			echo $m
 			echo $m >> ~/.mail/notify-notified
 			if echo "$NOTIFIED" | grep "$m" >/dev/null; then continue; fi
-			FROM=`grep -E "^From: " "$m" | sed 's/^From: //'`
-			SUBJECT=`grep -E "^Subject: " "$m" | sed 's/^Subject: //'`
-			notify-send "Email: $account" "$FROM: $SUBJECT"
+			FROM=`grep -E "^From: " "$m" | sed 's/^From: //' | perl -CS -MEncode -ne 'print decode("MIME-Header", $_)'`
+			TO=`grep -E "^To: " "$m" | sed 's/^To: //' | perl -CS -MEncode -ne 'print decode("MIME-Header", $_)'`
+			SUBJECT=`grep -E "^Subject: " "$m" | sed 's/^Subject: //' | perl -CS -MEncode -ne 'print decode("MIME-Header", $_)'`
+			notify-send "$TO: $FROM" "$SUBJECT"
 		done
 	fi
 	cd ~/.mail
