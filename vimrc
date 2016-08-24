@@ -18,7 +18,7 @@ function InitBase()
 	set number
 	set hidden
 	set undofile
-	set undodir=.vimundo
+	set undodir=~/.cache/vim-undo//
 	set colorcolumn=82
 	set textwidth=82
 	highlight ColorColumn ctermbg=darkgray
@@ -41,19 +41,12 @@ let g:netrw_banner=0
 let g:netrw_liststyle=1
 let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+'
 
-"let g:NERDTreeWinPos = "right"
-"let g:NERDTreeWinSize = 30
-
 let g:table_mode_corner="|"
 
 colorscheme elflord
 
-" Gitgutter colors change for dark theme match
-" autocmd VimEnter * hi clear SignColumn
-" autocmd VimEnter * hi GitGutterChangeDefault ctermfg=3 ctermbg=16 guifg=#bbbb00 guibg=Grey
-" autocmd VimEnter * hi GitGutterChangeDefault ctermfg=3 ctermbg=16 guifg=#bbbb00 guibg=Grey
-" autocmd VimEnter * hi GitGutterDeleteDefault ctermfg=1 ctermbg=16 guifg=#ff2222 guibg=Grey
-" autocmd VimEnter * hi GitGutterAddDefault ctermfg=2 ctermbg=16 guifg=#009900 guibg=Grey
+" Directory where *.swp files will be stored
+set directory=$HOME/.cache/vim//
 
 map <F2> :call InitBase()<cr>
 map <F10> :setlocal spell! spelllang=en_us<cr>
@@ -83,9 +76,6 @@ endfunction
 
 function InitC()
 	call InitBase()
-	set expandtab
-
-	"execute 'NERDTree'
 
 	map <F2> gggqG2<c-o>
 	map <F3> :w<cr>
