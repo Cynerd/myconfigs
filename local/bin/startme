@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if ls ~/.annoyme/*.pid 2>/dev/null >/dev/null; then
+	annoyme
+fi
+
+startx
