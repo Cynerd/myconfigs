@@ -50,6 +50,7 @@ set directory=$HOME/.cache/vim//
 
 map <F2> :call InitBase()<cr>
 map <F10> :setlocal spell! spelllang=en_us<cr>
+map <F11> :setlocal spell! spelllang=cs<cr>
 
 function InitBash()
 	call InitBase()

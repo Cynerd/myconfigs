@@ -20,7 +20,7 @@ alias gdb='gdb -q'
 alias cgdb='cgdb -q'
 alias octave='octave-cli -q'
 alias ssh='TERM="xterm-256color" ssh'
-alias pacaur='pacaur -a'
+alias make='make -j8'
 
 export LESS=-R
 export LESS_TERMCAP_mb=$'\E[1;31m'
