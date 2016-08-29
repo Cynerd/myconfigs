@@ -2,11 +2,50 @@
 
 cd `dirname $0`
 
-function inst {
-	SOURCE=$1
-	OUTPUT=$2
-	echo rsync -rlpt $SOURCE $OUTPUT
-	rsync -rlpt $SOURCE $OUTPUT
+dodiff() {
+	if ! [ -f "$2" ]; then
+		echo "Not installed: $1 => $2"
+		read -p "Install? (Y/n) "
+		if [[ $REPLY =~ ^[Yy]?$ ]]; then
+			doinst $1 $2
+		fi
+		return
+	fi
+	if cmp "$1" "$2" >/dev/null; then
+		echo "No difference detected: $2"
+		return
+	fi
+	vimdiff "$1" "$2"
+}
+diff() {
+	# Ignore some folders.
+	if ! echo $1 | sed '/vim/q1' >/dev/null; then
+		continue
+	fi
+	# Iterate trough source directory
+	# Note that its design decision to not iterate trough target directory.
+	if [ -d "$1" ]; then
+		for f in `find "$1" -type f`; do
+			F="${f#$1/}"
+			echo $f
+			dodiff "$1/$F" "$2/$F"
+		done
+	else
+		dodiff "$1" "$2"
+	fi
+}
+
+doinst() {
+	echo rsync -rlpt $1 $2
+	rsync -rlpt $1 $2
+}
+inst() {
+	if [ -e "$2" ]; then
+		# If output exists, execute diff instead
+		diff $1 $2
+		return
+	fi
+	doinst $1 $2
 }
 
 read -p "Install Bashrc? (Y/n) "
