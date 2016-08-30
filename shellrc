@@ -1,0 +1,43 @@
+# vim: ft=sh:
+# This is file with aliases and variables shared between bash and zsh
+
+export PATH=.local/bin:$PATH:$(ruby -e "print Gem.user_dir")/bin
+export EDITOR=vim
+
+alias debian='ssh debian'
+alias turris='ssh turris'
+alias omnia='ssh omnia'
+
+alias ls='ls --color=auto'
+alias ll='ls -l'
+eval $(dircolors -b)
+alias grep='grep --color=auto'
+alias git='LANG=en_GB git'
+alias gdb='gdb -q'
+alias cgdb='cgdb -q'
+alias octave='octave-cli -q'
+alias ssh='TERM="xterm-256color" ssh'
+alias feh='feh -.'
+alias make='make -j8'
+
+export LESS=-R
+export LESS_TERMCAP_mb=$'\E[1;31m'
+export LESS_TERMCAP_md=$'\E[1;36m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[1;32m'
+
+alias gst='git status'
+alias vimc='vim -c "call InitC()"'
+alias vimb='vim -c "call InitBase()"'
+alias vimp='vim -c "call InitPython()"'
+alias vims='vim -c "call InitBash()"'
+alias i='i3-msg'
+
+genpasswd() {
+	local l=$1
+	if [ "$l" = "" ]; then l=16; fi
+	tr -dc A-Za-z0-9_ < /dev/urandom | head -c ${l} | xargs
+}

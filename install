@@ -51,11 +51,19 @@ inst() {
 read -p "Install Bashrc? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst bashrc ~/.bashrc
+	inst shellrc ~/.shellrc
+fi
+
+read -p "Install zshrc? (Y/n) "
+if [[ $REPLY =~ ^[Yy]?$ ]]; then
+	inst zshrc ~/.zshrc
+	inst shellrc ~/.shellrc
 fi
 
 read -p "Install GIT configuration? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst gitconfig ~/.gitconfig
+	inst local/.git-prompt.sh ~/.local/
 fi
 
 read -p "Install VIM scripts? (Y/n) "
