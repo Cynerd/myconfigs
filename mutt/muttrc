@@ -22,6 +22,9 @@ set crypt_autosign = yes
 set crypt_replyencrypt = yes
 set sendmail="/usr/bin/msmtp --read-envelope-from"
 
+set query_command= "abook --mutt-query '%s'"
+bind editor        <Tab> complete-query
+
 set sidebar_visible = yes
 bind index,pager B sidebar-toggle-visible
 # Ctrl-n, Ctrl-p to select next, previous folder.
@@ -38,9 +41,6 @@ bind pager g top
 bind pager G bottom
 bind attach,index g first-entry
 bind attach,index G last-entry
-
-set query_command= "abook --mutt-query '%s'"
-bind editor        <Tab> complete-query
 
 macro index <F3> ':source ~/.mutt/muttemail<enter>c~/.mail/email/INBOX<enter>'
 
