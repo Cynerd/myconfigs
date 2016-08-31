@@ -91,3 +91,85 @@ interactive("revive-buffer",
         }
     });
 /////////////////////////////////////////////////////////////////////////////////
+// pass password management
+define_key(default_global_keymap, "C-j", "pass-chose-account");
+define_key(default_global_keymap, "C-J", "pass-get-password");
+
+function get_domain(I) {
+	var domain = I.buffer.document.location.href;
+	var tmp_a = I.buffer.document.createElement('a');
+	tmp_a.href = domain;
+	domain = tmp_a.hostname.replace(/^www\./, '');
+	yield co_return(domain);
+}
+
+function shell(cmd, input) {
+	var res = {
+		stdout: "",
+		stderr: "",
+		result: 0
+	};
+	res.result = yield shell_command(cmd,
+					 $fds = [{ output: async_binary_string_writer(input) },
+							 { input: async_binary_reader(function (s) res.stdout+=s||"") },
+							 { input: async_binary_reader(function (s) res.stderr+=s||"") }
+							]
+					);
+	yield co_return(res);
+};
+
+var pass_domain = "";
+var pass_account = "";
+
+function pass_get_password(I) {
+	var domain = yield get_domain(I);
+	dumpln("why?");
+	if (pass_account == "" || pass_domain != domain) {
+		I.window.minibuffer.message("pass: Please use C-j first to set account for domain: " + domain);
+	} else {
+		if (I.buffer.focused_element) {
+			var res = yield shell("pass " + pass_account, "");
+			dumpln(res.stdout);
+			I.buffer.focused_element.value = res.stdout;
+			I.window.minibuffer.message("pass: Inserted password for account: " + pass_account);
+		}
+	}
+};
+
+function pass_chose_account(I) {
+	var domain = yield get_domain(I);
+	var res = yield shell("cd ~/.password-store && find -path '*" + domain + "*' -type f", "");
+	var accs = res.stdout.split('\n');
+	if (accs.length == 0 || accs.length == 1) {
+		I.window.minibuffer.message("pass: No accounts detected for domain: " + domain);
+		return;
+	// Note that accs has empty line at end so all this is bupped by one
+	} else if (accs.length == 2) {
+		pass_account = accs[0].replace(/\.\//, '').replace(/\.gpg$/, '');
+	} else {
+		var accs_list = [];
+		for (i = 0; i < accs.length - 1; i++) {
+			accs_list.push(accs[i].replace(/\.\//, '').replace(/\.gpg$/, ''));
+		}
+		pass_account = yield I.minibuffer.read(
+			$prompt = "Chose account for " + domain + ":",
+			$completer = new all_word_completer($completions = accs_list),
+			$default_completion = accs_list[accs_list.length - 1],
+			$auto_complete = "url",
+			$auto_complete_initial = true,
+			$auto_complete_delay = 0,
+			$require_match = true);
+	}
+	pass_domain = domain;
+	I.window.minibuffer.message("pass: Chosen account: " + pass_account);
+	if (I.buffer.focused_element){
+		var regexp = /[^\/]*$/;
+		I.buffer.focused_element.value = regexp.exec(pass_account)[0];
+	}
+};
+
+// TODO iterate trough all pass to chose account
+
+interactive("pass-chose-account", "Choses account for to be loged as. As result name of account is outputed.", pass_chose_account);
+interactive("pass-get-password", "Receives password from pass for currently selected account.", pass_get_password);
+/////////////////////////////////////////////////////////////////////////////////
