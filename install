@@ -110,17 +110,7 @@ if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst config/mpd/ ~/.config/mpd
 fi
 
-read -p "Install Mopidy configuration? (Y/n) "
-if [[ $REPLY =~ ^[Yy]?$ ]]; then
-	inst config/mopidy/ ~/.config/mopidy
-fi
-
 read -p "Install backup script? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst local/bin/system-backup ~/.local/bin/system-backup
-fi
-
-read -p "Install Eagle CAD configuration? (Y/n) "
-if [[ $REPLY =~ ^[Yy]?$ ]]; then
-	inst eaglerc ~/.eaglerc
 fi
