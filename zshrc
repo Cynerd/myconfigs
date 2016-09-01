@@ -1,5 +1,13 @@
+zstyle ':completion:*' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' insert-unambiguous true
+zstyle ':completion:*' max-errors 3
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.cache/zsh
+zstyle :compinstall filename '/home/kkoci/.zshrc'
+zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==32=33}:${(s.:.)LS_COLORS}")'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
 autoload -Uz compinit && compinit
-autoload -Uz promptinit && promptinit
 autoload -Uz colors && colors
 
 HISTFILE=~/.histfile
@@ -29,7 +37,7 @@ annoyme_check() {
 }
 if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="green"; fi
 PROMPT="%(?..%{$fg_bold[yellow]%}EXIT: %?
-)\$(annoyme_check)%{$fg_bold[$NCOLOR]%}%n@%m:%{$fg_bold[blue]%}%~%{$fg_bold[$NCOLOR]%}%(!.#.$)%{$reset_color%} "
+)\$(annoyme_check)%{$fg_bold[$NCOLOR]%}%n@%m:%{$fg_bold[blue]%}%1~%{$fg_bold[$NCOLOR]%}%(!.#.$)%{$reset_color%} "
 
 if [ -e ~/.local/git-prompt.sh ]; then
 	source ~/.local/git-prompt.sh

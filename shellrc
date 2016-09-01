@@ -4,10 +4,6 @@
 export PATH=.local/bin:$PATH:$(ruby -e "print Gem.user_dir")/bin
 export EDITOR=vim
 
-alias debian='ssh debian'
-alias turris='ssh turris'
-alias omnia='ssh omnia'
-
 alias ls='ls --color=auto'
 alias ll='ls -l'
 eval $(dircolors -b)
@@ -18,7 +14,7 @@ alias cgdb='cgdb -q'
 alias octave='octave-cli -q'
 alias ssh='TERM="xterm-256color" ssh'
 alias feh='feh -.'
-alias make='make -j8'
+alias make='make -j 8'
 
 export LESS=-R
 export LESS_TERMCAP_mb=$'\E[1;31m'
