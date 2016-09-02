@@ -48,6 +48,8 @@ inst() {
 	doinst $1 $2
 }
 
+# TODO if on archlinux install pkgstats
+
 read -p "Install Bashrc? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst bashrc ~/.bashrc
