@@ -34,3 +34,6 @@
 [submodule "vim/3rdparty/vim-pathogen"]
 	path = vim/3rdparty/vim-pathogen
 	url = https://github.com/tpope/vim-pathogen.git
+[submodule "private"]
+	path = private
+	url = git@cynerd.cz:myconfigs-private
