@@ -32,6 +32,12 @@ alias vimp='vim -c "call InitPython()"'
 alias vims='vim -c "call InitBash()"'
 alias i='i3-msg'
 
+# Systemd aliases
+alias sctl='sudo systemctl'
+alias usctl='systemctl --user'
+alias jrn='journalctl'
+alias ujrn='jrn --user'
+
 genpasswd() {
 	local l=$1
 	if [ "$l" = "" ]; then l=16; fi
