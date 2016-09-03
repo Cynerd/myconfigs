@@ -5,4 +5,4 @@ set spoolfile = "+INBOX"
 set copy = no
 #set record = "+sent"
 set postponed = "+drafts"
-set from = "cynerd@email.cz"
+set from = "Karel Kočí <cynerd@email.cz>"

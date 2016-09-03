@@ -10,7 +10,5 @@
 	gpgsign = true
 [merge]
 	tool = vimdiff
-[pull]
-	ff = only
 [commit]
 	gpgSign = true
