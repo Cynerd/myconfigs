@@ -6,16 +6,20 @@ fi
 
 state=5
 if [[ -e ~/.backup_date ]]; then
-	today=$(date +"%Y%m%d")
-	prev=$(date -d `cat ~/.backup_date` +"%Y%m%d")
-	dif=$(expr $today - $prev)
-	if [[ $dif -ge 30 ]]; then
+	now=$(date +"%s")
+	prev=$(cat ~/.backup_date)
+	dif=$(expr $now - $prev)
+	# 15 days
+	if [[ $dif -ge 648000 ]]; then
 		state=4
-	elif [[ $dif -ge 20 ]]; then
+	# 12 days
+	elif [[ $dif -ge 518400 ]]; then
 		state=3
-	elif [[ $dif -ge 5 ]]; then
+	# 5 days
+	elif [[ $dif -ge 216000 ]]; then
 		state=2
-	elif [[ $dif -ge 2 ]]; then
+	# 2 days
+	elif [[ $dif -ge 86400 ]]; then
 		state=1
 	else
 		state=0

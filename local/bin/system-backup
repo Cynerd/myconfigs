@@ -25,8 +25,13 @@ if [ -z "$PART" ]; then
 	exit -1
 fi
 MPATH=$(lsblk -lp | grep "$PART" | awk '{print$7}')
-# TODO check if this is not in backupped path
 if [ -n "$MPATH" ]; then
+	while read -r DIR; do
+		if echo "$MPATH" | grep -q "$DIR"; then
+			echo Disk seems to be mounted to one of backuped paths. Please unmount it first.
+			exit -2
+		fi
+	done <<< "$DIRS"
 	echo Disk already mounted to $MPATH. Continuing with that.
 else
 	MPATH=$MBACKUP
@@ -50,7 +55,7 @@ if [ "$MBACKUP" = "$MPATH" ]; then
 	umount "$MPATH"
 fi
 
-date +"%Y%m%d" > /home/cynerd/.backup_date
+date +"%s" > /home/cynerd/.backup_date
 pkill -RTMIN+13 i3blocks
 
 sync
