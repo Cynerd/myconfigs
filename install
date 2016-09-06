@@ -3,26 +3,39 @@
 cd `dirname $0`
 
 dodiff() {
-	if ! [ -f "$2" ]; then
-		echo "Not installed: $1 => $2"
+	if [ -d "$2" ]; then
+		# If we just copying some file to directory
+		OUT=$2/$(basename "$1")
+	else
+		OUT=$2
+	fi
+	if ! [ -f "$OUT" ]; then
+		echo "Not installed: $1 => $OUT"
 		read -p "Install? (Y/n) "
 		if [[ $REPLY =~ ^[Yy]?$ ]]; then
-			doinst $1 $2
+			doinst "$1" "$OUT"
 		fi
 		return
 	fi
-	if cmp "$1" "$2" >/dev/null; then
-		echo "No difference detected: $2"
+	if cmp "$1" "$OUT" >/dev/null; then
+		echo "No difference detected: $OUT"
 		return
 	fi
-	vimdiff "$1" "$2"
+	vimdiff "$1" "$OUT"
 }
 diff() {
 	# Iterate trough source directory but ignore any git repositories
 	# Note that its design decision to not iterate trough target directory.
 	if [ -d "$1" ]; then
+		# This is check if we have correct inst command basically. If it is
+		# directory than it have to have trailing slash to ensure that no
+		# additional directory is created.
+		if ! echo "$1" | grep -qE '/$'; then
+			echo ERROR: Directory without trailing slash detected: $1
+			exit 1
+		fi
 		for f in `find "$1" \( -type d -exec test -e '{}'/.git \; \) -prune -o -type f -print`; do
-			F="${f#$1/}"
+			F="${f#$1}"
 			echo $f
 			dodiff "$1/$F" "$2/$F"
 		done
@@ -67,7 +80,7 @@ fi
 read -p "Install VIM scripts? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst vimrc ~/.vimrc
-	inst vim ~/.vim
+	inst vim/ ~/.vim
 	mkdir -p ~/.cache/vim # directory for *.swp files
 	mkdir -p ~/.cache/vim-undo # directory for undo files
 	echo "Please don't forget to setup YouCompleteMe"
