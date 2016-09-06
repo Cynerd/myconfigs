@@ -1,7 +1,7 @@
 # vim: ft=sh:
 # This is file with aliases and variables shared between bash and zsh
 
-export PATH=.local/bin:$PATH:$(ruby -e "print Gem.user_dir")/bin
+export PATH=~/.local/bin:$PATH:$(ruby -e "print Gem.user_dir")/bin
 export EDITOR=vim
 
 alias ls='ls --color=auto'
