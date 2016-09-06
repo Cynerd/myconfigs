@@ -28,7 +28,9 @@ url_completion_use_history = true;
 url_remoting_fn = load_url_in_new_buffer;
 download_buffer_automatic_open_target = OPEN_NEW_BUFFER_BACKGROUND;
 
-// Set zoom to 90% (this is normal zoom don't know why default seems to be 110% or so.
+require("adblockplus.js");
+
+// Set zoom to 90%
 session_pref("layout.css.devPixelsPerPx", "0.9");
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -123,7 +125,6 @@ var pass_account = "";
 
 function pass_get_password(I) {
 	var domain = yield get_domain(I);
-	dumpln("why?");
 	if (pass_account == "" || pass_domain != domain) {
 		I.window.minibuffer.message("pass: Please use C-j first to set account for domain: " + domain);
 	} else {

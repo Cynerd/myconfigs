@@ -25,6 +25,8 @@ set sendmail="/usr/bin/msmtp --read-envelope-from"
 set query_command= "abook --mutt-query '%s'"
 bind editor        <Tab> complete-query
 
+macro index S 's=archive<enter>'
+
 set sidebar_visible = yes
 bind index,pager B sidebar-toggle-visible
 # Ctrl-n, Ctrl-p to select next, previous folder.

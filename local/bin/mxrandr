@@ -8,9 +8,9 @@ disconnectedOutputs=$(xrandr | grep -E " disconnected (primary )?[1-9]+" | awk '
 cmd="xrandr "
 cmd_def=$cmd
 
-INTERNAL=eDP1
-HDMI=HDMI1
-VGA=VGA1
+INTERNAL=eDP-1
+HDMI=HDMI-1
+VGA=VGA-1
 
 for device in "$disconnectedOutputs"; do
 	if [ -n "$defice" ]; then

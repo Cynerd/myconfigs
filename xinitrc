@@ -2,6 +2,7 @@ xrdb -merge -I$HOME ~/.Xresources
 setxkbmap -option caps:escape
 
 export QT_STYLE_OVERRIDE='gtk2'
+export STEAM_RUNTIME=0
 
 #srandrd ~/.bin/mxrandr
 mxrandr
