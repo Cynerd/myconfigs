@@ -18,14 +18,10 @@ dodiff() {
 	vimdiff "$1" "$2"
 }
 diff() {
-	# Ignore some folders.
-	if ! echo $1 | sed '/vim/q1' >/dev/null; then
-		continue
-	fi
-	# Iterate trough source directory
+	# Iterate trough source directory but ignore any git repositories
 	# Note that its design decision to not iterate trough target directory.
 	if [ -d "$1" ]; then
-		for f in `find "$1" -type f`; do
+		for f in `find "$1" \( -type d -exec test -e '{}'/.git \; \) -prune -o -type f -print`; do
 			F="${f#$1/}"
 			echo $f
 			dodiff "$1/$F" "$2/$F"
@@ -48,7 +44,7 @@ inst() {
 	doinst $1 $2
 }
 
-# TODO if on archlinux install pkgstats
+# TODO if on archlinux install pkgstats and other packages we would need for every feature
 
 read -p "Install Bashrc? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
@@ -65,13 +61,15 @@ fi
 read -p "Install GIT configuration? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst gitconfig ~/.gitconfig
-	inst local/.git-prompt.sh ~/.local/
+	inst local/git-prompt.sh ~/.local/
 fi
 
 read -p "Install VIM scripts? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst vimrc ~/.vimrc
 	inst vim ~/.vim
+	mkdir -p ~/.cache/vim # directory for *.swp files
+	mkdir -p ~/.cache/vim-undo # directory for undo files
 	echo "Please don't forget to setup YouCompleteMe"
 fi
 
