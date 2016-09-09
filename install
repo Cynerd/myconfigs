@@ -25,7 +25,7 @@ dodiff() {
 }
 diff() {
 	# Iterate trough source directory but ignore any git repositories
-	# Note that its design decision to not iterate trough target directory.
+	# Note that it's design decision to not iterate trough target directory.
 	if [ -d "$1" ]; then
 		# This is check if we have correct inst command basically. If it is
 		# directory than it have to have trailing slash to ensure that no
@@ -109,7 +109,8 @@ if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst config/i3blocks/ ~/.config/i3blocks
 	inst config/i3status/ ~/.config/i3status
 	inst config/dunst/ ~/.config/dunst
-	inst local/bin/mxrandr ~/.local/bin/mxrandr
+	inst local/bin/mxrandr ~/.local/bin/
+	inst local/bin/startme ~/.local/bin/
 fi
 
 read -p "Install Conkeror configuration? (Y/n) "
