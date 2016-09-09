@@ -48,6 +48,10 @@ colorscheme elflord
 " Directory where *.swp files will be stored
 set directory=$HOME/.cache/vim//
 
+" Setup table-mode to markdown compliant
+" Note: to start use "\ t m"
+let g:table_mode_corner="|"
+
 map <F2> :call InitBase()<cr>
 map <F10> :setlocal spell! spelllang=en_us<cr>
 map <F11> :setlocal spell! spelllang=cs<cr>
