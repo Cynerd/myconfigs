@@ -1,3 +1,7 @@
+source ~/.shellrc
+
+[[ -o interactive ]] || return # skip on initialization if not interactive
+
 zstyle ':completion:*' completer _expand _complete _ignored _approximate
 zstyle ':completion:*' insert-unambiguous true
 zstyle ':completion:*' max-errors 3
@@ -48,7 +52,40 @@ if [ -e ~/.local/git-prompt.sh ]; then
 	export GIT_PS1_DESCRIBE_STYLE="branch"
 	RPROMPT=$RPROMPT'$(__git_ps1 "%s")'
 fi
+# Long running bell ############################################
+# Inspired by: https://gist.github.com/jpouellet/5278239
+zmodload zsh/datetime # load $EPOCHSECONDS builtin
+autoload -Uz add-zsh-hook
+lrbell_duration=15
+lrbell_timestamp=$EPOCHSECONDS
+lrbell_window_id=0x0
 
+lrbell_active_window_id() {
+	xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2
+}
+
+lrbell_begin() {
+	lrbell_timestamp=$EPOCHSECONDS
+	lrbell_message="`pwd`: $1"
+	if [ -n "$DISPLAY" ]; then
+		lrbell_window_id=$(lrbell_active_window_id)
+	fi
+}
+lrbell_end() {
+	if (( $EPOCHSECONDS - $lrbell_timestamp < $lrbell_duration )); then
+		return
+	fi
+
+	print -n '\a'
+	if [ -n "$DISPLAY" ] && [ -n "$lrbell_window_id" ]; then # notify only if running in X
+		if [ "$(lrbell_active_window_id)" != "$lrbell_window_id" ]; then # And active window isn't current one
+			notify-send "Command finished" "$lrbell_message"
+		fi
+	fi
+}
+
+add-zsh-hook preexec lrbell_begin
+add-zsh-hook precmd lrbell_end
 ################################################################
 case "$TERM" in
 	xterm*|*rxvt*)
@@ -60,5 +97,3 @@ case "$TERM" in
 		}
 		;;
 esac
-
-source ~/.shellrc

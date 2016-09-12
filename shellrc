@@ -4,6 +4,9 @@
 export PATH=~/.local/bin:$PATH:$(ruby -e "print Gem.user_dir")/bin
 export EDITOR=vim
 
+# Continue only if this is interactive shell
+[[ -o interactive ]] || return
+
 alias ls='ls --color=auto'
 alias ll='ls -l'
 eval $(dircolors -b)
