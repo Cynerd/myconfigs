@@ -10,24 +10,41 @@ set exrc
 set secure
 set title
 
+set hidden
+set undofile
+set undodir=~/.cache/vim-undo//
+set hlsearch
+set foldmethod=syntax
+
+" GitGutterEnable
+
 function InitBase()
-	set tabstop=4
-	set softtabstop=4
-	set shiftwidth=4
-	set noexpandtab
 	set number
-	set hidden
-	set undofile
-	set undodir=~/.cache/vim-undo//
 	set colorcolumn=82
 	set textwidth=82
 	highlight ColorColumn ctermbg=darkgray
-	set hlsearch
-
-	set foldmethod=syntax
-
-	execute 'GitGutterEnable'
 endfunction
+
+" Tabs setting. In default we want 4 spaces tab, but allows also 8 spaced tabs
+set noexpandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+function TabToogle()
+	if &tabstop != 4
+		set tabstop=4
+		set shiftwidth=4
+		set softtabstop=4
+		echom 'Tab stop set to 4'
+	else
+		set tabstop=8
+		set shiftwidth=8
+		set softtabstop=8
+		echom 'Tab stop set to 8'
+	endif
+	" Soft tab stop is here only for posibility of expandtab
+endfunction
+command TabToogle call TabToogle()
 
 " Write as root
 cmap w!! w !sudo tee >/dev/null %
@@ -75,8 +92,6 @@ function InitPython()
 	map <F3> :w<cr>
 	map <F4> :wa<cr>
 	nmap <F9> :TagbarOpen fc<cr>
-
-	"execute 'NERDTree'
 endfunction
 
 function InitC()
