@@ -34,3 +34,6 @@
 [submodule "private"]
 	path = private
 	url = git@cynerd.cz:myconfigs-private
+[submodule "vim/bundle/vim-autotag"]
+	path = vim/bundle/vim-autotag
+	url = https://github.com/craigemery/vim-autotag.git

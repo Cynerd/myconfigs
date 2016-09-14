@@ -1,0 +1,4 @@
+#!/bin/bash
+# Generates ctags and cscope files for project.
+ctags -R -f .tags
+#cscope -Rbq -f .cscope.out
