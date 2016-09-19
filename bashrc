@@ -1,5 +1,7 @@
 # .bashrc
 
+source ~/.shellrc
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -35,4 +37,3 @@ case "$TERM" in
 		;;
 esac
 
-source ~/.shellrc
