@@ -28,6 +28,9 @@ setopt hist_ignore_dups
 unsetopt nomatch
 bindkey -e
 
+autoload -U select-word-style
+select-word-style bash
+
 # Delete key workaround
 bindkey    "^[[3~"          delete-char
 bindkey    "^[3;5~"         delete-char
