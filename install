@@ -88,6 +88,8 @@ inst() {
 }
 
 # TODO if on archlinux install pkgstats and other packages we would need for every feature
+#################################################################################
+source private/install # private files, sorry but some privacy is required.
 
 read -p "Install Bashrc? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
@@ -111,6 +113,7 @@ read -p "Install VIM scripts? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst vimrc ~/.vimrc
 	inst vim/ ~/.vim
+	inst local/bin/vim-project-gen ~/.local/bin/vim-project-gen
 	mkdir -p ~/.cache/vim # directory for *.swp files
 	mkdir -p ~/.cache/vim-undo # directory for undo files
 	echo "Please don't forget to setup YouCompleteMe"
@@ -120,15 +123,20 @@ read -p "Install email synchronization? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst local/bin/annoyme ~/.local/bin/
 	inst local/sbin/annoyme-request ~/.local/sbin/
-	inst local/sbin/syncemail ~/.local/sbin/
-	inst config/offlineimap/ ~/.config/offlineimap
 	inst config/systemd/user/syncemail.service ~/.config/systemd/user
+	inst_email_sync
+	# Contains:
+	# inst local/sbin/syncemail ~/.local/sbin/
+	# inst config/offlineimap/ ~/.config/offlineimap
 fi
 
 read -p "Install mutt configuration? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
-	inst mutt/ ~/.mutt
 	inst urlview ~/.urlview
+	inst_mutt_conf
+	# Contains:
+	# inst mutt/ ~/.mutt
+	# inst msmtprc ~/.msmtprc
 fi
 
 read -p "Install i3 configuration and related tools? (Y/n) "
