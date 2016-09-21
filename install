@@ -133,6 +133,9 @@ fi
 read -p "Install mutt configuration? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst urlview ~/.urlview
+	inst mutt/mailcap ~/.mutt/
+	inst mutt/gpg.rc ~/.mutt/
+	inst mutt/color ~/.mutt/
 	inst_mutt_conf
 	# Contains:
 	# inst mutt/ ~/.mutt
