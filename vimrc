@@ -15,6 +15,8 @@ set undofile
 set undodir=~/.cache/vim-undo//
 set hlsearch
 set foldmethod=syntax
+set wildmode=longest:full,full
+set wildmenu
 
 colorscheme elflord
 
@@ -61,9 +63,15 @@ set directory=$HOME/.cache/vim//
 " Note: to start use "\ t m"
 let g:table_mode_corner="|"
 
-set tags=.tags,./tags
+set tags=./.tags,.tags
 " Setup autotag to look for .tags file
 let g:autotagTagsFile=".tags"
+
+" Enable mouse
+set mouse=a
+set ttymouse=urxvt
+" We are always on fast tty (maybe remove this on servers?)
+set ttyfast
 
 " Some fast shortcuts
 map <F2> :call InitBase()<cr>
@@ -102,7 +110,7 @@ endfunction
 function InitC()
 	call InitBase()
 
-	map <F2> gggqG2<c-o>
+	" TODO bind F2 to execute gnu ident on whole file and ensure that if it fails, no change is done.
 	map <F3> :w<cr>
 	map <F4> :wa<cr>
 	map <F5> :w<cr>:make<cr>
@@ -111,11 +119,6 @@ function InitC()
 	map <F8> :cl<cr>
 
 	" TODO check if .tags exists and alternativelly generate
-
-	autocmd BufNewFile,BufRead *.c set formatprg=indent\ -kr\ -cp1\ -cd1\ -ts4\ -nut\ -brf
-	autocmd BufNewFile,BufRead *.cpp set formatprg=indent\ -kr\ -cp1\ -cd1\ -ts4\ -nut\ -brf
-	autocmd BufNewFile,BufRead *.h set formatprg=indent\ -kr\ -cp0\ -cd1\ -ts4\ -nut\ -brf
-	autocmd BufNewFile,BufRead *.hpp set formatprg=indent\ -kr\ -cp1\ -cd1\ -ts4\ -nut\ -brf
 endfunction 
 
 let g:ycm_path_to_python_interpreter="/usr/bin/python3"
