@@ -37,3 +37,6 @@
 [submodule "vim/bundle/vim-autotag"]
 	path = vim/bundle/vim-autotag
 	url = https://github.com/craigemery/vim-autotag.git
+[submodule "external/annoyme"]
+	path = external/annoyme
+	url = git@cynerd.cz:annoyme

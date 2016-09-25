@@ -121,8 +121,8 @@ fi
 
 read -p "Install email synchronization? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
-	inst local/bin/annoyme ~/.local/bin/
-	inst local/sbin/annoyme-request ~/.local/sbin/
+	inst external/annoyme/src/annoyme ~/.local/bin/
+	inst external/annoyme/src/annoyme-request ~/.local/sbin/
 	inst config/systemd/user/syncemail.service ~/.config/systemd/user
 	inst_email_sync
 	# Contains:
