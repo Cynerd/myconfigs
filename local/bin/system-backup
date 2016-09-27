@@ -6,59 +6,53 @@ read -d '' DIRS <<-"_EOF_"
 /home
 /home_hdd
 _EOF_
-# Directory where backup will be stored
-BACKUP=backup
-# Directory where backup will be mounted
-MBACKUP=/media/backup-hdd
+# Path where backup will be mounted
+MPATH=/media/backup-hdd
 # UUID of disk
-UUID=21e0c8dd-77cc-44f1-b2bd-bb238d142e7f
+UUID=b162ea95-38bb-42c6-b36a-1be98c65392c
+# If disk is encrypted
+CRYPT=true
 ####################################################################
 # Check if running as root
 if [ `id -u` -ne "0" ]; then
 	echo Please run this as root.
 	exit 1
 fi
-# Mount backup disk if available
+
+# Mount disk
 PART=$(lsblk -fpl | grep "$UUID" | awk '{print $1}')
 if [ -z "$PART" ]; then
 	echo Disk not detected. Exiting
 	exit -1
 fi
-MPATH=$(lsblk -lp | grep "$PART" | awk '{print$7}')
-if [ -n "$MPATH" ]; then
-	while read -r DIR; do
-		if echo "$MPATH" | grep -q "$DIR"; then
-			echo Disk seems to be mounted to one of backuped paths. Please unmount it first.
-			exit -2
-		fi
-	done <<< "$DIRS"
-	echo Disk already mounted to $MPATH. Continuing with that.
-else
-	MPATH=$MBACKUP
-	mkdir -p "$MPATH"
-	mount "$PART" "$MPATH"
+if $CRYPT; then
+	cryptsetup open "$PART" backup_enc || (echo Decryption failed && exit 1)
+	PART=/dev/mapper/backup_enc
 fi
+mkdir -p "$MPATH"
+mount "$PART" "$MPATH" || (echo Mount failed && exit 2)
 
-mkdir -p "$MPATH/$BACKUP"
+# Do backup
 while read -r DIR; do
 	echo Backing up: $DIR
 	rdiff-backup -b --exclude-device-files --exclude-fifos --exclude-sockets \
-		--terminal-verbosity=5 --print-statistics \
-		"$DIR" "$MPATH/$BACKUP/$(basename $DIR)/"
+		--terminal-verbosity=5 --print-statistics --exclude-other-filesystems \
+		"$DIR" "$MPATH/$(basename $DIR)/"
 	rdiff-backup --remove-older-than 100D --force \
 		--terminal-verbosity=5 --print-statistics \
-		"$MPATH/$BACKUP/$(basename $DIR)/"
+		"$MPATH/$(basename $DIR)/"
 done <<< "$DIRS"
 
-# If we were mounting it, we should unmount it
-if [ "$MBACKUP" = "$MPATH" ]; then
-	umount "$MPATH"
+# Unmount disk
+sync
+umount "$MPATH" || (echo Unmount failed. Unmount by hand. && exit 3)
+if $CRYPT; then
+	cryptsetup close backup_enc
 fi
 
+# Store when we did last backup and update i3blocks status
 date +"%s" > /home/cynerd/.backup_date
 pkill -RTMIN+13 i3blocks
-
-sync
 
 echo
 echo Backup finished
