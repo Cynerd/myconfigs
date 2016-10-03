@@ -29,10 +29,7 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[1;32m'
 
 alias gst='git status'
-alias vimc='vim -c "call InitC()"'
-alias vimb='vim -c "call InitBase()"'
-alias vimp='vim -c "call InitPython()"'
-alias vims='vim -c "call InitBash()"'
+alias v='vim'
 alias i='i3-msg'
 
 # Systemd aliases

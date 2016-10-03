@@ -18,6 +18,11 @@ set foldmethod=syntax
 set wildmode=longest:full,full
 set wildmenu
 
+set number
+set colorcolumn=82
+set textwidth=82
+highlight ColorColumn ctermbg=darkgray
+
 colorscheme elflord
 
 " Tabs setting. In default we want 4 spaces tab, but allows also 8 spaced tabs
@@ -73,53 +78,30 @@ set ttymouse=urxvt
 " We are always on fast tty (maybe remove this on servers?)
 set ttyfast
 
-" Some fast shortcuts
-map <F2> :call InitBase()<cr>
+" Open tagbar with <F9>
 nmap <F9> :TagbarOpen fc<cr>
-map <F10> :setlocal spell! spelllang=en_us<cr>
-map <F11> :setlocal spell! spelllang=cs<cr>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function InitBase()
-	set number
-	set colorcolumn=82
-	set textwidth=82
-	highlight ColorColumn ctermbg=darkgray
+" Spell checking
+map <F10> :setlocal spell!<cr>
+function LangToggle()
+	if &spelllang != "en_us"
+		setlocal spelllang=en_us
+		echo "spelllang=en_us"
+	else
+		setlocal spelllang=cs
+		echo "spelllang=cs"
+	endif
 endfunction
+setlocal spelllang=en_us
+map <F11> :call LangToggle()<cr>
 
-function InitBash()
-	call InitBase()
+" TODO for python file type set:
+" set colorcolumn=79
+" set textwidth=79
 
-	" Format current file with indent
-	map <F2> gg=G2<c-o>
-
-	map <F3> :w<cr>
-	map <F4> :wa<cr>
-endfunction
-
-function InitPython()
-	call InitBase()
-	set colorcolumn=79
-	set textwidth=79
-	
-	unmap <F2>
-	map <F3> :w<cr>
-	map <F4> :wa<cr>
-endfunction
-
-function InitC()
-	call InitBase()
-
-	" TODO bind F2 to execute gnu ident on whole file and ensure that if it fails, no change is done.
-	map <F3> :w<cr>
-	map <F4> :wa<cr>
-	map <F5> :w<cr>:make<cr>
-	map <F6> :cp<cr>
-	map <F7> :cn<cr>
-	map <F8> :cl<cr>
-
-	" TODO check if .tags exists and alternativelly generate
-endfunction 
+" TODO for C file type set:
+" TODO bind F2 to execute gnu ident on whole file and ensure that if it fails, no change is done.
+" TODO check if .tags exists and alternativelly warn that it missing
 
 let g:ycm_path_to_python_interpreter="/usr/bin/python3"
 let g:ycm_global_ycm_extra_conf = "~/.ycm_c_conf.py"
