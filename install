@@ -2,6 +2,8 @@
 
 cd `dirname $0`
 
+git submodule update --init || (echo "Submodule update failed! Use --ignore-sub if it's ok."; exit 5)
+
 dodiff() {
 	if [ -d "$2" ]; then
 		# If we just copying some file to directory
