@@ -4,7 +4,6 @@ setxkbmap -option caps:escape
 export QT_STYLE_OVERRIDE='gtk2'
 export STEAM_RUNTIME=0
 
-#srandrd ~/.bin/mxrandr
 mxrandr
 
 #exec i3 -d all -V >> ~/i3log-$(date +'%F-%k-%M-%S') 2>&1
