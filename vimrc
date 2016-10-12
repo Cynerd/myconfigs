@@ -6,6 +6,8 @@ execute pathogen#infect()
 syntax on
 filetype plugin indent on
 
+colorscheme elflord
+
 set exrc
 set secure
 set title
@@ -23,7 +25,6 @@ set colorcolumn=82
 set textwidth=82
 highlight ColorColumn ctermbg=darkgray
 
-colorscheme elflord
 
 " Tabs setting. In default we want 4 spaces tab, but allows also 8 spaced tabs
 set noexpandtab

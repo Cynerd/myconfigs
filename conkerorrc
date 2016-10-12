@@ -132,7 +132,7 @@ function pass_chose_account(I) {
 		I.window.minibuffer.message("pass: No accounts detected for domain: " + pass_domain);
 		pass_account = "";
 		return;
-	// Note that accs has empty line at end so all this is bupped by one
+	// Note that accs has empty line at end so all this is bumped by one
 	} else if (accs.length == 2) {
 		pass_account = accs[0].replace(/\.\//, '').replace(/\.gpg$/, '');
 	} else {
@@ -153,7 +153,7 @@ function pass_chose_account(I) {
 
 function pass_get_password(I) {
 	var domain = yield get_domain(I);
-	if (pass_account == "" || pass_domain != domain) {
+	if (pass_account == "" || String(pass_domain) != String(domain)) {
 		yield pass_chose_account(I);
 	}
 	if (pass_account != "" && I.buffer.focused_element) {
@@ -161,6 +161,7 @@ function pass_get_password(I) {
 		dumpln(res.stdout);
 		I.buffer.focused_element.value = res.stdout;
 		I.window.minibuffer.message("pass: Inserted password for account: " + pass_account);
+		pass_account = ""; // remove selected account so we can select new one
 	}
 };
 
@@ -172,8 +173,6 @@ function pass_get_name(I) {
 		I.buffer.focused_element.value = regexp.exec(pass_account)[0];
 	}
 };
-
-// TODO iterate trough all pass to chose account
 
 interactive("pass-get-name", "Choses account for to be loged as. As result name of account is outputed.", pass_get_name);
 interactive("pass-get-password", "Receives password from pass for currently selected account.", pass_get_password);
