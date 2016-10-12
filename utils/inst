@@ -1,0 +1,89 @@
+# Functions used for interactive installation of new changes to running system
+# vim: ft=sh
+
+dodiff() {
+	if [ -d "$2" ]; then
+		# If we just copying some file to directory
+		OUT=$2/$(basename "$1")
+	else
+		OUT=$2
+	fi
+	if ! [ -f "$OUT" ]; then
+		echo "Not installed: $1 => $OUT"
+		read -p "Install? (Y/n) "
+		if [[ $REPLY =~ ^[Yy]?$ ]]; then
+			doinst "$1" "$OUT"
+		fi
+		return
+	fi
+	if cmp "$1" "$OUT" >/dev/null; then
+		echo "No difference detected: $OUT"
+		return
+	fi
+	vimdiff "$1" "$OUT"
+}
+
+diff() {
+	# Iterate trough source directory but ignore any git repositories
+	# Note that it's design decision to not iterate trough target directory.
+	if [ -d "$1" ]; then
+		# This is check if we have correct inst command basically. If it is
+		# directory than it have to have trailing slash to ensure that no
+		# additional directory is created.
+		if ! echo "$1" | grep -qE '/$'; then
+			echo ERROR: Directory without trailing slash detected: $1
+			exit 1
+		fi
+		# Got trough all files ignoring git repositories
+		for f in `find "$1" \( -type d -exec test -e '{}'/.git \; \) -prune -o -type f -print`; do
+			F="${f#$1}"
+			dodiff "$1/$F" "$2/$F"
+		done
+		# Check if we have all directories ignoring those in git repositories
+		for d in `find "$1" -type d -print -exec test -e '{}'/.git \; -prune`; do
+			D="${d#$1}"
+			if [ ! -d "$2/$D" ]; then
+				echo "Directory not installed: $1/$D => $2/$D"
+				read -p "Install? (Y/n) "
+				if [[ $REPLY =~ ^[Yy]?$ ]]; then
+					doinst "$1/$D/" "$2/$D"
+				fi
+			fi
+		done
+		# Now checkout git repositories
+		for g in `find "$1" -name .git -type f -printf '%h '`; do
+			G="${g#$1}"
+			COMMIT=$( cd "$1/$G" && git rev-parse HEAD )
+			echo "Checkout of git repository: $2/$G"
+			( cd "$2/$G" && git --work-tree=. checkout -f "$COMMIT" )
+		done
+	else
+		dodiff "$1" "$2"
+	fi
+}
+
+# Managing two git trees with master has small inconvenience that git allows only
+# single branch checkout in all work trees, so as it sets now git will execute all
+# commands not on deployed tree but on tree in this repository, so we need specify
+# work tree on command line every time we want target deployed work tree.
+doinst() {
+	echo rsync -rlpt $1 $2
+	rsync -rlpt $1 $2
+	# Now edit all .git files in target directory
+	for g in `find "$2" -name '.git' -type f`; do
+		if ! grep -q "gitdir: " "$g"; then
+			continue # Probably not a git repository or who knows.
+		fi
+		echo "Pointing git repository $g to this repository"
+		echo gitdir: $PWD/.git`sed "s/^gitdir: [./]*git//" "$g"` > "$g"
+	done
+}
+
+inst() {
+	if [ -e "$2" ]; then
+		# If output exists, execute diff instead
+		diff $1 $2
+		return
+	fi
+	doinst $1 $2
+}
