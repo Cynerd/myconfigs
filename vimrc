@@ -25,7 +25,6 @@ set colorcolumn=82
 set textwidth=82
 highlight ColorColumn ctermbg=darkgray
 
-
 " Tabs setting. In default we want 4 spaces tab, but allows also 8 spaced tabs
 set noexpandtab
 set tabstop=4
@@ -105,4 +104,4 @@ map <F11> :call LangToggle()<cr>
 " TODO check if .tags exists and alternativelly warn that it missing
 
 let g:ycm_path_to_python_interpreter="/usr/bin/python3"
-let g:ycm_global_ycm_extra_conf = "~/.ycm_c_conf.py"
+let g:ycm_global_ycm_extra_conf = ".ycm_conf.py"
