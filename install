@@ -15,12 +15,14 @@ read -p "Install Bashrc? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst bashrc ~/.bashrc
 	inst shellrc ~/.shellrc
+	inst profile ~/.profile
 fi
 
 read -p "Install zshrc? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst zshrc ~/.zshrc
 	inst shellrc ~/.shellrc
+	inst zprofile ~/.zprofile
 fi
 
 read -p "Install GIT configuration? (Y/n) "
@@ -41,9 +43,6 @@ fi
 
 read -p "Install email synchronization? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
-	inst external/annoyme/src/annoyme ~/.local/bin/
-	inst external/annoyme/src/annoyme-request ~/.local/sbin/
-	inst config/systemd/user/syncemail.service ~/.config/systemd/user
 	inst_email_sync
 	# Contains:
 	# inst local/sbin/syncemail ~/.local/sbin/
@@ -71,7 +70,9 @@ if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst config/i3status/ ~/.config/i3status
 	inst config/dunst/ ~/.config/dunst
 	inst local/bin/mxrandr ~/.local/bin/
-	inst local/bin/startme ~/.local/bin/
+	inst local/bin/sys-reboot ~/.local/bin/
+	inst local/bin/sys-shutdown ~/.local/bin/
+	inst local/bin/sys-suspend ~/.local/bin/
 fi
 
 read -p "Install Conkeror configuration? (Y/n) "

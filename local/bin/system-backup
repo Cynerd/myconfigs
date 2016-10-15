@@ -1,11 +1,9 @@
 #!/bin/bash
 # vim:ft=sh
 # New line separated list of all directories to backup
-read -d '' DIRS <<-"_EOF_"
-/etc
+DIRS="/etc
 /home
-/home_hdd
-_EOF_
+/home_hdd"
 # Path where backup will be mounted
 MPATH=/media/backup-hdd
 # UUID of disk
@@ -18,6 +16,7 @@ if [ `id -u` -ne "0" ]; then
 	echo Please run this as root.
 	exit 1
 fi
+set -e
 
 # Mount disk
 PART=$(lsblk -fpl | grep "$UUID" | awk '{print $1}')

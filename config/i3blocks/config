@@ -62,7 +62,7 @@ signal=10
 # see the script for details.
 [cpu_usage]
 #label=CPU
-label=
+label=cpu
 interval=10
 separator=false
 
@@ -71,7 +71,7 @@ separator=false
 # The type defaults to "mem" if the instance is not specified.
 [memory]
 #label=MEM
-label=
+label=mem
 interval=30
 
 [bbswitch]
@@ -92,11 +92,6 @@ interval=5
 [disk]
 label=/
 instance=/
-interval=30
-separator=false
-[disk]
-label=/home
-instance=/home
 interval=30
 separator=false
 [disk]
