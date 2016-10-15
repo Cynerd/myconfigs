@@ -7,8 +7,17 @@ import daemon
 import lockfile
 from offlineimap import OfflineImap
 
-if os.path.isfile('/home/cynerd/.run/syncemail.pid.lock'):
-    sys.exit(0)
+pidfile = '/tmp/syncemail-%d.pid' % os.getuid()
+
+# Check if not already running
+def check_running():
+    if os.access(pidfile, os.F_OK):
+        with open(pidfile, "r") as f:
+            pid = f.readline()
+            if os.path.exists('/proc/%s' % pid):
+                sys.exit(0)
+check_running()
+
 
 accounts = [
         ["email", "mail/cynerd@email.cz"],
@@ -25,8 +34,11 @@ for acc in accounts:
     sys.argv.append('Repository_' + acc[0] + '-remote:remotepass=' + output)
 
 sys.argv.append('-s') # output to syslog
+sys.argv.append('-u')
+sys.argv.append('syslog')
 
-with daemon.DaemonContext(
-        pidfile=lockfile.FileLock('/home/cynerd/.run/syncemail.pid')
-        ):
+with daemon.DaemonContext():
+    check_running()
+    with open(pidfile, "w") as f:
+        f.write("%s" % os.getpid())
     OfflineImap().run()
