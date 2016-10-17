@@ -1,0 +1,33 @@
+#!/bin/bash
+# annoyme - script to allow user intervention to otherwise backgrounded process.
+# Copyright (C) 2016 Karel Kočí
+# 
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+DOT_ANNOYME=~/.annoyme
+
+for NAME in `ls "$DOT_ANNOYME" | grep -E '.pid$' | sed 's/\.pid$//'`; do
+	echo -e "\033[0;31m$NAME:\033[0m" `cat "$DOT_ANNOYME/$NAME.desc"`
+	echo -ne "\033[0;1m Y/n: \033[0;0m"
+	read
+	if [[ $REPLY =~ ^[Yy]?$ ]]; then
+		if $DOT_ANNOYME/$NAME.script > "$DOT_ANNOYME/$NAME.out"; then
+			kill -SIGUSR1 `cat "$DOT_ANNOYME/$NAME.pid"`
+		else
+			kill -SIGUSR2 `cat "$DOT_ANNOYME/$NAME.pid"`
+		fi
+	fi
+	echo
+done
