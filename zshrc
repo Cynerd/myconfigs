@@ -36,14 +36,9 @@ bindkey    "^[[3~"          delete-char
 bindkey    "^[3;5~"         delete-char
 
 # PROMPT #######################################################
-annoyme_check() {
-	if ls ~/.annoyme/*.pid 2>/dev/null >/dev/null; then
-		echo "%{$fg_bold[red]%}!"
-	fi
-}
 if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="green"; fi
 PROMPT="%(?..%{$fg_bold[yellow]%}EXIT: %?
-)\$(annoyme_check)%{$fg_bold[$NCOLOR]%}%n@%m:%{$fg_bold[blue]%}%1~%{$fg_bold[$NCOLOR]%}%(!.#.$)%{$reset_color%} "
+)%{$fg_bold[$NCOLOR]%}%n@%m:%{$fg_bold[blue]%}%1~%{$fg_bold[$NCOLOR]%}%(!.#.$)%{$reset_color%} "
 
 if [ -e ~/.local/git-prompt.sh ]; then
 	source ~/.local/git-prompt.sh
@@ -53,7 +48,7 @@ if [ -e ~/.local/git-prompt.sh ]; then
 	export GIT_PS1_STATESEPARATOR=""
 	export GIT_PS1_SHOWUPSTREAM=y
 	export GIT_PS1_DESCRIBE_STYLE="branch"
-	RPROMPT=$RPROMPT'$(__git_ps1 "%s")'
+	RPROMPT='$(__git_ps1 "%s")'
 fi
 # Long running bell ############################################
 # Inspired by: https://gist.github.com/jpouellet/5278239

@@ -16,7 +16,7 @@ alias gdb='gdb -q'
 alias cgdb='cgdb -q'
 alias octave='octave-cli -q'
 alias ssh='TERM="xterm-256color" ssh'
-alias feh='feh -.'
+alias feh='feh --magick-timeout 1 -.'
 alias make='make -j 8'
 
 export LESS=-R
