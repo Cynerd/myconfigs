@@ -1,9 +1,11 @@
 xrdb -merge -I$HOME ~/.Xresources
 setxkbmap -option caps:escape
+setxkbmap -option compose:menu
 numlockx
 
 export QT_STYLE_OVERRIDE='gtk2'
 export STEAM_RUNTIME=0
+export GTK_IM_MODULE=xim
 
 mxrandr
 start-pulseaudio-x11
