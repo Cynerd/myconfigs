@@ -1,0 +1,156 @@
+# Various essential to me programs console
+pacaur
+gvim
+htop
+mc
+zsh
+pass
+w3m
+lynx
+abook
+openssh
+unzip
+ncdu
+pkgfile
+syncthing-openrc
+rsync
+rdiff-backup
+
+# Various graphic programs
+gimp
+inkscape
+vlc
+conkeror
+surf-webkit2gtk-git
+feh
+kdegraphics-okular
+steam-native
+python-steamcontroller-git
+
+# Pidgin
+purple-facebook
+purple-hangouts-hg
+pidgin-encryption
+pidgin-gpg-git
+pidgin-hotkeys
+pidgin-latex
+pidgin-libnotify
+pidgin-window_merge
+
+# Stardict
+stardict-cz
+stardict-en-cz
+
+# Chromium
+chromium-widevine
+pepper-flash
+
+# Music player daemon
+mpc
+mpd
+ncmpcpp
+
+# Mail
+neomutt
+msmtp
+offlineimap
+python2-daemon
+
+# My desktop
+i3-wm
+i3blocks
+dunst
+xzoom
+xorg-server-utils
+xorg-xinit
+urxvt-perls
+urxvt-resize-font-git
+urxvt-vtwheel
+numlockx
+pulsemixer
+qt5-styleplugins
+numix-frost-themes
+
+# Fonts
+terminus-font
+font-mathematica
+ttf-hack
+ttf-symbola
+noto-fonts-emoji
+emojione-color-font
+twemoji-color-font
+texlive-fontsextra
+
+# Matlab fix
+ncurses5-compat-libs
+
+# System stuff
+syslinux
+acpid-openrc
+alsa-utils-openrc
+cpupower-openrc
+cronie-openrc
+cryptsetup
+dhcpcd-openrc
+wpa_supplicant-openrc
+rfkill
+fuse-openrc
+syslog-ng-openrc
+gpm-openrc
+ifplugd
+iproute2
+iputils
+# FS
+btrfs-progs
+mdadm
+xfsprogs
+exfat-utils
+reiserfsprogs
+# System but not essential or who knows if needed
+mesa-demos
+pcmciautils
+
+# My asus laptop specific stuff
+asus-kbd-backlight
+intel-ucode
+virtualgl-openrc
+lib32-nvidia-utils
+xf86-input-synaptics
+xf86-video-intel
+powertop
+
+# Stuff used durring development
+tig
+dash
+mkdocs
+# Web
+ruby-jekyll
+# Python
+twine
+flake8
+ipython
+python-pypandoc
+python-xattr
+python2-xattr
+python-daemon
+
+# Building stuff
+autoconf
+automake
+bison
+flex
+clang
+cmake
+fakeroot
+patch
+pkg-config
+
+# Base
+vi
+which
+licenses
+lvm2
+usbutils
+nano
+man-db
+man-pages

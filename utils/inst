@@ -23,7 +23,7 @@ dodiff() {
 	vimdiff "$1" "$OUT"
 }
 
-diff() {
+checkdiff() {
 	# Iterate trough source directory but ignore any git repositories
 	# Note that it's design decision to not iterate trough target directory.
 	if [ -d "$1" ]; then
@@ -82,7 +82,7 @@ doinst() {
 inst() {
 	if [ -e "$2" ]; then
 		# If output exists, execute diff instead
-		diff $1 $2
+		checkdiff $1 $2
 		return
 	fi
 	doinst $1 $2
