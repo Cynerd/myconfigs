@@ -65,6 +65,7 @@ if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	# Contains:
 	# inst mutt/ ~/.mutt
 	# inst msmtprc ~/.msmtprc
+	mkdir -p ~/.cache/mutt # directory for temporaly html files
 fi
 
 read -p "Install i3 configuration and related tools? (Y/n) "
