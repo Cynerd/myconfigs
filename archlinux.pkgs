@@ -3,9 +3,7 @@ pacaur
 gvim
 htop
 mc
-zsh
 pass
-w3m
 lynx
 abook
 openssh
@@ -15,6 +13,10 @@ pkgfile
 syncthing-openrc
 rsync
 rdiff-backup
+wget
+sshfs
+wireless_tools
+zsh-completions
 
 # Various graphic programs
 gimp
@@ -61,8 +63,10 @@ i3-wm
 i3blocks
 dunst
 xzoom
+xorg-server-nosystemd
 xorg-server-utils
 xorg-xinit
+xorg-xev
 urxvt-perls
 urxvt-resize-font-git
 urxvt-vtwheel
@@ -77,6 +81,7 @@ font-mathematica
 ttf-hack
 ttf-symbola
 noto-fonts-emoji
+powertop
 emojione-color-font
 twemoji-color-font
 texlive-fontsextra
@@ -85,6 +90,7 @@ texlive-fontsextra
 ncurses5-compat-libs
 
 # System stuff
+linux
 syslinux
 acpid-openrc
 alsa-utils-openrc
@@ -100,10 +106,15 @@ gpm-openrc
 ifplugd
 iproute2
 iputils
+ntp-openrc
+bluez-openrc
+bluez-utils
+powertop
 # FS
 btrfs-progs
 mdadm
 xfsprogs
+jfsutils
 exfat-utils
 reiserfsprogs
 # System but not essential or who knows if needed
@@ -117,7 +128,6 @@ virtualgl-openrc
 lib32-nvidia-utils
 xf86-input-synaptics
 xf86-video-intel
-powertop
 
 # Stuff used durring development
 tig
@@ -137,6 +147,7 @@ python-daemon
 # Building stuff
 autoconf
 automake
+make
 bison
 flex
 clang
