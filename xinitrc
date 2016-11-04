@@ -2,6 +2,7 @@ xrdb -merge -I$HOME ~/.Xresources
 setxkbmap -option caps:escape
 setxkbmap -option compose:menu
 numlockx
+xset -b # disable beeping
 
 export QT_STYLE_OVERRIDE='gtk2'
 export STEAM_RUNTIME=0
