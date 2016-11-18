@@ -33,6 +33,10 @@ require("adblockplus.js");
 // Set zoom to 90%
 session_pref("layout.css.devPixelsPerPx", "0.9");
 
+// Just key-kill all websites. I can use quote mode (ctrl+q)
+require("key-kill");
+key_kill_mode.test.push(/\/\/.*\//); //regexp matches all sites
+
 /////////////////////////////////////////////////////////////////////////////////
 // reopening closed buffers
 define_key(default_global_keymap, "A-W", "revive-buffer");

@@ -1,6 +1,8 @@
 # Various essential to me programs console
 pacaur
 gvim
+vim-spell-cs
+vim-spell-en
 htop
 mc
 pass
@@ -17,6 +19,7 @@ wget
 sshfs
 wireless_tools
 zsh-completions
+nmap
 
 # Various graphic programs
 gimp
@@ -28,6 +31,7 @@ feh
 kdegraphics-okular
 steam-native
 python-steamcontroller-git
+graphviz
 
 # Pidgin
 purple-facebook
@@ -71,6 +75,8 @@ urxvt-perls
 urxvt-resize-font-git
 urxvt-vtwheel
 numlockx
+xdotool
+inotify-tools
 pulsemixer
 qt5-styleplugins
 numix-frost-themes
@@ -85,6 +91,9 @@ powertop
 emojione-color-font
 twemoji-color-font
 texlive-fontsextra
+
+# Codecs
+x264
 
 # Matlab fix
 ncurses5-compat-libs
@@ -110,6 +119,8 @@ ntp-openrc
 bluez-openrc
 bluez-utils
 powertop
+lm_sensors-openrc
+openvpn-openrc
 # FS
 btrfs-progs
 mdadm
@@ -120,6 +131,12 @@ reiserfsprogs
 # System but not essential or who knows if needed
 mesa-demos
 pcmciautils
+
+# bluetooth
+bluez-hid2hci
+obexfs
+obextool
+pulseaudio-bluetooth
 
 # My asus laptop specific stuff
 asus-kbd-backlight
@@ -133,6 +150,11 @@ xf86-video-intel
 tig
 dash
 mkdocs
+asciidoc
+cppcheck
+ctags
+valgrind
+texlive-latexextra
 # Web
 ruby-jekyll
 # Python
