@@ -1,0 +1,23 @@
+# vim: ft=sh
+
+# Installs pacaur
+# This expect base and base-devel to be installed
+set -e
+
+# Make sure that we have wget
+sudo pacman -S wget
+# Download pacaur tar
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/pacaur.tar.gz
+# Download cower (pacaur dependency)
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/cower.tar.gz
+
+tar -xzf cower.tar.gz
+cd cower
+makepkg -cis
+cd ..
+rm -rf cower cower.tar.gz
+tar -xzf pacaur.tar.gz
+cd pacaur
+makepkg -cis
+cd ..
+rm -rf pacaur pacaur.tar.gz

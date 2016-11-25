@@ -1,31 +1,6 @@
 # Archlinux system installation and compare
 # vim: ft=sh
 
-# Installs pacaur
-# This expect base and base-devel to be installed
-arch_pacaur() {
-	set -e
-	# Make sure that we have wget
-	sudo pacman -S wget
-	# Download pacaur tar
-	wget https://aur.archlinux.org/cgit/aur.git/snapshot/pacaur.tar.gz
-	# Download cower (pacaur dependency)
-	wget https://aur.archlinux.org/cgit/aur.git/snapshot/cower.tar.gz
-	
-	tar -xzf cower.tar.gz
-	cd cower
-	makepkg -cis
-	cd ..
-	rm -rf cower cower.tar.gz
-	tar -xzf pacaur.tar.gz
-	cd pacaur
-	makepkg -cis
-	cd ..
-	rm -rf pacaur pacaur.tar.gz
-
-	unset -e
-}
-
 archlinux_inst() {
 	# Check if we are on archlinux
 	if ! [ -e /etc/arch-release ]; then
@@ -34,7 +9,8 @@ archlinux_inst() {
 	fi
 	# Now check for pacaur and optionally install
 	if ! pacaur --version 2>&1 >/dev/null; then
-		arch_pacaur
+		echo Please install pacaur! >&2
+		return
 	fi
 
 	TFILE1=$(mktemp myconfigs-pacaur1-XXXXX)
