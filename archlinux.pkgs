@@ -29,8 +29,9 @@ conkeror
 surf-webkit2gtk-git
 feh
 kdegraphics-okular
-steam-native
-python-steamcontroller-git
+steam
+steam-native-runtime
+sc-controller
 graphviz
 
 # Pidgin

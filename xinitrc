@@ -5,7 +5,6 @@ numlockx
 xset -b # disable beeping
 
 export QT_STYLE_OVERRIDE='gtk2'
-export STEAM_RUNTIME=0
 export GTK_IM_MODULE=xim
 
 mxrandr
