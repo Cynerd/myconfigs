@@ -4,6 +4,11 @@
 # This expect base and base-devel to be installed
 set -e
 
+if pacaur --version 2>&1 1>/dev/null; then
+	echo "Pacaur seems to be installed already"
+	exit 0
+fi
+
 # Make sure that we have wget
 sudo pacman -S wget
 # Download pacaur tar
