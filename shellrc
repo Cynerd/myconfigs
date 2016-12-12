@@ -32,6 +32,14 @@ alias gst='git status'
 alias v='vim'
 alias i='i3-msg'
 
+# Systemd aliases if we are running systemd
+if pidof systemd >/dev/null 2>/dev/null; then
+	alias sctl='sudo systemctl'
+	alias usctl='systemctl --user'
+	alias jrn='journalctl'
+	alias ujrn='jrn --user'
+fi
+
 genpasswd() {
 	local l=$1
 	if [ "$l" = "" ]; then l=16; fi
