@@ -37,6 +37,8 @@ session_pref("layout.css.devPixelsPerPx", "0.9");
 require("key-kill");
 key_kill_mode.test.push(/\/\/.*\//); //regexp matches all sites
 
+view_source_use_external_editor = true;
+
 /////////////////////////////////////////////////////////////////////////////////
 // reopening closed buffers
 define_key(default_global_keymap, "A-W", "revive-buffer");
