@@ -10,19 +10,24 @@ if pacaur --version 2>&1 1>/dev/null; then
 fi
 
 # Make sure that we have wget
-sudo pacman -S wget
+sudo pacman --needed -S wget
 # Download pacaur tar
 wget https://aur.archlinux.org/cgit/aur.git/snapshot/pacaur.tar.gz
 # Download cower (pacaur dependency)
 wget https://aur.archlinux.org/cgit/aur.git/snapshot/cower.tar.gz
 
+# Receive cower gpg key
+gpg --keyserver pgp.mit.edu --recv-keys 1EB2638FF56C0C53
+
+# Install cower
 tar -xzf cower.tar.gz
 cd cower
-makepkg -cis
+makepkg -Acis
 cd ..
 rm -rf cower cower.tar.gz
+# Install pacaur
 tar -xzf pacaur.tar.gz
 cd pacaur
-makepkg -cis
+makepkg -Acis
 cd ..
 rm -rf pacaur pacaur.tar.gz
