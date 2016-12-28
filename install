@@ -6,16 +6,18 @@ cd `dirname $0`
 git submodule update --init || (echo "Submodule update failed! Use --ignore-sub if it's ok."; exit 5)
 
 # Source inst and diff function
-source utils/inst
-source utils/arch
+. ./utils/inst
 
 # TODO if on archlinux install pkgstats and other packages we would need for every feature
 #################################################################################
 source private/install # private files, sorry but some privacy is required.
 
-read -p "Chek Archlinux system? (Y/n) "
-if [[ $REPLY =~ ^[Yy]?$ ]]; then
-	archlinux_inst
+if [ -e /etc/arch-release ]; then
+	. ./utils/arch
+	read -p "Chek Archlinux packages? (Y/n) "
+	if [[ $REPLY =~ ^[Yy]?$ ]]; then
+		archlinux_inst
+	fi
 fi
 
 read -p "Install Bashrc? (Y/n) "

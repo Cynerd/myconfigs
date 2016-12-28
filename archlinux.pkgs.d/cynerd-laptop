@@ -1,0 +1,17 @@
+dnl vim:ft=m4
+include(laptop)
+include(openrc)
+include(devel)
+include(steam)
+include(wine)
+
+intel-ucode
+
+openvpn-openrc
+easy-rsa
+freecad
+transmission-gtk
+qemu-arch-extra
+
+dnl for testing
+stress

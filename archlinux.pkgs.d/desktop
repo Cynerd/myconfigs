@@ -1,0 +1,104 @@
+dnl vim:ft=m4
+define(DESKTOP)
+
+dnl Some system level stuff
+gpm-openrc
+alsa-utils-openrc
+pulseaudio
+pulseaudio-alsa
+fuseiso
+
+dnl Some command line tools
+lynx
+abook
+pass
+syncthing-openrc
+ttysterm
+dnl Stardict
+sdcv
+stardict-cz
+stardict-en-cz
+
+dnl Various graphic programs
+gimp
+inkscape
+vlc
+conkeror
+surf-webkit2gtk-git
+feh
+okular
+graphviz
+mesa-demos
+
+dnl Pidgin
+purple-facebook
+purple-hangouts-hg
+pidgin-encryption
+pidgin-gpg-git
+pidgin-hotkeys
+pidgin-latex
+pidgin-libnotify
+pidgin-window_merge
+
+dnl Chromium
+chromium-widevine
+pepper-flash
+
+dnl Music player daemon
+mpc
+mpd
+ncmpcpp
+
+dnl Mail
+neomutt
+msmtp
+offlineimap
+python2-daemon
+urlview
+
+dnl My desktop
+i3-wm
+i3blocks
+i3lock
+dmenu
+dunst
+xzoom
+xorg-server-nosystemd
+xorg-server-utils
+xorg-xinit
+xorg-xev
+rxvt-unicode
+urxvt-perls
+urxvt-resize-font-git
+urxvt-vtwheel
+numlockx
+xdotool
+inotify-tools
+pulsemixer
+qt5-styleplugins
+numix-frost-themes
+xorg-setxkbmap
+dnl For app .desktop management
+perl-file-mimeinfo
+
+dnl Fonts
+terminus-font
+font-mathematica
+ttf-hack
+ttf-symbola
+noto-fonts-emoji
+powertop
+emojione-color-font
+twemoji-color-font
+texlive-fontsextra
+
+dnl Codecs
+x264
+mpg123
+lib32-mpg123
+
+dnl Matlab fix
+ncurses5-compat-libs
+
+dnl Java blee
+jre8-openjdk

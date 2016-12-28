@@ -1,0 +1,17 @@
+dnl vim:ft=m4
+dnl My asus laptop specific stuff
+include(laptop)
+include(openrc)
+include(devel)
+include(steam)
+include(wine)
+
+asus-kbd-backlight
+intel-ucode
+virtualgl-openrc
+lib32-nvidia-utils
+xf86-input-synaptics
+xf86-video-intel
+
+dnl steam controller user driver
+sc-controller

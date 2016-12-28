@@ -31,3 +31,5 @@ cd pacaur
 makepkg -Acis
 cd ..
 rm -rf pacaur pacaur.tar.gz
+# Set cower to be just an dependency
+pacman -D --asdeps cower

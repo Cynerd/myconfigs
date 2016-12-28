@@ -1,0 +1,30 @@
+dnl vim:ft=m4
+define(LAPTOP)
+include(desktop)
+
+dnl System essentials
+syslinux
+efibootmgr
+acpid-openrc
+lm_sensors-openrc
+xf86-input-synaptics
+xf86-video-intel
+
+dnl Network
+wpa_supplicant-openrc
+wireless_tools
+rfkill
+
+dnl Also system but not exactly essential for me
+cpupower-openrc
+powertop
+pm-utils
+acpi
+
+dnl bluetooth
+bluez
+bluez-utils
+bluez-hid2hci
+obexfs
+obextool
+pulseaudio-bluetooth

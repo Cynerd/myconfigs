@@ -14,9 +14,10 @@ archlinux_inst() {
 	fi
 
 	TFILE1=$(mktemp myconfigs-pacaur1-XXXXX)
-	grep -E  '^[^# ]+$' archlinux.pkgs | sort > "$TFILE1"
+	m4 archlinux.pkgs -I archlinux.pkgs.d | grep -E  '^[^	]+$' | sort | uniq > "$TFILE1"
 	TFILE2=$(mktemp myconfigs-pacaur2-XXXXX)
-	pacaur -Qqet | sort > "$TFILE2"
+	pacaur -Qqe | sort > "$TFILE2"
+	echo "	Required							 Local"
 	diff  --suppress-common-lines -ay "$TFILE1" "$TFILE2"
 	rm "$TFILE1" "$TFILE2"
 }

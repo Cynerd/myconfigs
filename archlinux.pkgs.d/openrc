@@ -1,0 +1,9 @@
+dnl vim:ft=m4
+define(OPENRC)
+
+syscmd(`pacman -Qg base-openrc | awk "{print \$2}"')
+syslog-ng-openrc
+cronie-openrc
+bluez-openrc
+consolekit-openrc
+libpulse-nosystemd

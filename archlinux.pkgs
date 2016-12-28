@@ -1,190 +1,50 @@
-# Various essential to me programs console
+dnl vim:ft=m4
+dnl File containing names of explicitly installed packages on system
+esyscmd(`echo define\(HOSTNAME,$(hostname)\)')
+sinclude(HOSTNAME)
+
+dnl Various essential console programs
 pacaur
-gvim
+pkgfile
+ifdef(`DESKTOP',gvim,vim)
 vim-spell-cs
 vim-spell-en
 htop
 mc
-pass
-lynx
-abook
 openssh
-unzip
 ncdu
-pkgfile
-syncthing-openrc
 rsync
 rdiff-backup
 wget
 sshfs
-wireless_tools
+zsh
 zsh-completions
+bash-completion
+bc
+pv
+sysstat
+
+dnl System stuff
+dhcpcd-openrc
+fuse-openrc
+ntp-openrc
+sudo
+lsof
+hdparm
+
+dnl File systems
+btrfs-progs
+exfat-utils
+dosfstools
+
+dnl network
+bind-tools
 nmap
 
-# Various graphic programs
-gimp
-inkscape
-vlc
-conkeror
-surf-webkit2gtk-git
-feh
-kdegraphics-okular
-steam
-steam-native-runtime
-sc-controller
-graphviz
+dnl archive
+unzip
+zip
+rar
 
-# Pidgin
-purple-facebook
-purple-hangouts-hg
-pidgin-encryption
-pidgin-gpg-git
-pidgin-hotkeys
-pidgin-latex
-pidgin-libnotify
-pidgin-window_merge
-
-# Stardict
-stardict-cz
-stardict-en-cz
-
-# Chromium
-chromium-widevine
-pepper-flash
-
-# Music player daemon
-mpc
-mpd
-ncmpcpp
-
-# Mail
-neomutt
-msmtp
-offlineimap
-python2-daemon
-
-# My desktop
-i3-wm
-i3blocks
-dunst
-xzoom
-xorg-server-nosystemd
-xorg-server-utils
-xorg-xinit
-xorg-xev
-urxvt-perls
-urxvt-resize-font-git
-urxvt-vtwheel
-numlockx
-xdotool
-inotify-tools
-pulsemixer
-qt5-styleplugins
-numix-frost-themes
-
-# Fonts
-terminus-font
-font-mathematica
-ttf-hack
-ttf-symbola
-noto-fonts-emoji
-powertop
-emojione-color-font
-twemoji-color-font
-texlive-fontsextra
-
-# Codecs
-x264
-
-# Matlab fix
-ncurses5-compat-libs
-
-# System stuff
-linux
-syslinux
-acpid-openrc
-alsa-utils-openrc
-cpupower-openrc
-cronie-openrc
-cryptsetup
-dhcpcd-openrc
-wpa_supplicant-openrc
-rfkill
-fuse-openrc
-syslog-ng-openrc
-gpm-openrc
-ifplugd
-iproute2
-iputils
-ntp-openrc
-bluez-openrc
-bluez-utils
-powertop
-lm_sensors-openrc
-openvpn-openrc
-# FS
-btrfs-progs
-mdadm
-xfsprogs
-jfsutils
-exfat-utils
-reiserfsprogs
-# System but not essential or who knows if needed
-mesa-demos
-pcmciautils
-
-# bluetooth
-bluez-hid2hci
-obexfs
-obextool
-pulseaudio-bluetooth
-
-# My asus laptop specific stuff
-asus-kbd-backlight
-intel-ucode
-virtualgl-openrc
-lib32-nvidia-utils
-xf86-input-synaptics
-xf86-video-intel
-
-# Stuff used durring development
-tig
-dash
-mkdocs
-asciidoc
-cppcheck
-ctags
-valgrind
-texlive-latexextra
-# Web
-ruby-jekyll
-# Python
-twine
-flake8
-ipython
-python-pypandoc
-python-xattr
-python2-xattr
-python-daemon
-
-# Building stuff
-autoconf
-automake
-make
-bison
-flex
-clang
-cmake
-fakeroot
-patch
-pkg-config
-
-# Base
-vi
-which
-licenses
-lvm2
-usbutils
-nano
-man-db
-man-pages
+dnl Base group
+syscmd(`pacman -Qg base | awk "{print \$2}"')

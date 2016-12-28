@@ -1,0 +1,41 @@
+dnl vim:ft=m4
+define(DEVEL)
+
+dnl devel group
+syscmd(`pacman -Qg base-devel | awk "{print \$2}"')
+
+dnl yep ansible
+ansible
+dnl I sometimes use busybox for testing scripts
+busybox
+
+dnl Stuff used durring development
+tig
+dash
+mkdocs
+asciidoc
+cppcheck
+ctags
+valgrind
+texlive-latexextra
+git
+dnl Web
+ruby
+ruby-jekyll
+
+dnl Python
+twine
+flake8
+ipython
+python-pypandoc
+python-xattr
+python2-xattr
+python-daemon
+
+dnl Building stuff
+clang
+cmake
+patch
+
+dnl work devel
+lua51
