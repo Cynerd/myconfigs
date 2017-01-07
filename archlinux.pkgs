@@ -10,7 +10,6 @@ ifdef(`DESKTOP',gvim,vim)
 vim-spell-cs
 vim-spell-en
 htop
-mc
 openssh
 ncdu
 rsync
