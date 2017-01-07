@@ -1,0 +1,10 @@
+dnl vim:ft=m4
+dnl Prety good files browser
+ranger
+
+dnl Optional dependencies
+atool
+highlight
+mediainfo
+perl-image-exiftool
+w3m

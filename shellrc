@@ -31,6 +31,10 @@ export LESS_TERMCAP_us=$'\E[1;32m'
 alias gst='git status'
 alias v='vim'
 alias i='i3-msg'
+alias ra='ranger'
+
+# Do not load system configuration for ranger (use only user one)
+export RANGER_LOAD_DEFAULT_RC=FALSE
 
 # Systemd aliases if we are running systemd
 if pidof systemd >/dev/null 2>/dev/null; then

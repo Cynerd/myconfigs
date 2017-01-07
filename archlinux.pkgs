@@ -24,6 +24,9 @@ bc
 pv
 sysstat
 
+dnl We want ranger everywhere
+include(ranger)
+
 dnl System stuff
 dhcpcd-openrc
 fuse-openrc
