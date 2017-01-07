@@ -1,6 +1,7 @@
 set editor="vim"
 set my_name="Karel Kočí"
 set edit_headers=yes
+set askcc=yes
 
 hdr_order Date From To Cc #Sorting emails by the given criteria (from left to right)
 set pager_index_lines= 5
