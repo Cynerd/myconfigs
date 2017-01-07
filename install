@@ -8,7 +8,6 @@ git submodule update --init || (echo "Submodule update failed! Use --ignore-sub 
 # Source inst and diff function
 . ./utils/inst
 
-# TODO if on archlinux install pkgstats and other packages we would need for every feature
 #################################################################################
 source private/install # private files, sorry but some privacy is required.
 
@@ -48,6 +47,11 @@ if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	mkdir -p ~/.cache/vim # directory for *.swp files
 	mkdir -p ~/.cache/vim-undo # directory for undo files
 	echo "Please don't forget to setup YouCompleteMe"
+fi
+
+read -p "Install ranger configuration? (Y/n) "
+if [[ $REPLY =~ ^[Yy]?$ ]]; then
+	inst config/ranger/ ~/.config/ranger
 fi
 
 read -p "Install email synchronization? (Y/n) "
