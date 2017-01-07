@@ -31,7 +31,6 @@ export LESS_TERMCAP_us=$'\E[1;32m'
 alias gst='git status'
 alias v='vim'
 alias i='i3-msg'
-alias ra='ranger'
 
 # ranger alias with nesting control
 rg() {
