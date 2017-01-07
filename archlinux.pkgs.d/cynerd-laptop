@@ -12,6 +12,9 @@ easy-rsa
 freecad
 transmission-gtk
 qemu-arch-extra
+octave
+
+lighttpd
 
 dnl for testing
 stress

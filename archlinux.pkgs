@@ -24,8 +24,9 @@ bc
 pv
 sysstat
 
-dnl We want ranger everywhere
+dnl I want ranger everywhere
 include(ranger)
+mpv
 
 dnl System stuff
 dhcpcd-openrc
@@ -48,6 +49,7 @@ dnl archive
 unzip
 zip
 rar
+p7zip
 
 dnl Base group
 syscmd(`pacman -Qg base | awk "{print \$2}"')

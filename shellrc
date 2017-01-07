@@ -33,6 +33,14 @@ alias v='vim'
 alias i='i3-msg'
 alias ra='ranger'
 
+# ranger alias with nesting control
+rg() {
+	if [ -z "$RANGER_LEVEL" ]; then
+		ranger
+	else
+		exit
+	fi
+}
 # Do not load system configuration for ranger (use only user one)
 export RANGER_LOAD_DEFAULT_RC=FALSE
 
