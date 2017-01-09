@@ -7,3 +7,4 @@ cronie-openrc
 bluez-openrc
 consolekit-openrc
 libpulse-nosystemd
+systemd-dummy

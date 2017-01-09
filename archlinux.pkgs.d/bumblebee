@@ -1,0 +1,8 @@
+dnl vim:ft=m4
+nvidia
+primus
+bumblebee-openrc
+bbswitch
+
+dnl  ??
+mesa-vdpau-nosystemd

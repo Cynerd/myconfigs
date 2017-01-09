@@ -1,13 +1,21 @@
 dnl vim:ft=m4
 dnl My asus laptop specific stuff
 define(NETFLIX)
-include(laptop)
 include(openrc)
+include(laptop)
 include(devel)
 include(steam)
 include(wine)
+include(bumblebee)
+include(latex)
 
+screen
 rdiff-backup
+openvpn-openrc
+easy-rsa
+octave
+chromium
+openssh-openrc
 
 asus-kbd-backlight
 intel-ucode
@@ -16,5 +24,23 @@ lib32-nvidia-utils
 xf86-input-synaptics
 xf86-video-intel
 
+joyutils
+
 dnl steam controller user driver
 sc-controller
+
+ipython2
+python-numpy
+python-scipy
+python-pip
+swig
+
+dnl games
+wesnoth
+simutrans
+simutrans-pak128
+openttd
+openttd-opengfx
+openttd-opensfx
+
+stress

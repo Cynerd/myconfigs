@@ -1,7 +1,7 @@
 dnl vim:ft=m4
 define(NETFLIX)
-include(laptop)
 include(openrc)
+include(laptop)
 include(devel)
 include(steam)
 include(wine)

@@ -24,6 +24,7 @@ dnl Various graphic programs
 gimp
 inkscape
 audacity
+pitivi
 vlc
 conkeror
 surf-webkit2gtk-git
@@ -80,6 +81,7 @@ pulsemixer
 qt5-styleplugins
 numix-frost-themes
 xorg-setxkbmap
+xorg-xprop
 dnl For app .desktop management
 perl-file-mimeinfo
 
@@ -92,6 +94,12 @@ noto-fonts-emoji
 emojione-color-font
 twemoji-color-font
 texlive-fontsextra
+ttf-ms-fonts
+ttf-dejavu
+ttf-droid
+ttf-freefont
+ttf-liberation
+ttf-linux-libertine
 
 dnl Codecs
 x264

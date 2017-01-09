@@ -22,6 +22,7 @@ git
 cgdb
 cscope
 gcovr
+strace
 dnl Web
 ruby
 ruby-jekyll
