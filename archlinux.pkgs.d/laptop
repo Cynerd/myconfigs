@@ -6,7 +6,6 @@ dnl System essentials
 syslinux
 efibootmgr
 acpid-openrc
-lm_sensors-openrc
 xf86-input-synaptics
 xf86-video-intel
 

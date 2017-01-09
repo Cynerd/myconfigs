@@ -1,10 +1,13 @@
 dnl vim:ft=m4
 dnl My asus laptop specific stuff
+define(NETFLIX)
 include(laptop)
 include(openrc)
 include(devel)
 include(steam)
 include(wine)
+
+rdiff-backup
 
 asus-kbd-backlight
 intel-ucode

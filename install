@@ -106,3 +106,8 @@ read -p "Install backup script? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst local/bin/system-backup ~/.local/bin/system-backup
 fi
+
+read -p "Install lxc-net script? (Y/n) "
+if [[ $REPLY =~ ^[Yy]?$ ]]; then
+	inst local/bin/lxc-net ~/.local/bin/lxc-net
+fi

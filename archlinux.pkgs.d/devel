@@ -19,6 +19,9 @@ ctags
 valgrind
 texlive-latexextra
 git
+cgdb
+cscope
+gcovr
 dnl Web
 ruby
 ruby-jekyll
@@ -32,10 +35,19 @@ python-xattr
 python2-xattr
 python-daemon
 
+dnl Perl
+perl-common-sense
+
+dnl Rust
+rust
+cargo
+
 dnl Building stuff
 clang
 cmake
 patch
+ccache
+clang-tools-extra
 
 dnl work devel
 lua51

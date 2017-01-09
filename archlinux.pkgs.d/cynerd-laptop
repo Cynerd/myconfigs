@@ -1,4 +1,5 @@
 dnl vim:ft=m4
+define(NETFLIX)
 include(laptop)
 include(openrc)
 include(devel)
@@ -7,6 +8,7 @@ include(wine)
 
 intel-ucode
 
+rdiff-backup
 openvpn-openrc
 easy-rsa
 freecad

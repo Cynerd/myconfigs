@@ -2,8 +2,9 @@ dnl vim:ft=m4
 define(DESKTOP)
 
 dnl Some system level stuff
-gpm-openrc
-alsa-utils-openrc
+ifdef(`OPENRC',gpm-openrc,gpm)
+ifdef(`OPENRC',alsa-utils-openrc, alsa-utils)
+ifdef(`OPENRC',lm_sensors-openrc,lm_sensors)
 pulseaudio
 pulseaudio-alsa
 fuseiso
@@ -12,7 +13,7 @@ dnl Some command line tools
 lynx
 abook
 pass
-syncthing-openrc
+ifdef(`OPENRC',syncthing-openrc,syncthing)
 ttysterm
 dnl Stardict
 sdcv
@@ -22,6 +23,7 @@ stardict-en-cz
 dnl Various graphic programs
 gimp
 inkscape
+audacity
 vlc
 conkeror
 surf-webkit2gtk-git
@@ -41,7 +43,7 @@ pidgin-libnotify
 pidgin-window_merge
 
 dnl Chromium
-chromium-widevine
+ifdef(`NETFLIX',chromium-widevine,chromium)
 pepper-flash
 
 dnl Music player daemon
@@ -63,7 +65,7 @@ i3lock
 dmenu
 dunst
 xzoom
-xorg-server-nosystemd
+ifdef(`OPENRC',xorg-server-nosystemd,xorg-server)
 xorg-server-utils
 xorg-xinit
 xorg-xev
@@ -87,7 +89,6 @@ font-mathematica
 ttf-hack
 ttf-symbola
 noto-fonts-emoji
-powertop
 emojione-color-font
 twemoji-color-font
 texlive-fontsextra

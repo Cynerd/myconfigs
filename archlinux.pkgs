@@ -3,9 +3,13 @@ dnl File containing names of explicitly installed packages on system
 esyscmd(`echo define\(HOSTNAME,$(hostname)\)')
 sinclude(HOSTNAME)
 
-dnl Various essential console programs
+dnl Archlinux packages management
 pacaur
 pkgfile
+agetpkg-git
+pkgstats
+
+dnl Various essential console programs
 ifdef(`DESKTOP',gvim,vim)
 vim-spell-cs
 vim-spell-en
@@ -13,7 +17,6 @@ htop
 openssh
 ncdu
 rsync
-rdiff-backup
 wget
 sshfs
 zsh
@@ -28,12 +31,14 @@ include(ranger)
 mpv
 
 dnl System stuff
-dhcpcd-openrc
-fuse-openrc
-ntp-openrc
+ifdef(`OPENRC',dhcpcd-openrc,dhcpcd)
+ifdef(`OPENRC',fuse-openrc,fuse2)
+ifdef(`OPENRC',ntp-openrc,ntp)
+ufw
 sudo
 lsof
 hdparm
+smartmontools
 
 dnl File systems
 btrfs-progs
