@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+[ -d vim/bundle ] || (echo Run in root of myconfigs only! && exit 1)
+
+for dir in vim/bundle/*; do
+	pushd $dir
+	git checkout master
+	git pull
+	git submodule update --init --recursive
+	popd
+done
