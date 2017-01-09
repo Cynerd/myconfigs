@@ -51,6 +51,7 @@ fi
 
 read -p "Install ranger configuration? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
+	mkdir -p ~/.config/ranger
 	inst config/ranger/rc.conf ~/.config/ranger/rc.conf
 	inst config/ranger/rifle.conf ~/.config/ranger/rifle.conf
 	inst config/ranger/scope.sh ~/.config/ranger/scope.sh
