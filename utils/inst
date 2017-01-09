@@ -55,6 +55,7 @@ checkdiff() {
 			G="${g#$1}"
 			COMMIT=$( cd "$1/$G" && git rev-parse HEAD )
 			echo "Checkout of git repository: $2/$G"
+			# TODO this doesn't  seems to work
 			( cd "$2/$G" && git --work-tree=. checkout -f "$COMMIT" )
 		done
 	else
