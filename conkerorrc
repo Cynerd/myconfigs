@@ -39,6 +39,10 @@ key_kill_mode.test.push(/\/\/.*\//); //regexp matches all sites
 
 view_source_use_external_editor = true;
 
+// Set cwd to ~/downloads so that downloads are saved there
+cwd = get_home_directory();
+cwd.append("downloads");
+
 /////////////////////////////////////////////////////////////////////////////////
 // reopening closed buffers
 define_key(default_global_keymap, "A-W", "revive-buffer");
