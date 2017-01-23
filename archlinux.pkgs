@@ -56,5 +56,8 @@ zip
 rar
 p7zip
 
+dnl Color highlight of less
+source-highlight
+
 dnl Base group
 syscmd(`pacman -Qg base | awk "{print \$2}"')

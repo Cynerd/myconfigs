@@ -8,14 +8,16 @@ include(wine)
 
 intel-ucode
 
-rdiff-backup
 openvpn-openrc
 easy-rsa
 freecad
 transmission-gtk
 qemu-arch-extra
 octave
+devtools
 
+mumble
+mtpfs
 lighttpd
 
 dnl for testing
