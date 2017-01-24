@@ -164,6 +164,15 @@ mode "$displays" {
 }
 bindsym $mod+Shift+w mode "$displays"
 
+set $asus-fan fan: (f)ull, (a)uto
+mode "$asus-fan" {
+    bindsym f exec --no-startup-id sudo asus-fan full, mode "default"
+    bindsym a exec --no-startup-id sudo asus-fan auto, mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+f mode "$asus-fan"
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
     # These bindings trigger as soon as you enter the resize mode
@@ -187,7 +196,6 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-
 bindsym $mod+r mode "resize"
 
 # Switch keyboard
