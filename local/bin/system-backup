@@ -63,7 +63,7 @@ done)
 sync -f "$MPATH"/@"$MNAME"
 umount "$MPATH" || (echo Unmount failed. Unmount by hand. && exit -5)
 if $CRYPT; then
-	cryptsetup close backup_enc || (echo Encryption close failed. Do by hand. && exit -6)
+	cryptsetup close backup || (echo Encryption close failed. Do by hand. && exit -6)
 fi
 
 # Store when we did last backup and update i3blocks status
