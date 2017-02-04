@@ -1,4 +1,20 @@
 #!/bin/bash
+
+case "$BLOCK_BUTTON" in
+	1)
+		mpc toggle >/dev/null
+		;;
+	2)
+		mpc stop >/dev/null
+		;;
+	4)
+		mpc next >/dev/null
+		;;
+	5)
+		mpc prev >/dev/null
+		;;
+esac
+
 if [ -n "`mpc status | grep -E "(playing|paused)"`" ]; then
 	echo `mpc -f "%artist%, %album%, %title%" status | head -1`
 	echo
