@@ -44,7 +44,8 @@ mount $MARGS "$PART" "$MPATH" || (echo Mount failed && exit -3)
 # Do backup
 while read -r DIR; do
 	echo -e "\e[1;33mBacking up: $DIR\e[0m"
-	rsync -a --progress "$DIR" "$MPATH"/@"$MNAME"/
+	rsync -aAXS --delete --progress "$DIR" "$MPATH"/@"$MNAME"/ || [ $? -eq 24 ]
+	# We ignore exit code if rsync detects vanished source file
 done <<< "$DIRS"
 
 # Do snapshot (read only)
