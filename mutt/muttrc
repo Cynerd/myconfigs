@@ -10,6 +10,8 @@ set sort_aux=last-date-received
 set mailcap_path = "~/.mutt/mailcap"
 set sleep_time = 0
 set delete = yes
+set include=yes
+set ispell="aspell"
 
 auto_view text/html
 alternative_order text/enriched text/plain text/html 
