@@ -7,6 +7,9 @@ case "$BLOCK_BUTTON" in
 	2)
 		mpc stop >/dev/null
 		;;
+	3)
+		nohup urxvt -title "Music player daemon client" -e ncmpcpp &
+		;;
 	4)
 		mpc next >/dev/null
 		;;
@@ -16,11 +19,13 @@ case "$BLOCK_BUTTON" in
 esac
 
 if [ -n "`mpc status | grep -E "(playing|paused)"`" ]; then
-	echo `mpc -f "%artist%, %album%, %title%" status | head -1`
+	echo `mpc -f "♫ %artist%, %album%, %title%" status | head -1`
 	echo
 	if [ -n `mpc status | grep playing` ]; then
 		echo "#ffff00"
 	elif [ -n `mpc status | grep paused` ]; then
 		echo "#00ff00"
 	fi
+else
+	echo "♫"
 fi
