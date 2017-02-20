@@ -19,7 +19,7 @@ openssh-openrc
 
 asus-kbd-backlight
 intel-ucode
-virtualgl-openrc
+virtualgl
 lib32-nvidia-utils
 xf86-input-synaptics
 xf86-video-intel

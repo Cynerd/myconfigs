@@ -66,7 +66,7 @@ i3lock
 dmenu
 dunst
 xzoom
-ifdef(`OPENRC',xorg-server-nosystemd,xorg-server)
+xorg-server
 xorg-server-utils
 xorg-xinit
 xorg-xev
@@ -113,3 +113,5 @@ ncurses5-compat-libs
 
 dnl Java blee
 jre8-openjdk
+
+libva-mesa-driver
