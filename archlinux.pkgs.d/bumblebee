@@ -5,4 +5,4 @@ bumblebee-openrc
 bbswitch
 
 dnl  ??
-mesa-vdpau
+mesa-vdpau-nosystemd

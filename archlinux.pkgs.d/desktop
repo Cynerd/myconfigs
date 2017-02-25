@@ -66,7 +66,7 @@ i3lock
 dmenu
 dunst
 xzoom
-xorg-server
+ifdef(`OPENRC',xorg-server-nosystemd,xorg-server)
 xorg-server-utils
 xorg-xinit
 xorg-xev
