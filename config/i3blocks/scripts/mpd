@@ -11,10 +11,10 @@ case "$BLOCK_BUTTON" in
 		nohup urxvt -title "Music player daemon client" -e ncmpcpp &
 		;;
 	4)
-		mpc next >/dev/null
+		mpc prev >/dev/null
 		;;
 	5)
-		mpc prev >/dev/null
+		mpc next >/dev/null
 		;;
 esac
 
