@@ -51,12 +51,21 @@ checkdiff() {
 			fi
 		done
 		# Now checkout git repositories
-		for g in `find "$1" -name .git -type f -printf '%h '`; do
+		for g in `find "$1" -type d -exec test -e '{}'/.git \; -print -prune`; do
 			G="${g#$1}"
-			COMMIT=$( cd "$1/$G" && git rev-parse HEAD )
-			echo "Checkout of git repository: $2/$G"
-			# TODO this doesn't  seems to work
-			( cd "$2/$G" && git --work-tree=. checkout -f "$COMMIT" )
+			PREV="$(pwd)"
+			cd "$2/$G"
+			# Check if we have any change at all
+			if git --work-tree=. diff --exit-code -s; then
+				echo "No difference detected in git: $2/$G"
+			else
+				echo "Checkout of git repository: $2/$G"
+				# Checkout all files to HEAD
+				git --work-tree=. checkout -f HEAD
+				# Update all submodules
+				git --work-tree=. submodule update
+			fi
+			cd "$PREV"
 		done
 	else
 		dodiff "$1" "$2"
