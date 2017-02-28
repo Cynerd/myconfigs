@@ -1,5 +1,6 @@
 #!/bin/sh
-HWMON=/sys/devices/platform/asus-nb-wmi/hwmon/hwmon2
+# TODO this probably should be auto detected, because hwmon number can change
+HWMON=/sys/devices/platform/asus-nb-wmi/hwmon/hwmon1
 
 if [ "$(whoami)" != "root" ]; then
 	echo "Run $0 only with root privileges"
