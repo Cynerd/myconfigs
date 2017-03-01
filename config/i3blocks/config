@@ -49,10 +49,8 @@ signal=13
 # The second parameter overrides the mixer selection
 # See the script for details.
 [volume]
-#label=VOL
 label=♪
 instance=Master
-#instance=PCM
 interval=once
 signal=10
 
@@ -61,7 +59,6 @@ signal=10
 # The script may be called with -w and -c switches to specify thresholds,
 # see the script for details.
 [cpu_usage]
-#label=CPU
 label=cpu
 interval=10
 separator=false
@@ -69,20 +66,14 @@ separator=false
 # Memory usage
 #
 # The type defaults to "mem" if the instance is not specified.
+# You can specify "swap".
 [memory]
-#label=MEM
 label=mem
 interval=30
 
 [bbswitch]
 command=~/.config/i3blocks/scripts/bbswitch
 interval=5
-
-#[memory]
-#label=SWAP
-#instance=swap
-#separator=false
-#interval=30
 
 # Disk usage
 #
@@ -105,24 +96,16 @@ interval=30
 # The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
 [iface]
 command=~/.config/i3blocks/scripts/iface
-instance=enp4s0 wlp3s0
 interval=2
 separator=false
 
 [bandwidth]
-#instance=eth0
+command=~/.config/i3blocks/scripts/bandwidth
 interval=2
 
 [wifi]
 command=~/.config/i3blocks/scripts/wifi
-instance=wlp3s0
 interval=2
-
-# OpenVPN support
-#
-# Support multiple VPN, with colors.
-#[openvpn]
-#interval=20
 
 # Temperature
 #
@@ -130,20 +113,13 @@ interval=2
 # The script may be called with -w and -c switches to specify thresholds,
 # see the script for details.
 [temperature]
-#label=T
 interval=10
-
-#[load_average]
-#interval=10
 
 # Battery indicator
 #
 # The battery instance defaults to 0.
 [battery]
 command=~/.config/i3blocks/scripts/battery
-#label=BAT
-#label=⚡
-#instance=1
 interval=30
 
 [email]
@@ -151,32 +127,6 @@ command=~/.config/i3blocks/scripts/email
 interval=30
 
 # Date Time
-#
 [time]
 command=date '+%Y-%m-%d %H:%M:%S'
 interval=1
-
-# Generic media player support
-#
-# This displays "ARTIST - SONG" if a music is playing.
-# Supported players are: spotify, vlc, audacious, xmms2, mplayer, and others.
-#[mediaplayer]
-#instance=mpd
-#interval=5
-#signal=10
-
-# Key indicators
-#
-# Add the following bindings to i3 config file:
-#
-# bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
-# bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
-#[keyindicator]
-#instance=CAPS
-#interval=once
-#signal=11
-
-#[keyindicator]
-#instance=NUM
-#interval=once
-#signal=11

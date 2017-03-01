@@ -17,19 +17,9 @@
 
 #------------------------------------------------------------------------
 
-# Locate current default interface
-D_IF=$(ip route | awk '/^default/ { print $5 ; exit }')
-# Filter if it's one of chosen ones
-if [[ -n $BLOCK_INSTANCE ]]; then
-	for INT in $BLOCK_INSTANCE; do
-		if [ "$INT" = "$D_IF" ]; then
-			IF="$D_IF"
-			break
-		fi
-	done
-else
-	IF="$D_IF"
-fi
+# Locate current default interface, but use only wlp (wifi) or enp (ethernet)
+# TODO probably also add connection over phone
+IF=$(ip route | awk '/^default .* (wlp|enp)/ { print $5 ; exit }')
 
 #------------------------------------------------------------------------
 
@@ -40,7 +30,7 @@ fi
 
 #------------------------------------------------------------------------
 
-# If no IF is selected then we want se down not anything else.
+# If no IF is selected then we want see down, not anything else.
 if [ -z "$IF" ] || [[ "$(cat /sys/class/net/$IF/operstate)" = 'down' ]]; then
   echo down # full text
   echo down # short text
@@ -49,19 +39,19 @@ if [ -z "$IF" ] || [[ "$(cat /sys/class/net/$IF/operstate)" = 'down' ]]; then
 fi
 
 case $1 in
-  -4)
-    AF=inet ;;
-  -6)
-    AF=inet6 ;;
-  *)
-    AF=inet6? ;;
+	-4)
+		AF=inet ;;
+	-6)
+		AF=inet6 ;;
+	*)
+		AF=inet6? ;;
 esac
 
 # Use the first global scope address
 IPADDR=$(ip addr show $IF | perl -n -e "/$AF ([^\/]+).* scope global/ && print \$1 and exit")
 
 case $BLOCK_BUTTON in
-  3) echo -n "$IPADDR" | xclip -q -se c ;;
+	3) echo -n "$IPADDR" | xclip -q -se c ;;
 esac
 
 #------------------------------------------------------------------------
@@ -70,7 +60,7 @@ echo "$IPADDR" # full text
 echo "$IPADDR" # short text
 
 #------------------------------------------------------------------------
-# Use fast ping to check if we have connection
+# Use ping to check if we have connection
 
 # We ping only once and wait for one second
 PINGV="-c 1 -w 1"

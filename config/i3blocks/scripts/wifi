@@ -16,7 +16,7 @@
 
 #------------------------------------------------------------------------
 
-INTERFACE="${BLOCK_INSTANCE:-wlan0}"
+INTERFACE="$(ip link | awk '/wlp.*/ {print substr($2, 1, length($2)-1); exit}')"
 
 #------------------------------------------------------------------------
 
@@ -32,7 +32,7 @@ SSID=$(iwgetid $INTERFACE | sed 's/.*ESSID:"\([^"]*\)"/\1/')
 
 #------------------------------------------------------------------------
 
-echo $SSID: $QUALITY% # full text
+echo $SSID $QUALITY% # full text
 echo $SSID # short text
 
 # color
