@@ -21,6 +21,9 @@ INTERFACE=$(ip route | awk '/^default .* (wlp|enp)/ { print $5 ; exit }')
 # Issue #36 compliant.
 if ! [ -e "/sys/class/net/${INTERFACE}/operstate" ] || ! [ "`cat /sys/class/net/${INTERFACE}/operstate`" = "up" ]
 then
+	echo down # full text
+	echo down # short text
+	echo \#FF0000 # color
     exit 0
 fi
 

@@ -32,9 +32,6 @@ IF=$(ip route | awk '/^default .* (wlp|enp)/ { print $5 ; exit }')
 
 # If no IF is selected then we want see down, not anything else.
 if [ -z "$IF" ] || [[ "$(cat /sys/class/net/$IF/operstate)" = 'down' ]]; then
-  echo down # full text
-  echo down # short text
-  echo \#FF0000 # color
   exit
 fi
 
