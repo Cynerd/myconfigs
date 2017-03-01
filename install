@@ -92,7 +92,6 @@ if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst Xresources ~/.Xresources
 	inst config/i3/ ~/.config/i3
 	inst config/i3blocks/ ~/.config/i3blocks
-	inst config/i3status/ ~/.config/i3status
 	inst config/dunst/ ~/.config/dunst
 	inst local/bin/mxrandr ~/.local/bin/
 	inst local/bin/sys-reboot ~/.local/bin/
