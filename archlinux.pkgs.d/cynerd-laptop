@@ -5,6 +5,8 @@ include(laptop)
 include(devel)
 include(steam)
 include(wine)
+include(avr)
+include(kicad)
 
 intel-ucode
 
@@ -13,12 +15,17 @@ easy-rsa
 freecad
 transmission-gtk
 qemu-arch-extra
+ovmf
 octave
 devtools
+dhcp-openrc
+ifplugd
 
+id3
 mumble
 mtpfs
-lighttpd
+lighttpd-openrc
+gucharmap
 
 dnl for testing
 stress

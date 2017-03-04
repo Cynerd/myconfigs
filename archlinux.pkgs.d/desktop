@@ -70,7 +70,7 @@ ifdef(`OPENRC',xorg-server-nosystemd,xorg-server)
 xorg-server-utils
 xorg-xinit
 xorg-xev
-rxvt-unicode
+rxvt-unicode-pixbuf
 urxvt-perls
 urxvt-resize-font-git
 urxvt-vtwheel

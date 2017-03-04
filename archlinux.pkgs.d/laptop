@@ -11,6 +11,7 @@ xf86-video-intel
 
 dnl Network
 wpa_supplicant-openrc
+iw
 wireless_tools
 rfkill
 

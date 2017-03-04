@@ -1,0 +1,7 @@
+dnl vim:ft=m4
+
+avrdude
+avr-gcc
+avr-gdb
+avr-libc
+simavr
