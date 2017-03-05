@@ -13,7 +13,7 @@ source private/install # private files, sorry but some privacy is required.
 
 if [ -e /etc/arch-release ]; then
 	. ./utils/arch
-	read -p "Chek Archlinux packages? (Y/n) "
+	read -p "Check Archlinux packages? (Y/n) "
 	if [[ $REPLY =~ ^[Yy]?$ ]]; then
 		archlinux_inst
 	fi
