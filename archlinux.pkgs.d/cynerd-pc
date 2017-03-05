@@ -8,6 +8,7 @@ include(steam)
 include(wine)
 include(bumblebee)
 include(latex)
+include(avr)
 
 screen
 rdiff-backup
@@ -16,6 +17,7 @@ easy-rsa
 octave
 chromium
 openssh-openrc
+qemu-arch-extr
 
 asus-kbd-backlight
 intel-ucode
