@@ -10,6 +10,7 @@ if [ "$1" = "clean" ]; then
 	kill $(cat /tmp/lxc-dhcpd.pid)
 	rm -f /tmp/lxc-dhcpd.pid /tmp/lxc-dhcpd.conf
 	ip link del name vbr0
+	exit
 fi
 
 # Setup bridge
