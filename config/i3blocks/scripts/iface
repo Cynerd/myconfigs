@@ -65,11 +65,18 @@ PINGV="-c 1 -w 1"
 if ping $PINGV nic.cz >/dev/null 2>&1; then
 	echo \#00FF00 # color
 else
+	# Ping nic.cz by ip
 	if ping $PINGV 217.31.205.50 >/dev/null 2>&1; then
 		# No DNS
 		echo \#FFFF00 # color
 	else
-		# No internet connection
-		echo \#FF0000 # color
+		# Ping default gateway of this interface
+		if ping $PINGV $(ip route show dev $IF | awk '/^default via/ {print $3}') >/dev/null 2>&1; then
+			# No internet connection but gateway accessible
+			echo \#FF0F00 # color
+		else
+			# No internet connection
+			echo \#FF0000 # color
+		fi
 	fi
 fi
