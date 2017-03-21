@@ -154,9 +154,9 @@ bindsym $mod+Shift+q mode "$mode_system"
 set $displays (d)efault, toggle: 1:eDP 2:HDMI 3:VGA
 mode "$displays" {
     bindsym d exec --no-startup-id mxrandr, mode "default"
-    bindsym 1 exec --no-startup-id mxrandr toggle eDP1, mode "default"
-    bindsym 2 exec --no-startup-id mxrandr toggle HDMI1, mode "default"
-    bindsym 3 exec --no-startup-id mxrandr toggle VGA1, mode "default"
+    bindsym 1 exec --no-startup-id mxrandr toggle eDP-1, mode "default"
+    bindsym 2 exec --no-startup-id mxrandr toggle HDMI-1, mode "default"
+    bindsym 3 exec --no-startup-id mxrandr toggle VGA-1, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
