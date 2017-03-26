@@ -7,3 +7,5 @@ pulseaudio --start 2>/dev/null
 mpd ~/.config/mpd/mpd.conf
 # Start email synchronization
 ~/.local/sbin/syncemail
+# And if we are on first terminal also automatically start x server
+[ "$(tty)" = "/dev/tty1" ] && startx
