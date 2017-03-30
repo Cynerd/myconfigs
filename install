@@ -2,8 +2,7 @@
 
 cd `dirname $0`
 
-# TODO arguments parsing
-git submodule update --init || (echo "Submodule update failed! Use --ignore-sub if it's ok."; exit 5)
+git submodule update --init || (echo "Submodule update failed!"; exit 5)
 
 # Source inst and diff function
 . ./utils/inst
