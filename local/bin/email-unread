@@ -1,37 +1,34 @@
-#!/bin/bash
-EMAIL=~/.mail
-IGNORE="(Spam|trash|Important)"
+#!/bin/perl
+use strict;
+use warnings;
+use File::Find;
 
-if [ "$1" == "-s" ]; then
-	V=n
-else
-	V=y
-fi
+use constant EMAIL => glob("~/.mail");
+my $IGNORE = "(Spam|trash|Important)";
 
-for account in $(ls "$EMAIL"); do
-	if ! cd $EMAIL/$account; then continue; fi
-	COUNT="0"
-	COUNT=$(find . -name new -type d -print0 |
-	while read -d $'\0' folder; do
-		if [ -n "`echo $folder | grep -E $IGNORE`" ]; then
-			continue
-		fi
-		directory=$(echo $folder | sed 's/^\.\///' | sed 's/\/new$//')
-		count=$(ls "$folder" | wc -l)
-		if [ "$count" -gt "0" ]; then
-			if [ $V == 'y' ]; then
-				echo "$account/$directory: $count"
-			else
-				let 'COUNT = COUNT + count'
-				echo $COUNT
-			fi
-		fi
-	done | tail -1)
-	if [ -n "$COUNT" ]; then
-		if [ $V == "n" ]; then
-			echo "$account:$COUNT"
-		else
-			echo $COUNT
-		fi
-	fi
-done
+my $V = (shift || "") eq "-s";
+
+opendir(EDIR, EMAIL) or die $!;
+while (readdir EDIR) {
+	next if /^\./ or not (-d EMAIL."/$_");
+	our $count = 0;
+
+	sub new_dir {
+		my $path = substr $File::Find::name, 1 + length EMAIL;
+		$path =~ s/\/new$//;
+		return if $_ ne "new" or $path =~ /$IGNORE/;
+		#print "ok: $path\n";
+		my $cnt = 0;
+		opendir(NDIR, "$File::Find::name") or die $!;
+		while (readdir NDIR) {
+			$cnt += 1 unless /^\./;
+		}
+		closedir(NDIR);
+		print "$path: $cnt\n" if not $V and $cnt > 0;
+		$count += $cnt;
+	}
+	find(\&new_dir, EMAIL."/$_");
+
+	print "$_: $count\n" if $V and $count > 0;
+}
+closedir(EDIR);

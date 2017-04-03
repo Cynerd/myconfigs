@@ -58,6 +58,7 @@ fi
 
 read -p "Install email synchronization? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
+	inst local/bin/email-unread ~/.local/bin/email-unread
 	inst_email_sync
 	# Contains:
 	# inst local/sbin/syncemail ~/.local/sbin/
