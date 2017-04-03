@@ -97,3 +97,15 @@ inst() {
 	fi
 	doinst $1 $2
 }
+
+# gpg encrypted install
+ginst() {
+	if [ -z "$PASS" ]; then
+		PASS="$(gpg --batch --decrypt pass.gpg)"
+	fi
+	# TODO probably we should be sure that file will be always removed
+	local TMP="$(mktemp myconfigs.XXXXXXXXXX)"
+	gpg --batch --passphase "$PASS" --output "$TMP" --decrypt "$1"
+	inst "$TMP" "$2"
+	gpg --batch --passphase "$PASS" --output "$1" --encrypt "$TMP"
+}

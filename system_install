@@ -1,0 +1,37 @@
+#!/bin/bash
+
+if [ "$UID" -ne 0 ]; then
+	echo "Please run this as root!" >&2
+	exit 6
+fi
+
+cd `dirname $0`
+
+git submodule update --init || (echo "Submodule update failed!"; exit 5)
+
+# Source inst and diff function
+. ./utils/inst
+
+#################################################################################
+
+if [ -e /etc/arch-release ]; then
+	. ./utils/arch
+	read -p "Check Archlinux packages? (Y/n) "
+	if [[ $REPLY =~ ^[Yy]?$ ]]; then
+		archlinux_inst
+	fi
+fi
+
+read -p "Laptop ACPI and pm? (Y/n) "
+if [[ $REPLY =~ ^[Yy]?$ ]]; then
+	inst system/etc/acpi/handler.sh /etc/acpi/handler.sh
+	inst system/etc/pm/sleep.d/10lock /etc/pm/sleep.d/10lock
+fi
+
+read -p "Wpa supplicant? (Y/n) "
+if [[ $REPLY =~ ^[Yy]?$ ]]; then
+	# TODO
+fi
+
+# As final step just ensure that correct user is owning system files
+chown -R $(stat -c "%U:%G" "$0") system

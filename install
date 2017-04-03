@@ -10,14 +10,6 @@ git submodule update --init || (echo "Submodule update failed!"; exit 5)
 #################################################################################
 source private/install # private files, sorry but some privacy is required.
 
-if [ -e /etc/arch-release ]; then
-	. ./utils/arch
-	read -p "Check Archlinux packages? (Y/n) "
-	if [[ $REPLY =~ ^[Yy]?$ ]]; then
-		archlinux_inst
-	fi
-fi
-
 read -p "Install Bashrc? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst bashrc ~/.bashrc
