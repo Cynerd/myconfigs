@@ -2,7 +2,6 @@
 " :diffg RE  " get from REMOTE
 " :diffg BA  " get from BASE
 " :diffg LO  " get from LOCAL
-execute pathogen#infect()
 syntax on
 filetype plugin indent on
 
@@ -72,15 +71,6 @@ set tags=./.tags,.tags
 " Setup autotag to look for .tags file
 let g:autotagTagsFile=".tags"
 
-" Enable mouse
-set mouse=a
-set ttymouse=urxvt
-" We are always on fast tty (maybe remove this on servers?)
-set ttyfast
-
-" Open tagbar with <F9>
-nmap <F9> :TagbarOpen fc<cr>
-
 " Spell checking
 map <F10> :setlocal spell!<cr>
 function LangToggle()
@@ -94,14 +84,3 @@ function LangToggle()
 endfunction
 setlocal spelllang=en_us
 map <F11> :call LangToggle()<cr>
-
-" TODO for python file type set:
-" set colorcolumn=79
-" set textwidth=79
-
-" TODO for C file type set:
-" TODO bind F2 to execute gnu ident on whole file and ensure that if it fails, no change is done.
-" TODO check if .tags exists and alternativelly warn that it missing
-
-let g:ycm_path_to_python_interpreter="/usr/bin/python3"
-let g:ycm_global_ycm_extra_conf = ".ycm_conf.py"

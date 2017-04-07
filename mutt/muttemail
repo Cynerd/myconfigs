@@ -1,8 +1,0 @@
-# vim: set filetype=muttrc:
-color status green default
-set folder = "~/.mail/email"
-set spoolfile = "+INBOX"
-set copy = no
-#set record = "+sent"
-set postponed = "+drafts"
-set from = "Karel Kočí <cynerd@email.cz>"

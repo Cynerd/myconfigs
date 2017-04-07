@@ -1,3 +1,0 @@
-mpd_connection_timeout = 3000
-system_encoding = utf-8
-mpd_music_dir = /home_hdd/cynerd/music

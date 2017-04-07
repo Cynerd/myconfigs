@@ -1,7 +1,0 @@
-dnl vim:ft=m4
-define(LATEX)
-
-dnl texlive-most and texlive-lang groups
-syscmd(`pacman -Qg texlive-most | awk "{print \$2}"')
-syscmd(`pacman -Qg texlive-lang | awk "{print \$2}"')
-
