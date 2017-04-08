@@ -30,6 +30,12 @@ if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst local/git-prompt.sh ~/.local/
 fi
 
+read -p "Install user services? (Y/n) "
+if [[ $REPLY =~ ^[Yy]?$ ]]; then
+	inst local/sbin/user-service.sh ~/.local/sbin/user-service.sh
+	inst service/ ~/.service/
+fi
+
 read -p "Install VIM scripts? (Y/n) "
 YCM_PATH=~/.vim/bundle/YouCompleteMe
 if [[ $REPLY =~ ^[Yy]?$ ]]; then

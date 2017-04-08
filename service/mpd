@@ -1,0 +1,23 @@
+#!/home/cynerd/.local/sbin/user-service.sh
+# vim: ft=sh
+
+description="Music player daemon"
+pidfile=".config/mpd/pid"
+
+MPD_PID=~/.config/mpd/pid
+if [ ! -e $MPD_PID ] || ! kill -0 $(cat $MPD_PID); then
+	mpd ~/.config/mpd/mpd.conf
+fi
+
+status() {
+	[ -f $pidfile ] || return 1
+	kill -0 "$(cat $pidfile)" || return 1
+}
+
+start() {
+	mpd ~/.config/mpd/mpd.conf
+}
+
+stop() {
+	mpd --kill ~/.config/mpd/mpd.conf
+}

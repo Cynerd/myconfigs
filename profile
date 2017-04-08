@@ -2,8 +2,11 @@
 [[ "$(tty)" != /dev/tty* ]] && return
 
 # Start music player daemon
-mpd ~/.config/mpd/mpd.conf
+~/.service/mpd -q status || ~/.service/mpd start
 # Start email synchronization
 ~/.local/sbin/syncemail
+# Start syncthing
+~/.service/syncthing -q status || ~/.service/syncthing start
+
 # And if we are on first terminal also automatically start x server
 [ "$(tty)" = "/dev/tty1" ] && exec startx -- vt1
