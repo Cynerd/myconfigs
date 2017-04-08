@@ -5,6 +5,7 @@ import sys
 import subprocess
 import daemon
 import lockfile
+import syslog
 from offlineimap import OfflineImap
 
 pidfile = '/tmp/syncemail-%d.pid' % os.getuid()
@@ -33,12 +34,15 @@ for acc in accounts:
     sys.argv.append('-k')
     sys.argv.append('Repository_' + acc[0] + '-remote:remotepass=' + output)
 
-sys.argv.append('-s') # output to syslog
-sys.argv.append('-u')
-sys.argv.append('syslog')
+# Define out logger and redirect stdout and stderr to it
+class logstd:
+    def write(self, data):
+        syslog.syslog(data)
 
 with daemon.DaemonContext():
     check_running()
     with open(pidfile, "w") as f:
         f.write("%s" % os.getpid())
+    syslog.openlog('syncemail')
+    sys.stderr = sys.stdout = logstd()
     OfflineImap().run()
