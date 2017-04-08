@@ -37,5 +37,5 @@ subnet 192.168.30.0 netmask 255.255.255.0 {
 dhcpd -4 -pf /tmp/lxc-dhcpd.pid -cf /tmp/lxc-dhcpd.conf vbr0
 
 # Setup network forwarding (TODO add -o ethX to iptable command)
-sysctl net.ipv4.ip_forward=1
+sysctl -w net.ipv4.ip_forward=1
 iptables -t nat -A POSTROUTING -j MASQUERADE
