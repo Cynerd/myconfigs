@@ -30,6 +30,11 @@ if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst local/git-prompt.sh ~/.local/
 fi
 
+read -p "Install configurations for various utility tools? (Y/n) "
+if [[ $REPLY =~ ^[Yy]?$ ]]; then
+	inst screenrc ~/.screenrc
+fi
+
 read -p "Install user services? (Y/n) "
 if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst local/sbin/user-service.sh ~/.local/sbin/user-service.sh
