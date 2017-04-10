@@ -1,4 +1,5 @@
 #!/bin/bash
-echo $(email-unread -s | tr "\n" " ")
-echo
+OUT="$(email-unread -s | tr "\n" " ")"
+echo "$OUT"
+echo "$OUT"
 echo "#ffff00"
