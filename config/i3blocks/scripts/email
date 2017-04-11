@@ -1,5 +1,6 @@
-#!/bin/bash
-OUT="$(email-unread -s | tr "\n" " ")"
+#!/bin/sh
+# Note: we cut last character because output ends with new line
+OUT="$(email-unread -s | tr "\n" " " | sed 's/ $//')"
 echo "$OUT"
 echo "$OUT"
 echo "#ffff00"

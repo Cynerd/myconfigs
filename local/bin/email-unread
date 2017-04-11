@@ -17,7 +17,6 @@ while (readdir EDIR) {
 		my $path = substr $File::Find::name, 1 + length EMAIL;
 		$path =~ s/\/new$//;
 		return if $_ ne "new" or $path =~ /$IGNORE/;
-		#print "ok: $path\n";
 		my $cnt = 0;
 		opendir(NDIR, "$File::Find::name") or die $!;
 		while (readdir NDIR) {
