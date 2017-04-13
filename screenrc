@@ -1,3 +1,8 @@
+vbell off
+autodetach on
+
 defscrollback 50000
+obuflimit 50000
+
 termcapinfo xterm* ti@:te@
 termcapinfo rxvt* ti@:te@
