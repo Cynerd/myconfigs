@@ -1,8 +1,8 @@
 #!/home/cynerd/.local/sbin/user-service.sh
 # vim: ft=sh
 
-description="Music player daemon"
-pidfile=".config/mpd/pid"
+description="Mail synchronization tool"
+pidfile="/tmp/syncemail-$(id -u).pid"
 
 status() {
 	[ -f $pidfile ] || return 1
@@ -10,9 +10,10 @@ status() {
 }
 
 start() {
-	mpd ~/.config/mpd/mpd.conf
+	~/.local/sbin/syncemail
 }
 
 stop() {
-	mpd --kill ~/.config/mpd/mpd.conf
+	kill "$(cat $pidfile)"
+	wait "$(cat $pidfile)"
 }
