@@ -135,15 +135,13 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
-set $Locker i3lock -c 000000 && sleep 1 && xset dpms force off
-
 set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym l exec --no-startup-id i3lock -c 000000 && sleep 1 && xset dpms force off, mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id sys-suspend, mode "default"
-    bindsym r exec --no-startup-id sys-reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id sys-shutdown, mode "default"  
+    bindsym s exec --no-startup-id sudo pm-suspend, mode "default"
+    bindsym r exec --no-startup-id sudo reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id ~/.config/i3/scripts/shutdown, mode "default"  
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
