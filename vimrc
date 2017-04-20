@@ -104,5 +104,10 @@ map <F11> :call LangToggle()<cr>
 " TODO bind F2 to execute gnu ident on whole file and ensure that if it fails, no change is done.
 " TODO check if .tags exists and alternativelly warn that it missing
 
+" UltiSnips triggers
+let g:UltiSnipsExpandTrigger="<c-h>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
 let g:ycm_path_to_python_interpreter="/usr/bin/python3"
 let g:ycm_global_ycm_extra_conf = ".ycm_conf.py"
