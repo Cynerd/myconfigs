@@ -20,7 +20,7 @@ define_opensearch_webjump("?g", "google.xml");
 define_opensearch_webjump("?w", "wikipedia.xml");
 define_opensearch_webjump("?e", "eBay.xml");
 
-external_content_handlers.set("application/pdf", "okular");
+external_content_handlers.set("application/pdf", "llpp");
 external_content_handlers.set("video/*", "vlc");
 editor_shell_command = "urxvt -e vim";
 
