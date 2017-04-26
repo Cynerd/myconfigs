@@ -17,7 +17,6 @@ localfolders = ~/.mail/email
 [Account email]
 localrepository = email-local
 remoterepository = email-remote
-status_backend = sqlite
-autorefresh = 5
+autorefresh = 1
 postsynchook = ~/.local/sbin/newmail-notify
 
