@@ -101,10 +101,10 @@ if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst local/bin/sys-reboot ~/.local/bin/
 	inst local/bin/sys-shutdown ~/.local/bin/
 	inst local/bin/sys-suspend ~/.local/bin/
-fi
-
-read -p "Install Gtk+ and Qt theme setup? (Y/n) "
-if [[ $REPLY =~ ^[Yy]?$ ]]; then
+	# Some small Xserver tools
+	inst local/bin/clip ~/.local/bin/
+	inst local/bin/xshot ~/.local/bin/
+	# Theme
 	inst gtk-2.0/gtkrc ~/.gtkrc-2.0
 	inst gtk-3.0/ ~/.config/gtk-3.0/
 	inst config/Trolltech.conf ~/.config/Trolltech.conf
