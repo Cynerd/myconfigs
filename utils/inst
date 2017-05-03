@@ -16,8 +16,7 @@ dodiff() {
 	fi
 	if ! [ -f "$OUT" ]; then
 		echo -e "\e[1;33mNot installed:\e[0m $1 => $OUT"
-		read -p "Install? (Y/n) "
-		if [[ $REPLY =~ ^[Yy]?$ ]]; then
+		if ask "Install?"; then
 			doinst "$1" "$OUT"
 		fi
 		return
@@ -50,8 +49,7 @@ checkdiff() {
 			D="${d#$1}"
 			if [ ! -d "$2/$D" ]; then
 				echo -e "\e[1;33mDirectory not installed:\e[0m $1/$D => $2/$D"
-				read -p "Install? (Y/n) "
-				if [[ $REPLY =~ ^[Yy]?$ ]]; then
+				if ask "Install?"; then
 					doinst "$1/$D/" "$2/$D"
 				fi
 			fi
