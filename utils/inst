@@ -1,6 +1,12 @@
 # Functions used for interactive installation of new changes to running system
 # vim: ft=sh
 
+ask() {
+	echo -ne "\e[1;34m$1 (Y/n) \e[0m"
+	read
+	return [[ $REPLY =~ ^[Yy]?$ ]]
+}
+
 dodiff() {
 	if [ -d "$2" ]; then
 		# If we just copying some file to directory
@@ -9,7 +15,7 @@ dodiff() {
 		OUT=$2
 	fi
 	if ! [ -f "$OUT" ]; then
-		echo "Not installed: $1 => $OUT"
+		echo -e "\e[1;33mNot installed:\e[0m $1 => $OUT"
 		read -p "Install? (Y/n) "
 		if [[ $REPLY =~ ^[Yy]?$ ]]; then
 			doinst "$1" "$OUT"
@@ -17,7 +23,7 @@ dodiff() {
 		return
 	fi
 	if cmp "$1" "$OUT" >/dev/null; then
-		echo "No difference detected: $OUT"
+		echo -e "\e[1;32mNo difference detected:\e[0m $OUT"
 		return
 	fi
 	vimdiff "$1" "$OUT"
@@ -31,7 +37,7 @@ checkdiff() {
 		# directory than it have to have trailing slash to ensure that no
 		# additional directory is created.
 		if ! echo "$1" | grep -qE '/$'; then
-			echo ERROR: Directory without trailing slash detected: $1
+			echo -e "\e[1;31mERROR: Directory without trailing slash detected:\e[0m $1"
 			exit 1
 		fi
 		# Got trough all files ignoring git repositories
@@ -43,7 +49,7 @@ checkdiff() {
 		for d in `find "$1" -type d -print -exec test -e '{}'/.git \; -prune`; do
 			D="${d#$1}"
 			if [ ! -d "$2/$D" ]; then
-				echo "Directory not installed: $1/$D => $2/$D"
+				echo -e "\e[1;33mDirectory not installed:\e[0m $1/$D => $2/$D"
 				read -p "Install? (Y/n) "
 				if [[ $REPLY =~ ^[Yy]?$ ]]; then
 					doinst "$1/$D/" "$2/$D"
@@ -57,9 +63,9 @@ checkdiff() {
 			cd "$2/$G"
 			# Check if we have any change at all
 			if git --work-tree=. diff --exit-code -s; then
-				echo "No difference detected in git: $2/$G"
+				echo -e "\e[1;32mNo difference detected in git:\e[0m $2/$G"
 			else
-				echo "Checkout of git repository: $2/$G"
+				echo -e "\e[0;32mCheckout of git repository:\e[0m $2/$G"
 				# Checkout all files to HEAD
 				git --work-tree=. checkout -f HEAD
 				# Update all submodules
@@ -77,14 +83,14 @@ checkdiff() {
 # commands not on deployed tree but on tree in this repository, so we need specify
 # work tree on command line every time we want target deployed work tree.
 doinst() {
-	echo rsync -rlpt $1 $2
+	echo -e "\e[1;34mrsync -rlpt $1 $2\e[0m"
 	rsync -rlpt $1 $2
 	# Now edit all .git files in target directory
 	for g in `find "$2" -name '.git' -type f`; do
 		if ! grep -q "gitdir: " "$g"; then
 			continue # Probably not a git repository or who knows.
 		fi
-		echo "Pointing git repository $g to this repository"
+		echo -e "\e[1;34mPointing git repository $g to this repository\e[0m"
 		echo gitdir: $PWD/.git`sed "s/^gitdir: [./]*git//" "$g"` > "$g"
 	done
 }

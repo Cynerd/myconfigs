@@ -10,40 +10,34 @@ git submodule update --init || (echo "Submodule update failed!"; exit 5)
 #################################################################################
 source private/install # private files, sorry but some privacy is required.
 
-read -p "Install Bashrc? (Y/n) "
-if [[ $REPLY =~ ^[Yy]?$ ]]; then
+if ask "Install Bashrc?"; then
 	inst bashrc ~/.bashrc
 	inst shellrc ~/.shellrc
 	inst profile ~/.profile
 fi
 
-read -p "Install zshrc? (Y/n) "
-if [[ $REPLY =~ ^[Yy]?$ ]]; then
+if ask "Install zshrc?"; then
 	inst zshrc ~/.zshrc
 	inst shellrc ~/.shellrc
 	inst zprofile ~/.zprofile
 fi
 
-read -p "Install GIT configuration? (Y/n) "
-if [[ $REPLY =~ ^[Yy]?$ ]]; then
+if ask "Install GIT configuration?"; then
 	inst gitconfig ~/.gitconfig
 	inst local/git-prompt.sh ~/.local/
 fi
 
-read -p "Install configurations for various utility tools? (Y/n) "
-if [[ $REPLY =~ ^[Yy]?$ ]]; then
+if ask "Install configurations for various utility tools?"; then
 	inst screenrc ~/.screenrc
 fi
 
-read -p "Install user services? (Y/n) "
-if [[ $REPLY =~ ^[Yy]?$ ]]; then
+if ask "Install user services?"; then
 	inst local/sbin/user-service.sh ~/.local/sbin/user-service.sh
 	inst service/ ~/.service/
 fi
 
-read -p "Install VIM scripts? (Y/n) "
 YCM_PATH=~/.vim/bundle/YouCompleteMe
-if [[ $REPLY =~ ^[Yy]?$ ]]; then
+if ask "Install VIM scripts?"; then
 	# See if we have anything different from what we have in repository
 	YCM_REV="$(cd $YCM_PATH && git --work-tree=. diff --exit-code -s && echo y)"
 	inst vimrc ~/.vimrc
@@ -59,16 +53,14 @@ if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	fi
 fi
 
-read -p "Install ranger configuration? (Y/n) "
-if [[ $REPLY =~ ^[Yy]?$ ]]; then
+if ask "Install ranger configuration?"; then
 	mkdir -p ~/.config/ranger
 	inst config/ranger/rc.conf ~/.config/ranger/rc.conf
 	inst config/ranger/rifle.conf ~/.config/ranger/rifle.conf
 	inst config/ranger/scope.sh ~/.config/ranger/scope.sh
 fi
 
-read -p "Install email synchronization? (Y/n) "
-if [[ $REPLY =~ ^[Yy]?$ ]]; then
+if ask "Install email synchronization?"; then
 	inst local/bin/email-unread ~/.local/bin/email-unread
 	inst local/sbin/newmail-notify ~/.local/sbin/newmail-notify
 	inst_email_sync
@@ -77,8 +69,7 @@ if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	# inst config/offlineimap/ ~/.config/offlineimap
 fi
 
-read -p "Install mutt configuration? (Y/n) "
-if [[ $REPLY =~ ^[Yy]?$ ]]; then
+if ask "Install mutt configuration?"; then
 	inst urlview ~/.urlview
 	inst mutt/mailcap ~/.mutt/
 	inst mutt/gpg.rc ~/.mutt/
@@ -90,8 +81,7 @@ if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	mkdir -p ~/.cache/mutt # directory for temporaly html files
 fi
 
-read -p "Install i3 configuration and related tools? (Y/n) "
-if [[ $REPLY =~ ^[Yy]?$ ]]; then
+if ask "Install i3 configuration and related tools?"; then
 	inst xinitrc ~/.xinitrc
 	inst Xresources ~/.Xresources
 	inst config/i3/ ~/.config/i3
@@ -110,23 +100,19 @@ if [[ $REPLY =~ ^[Yy]?$ ]]; then
 	inst config/Trolltech.conf ~/.config/Trolltech.conf
 fi
 
-read -p "Install Conkeror configuration? (Y/n) "
-if [[ $REPLY =~ ^[Yy]?$ ]]; then
+if ask "Install Conkeror configuration?"; then
 	inst conkerorrc ~/.conkerorrc
 	inst conkeror/ ~/.conkeror
 fi
 
-read -p "Install MPD configuration? (Y/n) "
-if [[ $REPLY =~ ^[Yy]?$ ]]; then
+if ask "Install MPD configuration?"; then
 	inst config/mpd/ ~/.config/mpd
 fi
 
-read -p "Install backup script? (Y/n) "
-if [[ $REPLY =~ ^[Yy]?$ ]]; then
+if ask "Install backup script?"; then
 	inst local/bin/system-backup ~/.local/bin/system-backup
 fi
 
-read -p "Install lxc-net script? (Y/n) "
-if [[ $REPLY =~ ^[Yy]?$ ]]; then
+if ask "Install lxc-net script?"; then
 	inst local/bin/lxc-net ~/.local/bin/lxc-net
 fi
