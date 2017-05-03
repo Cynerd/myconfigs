@@ -81,7 +81,7 @@ if ask "Install mutt configuration?"; then
 	mkdir -p ~/.cache/mutt # directory for temporaly html files
 fi
 
-if ask "Install i3 configuration and related tools?"; then
+if ask "Install desktop (i3..)?"; then
 	inst xinitrc ~/.xinitrc
 	inst Xresources ~/.Xresources
 	inst config/i3/ ~/.config/i3
@@ -98,6 +98,8 @@ if ask "Install i3 configuration and related tools?"; then
 	inst gtk-2.0/gtkrc ~/.gtkrc-2.0
 	inst gtk-3.0/ ~/.config/gtk-3.0/
 	inst config/Trolltech.conf ~/.config/Trolltech.conf
+	# User directories
+	inst config/user-dirs.dirs ~/.config/user-dirs.dirs
 fi
 
 if ask "Install Conkeror configuration?"; then
