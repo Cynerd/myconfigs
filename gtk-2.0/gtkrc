@@ -1,2 +1,4 @@
 include "/usr/share/themes/Numix-Frost/gtk-2.0/gtkrc"
 gtk-font-name = "pango monospace 8"
+gtk-icon-theme-name = "Adwaita"
+gtk-key-theme-name = "Emacs"

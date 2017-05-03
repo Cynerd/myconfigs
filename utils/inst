@@ -4,7 +4,7 @@
 ask() {
 	echo -ne "\e[1;34m$1 (Y/n) \e[0m"
 	read
-	return [[ $REPLY =~ ^[Yy]?$ ]]
+	[[ $REPLY =~ ^[Yy]?$ ]]
 }
 
 dodiff() {
@@ -22,7 +22,7 @@ dodiff() {
 		fi
 		return
 	fi
-	if cmp "$1" "$OUT" >/dev/null; then
+	if cmp "$1" "$OUT" >/dev/null 2>&1; then
 		echo -e "\e[1;32mNo difference detected:\e[0m $OUT"
 		return
 	fi
