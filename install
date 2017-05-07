@@ -7,26 +7,34 @@ git submodule update --init || (echo "Submodule update failed!"; exit 5)
 # Source inst and diff function
 . ./utils/inst
 
+# Load if we force changes (implies no interaction)
+[ "$1" = "-f" ] && FORCE=true || FORCE=false
+
 #################################################################################
-source private/install # private files, sorry but some privacy is required.
 
-echo -ne "\e[1;34mInstall Bashrc\e[0m"
-inst bashrc ~/.bashrc
-inst shellrc ~/.shellrc
-inst profile ~/.profile
+if ask "Install Bashrc"; then
+	inst bashrc ~/.bashrc
+	inst shellrc ~/.shellrc
+	inst profile ~/.profile
+fi
 
-echo -ne "\e[1;34mInstall zshrc\e[0m"
-inst zshrc ~/.zshrc
-inst zprofile ~/.zprofile
+if ask "Install zshrc"; then
+	inst zshrc ~/.zshrc
+	inst shellrc ~/.shellrc
+	inst zprofile ~/.zprofile
+fi
 
-echo -ne "\e[1;34mInstall GIT configuration\e[0m"
-inst gitconfig ~/.gitconfig
-inst local/git-prompt.sh ~/.local/
+if ask "Install GIT configuration"; then
+	inst gitconfig ~/.gitconfig
+	inst local/git-prompt.sh ~/.local/
+fi
 
-echo -ne "\e[1;34mInstall configurations for various utility tools\e[0m"
-inst screenrc ~/.screenrc
+if ask "Install configurations for various utility tools"; then
+	inst screenrc ~/.screenrc
+fi
 
-echo -ne "\e[1;34mInstall vim scripts\e[0m"
-inst vimrc ~/.vimrc
-mkdir -p ~/.cache/vim # directory for *.swp files
-mkdir -p ~/.cache/vim-undo # directory for undo files
+if ask "Install vim scripts"; then
+	inst vimrc ~/.vimrc
+	mkdir -p ~/.cache/vim # directory for *.swp files
+	mkdir -p ~/.cache/vim-undo # directory for undo files
+fi
