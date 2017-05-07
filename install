@@ -15,13 +15,11 @@ git submodule update --init || (echo "Submodule update failed!"; exit 5)
 if ask "Install Bashrc"; then
 	inst bashrc ~/.bashrc
 	inst shellrc ~/.shellrc
-	inst profile ~/.profile
 fi
 
 if ask "Install zshrc"; then
 	inst zshrc ~/.zshrc
 	inst shellrc ~/.shellrc
-	inst zprofile ~/.zprofile
 fi
 
 if ask "Install GIT configuration"; then
