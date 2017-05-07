@@ -8,9 +8,10 @@ if [ "$(uname -s)" = "FreeBSD" ]; then
 	alias ls='ls -G'
 else
 	alias ls='ls --color=auto'
+	eval $(dircolors -b)
+	alias make="make -j$(nproc)"
 fi
 alias ll='ls -l'
-eval $(dircolors -b)
 alias grep='grep --color=auto'
 alias git='LANG=en_GB git'
 alias gdb='gdb -q'
@@ -18,7 +19,6 @@ alias cgdb='cgdb -q'
 alias octave='octave-cli -q'
 alias ssh='TERM="xterm-256color" ssh'
 alias feh='feh --magick-timeout 1 -.'
-alias make="make -j$(nproc)"
 
 export LESS=-R
 export LESS_TERMCAP_mb=$'\E[1;31m'
