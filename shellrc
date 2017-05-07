@@ -1,9 +1,6 @@
 # vim: ft=sh:
 # This is file with aliases and variables shared between bash and zsh
 
-export PATH=~/.local/bin:$PATH:$(ruby -e "print Gem.user_dir")/bin
-export EDITOR=vim
-
 # Continue only if this is interactive shell
 [[ $- != *i* ]] && return
 
@@ -17,7 +14,7 @@ alias cgdb='cgdb -q'
 alias octave='octave-cli -q'
 alias ssh='TERM="xterm-256color" ssh'
 alias feh='feh --magick-timeout 1 -.'
-alias make='make -j 8'
+alias make="make -j$(nproc)"
 
 export LESS=-R
 export LESS_TERMCAP_mb=$'\E[1;31m'
