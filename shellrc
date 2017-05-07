@@ -4,7 +4,11 @@
 # Continue only if this is interactive shell
 [[ $- != *i* ]] && return
 
-alias ls='ls --color=auto'
+if [ "$(uname -s)" = "FreeBSD" ]; then
+	alias ls='ls -G'
+else
+	alias ls='ls --color=auto'
+fi
 alias ll='ls -l'
 eval $(dircolors -b)
 alias grep='grep --color=auto'
