@@ -7,37 +7,40 @@ git submodule update --init || (echo "Submodule update failed!"; exit 5)
 # Source inst and diff function
 . ./utils/inst
 
+# Load if we force changes (implies no interaction)
+[ "$1" = "-f" ] && FORCE=true || FORCE=false
+
 #################################################################################
 source private/install # private files, sorry but some privacy is required.
 
-if ask "Install Bashrc?"; then
+if ask "Install Bashrc"; then
 	inst bashrc ~/.bashrc
 	inst shellrc ~/.shellrc
 	inst profile ~/.profile
 fi
 
-if ask "Install zshrc?"; then
+if ask "Install zshrc"; then
 	inst zshrc ~/.zshrc
 	inst shellrc ~/.shellrc
 	inst zprofile ~/.zprofile
 fi
 
-if ask "Install GIT configuration?"; then
+if ask "Install GIT configuration"; then
 	inst gitconfig ~/.gitconfig
 	inst local/git-prompt.sh ~/.local/
 fi
 
-if ask "Install configurations for various utility tools?"; then
+if ask "Install configurations for various utility tools"; then
 	inst screenrc ~/.screenrc
 fi
 
-if ask "Install user services?"; then
+if ask "Install user services"; then
 	inst local/sbin/user-service.sh ~/.local/sbin/user-service.sh
 	inst service/ ~/.service/
 fi
 
 YCM_PATH=~/.vim/bundle/YouCompleteMe
-if ask "Install VIM scripts?"; then
+if ask "Install VIM scripts"; then
 	# See if we have anything different from what we have in repository
 	YCM_REV="$(cd $YCM_PATH && git --work-tree=. diff --exit-code -s && echo y)"
 	inst vimrc ~/.vimrc
@@ -53,14 +56,14 @@ if ask "Install VIM scripts?"; then
 	fi
 fi
 
-if ask "Install ranger configuration?"; then
+if ask "Install ranger configuration"; then
 	mkdir -p ~/.config/ranger
 	inst config/ranger/rc.conf ~/.config/ranger/rc.conf
 	inst config/ranger/rifle.conf ~/.config/ranger/rifle.conf
 	inst config/ranger/scope.sh ~/.config/ranger/scope.sh
 fi
 
-if ask "Install email synchronization?"; then
+if ask "Install email synchronization"; then
 	inst local/bin/email-unread ~/.local/bin/email-unread
 	inst local/sbin/newmail-notify ~/.local/sbin/newmail-notify
 	inst_email_sync
@@ -69,7 +72,7 @@ if ask "Install email synchronization?"; then
 	# inst config/offlineimap/ ~/.config/offlineimap
 fi
 
-if ask "Install mutt configuration?"; then
+if ask "Install mutt configuration"; then
 	inst urlview ~/.urlview
 	inst mutt/mailcap ~/.mutt/
 	inst mutt/gpg.rc ~/.mutt/
@@ -81,7 +84,7 @@ if ask "Install mutt configuration?"; then
 	mkdir -p ~/.cache/mutt # directory for temporaly html files
 fi
 
-if ask "Install desktop (i3..)?"; then
+if ask "Install desktop (i3..)"; then
 	inst xinitrc ~/.xinitrc
 	inst Xresources ~/.Xresources
 	inst config/i3/ ~/.config/i3
@@ -102,19 +105,19 @@ if ask "Install desktop (i3..)?"; then
 	inst config/user-dirs.dirs ~/.config/user-dirs.dirs
 fi
 
-if ask "Install Conkeror configuration?"; then
+if ask "Install Conkeror configuration"; then
 	inst conkerorrc ~/.conkerorrc
 	inst conkeror/ ~/.conkeror
 fi
 
-if ask "Install MPD configuration?"; then
+if ask "Install MPD configuration"; then
 	inst config/mpd/ ~/.config/mpd
 fi
 
-if ask "Install backup script?"; then
+if ask "Install backup script"; then
 	inst local/bin/system-backup ~/.local/bin/system-backup
 fi
 
-if ask "Install lxc-net script?"; then
+if ask "Install lxc-net script"; then
 	inst local/bin/lxc-net ~/.local/bin/lxc-net
 fi
