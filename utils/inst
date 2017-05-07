@@ -3,10 +3,10 @@
 
 ask() {
 	if $FORCE; then
-		echo -ne "\e[1;34m$1\e[0m"
+		echo -e "\e[1;34m$1\e[0m"
 		# Fall trough with 0 exit (always yes)
 	else
-		echo -ne "\e[1;34m$1? (Y/n) \e[0m"
+		echo -e -n "\e[1;34m$1? (Y/n) \e[0m"
 		read
 		[[ $REPLY =~ ^[Yy]?$ ]]
 	fi
