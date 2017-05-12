@@ -56,13 +56,6 @@ if ask "Install VIM scripts"; then
 	fi
 fi
 
-if ask "Install ranger configuration"; then
-	mkdir -p ~/.config/ranger
-	inst config/ranger/rc.conf ~/.config/ranger/rc.conf
-	inst config/ranger/rifle.conf ~/.config/ranger/rifle.conf
-	inst config/ranger/scope.sh ~/.config/ranger/scope.sh
-fi
-
 if ask "Install email synchronization"; then
 	inst local/bin/email-unread ~/.local/bin/email-unread
 	inst local/sbin/newmail-notify ~/.local/sbin/newmail-notify

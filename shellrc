@@ -34,17 +34,6 @@ alias gst='git status'
 alias v='vim'
 alias i='i3-msg'
 
-# ranger alias with nesting control
-rg() {
-	if [ -z "$RANGER_LEVEL" ]; then
-		ranger
-	else
-		exit
-	fi
-}
-# Do not load system configuration for ranger (use only user one)
-export RANGER_LOAD_DEFAULT_RC=FALSE
-
 # Systemd aliases if we are running systemd
 if pidof systemd >/dev/null 2>/dev/null; then
 	alias sctl='sudo systemctl'
