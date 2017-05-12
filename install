@@ -84,9 +84,6 @@ if ask "Install desktop (i3..)"; then
 	inst config/i3blocks/ ~/.config/i3blocks
 	inst config/dunst/ ~/.config/dunst
 	inst local/bin/mxrandr ~/.local/bin/
-	inst local/bin/sys-reboot ~/.local/bin/
-	inst local/bin/sys-shutdown ~/.local/bin/
-	inst local/bin/sys-suspend ~/.local/bin/
 	# Some small Xserver tools
 	inst local/bin/clip ~/.local/bin/
 	inst local/bin/xshot ~/.local/bin/
