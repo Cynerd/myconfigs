@@ -187,3 +187,21 @@ function pass_get_name(I) {
 interactive("pass-get-name", "Choses account for to be loged as. As result name of account is outputed.", pass_get_name);
 interactive("pass-get-password", "Receives password from pass for currently selected account.", pass_get_password);
 /////////////////////////////////////////////////////////////////////////////////
+// Local SOCKS5 proxy
+var proxy_session_enabled = false;
+interactive("proxy-session-toggle",
+    "Toggle the SOCKS proxy server",
+    function (I) {
+		if (proxy_session_enabled) {
+			session_pref('network.proxy.type', 0); //direct connection
+			I.window.minibuffer.message("SOCKS5 proxy is now disabled.");
+			proxy_session_enabled = false;
+		} else {
+			session_pref('network.proxy.socks', '127.0.0.1');
+			session_pref('network.proxy.socks_port', 8123);
+			session_pref('network.proxy.type', 1);
+			I.window.minibuffer.message("SOCKS5 proxy 127.0.0.1:8123 is now enabled.");
+			proxy_session_enabled = true;
+		}
+    });
+/////////////////////////////////////////////////////////////////////////////////
