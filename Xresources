@@ -41,9 +41,10 @@ URxvt*secondaryScreen: 1
 URxvt*secondaryScroll: 0
 ! Font
 URxvt*font: xft:mono:size=10
-URxvt*perl-ext-common:  default,clipboard,font-size
-URxvt*resize-font*smaller: C-Down
-URxvt*resize-font*bigger: C-Up
+URxvt.letterSpace: -1
+URxvt*perl-ext-common: default,clipboard,font-size
+URxvt.keysym.C-Up: font-size:increase
+URxvt.keysym.C-Down: font-size:decrease
 
 URxvt*iso14755: False
 URxvt*keysym*Shift-Control-C: perl:clipboard:copy
