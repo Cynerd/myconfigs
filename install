@@ -2,7 +2,7 @@
 
 cd `dirname $0`
 
-git submodule update --init || (echo "Submodule update failed!"; exit 5)
+git submodule update --init --recursive || (echo "Submodule update failed!"; exit 5)
 
 # Source inst and diff function
 . ./utils/inst
