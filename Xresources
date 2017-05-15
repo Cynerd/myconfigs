@@ -40,11 +40,11 @@ URxvt*scrollTtyKeypress: true
 URxvt*secondaryScreen: 1
 URxvt*secondaryScroll: 0
 ! Font
-URxvt*font: xft:mono:size=10
+URxvt*font: xft:DejaVu Sans Mono:size=9
 URxvt.letterSpace: -1
-URxvt*perl-ext-common: default,clipboard,font-size
-URxvt.keysym.C-Up: font-size:increase
-URxvt.keysym.C-Down: font-size:decrease
+URxvt*perl-ext-common:  default,clipboard,font-size
+URxvt.keysym.C-Up: perl:font-size:increase
+URxvt.keysym.C-Down: perl:font-size:decrease
 
 URxvt*iso14755: False
 URxvt*keysym*Shift-Control-C: perl:clipboard:copy
