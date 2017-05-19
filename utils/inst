@@ -37,6 +37,20 @@ dodiff() {
 	fi
 }
 
+# Managing two git trees with master has small inconvenience that git allows only
+# single branch checkout in all work trees, so as it sets now git will execute all
+# commands not on deployed tree but on tree in this repository, so we need specify
+# work tree on command line every time we want target deployed work tree.
+gitrepo_relink() {
+	local GITD="gitdir: $PWD/.git$(sed "s/^gitdir: [./]*git//" "$1")"
+	# We check that we are pointing to correct path just because of making message correct
+	if ! grep -q "$GITD" "$2"; then
+		echo -e "\e[1;34mPointing git repository $2 to this repository\e[0m"
+		echo "$GITD" > "$2"
+	fi
+	# else probably not a git repository or who knows.
+}
+
 checkdiff() {
 	# Iterate trough source directory but ignore any git repositories
 	# Note that it's design decision to not iterate trough target directory.
@@ -65,18 +79,19 @@ checkdiff() {
 		done
 		# Now checkout git repositories
 		for g in `find "$1" -type d -exec test -e '{}'/.git \; -print -prune`; do
-			G="${g#$1}"
+			G="$2/${g#$1}"
+			gitrepo_relink "$g/.git" "$G/.git" # Always reling .git just to be sure
 			PREV="$(pwd)"
-			cd "$2/$G"
+			cd "$G"
 			# Check if we have any change at all
 			if git --work-tree=. diff --exit-code -s; then
-				echo -e "\e[1;32mNo difference detected in git:\e[0m $2/$G"
+				echo -e "\e[1;32mNo difference detected in git:\e[0m $G"
 			else
-				echo -e "\e[0;32mCheckout of git repository:\e[0m $2/$G"
+				echo -e "\e[0;32mCheckout of git repository:\e[0m $G"
 				# Checkout all files to HEAD
 				git --work-tree=. checkout -f HEAD
 				# Update all submodules
-				git --work-tree=. submodule update
+				git --work-tree=. submodule update --recursive
 			fi
 			cd "$PREV"
 		done
@@ -85,20 +100,12 @@ checkdiff() {
 	fi
 }
 
-# Managing two git trees with master has small inconvenience that git allows only
-# single branch checkout in all work trees, so as it sets now git will execute all
-# commands not on deployed tree but on tree in this repository, so we need specify
-# work tree on command line every time we want target deployed work tree.
 doinst() {
 	echo -e "\e[1;34mrsync -rlpt $1 $2\e[0m"
 	rsync -rlpt $1 $2
 	# Now edit all .git files in target directory
-	for g in `find "$2" -name '.git' -type f`; do
-		if ! grep -q "gitdir: " "$g"; then
-			continue # Probably not a git repository or who knows.
-		fi
-		echo -e "\e[1;34mPointing git repository $g to this repository\e[0m"
-		echo gitdir: $PWD/.git`sed "s/^gitdir: [./]*git//" "$g"` > "$g"
+	for g in `find "$1" -name '.git' -type f`; do
+		gitrepo_relink "$g" "$2/${g#$1}"
 	done
 }
 
