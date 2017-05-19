@@ -13,6 +13,11 @@ git submodule update --init --recursive || (echo "Submodule update failed!"; exi
 #################################################################################
 source private/install # private files, sorry but some privacy is required.
 
+if [ -e /etc/arch-release ] && ask "Archlinux software"; then
+	source private/arch
+	archlinux_inst
+fi
+
 if ask "Install Bashrc"; then
 	inst bashrc ~/.bashrc
 	inst shellrc ~/.shellrc
