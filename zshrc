@@ -36,9 +36,15 @@ bindkey    "^[[3~"          delete-char
 bindkey    "^[3;5~"         delete-char
 
 # PROMPT #######################################################
-if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="green"; fi
+annoyme_check() {
+	which annoyme >/dev/null 2>&1 && ls ~/.annoyme/*.pid 2>/dev/null >&2 && \
+		echo "%{$fg_bold[red]%}!"
+}
+
+[ $UID -eq 0 ] && NCOLOR="red" || NCOLOR="green"
 PROMPT="%(?..%{$fg_bold[yellow]%}EXIT: %?
-)%{$fg_bold[$NCOLOR]%}%n@%m:%{$fg_bold[blue]%}%1~%{$fg_bold[$NCOLOR]%}%(!.#.$)%{$reset_color%} "
+)\$(annoyme_check)%{$fg_bold[$NCOLOR]%}%n@%m:%{$fg_bold[blue]%}%1~%{$fg_bold[$NCOLOR]%}%(!.#.$)%{$reset_color%} "
+unset NCOLOR
 
 if [ -e ~/.local/git-prompt.sh ]; then
 	source ~/.local/git-prompt.sh

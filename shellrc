@@ -18,7 +18,7 @@ alias gdb='gdb -q'
 alias cgdb='cgdb -q'
 alias octave='octave-cli -q'
 alias ssh='TERM="xterm-256color" ssh'
-alias feh='feh --magick-timeout 1 -.'
+alias feh='feh --magick-timeout 10 -.'
 
 export LESS=-R
 export LESS_TERMCAP_mb=$'\E[1;31m'

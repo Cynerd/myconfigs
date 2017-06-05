@@ -13,4 +13,10 @@ export EDITOR=vim
 ~/.service/syncthing -q status || ~/.service/syncthing start
 
 # And if we are on first terminal also automatically start x server
-[ "$(tty)" = "/dev/tty1" ] && exec startx -- vt1
+if [ "$(tty)" = "/dev/tty1" ]; then
+	if which annoyme >/dev/null 2>&1; then # Check if we are using annoyme
+		sleep 1 # just little bit of time to give systemd to start tasks
+		ls ~/.annoyme/*.pid 2>/dev/null >&2 && annoyme
+	fi
+	exec startx -- vt1
+fi
