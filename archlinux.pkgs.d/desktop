@@ -26,10 +26,12 @@ inkscape
 audacity
 pitivi
 vlc
+mpv
 conkeror
 surf-webkit2gtk-git
 feh
 okular
+llpp
 graphviz
 mesa-demos
 
@@ -80,6 +82,7 @@ inotify-tools
 pulsemixer
 qt5-styleplugins
 numix-frost-themes
+faenza-icon-theme
 xorg-setxkbmap
 xorg-xprop
 dnl For app .desktop management

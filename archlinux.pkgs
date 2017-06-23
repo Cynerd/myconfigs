@@ -13,6 +13,7 @@ dnl Various essential console programs
 ifdef(`DESKTOP',gvim,vim)
 vim-spell-cs
 vim-spell-en
+screen
 htop
 openssh
 ncdu
@@ -25,10 +26,6 @@ bash-completion
 bc
 pv
 sysstat
-
-dnl I want ranger everywhere
-include(ranger)
-mpv
 
 dnl System stuff
 ifdef(`OPENRC',dhcpcd-openrc,dhcpcd)
@@ -49,6 +46,10 @@ parted
 dnl network
 bind-tools
 nmap
+net-tools
+nethogs
+tcpdump
+tcping
 
 dnl archive
 unzip

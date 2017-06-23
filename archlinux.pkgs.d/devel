@@ -52,3 +52,4 @@ clang-tools-extra
 
 dnl work devel
 lua51
+lcov
