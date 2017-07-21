@@ -73,7 +73,7 @@ else
 		# Ping default gateway of this interface
 		if ping $PINGV $(ip route show dev $IF | awk '/^default via/ {print $3}') >/dev/null 2>&1; then
 			# No internet connection but gateway accessible
-			echo \#FF0F00 # color
+			echo \#FF9000 # color
 		else
 			# No internet connection
 			echo \#FF0000 # color
