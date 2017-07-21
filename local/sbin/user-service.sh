@@ -27,6 +27,7 @@ while [ -n "$1" ]; do
 			echo "  start - start service"
 			echo "  stop - stop service"
 			echo "  restart - restart service"
+			echo "  ifrestart - restart service if it's running"
 			;;
 		-q)
 			Q=false
@@ -81,6 +82,21 @@ case "$OP" in
 		else
 			$Q && echo "	start failed"
 			exit 1
+		fi
+		;;
+	ifrestart)
+		$Q && echo "Restarting service $NAME..."
+		if status; then
+			if ! stop; then
+				$Q && echo "	stop failed"
+				exit 1
+			fi
+			if start; then
+				$Q && echo "	ok"
+			else
+				$Q && echo "	start failed"
+				exit 1
+			fi
 		fi
 		;;
 	*)
