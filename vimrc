@@ -20,6 +20,7 @@ set foldmethod=syntax
 set wildmode=longest:full,full
 set wildmenu
 set modeline
+set encoding=utf-8
 
 set number
 set colorcolumn=82
@@ -46,6 +47,12 @@ function TabToogle()
 	" Soft tab stop is here only for possibility of expandtab
 endfunction
 command TabToogle call TabToogle()
+
+" Indent guides
+let g:indent_guides_start_level=2
+let g:indent_guides_guide_size=1
+hi IndentGuidesOdd  ctermbg=black
+hi IndentGuidesEven ctermbg=102
 
 " Write as root
 cmap w!! w !sudo tee >/dev/null %
