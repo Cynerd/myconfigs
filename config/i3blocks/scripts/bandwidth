@@ -19,12 +19,15 @@
 INTERFACE=$(ip route | awk '/^default .* (wlp|enp)/ { print $5 ; exit }')
 
 # Issue #36 compliant.
-if ! [ -e "/sys/class/net/${INTERFACE}/operstate" ] || ! [ "`cat /sys/class/net/${INTERFACE}/operstate`" = "up" ]
-then
-	echo down # full text
-	echo down # short text
-	echo \#FF0000 # color
-    exit 0
+if ! [ -e "/sys/class/net/${INTERFACE}/operstate" ]; then
+	ST="`cat /sys/class/net/${INTERFACE}/operstate`"
+	# Note: usb telephone network is reported as unknown state
+	if [ "$ST" = "up" -o "$ST" = "unknown" ]; then
+		echo down # full text
+		echo down # short text
+		echo \#FF0000 # color
+		exit 0
+	fi
 fi
 
 # path to store the old results in
