@@ -55,7 +55,7 @@ if ask "Install VIM scripts"; then
 	mkdir -p ~/.cache/vim-undo # directory for undo files
 	if [ "$YCM_REV" != "y" ]; then (
 		cd $YCM_PATH
-		./install.py --clang-completer --system-libclang --racer-completer
+		./install.py --clang-completer --system-libclang
 	); else
 		echo "YouCompleteMe is not required to be recompiled"
 	fi

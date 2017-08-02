@@ -49,10 +49,12 @@ endfunction
 command TabToogle call TabToogle()
 
 " Indent guides
+let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
-hi IndentGuidesOdd  ctermbg=black
-hi IndentGuidesEven ctermbg=102
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=232
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=233
 
 " Write as root
 cmap w!! w !sudo tee >/dev/null %
@@ -102,14 +104,6 @@ function LangToggle()
 endfunction
 setlocal spelllang=en_us
 map <F11> :call LangToggle()<cr>
-
-" TODO for python file type set:
-" set colorcolumn=79
-" set textwidth=79
-
-" TODO for C file type set:
-" TODO bind F2 to execute gnu ident on whole file and ensure that if it fails, no change is done.
-" TODO check if .tags exists and alternativelly warn that it missing
 
 " UltiSnips triggers
 let g:UltiSnipsExpandTrigger="<c-h>"
