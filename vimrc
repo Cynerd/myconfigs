@@ -19,6 +19,7 @@ set foldmethod=syntax
 set wildmode=longest:full,full
 set wildmenu
 set modeline
+set encoding=utf-8
 
 set number
 set colorcolumn=82

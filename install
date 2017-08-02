@@ -12,7 +12,7 @@ git submodule update --init --recursive || (echo "Submodule update failed!"; exi
 
 #################################################################################
 if [ -e /etc/arch-release ] && ask "Archlinux software"; then
-	source private/arch
+	source utils/arch
 	archlinux_inst
 fi
 
