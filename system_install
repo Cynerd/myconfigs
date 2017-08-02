@@ -22,15 +22,26 @@ if [ -e /etc/arch-release ]; then
 	fi
 fi
 
-read -p "Laptop ACPI and pm? (Y/n) "
-if [[ $REPLY =~ ^[Yy]?$ ]]; then
+if ask "Laptop ACPI and pm"; then
 	inst system/etc/acpi/handler.sh /etc/acpi/handler.sh
 	inst system/etc/pm/sleep.d/10lock /etc/pm/sleep.d/10lock
 fi
 
-read -p "Wpa supplicant? (Y/n) "
-if [[ $REPLY =~ ^[Yy]?$ ]]; then
+if ask "System PATH profile"; then
+	inst system/etc/profile.d/path.sh /etc/profile.d/path.sh
+fi
+
+if ask "X11 configuration"; then
+	inst system/etc/X11/ /etc/X11/
+fi
+
+if ask "System-wide PulseAudio configuration"; then
+	inst system/etc/pulse/ /etc/pulse/
+fi
+
+if ask "Wpa supplicant"; then
 	# TODO
+	true
 fi
 
 # As final step just ensure that correct user is owning system files
