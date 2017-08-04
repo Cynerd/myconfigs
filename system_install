@@ -12,6 +12,9 @@ git submodule update --init || (echo "Submodule update failed!"; exit 5)
 # Source inst and diff function
 . ./utils/inst
 
+# Load if we force changes (implies no interaction)
+[ "$1" = "-f" ] && FORCE=true || FORCE=false
+
 #################################################################################
 
 if [ -e /etc/arch-release ]; then
