@@ -4,6 +4,9 @@
 # Continue only if this is interactive shell
 [[ $- != *i* ]] && return
 
+#################################################################################
+# Aliases
+
 if [ "$(uname -s)" = "FreeBSD" ]; then
 	alias ls='ls -G'
 else
@@ -42,8 +45,21 @@ if pidof systemd >/dev/null 2>/dev/null; then
 	alias ujrn='jrn --user'
 fi
 
+#################################################################################
+# Utility functions
+
+# Generate random password (optionally takes length of password as first argument)
 genpasswd() {
 	local l=$1
 	if [ "$l" = "" ]; then l=16; fi
 	tr -dc A-Za-z0-9_ < /dev/urandom | head -c ${l} | xargs
+}
+
+# Run given command every second
+dorepeat() {
+	while true; do
+		"$@"
+		sleep 1
+		echo
+	done
 }

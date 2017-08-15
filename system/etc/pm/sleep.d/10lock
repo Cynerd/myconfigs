@@ -4,8 +4,8 @@
 
 case "$1" in
 	hibernate|suspend)
-		for socket in `find /tmp/i3-* -name ipc-socket*`; do
-			i3-msg -s $socket "exec i3lock -c 000000"
+		for socket in `find /tmp/i3-* -name ipc-socket.*`; do
+			i3-msg -s $socket "exec i3lock -d -c 000000"
 		done
 	;;
 	*) exit $NA
