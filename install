@@ -89,9 +89,6 @@ if ask "Install desktop (i3..)"; then
 	inst config/i3blocks/ ~/.config/i3blocks
 	inst config/dunst/ ~/.config/dunst
 	inst local/bin/mxrandr ~/.local/bin/
-	# Some small Xserver tools
-	inst local/bin/clip ~/.local/bin/
-	inst local/bin/xshot ~/.local/bin/
 	# Theme
 	inst gtk-2.0/gtkrc ~/.gtkrc-2.0
 	inst gtk-3.0/ ~/.config/gtk-3.0/

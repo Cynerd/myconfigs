@@ -1,2 +1,0 @@
-#!/bin/sh
-import -window "$(xdotool selectwindow)" ~/xshot_$(date +%F_%H%M%S_%N).png
