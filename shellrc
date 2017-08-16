@@ -57,12 +57,35 @@ genpasswd() {
 
 # Clip stdin to clipboard
 clip() {
-	xclip -selection clipboard
+	# Note: printf as magic to remove trailing new lines
+	printf %s "$(cat)" | xclip -selection clipboard
 }
 
 # Clip current HEAD hash to clipboard
+# Optionally you can pass commit as argument
 gitclip() {
-	git rev-parse HEAD | clip
+	[ -n "$1" ] && local CMT="$1" || local CMT=HEAD
+	git rev-parse "$CMT"| clip
+}
+# Clip current head message to clipboard
+# Optionally you can pass commit as argument
+gitmclip() {
+	[ -n "$1" ] && local CMT="$1" || local CMT=HEAD
+	git log --format=%B -n 1 "$CMT" | clip
+}
+
+# Automatic branch merger (merge branch, push it to server and remove branch)
+# Expects name of the branch as argument
+gitbmerge() {
+	(
+		set -e
+		local WT="$(git worktree list | sed -nE "/\[$1\]/{s/([^ ]+) .*/\1/p}")"
+		if [ -n "$WT" ]; then
+			rm -r "$WT"
+			git worktree prune
+		fi
+		git merge "$1" && git push && git branch -d "$1" && git push origin :"$1"
+	)
 }
 
 # Make screenshot
