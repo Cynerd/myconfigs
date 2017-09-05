@@ -72,6 +72,7 @@ fi
 
 if ask "Install mutt configuration"; then
 	inst urlview ~/.urlview
+	inst lynxrc ~/.lynxrc
 	inst mutt/mailcap ~/.mutt/
 	inst mutt/gpg.rc ~/.mutt/
 	inst mutt/color ~/.mutt/
