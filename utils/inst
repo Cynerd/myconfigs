@@ -8,7 +8,7 @@ ask() {
 	else
 		echo -e -n "\e[1;34m$1? (Y/n) \e[0m"
 		read
-		[[ $REPLY =~ ^[Yy]?$ ]]
+		echo "$REPLY" | grep -qE '^[Yy]?$'
 	fi
 }
 
