@@ -114,3 +114,7 @@ fi
 if ask "Install lxc-net script"; then
 	inst local/bin/lxc-net ~/.local/bin/lxc-net
 fi
+
+if ask "Install usbkey script"; then
+	inst local/bin/usbkey ~/.local/bin/usbkey
+fi
