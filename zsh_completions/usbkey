@@ -1,0 +1,48 @@
+#compdef usbkey
+#autoload
+
+_usbkey_mounted() {
+	mount | grep "/media/usbkey" | grep -q "/dev/mapper/usbkey"
+}
+
+_usbkey () {
+	local cmd
+	if (( CURRENT > 2)); then
+		_usbkey_mounted || return
+		operation=${words[2]}
+		# Run the completion for the subcommand
+		case "${operation}" in
+			ssh-import)
+				[ -d "/media/usbkey/ssh" ] || return
+				local keys=()
+				for F in $(find "/media/usbkey/ssh" -name '*.pub'); do
+					F="${F#/media/usbkey/ssh/}"
+					keys+=("${F%.pub}")
+				done
+				_describe -t keys 'usbkey' keys
+				;;
+			# TODO
+		esac
+	else
+		local operations=(
+			"mount:Mount key of usb driver"
+			"unmount:Unmount usb driver"
+			"sync:Synchronize drive to bakup drive"
+		)
+		if _usbkey_mounted; then
+			operations+=(
+				"gpg-import:Import gpg key"
+				"ssh-import:Import ssh key"
+				"ssh-generate:Generate new ssh key"
+				"ssh-list:List all keys in store"
+				"openvpn-list:List all keys"
+				"openvpn-get:Get keys for some host"
+				"openvpn-generate:Generate key for new host"
+			)
+		fi
+		_describe -t operations 'usbkey' operations
+		_arguments : "--help[Output help message]"
+	fi
+}
+
+_usbkey

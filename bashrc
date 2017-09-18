@@ -10,6 +10,14 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+# Source all completions
+if [ -d ~/.bash_completions ]; then
+	for F in $(find ~/.bash_completions -type f); do
+		. "$F"
+	done
+fi
+
+# PROMPT #######################################################
 PS1='$(
 if [ `id -u` -eq "0" ]; then
 	echo -n "\[\e[1;31m\]\u@\h:\[\e[1;34m\]\W\[\e[1;31m\]\$\[\e[0m\] "

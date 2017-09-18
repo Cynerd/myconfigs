@@ -22,12 +22,14 @@ if ask "Install Bashrc"; then
 	inst bashrc ~/.bashrc
 	inst shellrc ~/.shellrc
 	inst profile ~/.profile
+	mkdir -p ~/.bash_completions
 fi
 
 if ask "Install zshrc"; then
 	inst zshrc ~/.zshrc
 	inst shellrc ~/.shellrc
 	inst zprofile ~/.zprofile
+	mkdir -p ~/.zsh_completions
 fi
 
 if ask "Install GIT configuration"; then
@@ -117,4 +119,6 @@ fi
 
 if ask "Install usbkey script"; then
 	inst local/bin/usbkey ~/.local/bin/usbkey
+	inst zsh_completions/usbkey ~/.zsh_completions/_usbkey
+	inst bash_completions/usbkey ~/.bash_completions/usbkey
 fi

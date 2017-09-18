@@ -10,6 +10,7 @@ zstyle ':completion:*' cache-path ~/.cache/zsh
 zstyle :compinstall filename '/home/kkoci/.zshrc'
 zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==32=33}:${(s.:.)LS_COLORS}")'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+fpath=(~/.zsh_completions $fpath)
 
 autoload -Uz compinit && compinit
 autoload -Uz colors && colors
