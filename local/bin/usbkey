@@ -2,7 +2,7 @@
 set -e
 
 UUID_KKEY="7930cd94-b56e-4395-8859-f34da77f29be"
-UUID_WKEY=""
+UUID_WKEY="9fcaf42a-86d5-4e70-828d-fd90aad2d964"
 
 CRYPT_NAME="usbkey"
 MOUNT_PATH="/media/usbkey"
@@ -56,7 +56,7 @@ check_mount() {
 
 op_sync() {
 	local DOUNMOUNT=false
-	if [ -e "/dev/disk/by-uuid/$UUID_WKEY" ]; then
+	if [ ! -e "/dev/disk/by-uuid/$UUID_WKEY" ]; then
 		echo "USB backup key seems to not be inserted. Please do so." >&2
 		exit 1
 	fi
