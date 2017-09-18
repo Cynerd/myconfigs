@@ -56,30 +56,36 @@ check_mount() {
 
 op_sync() {
 	local DOUNMOUNT=false
-	local EXITC=0
+	if [ -e "/dev/disk/by-uuid/$UUID_WKEY" ]; then
+		echo "USB backup key seems to not be inserted. Please do so." >&2
+		exit 1
+	fi
 	if ! check_mount; then
 		DOUNMOUNT=true
 		op_mount
 	fi
-	if [ -e "/dev/disk/by-uuid/$UUID_WKEY" ]; then
-		# Mount backup usb
-		sudo -- cryptsetup open "/dev/disk/by-uuid/$UUID_WKEY" "$CRYPT_NAME-backup"
-		sudo -- mkdir -p "$MOUNT_PATH-backup"
-		sudo -- mount -o uid="$(id -u)",gid="$(id -g)" "/dev/mapper/$CRYPT_NAME-backup" "$MOUNT_PATH-backup"
-		# Sync them
-		rsync -aAxXS --delete --progress "$MOUNT_PATH/" "$MOUNT_PATH-backup/"
-		# Unmount it
-		sudo -- umount "$MOUNT_PATH-backup"
-		sudo -- rmdir "$MOUNT_PATH-backup"
-		sudo -- cryptsetup close "$CRYPT_NAME-backup"
-	else
-		echo "USB backup key seems to not be inserted. Please do so." >&2
-		EXITC=1
-	fi
+
+	# Mount backup usb
+	sudo -- cryptsetup open "/dev/disk/by-uuid/$UUID_WKEY" "$CRYPT_NAME-backup"
+	sudo -- mkdir -p "$MOUNT_PATH-backup"
+	sudo -- mount -o uid="$(id -u)",gid="$(id -g)" "/dev/mapper/$CRYPT_NAME-backup" "$MOUNT_PATH-backup"
+	# Sync them
+	rsync -ax --delete --progress "$MOUNT_PATH/" "$MOUNT_PATH-backup/"
+	# Unmount it
+	sudo -- umount "$MOUNT_PATH-backup"
+	sudo -- rmdir "$MOUNT_PATH-backup"
+	sudo -- cryptsetup close "$CRYPT_NAME-backup"
+
 	if $DOUNMOUNT; then
 		op_unmount
 	fi
-	exit $EXITC
+
+	echo "Sync process finished." >&2
+}
+
+op_gpg_import() {
+	# TODO
+	true
 }
 
 ssh_list() {
@@ -91,8 +97,16 @@ ssh_list() {
 	done
 }
 
-ssh_generate() {
+check_ssh_nane() {
+	if [ -z "$NAME" ]; then
+		echo "You have to specify key name!" >&2
+		exit 1
+	fi
+}
+
+op_ssh_generate() {
 	check_mount || op_mount
+	check_ssh_nane
 	if [ -f "$MOUNT_PATH/ssh/$NAME" ]; then
 		echo "Key $NAME seems to already exists." >&2
 		exit 1
@@ -100,16 +114,36 @@ ssh_generate() {
 	echo -n "Please enter comment: "
 	read COMMENT
 	ssh-keygen -f "$MOUNT_PATH/ssh/$NAME" -C "$COMMENT"
+
+	echo "SSH key $NAME was generated." >&2
 }
 
-ssh_import() {
+op_ssh_import() {
 	check_mount || op_mount
+	check_ssh_nane
 	if [ -f "$MOUNT_PATH/ssh/$NAME" ] && [ -f "$MOUNT_PATH/ssh/$NAME.pub" ]; then
 		echo "There is no key named $NAME" >&2
 		exit 1
 	fi
 	cp "$MOUNT_PATH/ssh/$NAME" ~/.ssh/
 	cp "$MOUNT_PATH/ssh/$NAME.pub" ~/.ssh/
+
+	echo "SSH key $NAME copied to local .ssh directory." >&2
+}
+
+op_openvpn_list() {
+	check_mount || op_mount
+	# TODO
+}
+
+op_openvpn_get() {
+	check_mount || op_mount
+	# TODO
+}
+
+op_openvpn_generate() {
+	check_mount || op_mount
+	# TODO
 }
 
 
@@ -131,6 +165,7 @@ case "$1" in
 		echo "  ssh-import: Import ssh key"
 		echo "  ssh-generate: Generate new ssh key"
 		echo "  ssh-list: List all keys in store"
+		echo "  openvpn-list: List all keys"
 		echo "  openvpn-get: Get keys for some host"
 		echo "  openvpn-generate: Generate key for new host"
 		exit 0
@@ -169,22 +204,5 @@ while [ $# -gt 0 ]; do
 	esac
 	shift
 done
-
-case "$OPERATION" in
-	mount)
-		op_mount
-		;;
-	unmount)
-		op_unmount
-		;;
-	sync)
-		op_sync
-		;;
-	ssh-list)
-		ssh_list
-		;;
-	*)
-		echo "Operation $OPERATION not implemented" >&2
-		exit 2
-		;;
-esac
+# Go to operation handler
+eval "op_$(echo "$OPERATION" | tr '-' '_')"
