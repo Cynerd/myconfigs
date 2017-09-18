@@ -97,7 +97,7 @@ ssh_list() {
 	done
 }
 
-check_ssh_nane() {
+check_name() {
 	if [ -z "$NAME" ]; then
 		echo "You have to specify key name!" >&2
 		exit 1
@@ -105,8 +105,8 @@ check_ssh_nane() {
 }
 
 op_ssh_generate() {
+	check_name
 	check_mount || op_mount
-	check_ssh_nane
 	if [ -f "$MOUNT_PATH/ssh/$NAME" ]; then
 		echo "Key $NAME seems to already exists." >&2
 		exit 1
@@ -119,8 +119,8 @@ op_ssh_generate() {
 }
 
 op_ssh_import() {
+	check_name
 	check_mount || op_mount
-	check_ssh_nane
 	if [ -f "$MOUNT_PATH/ssh/$NAME" ] && [ -f "$MOUNT_PATH/ssh/$NAME.pub" ]; then
 		echo "There is no key named $NAME" >&2
 		exit 1
@@ -131,19 +131,51 @@ op_ssh_import() {
 	echo "SSH key $NAME copied to local .ssh directory." >&2
 }
 
+# Note OpenVPN: CA generated using following command
+# openssl req -nodes -new -x509 -keyout ca.key -out ca.crt -config openssl.cnf
+
 op_openvpn_list() {
 	check_mount || op_mount
-	# TODO
+	for KEY in $(find "$MOUNT_PATH/openvpn" -name 'ca.crt' -o -name '*.crt' -print); do
+		local N="${KEY#$MOUNT_PATH/openvpn/}"
+		echo "${N%.crt}"
+	done
 }
 
 op_openvpn_get() {
+	check_name
 	check_mount || op_mount
-	# TODO
+	if [ ! -f "$MOUNT_PATH/openvpn/$NAME.key" ] || [ ! -f "$MOUNT_PATH/openvpn/$NAME.crt" ]; then
+		echo "There is no OpenVPN key $NAME" >&2
+		exit 1
+	fi
+	mkdir "openvpn-$NAME"
+	cp "$MOUNT_PATH/openvpn/$NAME.key" "openvpn-$NAME/"
+	cp "$MOUNT_PATH/openvpn/$NAME.crl" "openvpn-$NAME/"
+	cp "$MOUNT_PATH/openvpn/ca.crt" "openvpn-$NAME/"
+	cp "$MOUNT_PATH/openvpn/ta.key" "openvpn-$NAME/"
+
+	echo "OpenVPN key $NAME copied to openvpn-$NAME directory." >&2
 }
 
 op_openvpn_generate() {
+	check_name
 	check_mount || op_mount
-	# TODO
+	if [ -f "$MOUNT_PATH/openvpn/$NAME.key" ] && [ -f "$MOUNT_PATH/openvpn/$NAME.crt" ]; then
+		echo "OpenVPN key $NAME seems to already exists" >&2
+		exit 1
+	fi
+	(
+		cd  "$MOUNT_PATH/openvpn"
+		# Build request
+		openssl req -batch -days 3650 -nodes -new -config "openssl.cnf" \
+			-keyout "$NAME.key" -out "$NAME.csr"
+		# Sign request
+		openssl ca -days 3650 -config "openssl.cnf" \
+			-out "$NAME.crt" -in "$NAME.csr"
+	)
+
+	echo "OpenVPN key $NAME was generated." >&2
 }
 
 
@@ -164,13 +196,13 @@ case "$1" in
 		echo "  gpg-import: Import gpg key"
 		echo "  ssh-import: Import ssh key"
 		echo "  ssh-generate: Generate new ssh key"
-		echo "  ssh-list: List all keys in store"
-		echo "  openvpn-list: List all keys"
-		echo "  openvpn-get: Get keys for some host"
-		echo "  openvpn-generate: Generate key for new host"
+		echo "  ssh-list: List all ssh keys in store"
+		echo "  openvpn-list: List all openvpn keys"
+		echo "  openvpn-get: Get openvpn keys for some host"
+		echo "  openvpn-generate: Generate openvpn key for new host"
 		exit 0
 		;;
-	mount|unmount|sync|gpg-import|ssh-import|ssh-generate|ssh-list|openvpn-get|openvpn-generate)
+	mount|unmount|sync|gpg-import|ssh-import|ssh-generate|ssh-list|openvpn-list|openvpn-get|openvpn-generate)
 		OPERATION="$1"
 		;;
 	*)
@@ -184,10 +216,10 @@ while [ $# -gt 0 ]; do
 		-h|--help)
 			echo "Usb key manager"
 			case "$OPERATION" in
-				mount|unmount|sync)
+				mount|unmount|sync|ssh-list|openvn-list)
 					echo "Usage: usbkey $OPERATION [-h]"
 					;;
-				ssh-*)
+				ssh-*|openvpn-*)
 					echo "Usage: usbkey $OPERATION NAME [-h]"
 					;;
 				# TODO
@@ -195,7 +227,10 @@ while [ $# -gt 0 ]; do
 			exit 0
 			;;
 		*)
-			if [[ "$OPERATION" = ssh-* ]] && [ -z "$NAME" ]; then
+			if  [ -z "$NAME" ] && \
+				[ "$OPERATION" = "ssh-import" -o "$OPERATION" = "ssh-generate" -o \
+				"$OPERATION" = "openvpn-get" -o "$OPERATION" = "openvpn-generate" ] \
+				; then
 				NAME="$1"
 			else
 				unknown_argument "$1"

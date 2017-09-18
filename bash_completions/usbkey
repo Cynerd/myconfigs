@@ -22,11 +22,20 @@ _usbkey() {
 				done
 				COMPREPLY+=($(compgen -W "${keys}" -- ${cur}))
 				;;
+			openvpn-get)
+				[ -d "/media/usbkey/openvpn" ] || return
+				local certs
+				for F in $(find "/media/usbkey/openvpn" -name 'ca.crt' -o -name '*.crt' -print); do
+					F="${F#/media/usbkey/openvpn/}"
+					certs="$certs ${F%.crt}"
+				done
+				COMPREPLY+=($(compgen -W "${certs}" -- ${cur}))
+				;;
 		esac
 	else
 		local ops="-h --help mount sync"
 		if _usbkey_mounted; then
-			ops="$ops unmount ssh-list ssh-generate ssh-import"
+			ops="$ops unmount gpg-import ssh-list ssh-generate ssh-import openvpn-list openvpn-get openvpn-generate"
 		fi
 		COMPREPLY+=($(compgen -W "${ops}" -- ${cur}))
 	fi

@@ -21,6 +21,15 @@ _usbkey () {
 				done
 				_describe -t keys 'usbkey' keys
 				;;
+			openvpn-get)
+				[ -d "/media/usbkey/openvpn" ] || return
+				local certs=()
+				for F in $(find "/media/usbkey/openvpn" -name 'ca.crt' -o -name '*.crt' -print); do
+					F="${F#/media/usbkey/openvpn/}"
+					certs+=("${F%.crt}")
+				done
+				_describe -t certificates 'usbkey' certs
+				;;
 			# TODO
 		esac
 	else
@@ -34,10 +43,10 @@ _usbkey () {
 				"gpg-import:Import gpg key"
 				"ssh-import:Import ssh key"
 				"ssh-generate:Generate new ssh key"
-				"ssh-list:List all keys in store"
-				"openvpn-list:List all keys"
-				"openvpn-get:Get keys for some host"
-				"openvpn-generate:Generate key for new host"
+				"ssh-list:List all SSH keys in store"
+				"openvpn-list:List all OpenVPN keys"
+				"openvpn-get:Get OpenVPN keys for some host"
+				"openvpn-generate:Generate OpenVPN key for new host"
 			)
 		fi
 		_describe -t operations 'usbkey' operations
