@@ -47,7 +47,6 @@ esac
 
 # Completions ##################################################
 
-# Some completion functions
 _gitbmerge() {
 	local cur prev
 	_init_completion || return
