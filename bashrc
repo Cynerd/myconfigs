@@ -37,3 +37,27 @@ case "$TERM" in
 		;;
 esac
 
+# Completions ##################################################
+
+# Some completion functions
+_gitbmerge() {
+	local cur prev
+	_init_completion || return
+	[ $COMP_CWORD -gt 1 ] &&  return # Complete only single dependency
+	COMPREPLY=()
+	local GDIR="$(pwd)"
+	while [ ! -d "$GDIR/.git"  ]; do
+		[ -z "$GDIR" ] && return
+		GDIR="${GDIR%/*}"
+	done
+	GDIR="$GDIR/.git"
+	[ -f "$GDIR" ] && GDIR="$(cat "$GDIR")" # This just points to some other directory
+	[ -d "$GDIR/refs/heads" ] || return # No completion if there is no local branch
+	local ops=""
+	for B in "$GDIR"/refs/heads/*; do
+		# TODO skip branch on HEAD
+		ops="$ops ${B#$GDIR/refs/heads/}"
+	done
+	COMPREPLY+=($(compgen -W "${ops}" -- ${cur}))
+}
+complete -F _gitbmerge gitbmerge
