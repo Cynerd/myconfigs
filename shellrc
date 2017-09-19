@@ -84,7 +84,7 @@ gitbmerge() {
 			rm -r "$WT"
 			git worktree prune
 		fi
-		git merge "$1" && git push && git branch -d "$1" && git push origin :"$1"
+		git merge --ff-only "$1" && git push && git branch -d "$1" && git push origin :"$1"
 	)
 }
 

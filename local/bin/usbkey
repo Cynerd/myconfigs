@@ -93,7 +93,7 @@ op_ssh_list() {
 	for KEY in $(find "$MOUNT_PATH/ssh" -name '*.pub'); do
 		local N="${KEY#$MOUNT_PATH/ssh/}"
 		echo -n "${N%.pub}: "
-		sed -n 's/ssh-rsa .* \(.*\)/\1/p' "$KEY"
+		sed -n 's/ssh-rsa [^ ]* \(.*\)/\1/p' "$KEY"
 	done
 }
 
