@@ -88,7 +88,7 @@ op_gpg_import() {
 	true
 }
 
-ssh_list() {
+op_ssh_list() {
 	check_mount || op_mount
 	for KEY in $(find "$MOUNT_PATH/ssh" -name '*.pub'); do
 		local N="${KEY#$MOUNT_PATH/ssh/}"
