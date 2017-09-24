@@ -1,30 +1,64 @@
 #!/bin/bash
+HOME="192.168.0.217"
+HOST=""
 
+# Let's be sneaky and verify that we are on relevant network before we try to ping
+if ip a | grep -q 'inet 192.168.0.' && \
+		ping -c 1 -w 1 "$HOME" >/dev/null 2>&1; then
+	# TODO check that mpd is running?
+	HOST="-h $HOME"
+fi
+
+# Handle remote volume
+if [ "$BLOCK_INSTANCE" = "remote" ]; then
+	[ -n "$HOST" ] || exit 0
+	case "$BLOCK_BUTTON" in
+		1)
+			mpc $HOST volume 40 >/dev/null
+			;;
+		3)
+			mpc $HOST volume 0 >/dev/null
+			;;
+		4)
+			mpc $HOST volume +2 >/dev/null
+			;;
+		5)
+			mpc $HOST volume -2 >/dev/null
+			;;
+	esac
+
+	echo "♫ $(mpc $HOST volume | sed 's/volume: //')"
+	exit 0
+fi
+
+# Handle user input
 case "$BLOCK_BUTTON" in
 	1)
-		mpc toggle >/dev/null
+		mpc $HOST toggle >/dev/null
 		;;
 	2)
-		mpc stop >/dev/null
+		mpc $HOST stop >/dev/null
 		;;
 	3)
-		nohup urxvt -title "Music player daemon client" -e ncmpcpp 2>&1 >/dev/null &
+		# TODO this doesn't work with host
+		nohup urxvt -title "Music player daemon client" -hold -e ncmpcpp 2>&1 >/dev/null &
 		;;
 	4)
-		mpc prev >/dev/null
+		mpc $HOST prev >/dev/null
 		;;
 	5)
-		mpc next >/dev/null
+		mpc $HOST next >/dev/null
 		;;
 esac
 
-if [ -n "`mpc status | grep -E "(playing|paused)"`" ]; then
-	echo `mpc -f "♫ %artist%, %album%, %title%" status | head -1`
+STATUS="$(mpc $HOST status)"
+if echo "$STATUS" | grep -qE "(playing|paused)"; then
+	echo `mpc $HOST -f "♫ %artist%, %album%, %title%" status | head -1`
 	echo
-	if [ -n `mpc status | grep playing` ]; then
-		echo "#ffff00"
-	elif [ -n `mpc status | grep paused` ]; then
+	if echo "$STATUS" | grep -q playing; then
 		echo "#00ff00"
+	elif echo "$STATUS" | grep -q paused; then
+		echo "#ffff00"
 	fi
 else
 	echo "♫"

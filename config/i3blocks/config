@@ -33,6 +33,11 @@ command=~/.config/i3blocks/scripts/mpd
 interval=5
 signal=12
 
+[mpd-remote]
+command=~/.config/i3blocks/scripts/mpd
+interval=5
+instance=remote
+
 [keymap]
 command=~/.config/i3/scripts/keyboard_layout
 interval=once
