@@ -121,12 +121,14 @@ op_ssh_generate() {
 op_ssh_import() {
 	check_name
 	check_mount || op_mount
-	if [ -f "$MOUNT_PATH/ssh/$NAME" ] && [ -f "$MOUNT_PATH/ssh/$NAME.pub" ]; then
+	if [ ! -f "$MOUNT_PATH/ssh/$NAME" ] || [ ! -f "$MOUNT_PATH/ssh/$NAME.pub" ]; then
 		echo "There is no key named $NAME" >&2
 		exit 1
 	fi
 	cp "$MOUNT_PATH/ssh/$NAME" ~/.ssh/
 	cp "$MOUNT_PATH/ssh/$NAME.pub" ~/.ssh/
+	chmod 600 ~/.ssh/"$NAME"
+	chmod 640 ~/.ssh/"$NAME.pub"
 
 	echo "SSH key $NAME copied to local .ssh directory." >&2
 }

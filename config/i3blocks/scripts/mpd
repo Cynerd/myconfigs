@@ -1,13 +1,15 @@
 #!/bin/bash
-HOME="192.168.0.217"
-HOST=""
+HOST_HOME="192.168.0.51"
 
+HOST=""
 # Let's be sneaky and verify that we are on relevant network before we try to ping
 if ip a | grep -q 'inet 192.168.0.' && \
-		ping -c 1 -w 1 "$HOME" >/dev/null 2>&1; then
+		ping -c 1 -w 1 "$HOST_HOME" >/dev/null 2>&1; then
 	# TODO check that mpd is running?
-	HOST="-h $HOME"
+	HOST="-h $HOST_HOME"
 fi
+
+STATUS="$(mpc $HOST status)"
 
 # Handle remote volume
 if [ "$BLOCK_INSTANCE" = "remote" ]; then
@@ -27,7 +29,9 @@ if [ "$BLOCK_INSTANCE" = "remote" ]; then
 			;;
 	esac
 
-	echo "♫ $(mpc $HOST volume | sed 's/volume: //')"
+	if echo "$STATUS" | grep -qE "(playing|paused)"; then
+		echo "♫ $(mpc $HOST volume | sed 's/volume: //')"
+	fi
 	exit 0
 fi
 
@@ -40,8 +44,7 @@ case "$BLOCK_BUTTON" in
 		mpc $HOST stop >/dev/null
 		;;
 	3)
-		# TODO this doesn't work with host
-		nohup urxvt -title "Music player daemon client" -hold -e ncmpcpp 2>&1 >/dev/null &
+		nohup urxvt -title "Music player daemon client" -e ncmpcpp $HOST 2>&1 >/dev/null &
 		;;
 	4)
 		mpc $HOST prev >/dev/null
