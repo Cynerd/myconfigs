@@ -10,7 +10,6 @@ zstyle ':completion:*' cache-path ~/.cache/zsh
 zstyle :compinstall filename '/home/kkoci/.zshrc'
 zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==32=33}:${(s.:.)LS_COLORS}")'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-fpath=(~/.zsh_completions $fpath)
 
 autoload -Uz compinit && compinit
 autoload -Uz colors && colors
@@ -86,27 +85,6 @@ lrbell_end() {
 
 add-zsh-hook preexec lrbell_begin
 add-zsh-hook precmd lrbell_end
-# Completions ##################################################
-
-_gitbmerge() {
-	(( CURRENT > 2)) &&  return # Complete only single dependency
-	local GDIR="$(pwd)"
-	while [ ! -d "$GDIR/.git"  ]; do
-		[ -z "$GDIR" ] && return
-		GDIR="${GDIR%/*}"
-	done
-	GDIR="$GDIR/.git"
-	[ -f "$GDIR" ] && GDIR="$(cat "$GDIR")" # This just points to some other directory
-	[ -d "$GDIR/refs/heads" ] || return # No completion if there is no local branch
-	local branches=()
-	for B in "$GDIR"/refs/heads/*; do
-		# TODO skip branch on HEAD
-		branches+=("${B#$GDIR/refs/heads/}")
-	done
-	_describe -t branches 'gitbmerge' branches
-}
-compdef _gitbmerge gitbmerge
-
 ################################################################
 case "$TERM" in
 	xterm*|*rxvt*)

@@ -33,6 +33,7 @@ fi
 
 if ask "Install configurations for various utility tools"; then
 	inst screenrc ~/.screenrc
+	mkdir -p ~/.config/htop
 	inst config/htop/htoprc ~/.config/htop/htoprc
 fi
 
