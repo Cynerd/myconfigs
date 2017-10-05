@@ -39,6 +39,7 @@ fi
 
 if ask "Install configurations for various utility tools"; then
 	inst screenrc ~/.screenrc
+	inst config/htop/htoprc ~/.config/htop/htoprc
 fi
 
 if ask "Install user services"; then
