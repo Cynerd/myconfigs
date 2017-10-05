@@ -37,14 +37,9 @@ bindkey    "^[[3~"          delete-char
 bindkey    "^[3;5~"         delete-char
 
 # PROMPT #######################################################
-annoyme_check() {
-	which annoyme >/dev/null 2>&1 && ls ~/.annoyme/*.pid 2>/dev/null >&2 && \
-		echo "%{$fg_bold[red]%}!"
-}
-
 [ $UID -eq 0 ] && NCOLOR="red" || NCOLOR="green"
 PROMPT="%(?..%{$fg_bold[yellow]%}EXIT: %?
-)\$(annoyme_check)%{$fg_bold[$NCOLOR]%}%n@%m:%{$fg_bold[blue]%}%1~%{$fg_bold[$NCOLOR]%}%(!.#.$)%{$reset_color%} "
+)%{$fg_bold[$NCOLOR]%}%n@%m:%{$fg_bold[blue]%}%1~%{$fg_bold[$NCOLOR]%}%(!.#.$)%{$reset_color%} "
 unset NCOLOR
 
 if [ -e ~/.local/git-prompt.sh ]; then
@@ -71,9 +66,9 @@ lrbell_active_window_id() {
 
 lrbell_begin() {
 	lrbell_timestamp=$EPOCHSECONDS
-	lrbell_message="`pwd`: $1"
 	if [ -n "$DISPLAY" ]; then
-		lrbell_window_id=$(lrbell_active_window_id)
+		lrbell_message="`pwd`: $1"
+		lrbell_window_id="$(lrbell_active_window_id)"
 	fi
 }
 lrbell_end() {

@@ -14,7 +14,7 @@ else
 	eval $(dircolors -b)
 	alias make="make -j$(nproc)"
 fi
-alias ll='ls -l'
+alias ll='ls -lh'
 alias grep='grep --color=auto'
 alias git='LANG=en_GB git'
 alias gdb='gdb -q'
