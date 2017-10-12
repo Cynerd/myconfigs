@@ -15,6 +15,8 @@ else
 	alias make="make -j$(nproc)"
 fi
 alias ll='ls -lh'
+alias df='df -h'
+alias du='du -h'
 alias grep='grep --color=auto'
 alias git='LANG=en_GB git'
 alias gdb='gdb -q'
@@ -51,8 +53,8 @@ fi
 # Generate random password (optionally takes length of password as first argument)
 genpasswd() {
 	local l=$1
-	if [ "$l" = "" ]; then l=16; fi
-	tr -dc A-Za-z0-9_ < /dev/urandom | head -c ${l} | xargs
+	[ -n "$l" ] || l=16
+	tr -dc A-Za-z0-9_ < /dev/urandom | head -c "$l" | xargs
 }
 
 # Clip stdin to clipboard
