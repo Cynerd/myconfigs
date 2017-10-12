@@ -47,6 +47,10 @@ if ask "Install user services"; then
 	inst service/ ~/.service/
 fi
 
+if ask "Install SSH config"; then
+	inst private/ssh_config ~/.ssh/config
+fi
+
 YCM_PATH=~/.vim/bundle/YouCompleteMe
 if ask "Install VIM scripts"; then
 	# See if we have anything different from what we have in repository
