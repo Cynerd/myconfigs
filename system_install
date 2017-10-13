@@ -17,14 +17,6 @@ git submodule update --init || (echo "Submodule update failed!"; exit 5)
 
 #################################################################################
 
-if [ -e /etc/arch-release ]; then
-	. ./utils/arch
-	read -p "Check Archlinux packages? (Y/n) "
-	if [[ $REPLY =~ ^[Yy]?$ ]]; then
-		archlinux_inst
-	fi
-fi
-
 if ask "Laptop ACPI and pm"; then
 	inst system/etc/acpi/handler.sh /etc/acpi/handler.sh
 	inst system/etc/pm/sleep.d/10lock /etc/pm/sleep.d/10lock
