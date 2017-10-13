@@ -1,6 +1,0 @@
-dnl vim:ft=m4
-
-wine
-wine_gecko
-wine-mono
-winetricks
