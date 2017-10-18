@@ -1,0 +1,43 @@
+#!/bin/sh
+set -e
+
+BOOKMARDS=~/notes/bookmarks.md
+
+# Note: Bookmarks starts with '* '
+sed -n 's/\* //p' "$BOOKMARDS" | dmenu -p 'surf' | while read L; do
+	if echo "$L" | grep -qE '^\?'; then # We do search on duckduckgo
+
+		surf "https://duckduckgo.com/?q=${L#?}&t=surf&kk=-1&ia=web"
+
+	else # We follow address
+
+		LPROTOCOL="$(echo "$L" | sed -n 's#^\([^:]*\)://.*#\1#p')"
+		LHOST="$(echo "$L" | sed -n 's#^[^:]*://##;s#^\([^/]\+\)/\?.*#\1#p')"
+		LPATH="$(echo "$L" | sed 's#^[^:]*://##;s#^[^/]\+/\?##')"
+
+		# Try to lookup if it's an real address
+		# Note: This is hack because of youtube, nslookup return No answer but
+		# exists with 0. So I am checking if it returned more than one address
+		# (one address is for dns server).
+		if [ "$(nslookup "$LHOST" | grep 'Address:' | wc -l)" -le 1 ]; then # It's a real address
+			if nslookup "$LHOST.cz" >/dev/null; then # we can expand it with cz
+				LHOST="$LHOST.cz"
+			elif nslookup "$LHOST.com" >/dev/null; then # we can expand it with com
+				LHOST="$LHOST.com"
+			fi
+			# TODO what to do when we can't expand it?
+		fi
+		# Decide on protocol (if connection to 443 is not possible then use http otherwise https)
+		if [ -z "$LPROTOCOL" ]; then # We already have protocol (given explicitly)
+			if nc -z -w1 "$LHOST" 443 2>/dev/null; then
+				LPROTOCOL="https"
+			else
+				LPROTOCOL="http"
+			fi
+		fi
+
+		surf "$LPROTOCOL://$LHOST/$LPATH" & # run backgrounded
+
+	fi
+
+done
