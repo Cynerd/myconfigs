@@ -102,6 +102,7 @@ checkdiff() {
 
 doinst() {
 	echo -e "\e[1;34mrsync -rlpt $1 $2\e[0m"
+	mkdir -p "$(dirname "$2")"
 	rsync -rlpt $1 $2
 	# Now edit all .git files in target directory
 	for g in `find "$1" -name '.git' -type f`; do
