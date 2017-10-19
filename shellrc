@@ -90,6 +90,15 @@ gitbmerge() {
 	)
 }
 
+# Create new branch from master
+gitbnew() {
+	git branch "$1" master
+	local NW="$(git rev-parse --show-toplevel)-$1"
+	git worktree add "$NW" $1
+	cd "$NW"
+	git submodule update --init --recursive
+}
+
 # Make screenshot
 xshot() {
 	import -window "$(xdotool selectwindow)" ~/xshot_$(date +%F_%H%M%S_%N).png
