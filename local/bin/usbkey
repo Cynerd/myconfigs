@@ -134,7 +134,7 @@ op_ssh_import() {
 }
 
 # Note OpenVPN: CA generated using following command
-# openssl req -nodes -new -x509 -keyout ca.key -out ca.crt -config openssl.cnf
+# openssl req -nodes -new -x509 -days 3650 -keyout ca.key -out ca.crt -config openssl.cnf
 
 op_openvpn_list() {
 	check_mount || op_mount
