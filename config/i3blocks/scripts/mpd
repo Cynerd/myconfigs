@@ -54,7 +54,6 @@ case "$BLOCK_BUTTON" in
 		;;
 esac
 
-STATUS="$(mpc $HOST status)"
 if echo "$STATUS" | grep -qE "(playing|paused)"; then
 	echo `mpc $HOST -f "♫ %artist%, %album%, %title%" status | head -1`
 	echo
