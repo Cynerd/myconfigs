@@ -22,7 +22,7 @@ font pango:monospace 8
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
+# start a terminal and more
 bindsym $mod+Return exec urxvt
 bindsym $mod+Shift+Return exec conkeror & pidgin
 bindsym $mod+Shift+d exec surf-menu

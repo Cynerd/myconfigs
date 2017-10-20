@@ -3,17 +3,27 @@ set -e
 
 BOOKMARDS=~/notes/bookmarks.md
 
-# Note: Bookmarks starts with '* '
-sed -n 's/\* //p' "$BOOKMARDS" | dmenu -p 'surf' | while read L; do
-	if echo "$L" | grep -qE '^\?'; then # We do search on duckduckgo
+run() {
+	echo "Run $1"
+	echo "$1" | grep -qE '^~?/' || true
+	echo $?
+	if echo "$1" | grep -qE '^\?'; then # We do search on duckduckgo
 
-		surf "https://duckduckgo.com/?q=${L#?}&t=surf&kk=-1&ia=web"
+		surf "https://duckduckgo.com/?q=${L#?}&t=surf&kk=-1&ia=web" &
+
+	elif echo "$1" | grep -qE '^~?/'; then # This is local path
+
+		surf "${1/#\~/$HOME}" &
+
+	elif echo "$1" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+'; then # This ipv4 address
+
+		surf "$1" &
 
 	else # We follow address
 
-		LPROTOCOL="$(echo "$L" | sed -n 's#^\([^:]*\)://.*#\1#p')"
-		LHOST="$(echo "$L" | sed -n 's#^[^:]*://##;s#^\([^/]\+\)/\?.*#\1#p')"
-		LPATH="$(echo "$L" | sed 's#^[^:]*://##;s#^[^/]\+/\?##')"
+		LPROTOCOL="$(echo "$1" | sed -n 's#^\([^:]*\)://.*#\1#p')"
+		LHOST="$(echo "$1" | sed -n 's#^[^:]*://##;s#^\([^/]\+\)/\?.*#\1#p')"
+		LPATH="$(echo "$1" | sed 's#^[^:]*://##;s#^[^/]\+/\?##')"
 
 		# Try to lookup if it's an real address
 		# Note: This is hack because of youtube, nslookup return No answer but
@@ -36,8 +46,17 @@ sed -n 's/\* //p' "$BOOKMARDS" | dmenu -p 'surf' | while read L; do
 			fi
 		fi
 
-		surf "$LPROTOCOL://$LHOST/$LPATH" & # run backgrounded
+		surf "$LPROTOCOL://$LHOST/$LPATH" &
 
 	fi
+}
 
-done
+if [ -n "$1" ]; then
+	run "$1"
+	exit
+else
+	# Note: Bookmarks starts with '* '
+	sed -n 's/\* //p' "$BOOKMARDS" | dmenu -p 'surf' | while read L; do
+		run "$L"
+	done
+fi

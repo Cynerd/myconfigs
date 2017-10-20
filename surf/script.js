@@ -70,6 +70,7 @@ elink_setup = function() {
 	}
 	// TODO
 
+	// Just to be sure that we override website settings
 	if(document.readyState!="complete") {
 		window.setTimeout("elink_setup()",200);
 	}
