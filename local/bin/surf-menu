@@ -25,14 +25,12 @@ run() {
 		LHOST="$(echo "$1" | sed -n 's#^[^:]*://##;s#^\([^/]\+\)/\?.*#\1#p')"
 		LPATH="$(echo "$1" | sed 's#^[^:]*://##;s#^[^/]\+/\?##')"
 
-		# Try to lookup if it's an real address
-		# Note: This is hack because of youtube, nslookup return No answer but
-		# exists with 0. So I am checking if it returned more than one address
-		# (one address is for dns server).
-		if [ "$(nslookup "$LHOST" | grep 'Address:' | wc -l)" -le 1 ]; then # It's a real address
-			if nslookup "$LHOST.cz" >/dev/null; then # we can expand it with cz
+		if ! getent hosts "$LHOST" >/dev/null; then
+			if getent hosts "$LHOST.cz" >/dev/null; then
 				LHOST="$LHOST.cz"
-			elif nslookup "$LHOST.com" >/dev/null; then # we can expand it with com
+			elif getent hosts "$LHOST.org" >/dev/null; then
+				LHOST="$LHOST.org"
+			elif getent hosts "$LHOST.com" >/dev/null; then
 				LHOST="$LHOST.com"
 			fi
 			# TODO what to do when we can't expand it?
