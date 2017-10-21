@@ -1,9 +1,9 @@
 #!/bin/bash
-HOST_HOME="192.168.0.51"
+HOST_HOME="10.8.2.51"
 
 HOST=""
 # Let's be sneaky and verify that we are on relevant network before we try to ping
-if ip a | grep -q 'inet 192.168.0.' && \
+if ip a | grep -q 'inet 10.8.2.' && \
 		ping -c 1 -w 1 "$HOST_HOME" >/dev/null 2>&1; then
 	# TODO check that mpd is running?
 	HOST="-h $HOST_HOME"
