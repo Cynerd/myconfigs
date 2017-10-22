@@ -37,7 +37,7 @@ function settitle {
 	echo -ne "\033]0;`whoami`@`hostname`:`pwd`\007"
 }
 case "$TERM" in
-	xterm*|*rxvt*)
+	xterm*|*rxvt*|*st*)
 		trap 'settitle' DEBUG
 		;;
 esac

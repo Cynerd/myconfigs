@@ -109,7 +109,7 @@ compdef _gitbmerge gitbmerge
 
 ################################################################
 case "$TERM" in
-	xterm*|*rxvt*)
+	xterm*|*rxvt*|*st*)
 		precmd() {
 			print -Pn "\e]0;%n@%m:%~  %(1j,%j job%(2j|s|) ,)\a"
 		}
