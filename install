@@ -11,10 +11,6 @@ git submodule update --init --recursive || (echo "Submodule update failed!"; exi
 [ "$1" = "-f" ] && FORCE=true || FORCE=false
 
 #################################################################################
-if [ -e /etc/arch-release ] && ask "Archlinux software"; then
-	source utils/arch
-	archlinux_inst
-fi
 
 if ask "Install Bashrc"; then
 	inst bashrc ~/.bashrc

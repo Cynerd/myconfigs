@@ -87,7 +87,7 @@ add-zsh-hook preexec lrbell_begin
 add-zsh-hook precmd lrbell_end
 ################################################################
 case "$TERM" in
-	xterm*|*rxvt*)
+	xterm*|*rxvt*|*st*)
 		precmd() {
 			print -Pn "\e]0;%n@%m:%~  %(1j,%j job%(2j|s|) ,)\a"
 		}
