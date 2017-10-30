@@ -15,7 +15,7 @@ set ispell="aspell"
 
 auto_view text/html
 alternative_order text/enriched text/plain text/html 
-macro attach 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && ( surf ~/.cache/mutt/mail.html & )<enter>"
+macro attach 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && ( surf ~/.cache/mutt/mail.html >/dev/null & )<enter>"
 
 source ~/.mutt/gpg.rc
 set pgp_use_gpg_agent = yes
