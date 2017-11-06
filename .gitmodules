@@ -49,3 +49,6 @@
 [submodule "vim/bundle/ale"]
 	path = vim/bundle/ale
 	url = https://github.com/w0rp/ale.git
+[submodule "vim/bundle/neomutt.vim"]
+	path = vim/bundle/neomutt.vim
+	url = https://github.com/neomutt/neomutt.vim.git
