@@ -108,3 +108,9 @@ dorepeat() {
 		echo
 	done
 }
+
+# Clear all ssh control masters
+ssh-clear() {
+	rm -f ~/.cache/ssh
+	mkdir -p ~/.cache/ssh
+}

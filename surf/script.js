@@ -1,4 +1,5 @@
 
+/*
 // Easylinks (inspired but my own implementation)
 var elink_modkey = 18;  //ctrl=17, alt=18
 var elink_copykey = 67;  // c
@@ -185,3 +186,4 @@ run=function() {
 		}
 	}
 }
+*/
