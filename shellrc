@@ -111,6 +111,6 @@ dorepeat() {
 
 # Clear all ssh control masters
 ssh-clear() {
-	rm -f ~/.cache/ssh
+	rm -rf ~/.cache/ssh
 	mkdir -p ~/.cache/ssh
 }
