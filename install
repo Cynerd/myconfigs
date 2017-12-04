@@ -102,7 +102,6 @@ fi
 if ask "Install Surf configuration"; then
 	inst surf/script.js ~/.surf/script.js
 	inst surf/styles/default.css ~/.surf/styles/default.css
-	inst local/bin/surf-menu ~/.local/bin/surf-menu
 fi
 
 if ask "Install MPD configuration"; then
