@@ -114,3 +114,8 @@ ssh-clear() {
 	rm -rf ~/.cache/ssh
 	mkdir -p ~/.cache/ssh
 }
+
+# Run process in background
+tobg() {
+	"$@" >/dev/null 2>&1 &
+}
