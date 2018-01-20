@@ -111,9 +111,3 @@ fi
 if ask "Install backup script"; then
 	inst local/bin/system-backup ~/.local/bin/system-backup
 fi
-
-if ask "Install usbkey script"; then
-	inst local/bin/usbkey ~/.local/bin/usbkey
-	inst zsh_completions/usbkey ~/.zsh_completions/_usbkey
-	inst bash_completions/usbkey ~/.bash_completions/usbkey
-fi
