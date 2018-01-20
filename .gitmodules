@@ -52,3 +52,6 @@
 [submodule "vim/bundle/neomutt.vim"]
 	path = vim/bundle/neomutt.vim
 	url = https://github.com/neomutt/neomutt.vim.git
+[submodule "vim/bundle/vim-openscad"]
+	path = vim/bundle/vim-openscad
+	url = https://github.com/sirtaj/vim-openscad.git
