@@ -13,18 +13,10 @@ git submodule update --init --recursive || (echo "Submodule update failed!"; exi
 #################################################################################
 source private/install # private files, sorry but some privacy is required.
 
-if ask "Install Bashrc"; then
-	inst bashrc ~/.bashrc
-	inst shellrc ~/.shellrc
+# TODO on hosts without shellrc we might want some thin shellrc to be installed
+if ask "Install shell profile"; then
 	inst profile ~/.profile
-	mkdir -p ~/.bash_completions
-fi
-
-if ask "Install zshrc"; then
-	inst zshrc ~/.zshrc
-	inst shellrc ~/.shellrc
 	inst zprofile ~/.zprofile
-	mkdir -p ~/.zsh_completions
 fi
 
 if ask "Install GIT configuration"; then
