@@ -1,0 +1,32 @@
+[default]
+default_calendar = personal
+highlight_event_days = True
+timedelta = 10d
+
+[calendars]
+
+[[personal]]
+path = /home/cynerd/.khal/private
+type = calendar
+color = dark blue
+
+[[school]]
+path = /home/cynerd/.khal/school
+type = calendar
+color = dark red
+
+[[work]]
+path = /home/cynerd/.khal/work
+type = calendar
+color = yellow
+
+[highlight_days]
+default_color = dark gray
+method = background
+
+[locale]
+timeformat = %H:%M
+dateformat = %d.%m.%Y
+longdateformat = %d.%m.%Y
+datetimeformat = %d.%m.%Y %H:%M
+longdatetimeformat = %d.%m.%Y %H:%M
