@@ -91,9 +91,10 @@ if ask "Install desktop (i3..)"; then
 	inst config/user-dirs.dirs ~/.config/user-dirs.dirs
 fi
 
-if ask "Install khal khard"; then
+if ask "Install calendar and contacts"; then
 	inst config/khal/config ~/.config/khal/config
 	inst config/khard/khard.conf ~/.config/khard/khard.conf
+	inst private/vdirsyncer/ ~/.vdirsyncer
 fi
 
 if ask "Install Surf configuration"; then

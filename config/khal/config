@@ -6,19 +6,19 @@ timedelta = 10d
 [calendars]
 
 [[personal]]
-path = /home/cynerd/.khal/private
+path = /home/cynerd/.calendar/personal
 type = calendar
 color = dark blue
 
-[[school]]
-path = /home/cynerd/.khal/school
-type = calendar
-color = dark red
-
 [[work]]
-path = /home/cynerd/.khal/work
+path = /home/cynerd/.calendar/work
 type = calendar
 color = yellow
+
+[[misc]]
+path = /home/cynerd/.calendar/misc
+type = calendar
+color = dark red
 
 [highlight_days]
 default_color = dark gray
