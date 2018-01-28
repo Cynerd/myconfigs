@@ -9,6 +9,8 @@ export QT_STYLE_OVERRIDE='gtk2'
 export GTK_IM_MODULE=xim
 # Fix fullscreen game offscreen
 export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+# To fix missing textures on intel
+export force_s3tc_enable=true
 
 mxrandr
 
