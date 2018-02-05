@@ -1,4 +1,4 @@
-include "/usr/share/themes/Numix-Frost/gtk-2.0/gtkrc"
+include "/usr/share/themes/numix-frost/gtk-2.0/gtkrc"
 gtk-font-name = "DejaVu Sans 8"
 gtk-icon-theme-name = "Faenza"
 gtk-key-theme-name = "Emacs"
