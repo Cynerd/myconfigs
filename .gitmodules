@@ -47,7 +47,7 @@
 	path = vim/bundle/vim-repeat
 	url = https://github.com/tpope/vim-repeat.git
 [submodule "vim/bundle/ale"]
-	path = vim/bundle/ale
+	path = vim/pack/git-plugins/start/ale
 	url = https://github.com/w0rp/ale.git
 [submodule "vim/bundle/neomutt.vim"]
 	path = vim/bundle/neomutt.vim
