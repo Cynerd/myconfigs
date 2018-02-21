@@ -111,6 +111,7 @@ let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " Ale
+let g:ale_lint_on_text_changed = 'never'
 let g:ale_linters = {'c': ['cppcheck', 'gcc', 'clang']}
 
 let g:ycm_path_to_python_interpreter="/usr/bin/python3"
