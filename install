@@ -12,14 +12,10 @@ git submodule update --init --recursive || (echo "Submodule update failed!"; exi
 
 #################################################################################
 
-if ask "Install Bashrc"; then
-	inst bashrc ~/.bashrc
-	inst shellrc ~/.shellrc
-fi
-
-if ask "Install zshrc"; then
-	inst zshrc ~/.zshrc
-	inst shellrc ~/.shellrc
+# TODO on hosts without shellrc we might want some thin shellrc to be installed
+if ask "Install shell profile"; then
+	inst profile ~/.profile
+	inst zprofile ~/.zprofile
 fi
 
 if ask "Install GIT configuration"; then
@@ -29,8 +25,6 @@ fi
 
 if ask "Install configurations for various utility tools"; then
 	inst screenrc ~/.screenrc
-	mkdir -p ~/.config/htop
-	inst config/htop/htoprc ~/.config/htop/htoprc
 fi
 
 if ask "Install vim scripts"; then
