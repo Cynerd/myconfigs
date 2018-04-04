@@ -12,12 +12,6 @@ git submodule update --init --recursive || (echo "Submodule update failed!"; exi
 
 #################################################################################
 
-# TODO on hosts without shellrc we might want some thin shellrc to be installed
-if ask "Install shell profile"; then
-	inst profile ~/.profile
-	inst zprofile ~/.zprofile
-fi
-
 if ask "Install GIT configuration"; then
 	inst gitconfig ~/.gitconfig
 	inst local/git-prompt.sh ~/.local/
