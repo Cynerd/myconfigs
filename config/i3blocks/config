@@ -76,10 +76,6 @@ separator=false
 label=mem
 interval=30
 
-[bbswitch]
-command=~/.config/i3blocks/scripts/bbswitch
-interval=5
-
 # Disk usage
 #
 # The directory defaults to $HOME if the instance is not specified.
