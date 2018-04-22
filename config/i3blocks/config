@@ -87,8 +87,8 @@ instance=/
 interval=30
 separator=false
 [disk]
-label=/home_hdd
-instance=/home_hdd
+label=/home2
+instance=/home2
 interval=30
 
 # Network interface monitoring
