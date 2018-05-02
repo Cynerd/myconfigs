@@ -1,0 +1,49 @@
+#!/bin/sh
+set -e
+
+while [ $# -gt 0 ]; do
+	case "$1" in
+		-h|--help)
+			echo "Usage: netsync [OPTION].."
+			echo "Group network synchronization script."
+			echo
+			echo "Options:"
+			echo "  -h, --help"
+			echo "    Print this help text."
+			echo "  --tty"
+			echo "    Spawn its own terminal window to run in"
+			exit 0
+			;;
+		--tty)
+			# TODO dump log somewhere with timestamp
+			nohup urxvt -title "Network Sync" -e "$0"  2>&1 >/dev/null &
+			# TODO we might have to do some trickary here if we want more than
+			# just this one option.
+			exit 0
+			;;
+		*)
+			echo "Unknown argument: $1" >&2
+			exit 1
+	esac
+	shift
+done
+
+EXIT_CODE=0
+
+run() {
+	if ! "$@"; then
+		EXIT_CODE=$?
+		echo -e "\e[1'31mCommand exited with: $EXIT_CODE\e[0m"
+		return $EXIT_CODE
+	fi
+}
+
+echo -e "\e[1;34m========== DAV discover ==========\e[0m"
+vdirsyncer discover
+echo -e "\e[1;34m========== DAV sync ==========\e[0m"
+vdirsyncer sync
+
+echo -e "\e[1;34m========== Mail ==========\e[0m"
+offlineimap
+
+# TODO also send mails now if there are some delayed mails (also confirm first?)

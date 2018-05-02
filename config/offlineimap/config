@@ -2,11 +2,13 @@
 [general]
 accounts = email
 maxsyncaccounts = 4
+pythonfile = ~/.config/offlineimap/plugin.py
 
 [Repository email-remote]
 type = IMAP
 remotehost = imap.seznam.cz
 remoteuser = cynerd@email.cz
+remotepasseval = get_pass("cynerd@email.cz")
 ssl = yes
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
@@ -17,6 +19,5 @@ localfolders = ~/.mail/email
 [Account email]
 localrepository = email-local
 remoterepository = email-remote
-autorefresh = 1
 postsynchook = ~/.local/sbin/newmail-notify
 

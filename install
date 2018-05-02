@@ -59,8 +59,8 @@ if ask "Install email synchronization"; then
 	inst local/sbin/newmail-notify ~/.local/sbin/newmail-notify
 	inst_email_sync
 	# Contains:
-	# inst local/sbin/syncemail ~/.local/sbin/
 	# inst config/offlineimap/ ~/.config/offlineimap
+	inst config/offlineimap/plugin.py ~/.config/offlineimap/plugin.py
 fi
 
 if ask "Install mutt configuration"; then
