@@ -106,6 +106,10 @@ if ask "Install MPD configuration"; then
 	inst config/mpd/ ~/.config/mpd
 fi
 
+if ask "Install wake-desktop"; then
+	inst local/bin/wake-desktop ~/.local/bin/wake-desktop
+fi
+
 if ask "Install backup script"; then
 	inst local/bin/system-backup ~/.local/bin/system-backup
 fi

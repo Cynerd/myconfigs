@@ -1,0 +1,2 @@
+#!/bin/sh
+ssh turris.prg etherwake 70:85:c2:4a:59:f2
