@@ -164,6 +164,8 @@ bindsym XF86AudioPlay exec --no-startup-id mpc toggle && pkill -RTMIN+12 i3block
 bindsym XF86AudioStop exec --no-startup-id mpc stop && pkill -RTMIN+12 i3blocks
 bindsym XF86AudioNext exec --no-startup-id mpc next && pkill -RTMIN+12 i3blocks
 bindsym XF86AudioPrev exec --no-startup-id mpc prev && pkill -RTMIN+12 i3blocks
+# Run media player control app
+bindsym $mod+Shift+m exec urxvt -title "Music player daemon client" -e ncmpcpp
 
 
 # Start i3blocks to display a workspace bar
