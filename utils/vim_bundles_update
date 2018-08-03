@@ -7,6 +7,6 @@ for dir in vim/bundle/*; do
 	pushd $dir
 	git checkout master
 	git pull
-	git submodule update --init
+	git submodule update --init --recursive
 	popd
 done
