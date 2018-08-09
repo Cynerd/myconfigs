@@ -177,6 +177,7 @@ bar {
 
 # Start daemons
 exec --no-startup-id dunst
-
-# Start Pidbargin
+# Set background
+exec --no-startup-id i3background
+# Start pidgin
 exec pidgin
