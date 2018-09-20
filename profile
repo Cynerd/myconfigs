@@ -1,5 +1,5 @@
 # First global user configuration
-export PATH=~/.local/bin:$PATH:$(ruby -e "print Gem.user_dir")/bin
+export PATH="~/.local/bin:$PATH:$(ruby -e "print Gem.user_dir")/bin:$HOME/.local/avr/bin"
 export EDITOR=vim
 
 # Rest of the profile run only if login is from linux console
