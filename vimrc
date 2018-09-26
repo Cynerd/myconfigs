@@ -2,11 +2,38 @@
 " :diffg RE  " get from REMOTE
 " :diffg BA  " get from BASE
 " :diffg LO  " get from LOCAL
-execute pathogen#infect()
-syntax on
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+" Visual
+Plugin 'itchyny/lightline.vim'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'airblade/vim-gitgutter'
+" Programming
+Plugin 'w0rp/ale'
+Plugin 'maximbaz/lightline-ale'
+Plugin 'majutsushi/tagbar'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Bundle 'craigemery/vim-autotag'
+Plugin 'scrooloose/nerdcommenter'
+" Movement, format and others
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+Plugin 'dhruvasagar/vim-table-mode'
+" Syntax
+Plugin 'vim-scripts/iptables'
+Plugin 'neomutt/neomutt.vim'
+Plugin 'sirtaj/vim-openscad'
+
+call vundle#end()
 filetype plugin indent on
 
 colorscheme elflord
+syntax on
 
 set exrc
 set secure

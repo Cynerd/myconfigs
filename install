@@ -39,19 +39,17 @@ fi
 
 YCM_PATH=~/.vim/bundle/YouCompleteMe
 if ask "Install VIM scripts"; then
-	# See if we have anything different from what we have in repository
-	YCM_REV="$(cd $YCM_PATH && git --work-tree=. diff --exit-code -s && echo y)"
 	inst vimrc ~/.vimrc
 	inst vim/ ~/.vim
 	inst local/bin/vim-project-gen ~/.local/bin/vim-project-gen
 	mkdir -p ~/.cache/vim # directory for *.swp files
 	mkdir -p ~/.cache/vim-undo # directory for undo files
-	if [ "$YCM_REV" != "y" ]; then (
-		cd $YCM_PATH
-		./install.py --clang-completer --system-libclang
-	); else
-		echo "YouCompleteMe is not required to be recompiled"
-	fi
+	# Vim plugin manager
+	[ -d ~/.vim/bundle/Vundle.vim ] || {
+		mkdir -p ~/.vim/bundle
+		git clone "https://github.com/VundleVim/Vundle.vim.git" ~/.vim/bundle/Vundle.vim
+	}
+	vim +PluginInstall +qall
 fi
 
 if ask "Install email synchronization"; then
