@@ -43,16 +43,18 @@ set hidden
 set undofile
 set undodir=~/.cache/vim-undo//
 set hlsearch
-set foldmethod=syntax
 set wildmode=longest:full,full
 set wildmenu
 set modeline
 set encoding=utf-8
 
+set foldmethod=syntax
+highlight Folded ctermbg=Black ctermfg=LightBlue
+
 set number
 set colorcolumn=82
 set textwidth=82
-highlight ColorColumn ctermbg=darkgray
+highlight ColorColumn ctermbg=DarkGray
 
 " Tabs setting. In default we want 4 spaces tab, but allows also 8 spaced tabs
 set noexpandtab
@@ -102,6 +104,9 @@ nnoremap <C-C><C-C> :buffers<CR>:buffer<Space>
 " Directory where *.swp files will be stored
 " Note that double slash is intensional, it tells vim to build complete path.
 set directory=$HOME/.cache/vim//
+
+" Setup gitgutter
+set updatetime=100
 
 " Setup table-mode to markdown compliant
 " Note: to start use "\ t m"
