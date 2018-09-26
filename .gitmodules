@@ -55,3 +55,6 @@
 [submodule "vim/bundle/vim-openscad"]
 	path = vim/bundle/vim-openscad
 	url = https://github.com/sirtaj/vim-openscad.git
+[submodule "vim/bundle/lightline-ale"]
+	path = vim/bundle/lightline-ale
+	url = https://github.com/maximbaz/lightline-ale.git
