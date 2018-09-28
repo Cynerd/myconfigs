@@ -28,6 +28,7 @@ Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'vim-scripts/iptables'
 Plugin 'neomutt/neomutt.vim'
 Plugin 'sirtaj/vim-openscad'
+Plugin 'tmhedberg/SimpylFold'
 
 call vundle#end()
 filetype plugin indent on
@@ -50,6 +51,11 @@ set encoding=utf-8
 
 set foldmethod=syntax
 highlight Folded ctermbg=Black ctermfg=LightBlue
+set foldtext=FoldText()
+function FoldText()
+	return getline(v:foldstart) . '  '
+endfunction
+
 
 set number
 set colorcolumn=82
