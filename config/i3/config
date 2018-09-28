@@ -130,6 +130,18 @@ mode "$displays" {
 }
 bindsym $mod+Shift+w mode "$displays"
 
+set $xshot Xshot: (w)indow or (d)desktop
+mode "$xshot" {
+	# Note: xshot window is for some reason broken.
+	# It won't run when not spawned in terminal
+	bindsym w exec xshot window, mode "default"
+	bindsym d exec --no-startup-id xshot desktop, mode "default"
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+bindsym $mod+Shift+s mode "$xshot"
+
 # resize window
 mode "resize" {
 	bindsym h resize shrink width 10 px or 10 ppt
