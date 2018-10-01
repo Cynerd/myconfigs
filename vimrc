@@ -153,4 +153,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " Ale
 let g:ale_completion_enabled = 1
+let g:ale_completion_delay = 1
 let g:ale_set_highlights = 0
+" To fix random insertion by omnicomplete
+set completeopt=menu,menuone,preview,noselect,noinsert
