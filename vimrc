@@ -152,12 +152,8 @@ let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " Ale
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_linters = {'c': ['cppcheck', 'gcc']}
-let g:ale_fixers = {
-\	'c': ['remove_trailing_lines', 'trim_whitespace'],
-\ 'python': ['autopep8', 'isort', 'add_blank_lines_for_python_control_statements', 'remove_trailing_lines', 'trim_whitespace'],
-\}
+let g:ale_completion_enabled = 1
+let g:ale_set_highlights = 0
 
 " YouCompleteMe
 let g:ycm_autoclose_preview_window_after_completion = 1
