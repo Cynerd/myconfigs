@@ -51,7 +51,7 @@ set modeline
 set encoding=utf-8
 
 set foldmethod=syntax
-highlight Folded ctermbg=Black ctermfg=LightBlue
+highlight Folded ctermbg=Black ctermfg=Yellow
 set foldtext=FoldText()
 function FoldText()
 	return getline(v:foldstart) . '  '
