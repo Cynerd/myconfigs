@@ -30,6 +30,7 @@ Plugin 'vim-scripts/iptables'
 Plugin 'neomutt/neomutt.vim'
 Plugin 'sirtaj/vim-openscad'
 Plugin 'tmhedberg/SimpylFold'
+Plugin 'fedorenchik/qt-support.vim'
 
 call vundle#end()
 filetype plugin indent on
