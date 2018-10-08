@@ -107,7 +107,7 @@ bindsym $mod+Shift+r restart
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-	bindsym l exec --no-startup-id i3lock-lnxpcs, mode "default"
+	bindsym l exec --no-startup-id myi3lock, mode "default"
 	bindsym e exec --no-startup-id i3-msg exit, mode "default"
 	bindsym s exec --no-startup-id sudo pm-suspend, mode "default"
 	bindsym r exec --no-startup-id sudo reboot, mode "default"
