@@ -34,8 +34,6 @@ URxvt*color13: magenta
 URxvt*color14: cyan
 URxvt*color15: white
 URxvt*saveLines: 4096
-! scrollbar style - rxvt (default), plain (most compact), next, or xterm
-!URxvt.scrollstyle: plain
 URxvt.scrollBar: false
 ! do not scroll with output
 URxvt*scrollTtyOutput: false
@@ -49,11 +47,18 @@ URxvt*secondaryScroll: 0
 ! Font
 URxvt*font: xft:DejaVu Sans Mono:size=9
 URxvt.letterSpace: -1
-URxvt*perl-ext-common:  default,clipboard,font-size
+URxvt*iso14755: False
+
+! Perl extensions
+URxvt*perl-ext-common:  default,clipboard,font-size,url-select
+! Font size change
 URxvt.keysym.C-Up: perl:font-size:increase
 URxvt.keysym.C-Down: perl:font-size:decrease
-
-URxvt*iso14755: False
+! Yankable URLs
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.url-select.launcher: /usr/bin/xdg-open
+URxvt.url-select.underline: false
+! Clipboard
 URxvt*keysym*Shift-Control-C: perl:clipboard:copy
 URxvt*keysym*Shift-Control-V: perl:clipboard:paste
 URxvt*clipboard*copycmd:  xsel -ib
