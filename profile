@@ -14,9 +14,17 @@ export EDITOR=vim
 
 # And if we are on first terminal also automatically start x server
 if [ "$(tty)" = "/dev/tty1" ]; then
-	if which annoyme >/dev/null 2>&1; then # Check if we are using annoyme
-		sleep 1 # just little bit of time to give systemd to start tasks
-		ls ~/.annoyme/*.pid 2>/dev/null >&2 && annoyme
-	fi
 	exec startx -- vt1
 fi
+
+echo
+echo "(1) i3"
+echo "(2) sway"
+echo -n "Select or pass to shell: "
+read -r PROFILE_SELECTION
+if [ "$PROFILE_SELECTION" -eq 1 ]; then
+	exec startx -- "vt$XDG_VTNR"
+elif [ "$PROFILE_SELECTION" -eq 2 ]; then
+	exec sway
+fi
+unset PROFILE_SELECTION

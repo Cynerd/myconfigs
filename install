@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 cd `dirname $0`
 
@@ -14,31 +14,30 @@ git submodule update --init --recursive || (echo "Submodule update failed!"; exi
 source private/install # private files, sorry but some privacy is required.
 
 # TODO on hosts without shellrc we might want some thin shellrc to be installed
-if ask "Install shell profile"; then
+if ask "profile" "Install shell profile"; then
 	inst profile ~/.profile
 	inst zprofile ~/.zprofile
 fi
 
-if ask "Install GIT configuration"; then
+if ask "git" "Install GIT configuration"; then
 	inst gitconfig ~/.gitconfig
 	inst local/git-prompt.sh ~/.local/
 fi
 
-if ask "Install configurations for various utility tools"; then
+if ask "gnuscreen" "Install configurations for various utility tools"; then
 	inst screenrc ~/.screenrc
 fi
 
-if ask "Install user services"; then
+if ask "services" "Install user services"; then
 	inst local/sbin/user-service.sh ~/.local/sbin/user-service.sh
 	inst service/ ~/.service/
 fi
 
-if ask "Install SSH config"; then
+if ask "ssh" "Install SSH config"; then
 	inst private/ssh_config ~/.ssh/config
 fi
 
-YCM_PATH=~/.vim/bundle/YouCompleteMe
-if ask "Install VIM scripts"; then
+if ask "vim" "Install VIM scripts"; then
 	inst vimrc ~/.vimrc
 	inst vim/ ~/.vim
 	inst local/bin/vim-project-gen ~/.local/bin/vim-project-gen
@@ -52,7 +51,7 @@ if ask "Install VIM scripts"; then
 	vim +PluginInstall +qall
 fi
 
-if ask "Install email synchronization"; then
+if ask "email-sync" "Install email synchronization"; then
 	inst local/bin/email-unread ~/.local/bin/email-unread
 	inst local/sbin/newmail-notify ~/.local/sbin/newmail-notify
 	inst_email_sync
@@ -61,7 +60,7 @@ if ask "Install email synchronization"; then
 	# inst config/offlineimap/ ~/.config/offlineimap
 fi
 
-if ask "Install mutt configuration"; then
+if ask "mutt" "Install mutt configuration"; then
 	inst urlview ~/.urlview
 	inst lynxrc ~/.lynxrc
 	inst mutt/mailcap ~/.mutt/
@@ -74,40 +73,50 @@ if ask "Install mutt configuration"; then
 	mkdir -p ~/.cache/mutt # directory for temporaly html files
 fi
 
-if ask "Install desktop (i3..)"; then
-	inst xinitrc ~/.xinitrc
-	inst Xresources ~/.Xresources
-	inst config/i3/ ~/.config/i3
-	inst config/i3blocks/ ~/.config/i3blocks
-	inst config/dunst/ ~/.config/dunst
-	inst local/bin/mxrandr ~/.local/bin/
+if ask "desktop" "Install desktop generic"; then
 	# Theme
 	inst gtk-2.0/gtkrc ~/.gtkrc-2.0
 	inst gtk-3.0/ ~/.config/gtk-3.0/
 	inst config/Trolltech.conf ~/.config/Trolltech.conf
 	# User directories
 	inst config/user-dirs.dirs ~/.config/user-dirs.dirs
+	# Generic i3/sway
+	inst config/dunst/ ~/.config/dunst
+	inst config/i3blocks/ ~/.config/i3blocks
 fi
 
-if ask "Install calendar and contacts"; then
+if ask "xorg" "Install XOrg (i3)"; then
+	inst xinitrc ~/.xinitrc
+	inst Xresources ~/.Xresources
+	inst config/i3/ ~/.config/i3
+	inst local/bin/mxrandr ~/.local/bin/
+fi
+
+if ask "wayland" "Install Wayland (sway)"; then
+	inst Xresources ~/.Xdefaults # X resources for wayland session
+	inst config/sway/ ~/.config/sway
+	inst config/swaylock/ ~/.config/swaylock
+fi
+
+if ask "cal" "Install calendar and contacts"; then
 	inst config/khal/config ~/.config/khal/config
 	inst config/khard/khard.conf ~/.config/khard/khard.conf
 	inst private/vdirsyncer/ ~/.vdirsyncer
 fi
 
-if ask "Install Surf configuration"; then
+if ask "surf" "Install Surf configuration"; then
 	inst surf/script.js ~/.surf/script.js
 	inst surf/styles/default.css ~/.surf/styles/default.css
 fi
 
-if ask "Install MPD configuration"; then
+if ask "mpd" "Install MPD configuration"; then
 	inst config/mpd/ ~/.config/mpd
 fi
 
-if ask "Install wake-desktop"; then
+if ask "wake-desktop" "Install wake-desktop"; then
 	inst local/bin/wake-desktop ~/.local/bin/wake-desktop
 fi
 
-if ask "Install backup script"; then
+if ask "backup" "Install backup script"; then
 	inst local/bin/system-backup ~/.local/bin/system-backup
 fi

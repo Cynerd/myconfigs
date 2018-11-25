@@ -1,14 +1,19 @@
 # Functions used for interactive installation of new changes to running system
 # vim: ft=sh
 
+# Ask if given section should be installed
+# First argument is name (take care not to use special characters for regulard
+# expression) and second argument is a question
 ask() {
+	grep -q "^$1$" ".ignore-$(hostname)" && return 1
 	if $FORCE; then
-		echo -e "\e[1;34m$1\e[0m"
+		echo "\e[1;34m$2\e[0m"
 		# Fall trough with 0 exit (always yes)
 	else
-		echo -e -n "\e[1;34m$1? (Y/n) \e[0m"
-		read
-		echo "$REPLY" | grep -qE '^[Yy]?$'
+		echo -e -n "\e[1;34m$2? (Y/n) \e[0m"
+		local reply
+		read -r reply
+		echo "$reply" | grep -qE '^[Yy]?$'
 	fi
 }
 

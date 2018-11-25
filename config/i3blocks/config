@@ -43,11 +43,6 @@ command=~/.config/i3/scripts/keyboard_layout
 interval=once
 signal=11
 
-[backup]
-command=~/.config/i3blocks/scripts/backup
-interval=86400
-signal=13
-
 # Volume indicator
 #
 # The first parameter sets the step (and units to display)
