@@ -17,19 +17,19 @@ git submodule update --init || (echo "Submodule update failed!"; exit 5)
 
 #################################################################################
 
-if ask "System PATH profile"; then
+if ask "sys-path" "System PATH profile"; then
 	inst system/etc/profile.d/path.sh /etc/profile.d/path.sh
 fi
 
-if ask "X11 configuration"; then
+if ask "sys-x11" "X11 configuration"; then
 	inst system/etc/X11/ /etc/X11/
 fi
 
-if ask "System-wide PulseAudio configuration"; then
+if ask "sys-pulse" "System-wide PulseAudio configuration"; then
 	inst system/etc/pulse/ /etc/pulse/
 fi
 
-if ask "Wpa supplicant"; then
+if ask "sys-wpa" "Wpa supplicant"; then
 	# TODO
 	true
 fi
