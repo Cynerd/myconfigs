@@ -51,6 +51,10 @@ if ask "vim" "Install VIM scripts"; then
 	vim +PluginInstall +qall
 fi
 
+if ask "dev" "Install VIM scripts"; then
+	inst config/pycodestyle ~/.config/pycodestyle
+fi
+
 if ask "email-sync" "Install email synchronization"; then
 	inst local/bin/email-unread ~/.local/bin/email-unread
 	inst local/sbin/newmail-notify ~/.local/sbin/newmail-notify
