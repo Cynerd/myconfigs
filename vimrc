@@ -3,10 +3,14 @@
 " :diffg BA  " get from BASE
 " :diffg LO  " get from LOCAL
 set nocompatible
+
+" Ale (required to be before plugin load)
+let g:ale_completion_enabled = 1
+
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plugin 'VundleVim/Vundle.vim'
 " Visual
 Plugin 'itchyny/lightline.vim'
@@ -32,7 +36,7 @@ Plugin 'sirtaj/vim-openscad'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'fedorenchik/qt-support.vim'
 Plugin 'chr4/nginx.vim'
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call vundle#end()
 filetype plugin indent on
 
@@ -86,6 +90,7 @@ function TabToogle()
 endfunction
 command TabToogle call TabToogle()
 
+" Translate word under cursor
 nnoremap <leader>d :! sdcv -n <cword><cr>
 
 " Indent guides
@@ -153,9 +158,6 @@ let g:UltiSnipsExpandTrigger="<c-h>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
-" Ale
-let g:ale_completion_enabled = 1
-let g:ale_completion_delay = 1
-let g:ale_set_highlights = 0
-" To fix random insertion by omnicomplete
-set completeopt=menu,menuone,preview,noselect,noinsert
+" ALE bidings
+nmap <leader>[ <Plug>(ale_go_to_definition)
+nmap <leader>] <Plug>(ale_go_to_definition_in_tab)
