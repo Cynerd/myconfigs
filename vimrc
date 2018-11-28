@@ -4,8 +4,10 @@
 " :diffg LO  " get from LOCAL
 set nocompatible
 
-" Ale (required to be before plugin load)
+" Ale (completion enablement has to be before plugin load)
 let g:ale_completion_enabled = 1
+let g:ale_set_highlights = 0
+set completeopt=menu,menuone,preview,noselect,noinsert
 
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
