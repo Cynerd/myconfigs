@@ -51,7 +51,7 @@ if ask "vim" "Install VIM scripts"; then
 	vim +PluginInstall +qall
 fi
 
-if ask "dev" "Install VIM scripts"; then
+if ask "dev" "Development tools configuration"; then
 	inst config/pycodestyle ~/.config/pycodestyle
 fi
 
