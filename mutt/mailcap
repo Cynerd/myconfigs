@@ -8,5 +8,5 @@ text/html; w3m -v -F -T text/html %s; nametemplate=%s.html; needsterminal
 text/html; lynx -stdin -dump -force_html -display_charset utf-8 ; copiousoutput
 
 image/*; feh --magick-timeout 1 %s
-application/pdf; llpp %s
+application/pdf; mupdf %s
 
