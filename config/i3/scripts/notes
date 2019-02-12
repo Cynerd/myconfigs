@@ -1,0 +1,6 @@
+#!/bin/sh
+
+cd ~/notes
+find * -type f | dmenu -p 'notes' | while read -r note; do
+	nohup urxvt -title 'notes-terminal-window' -e vim ~/notes/"$note" >/dev/null 2>&1 &
+done

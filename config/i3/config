@@ -15,6 +15,11 @@ bindsym $mod+Return exec urxvt
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --entry-type=name
 bindsym $mod+Shift+d exec --no-startup-id surf-menu
+bindsym $mod+Shift+p exec --no-startup-id surf-menu --socks
+
+# Notes
+bindsym $mod+Shift+n exec --no-startup-id ~/.config/i3/scripts/notes
+for_window [ title="notes-terminal-window" ] floating enable
 
 # kill focused window
 bindsym $mod+q kill
