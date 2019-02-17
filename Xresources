@@ -45,7 +45,7 @@ URxvt*scrollTtyKeypress: true
 URxvt*secondaryScreen: 1
 URxvt*secondaryScroll: 0
 ! Font
-URxvt*font: xft:DejaVu Sans Mono:size=9
+URxvt*font: xft:DejaVu Sans Mono:size=8
 URxvt.letterSpace: -1
 URxvt*iso14755: False
 
