@@ -123,6 +123,9 @@ set directory=$HOME/.cache/vim//
 
 " Setup gitgutter
 set updatetime=100
+highlight GitGutterAdd ctermfg=2
+highlight GitGutterChange ctermfg=3
+highlight GitGutterDelete ctermfg=1
 
 " Setup table-mode to markdown compliant
 " Note: to start use "\ t m"
