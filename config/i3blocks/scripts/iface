@@ -62,11 +62,11 @@ echo "$IPADDR" # short text
 # We ping only once and wait for one second
 PINGV="-c 1 -w 1"
 # Ping nic.cz
-if ping $PINGV nic.cz >/dev/null 2>&1; then
+if ping $PINGV cynerd.cz >/dev/null 2>&1; then
 	echo \#00FF00 # color
 else
 	# Ping nic.cz by ip
-	if ping $PINGV 217.31.205.50 >/dev/null 2>&1; then
+	if ping $PINGV 77.93.223.198 >/dev/null 2>&1; then
 		# No DNS
 		echo \#FFFF00 # color
 	else
