@@ -26,6 +26,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Bundle 'craigemery/vim-autotag'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-fugitive'
 " Movement, format and others
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
