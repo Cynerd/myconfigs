@@ -39,6 +39,7 @@ Plugin 'sirtaj/vim-openscad'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'fedorenchik/qt-support.vim'
 Plugin 'chr4/nginx.vim'
+Plugin 'LnL7/vim-nix'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call vundle#end()
 filetype plugin indent on
