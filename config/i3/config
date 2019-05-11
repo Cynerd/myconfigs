@@ -32,6 +32,9 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
+# mouse focus control
+bindsym --whole-window button13 focus right
+bindsym --whole-window button14 focus left
 
 # move focused window
 bindsym $mod+Shift+h move left
@@ -169,6 +172,8 @@ bindsym Mod1+space exec --no-startup-id ~/.config/i3/scripts/keyboard_switch
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% && pkill -RTMIN+10 i3blocks
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% && pkill -RTMIN+10 i3blocks
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle && pkill -RTMIN+10 i3blocks
+# Run pulsemixer
+bindsym $mod+p exec urxvt -title "Pulsemixer" -e pulsemixer
 
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 20 # increase screen brightness
