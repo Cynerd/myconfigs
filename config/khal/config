@@ -13,7 +13,7 @@ color = dark blue
 [[work]]
 path = /home/cynerd/.calendar/work
 type = calendar
-color = yellow
+color = dark gray
 
 [[misc]]
 path = /home/cynerd/.calendar/misc
@@ -25,6 +25,7 @@ default_color = dark gray
 method = background
 
 [locale]
+firstweekday = 0
 timeformat = %H:%M
 dateformat = %d.%m.%Y
 longdateformat = %d.%m.%Y
