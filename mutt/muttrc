@@ -12,6 +12,8 @@ set sleep_time = 0
 set delete = yes
 set include=yes
 set ispell="aspell"
+set mime_forward=yes
+set mime_forward_rest=yes
 
 auto_view text/html
 alternative_order text/enriched text/plain text/html 
