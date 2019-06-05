@@ -4,9 +4,13 @@ setxkbmap -option compose:menu
 numlockx
 xset -b # disable beeping
 
+# Use GTK theme for QT applications
 export QT_QPA_PLATFORMTHEME=gtk2
 export QT_STYLE_OVERRIDE='gtk2'
-export GTK_IM_MODULE=xim
+# use IBus for keyboard inputs
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
 # Fix fullscreen game offscreen
 export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
 # To fix missing textures on intel

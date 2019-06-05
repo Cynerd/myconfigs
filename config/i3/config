@@ -162,9 +162,6 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Switch keyboard layout
-bindsym Mod1+space exec --no-startup-id ~/.config/i3/scripts/keyboard_switch
-
 # Pulse audio control
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% && pkill -RTMIN+10 i3blocks
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% && pkill -RTMIN+10 i3blocks
@@ -195,6 +192,7 @@ bar {
 # Start daemons
 exec --no-startup-id dunst
 exec --no-startup-id xss-lock -- myi3lock
+exec --no-startup-id ibus-daemon -drx
 # Set background
 exec --no-startup-id i3background
 # Start pidgin
