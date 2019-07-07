@@ -190,9 +190,9 @@ bar {
 }
 
 # Start daemons
-exec --no-startup-id dunst
-exec --no-startup-id xss-lock -- myi3lock
 exec --no-startup-id ibus-daemon -drx
+exec --no-startup-id xss-lock -- myi3lock
+exec --no-startup-id dunst
 # Set background
 exec --no-startup-id i3background
 # Start pidgin
