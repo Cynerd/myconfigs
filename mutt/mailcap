@@ -7,6 +7,6 @@ text/html; w3m -v -F -T text/html %s; nametemplate=%s.html; needsterminal
 ##auto_view will use the entry with the copiousoutput part:
 text/html; lynx -stdin -dump -force_html -display_charset utf-8 ; copiousoutput
 
-image/*; feh --magick-timeout 1 %s
+image/*; feh --conversion-timeout 1 %s
 application/pdf; mupdf %s
 
