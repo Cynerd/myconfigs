@@ -53,6 +53,8 @@ fi
 
 if ask "dev" "Development tools configuration"; then
 	inst config/pycodestyle ~/.config/pycodestyle
+	inst flake8 ~/.flake8
+	inst pylintrc ~/.pylintrc
 fi
 
 if ask "email-sync" "Install email synchronization"; then
