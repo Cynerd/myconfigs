@@ -5,7 +5,8 @@
 # First argument is name (take care not to use special characters for regulard
 # expression) and second argument is a question
 ask() {
-	grep -q "^$1$" ".ignore-$(hostname)" && return 1
+	local ignore_file=".ignore-$(hostname)"
+	[ -f "$ignore_file" ] && grep -q "^$1$" "$ignore_file" && return 1
 	if $FORCE; then
 		echo "\e[1;34m$2\e[0m"
 		# Fall trough with 0 exit (always yes)
