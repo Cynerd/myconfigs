@@ -15,6 +15,8 @@ export QT_IM_MODULE=ibus
 export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
 # To fix missing textures on intel
 export force_s3tc_enable=true
+# Fix firefox touchscreen gestures
+export MOZ_USE_XINPUT2=1
 
 mxrandr
 
