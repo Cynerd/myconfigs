@@ -19,7 +19,7 @@ bindsym $mod+Shift+p exec --no-startup-id surf-menu --socks
 
 # Notes
 bindsym $mod+Shift+n exec --no-startup-id ~/.config/i3/scripts/notes
-for_window [ title="notes-terminal-window" ] floating enable
+for_window [ title="notes-terminal-window" ] floating enable sticky enable
 
 # kill focused window
 bindsym $mod+q kill
@@ -51,6 +51,7 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+Tab scratchpad show
 bindsym $mod+Shift+Tab move scratchpad
 
+workspace_layout tabbed
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
@@ -186,11 +187,10 @@ bar {
 	tray_output primary
 }
 
-
 # Set Pidgin to scratchpad
 for_window [class="Pidgin"] move scratchpad
-# GnomePie floating
-for_window[class="gnome-pie"] floating enable border pixel
+# On-screen keyboard Florence
+for_window [class="Florence"] floating enable
 
 # Start daemons
 exec --no-startup-id ibus-daemon -drx
