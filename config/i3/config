@@ -193,10 +193,12 @@ for_window [class="Pidgin"] move scratchpad
 for_window [class="Florence"] floating enable
 
 # Start daemons
+exec --no-startup-id compton -b --vsync opengl
 exec --no-startup-id ibus-daemon -drx
 exec --no-startup-id xss-lock -- myi3lock
 exec --no-startup-id dunst
 # Set background
 exec --no-startup-id i3background
+
 # Start pidgin
 exec pidgin
