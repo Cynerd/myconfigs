@@ -17,6 +17,10 @@ if [ "$(tty)" = "/dev/tty1" ]; then
 	exec startx -- vt1
 fi
 
+# Nix
+[ ! -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ] || \
+	. "$HOME/.nix-profile/etc/profile.d/nix.sh" # added by Nix installer
+
 echo
 echo "(1) i3"
 echo "(2) sway"
