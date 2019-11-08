@@ -21,7 +21,10 @@ fi
 
 if ask "git" "Install GIT configuration"; then
 	inst gitconfig ~/.gitconfig
-	inst local/git-prompt.sh ~/.local/
+fi
+
+if ask "gpg" "Install GPG configuration"; then
+	inst gnupg/gpg.conf ~/.gnupg/gpg.conf
 fi
 
 if ask "gnuscreen" "Install configurations for various utility tools"; then
@@ -70,7 +73,6 @@ if ask "mutt" "Install mutt configuration"; then
 	inst urlview ~/.urlview
 	inst lynxrc ~/.lynxrc
 	inst mutt/mailcap ~/.mutt/
-	inst mutt/gpg.rc ~/.mutt/
 	inst mutt/color ~/.mutt/
 	inst_mutt_conf
 	# Contains:

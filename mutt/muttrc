@@ -22,10 +22,6 @@ macro attach 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && ( surf ~/.cache/mu
 set crypt_autosign = yes
 set crypt_replyencrypt = yes
 set crypt_use_gpgme = yes
-source ~/.mutt/gpg.rc
-set pgp_use_gpg_agent = yes
-set pgp_sign_as = 0xA6BC8B8CEB31659B
-set pgp_timeout = 3600
 set sendmail="/usr/bin/msmtp --read-envelope-from"
 
 set query_command= "khard email --parsable '%s'"
