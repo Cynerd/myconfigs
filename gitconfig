@@ -16,8 +16,8 @@
 	st = status
 	br = branch
 	wt = worktree
-	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
 	type = cat-file -t
 	dump = cat-file -p
+	please = push --force-with-lease
 [commit]
 	verbose = true
