@@ -8,6 +8,9 @@
 	editor = vim
 [commit]
 	gpgsign = true
+	verbose = true
+[tag]
+	gpgSign = true
 [merge]
 	tool = vimdiff
 [alias]
@@ -19,5 +22,4 @@
 	type = cat-file -t
 	dump = cat-file -p
 	please = push --force-with-lease
-[commit]
-	verbose = true
+	cleanup = "!git branch --merged HEAD --format=\"%(refname:lstrip=2)\" | grep -vx master | xargs git branch -d"
