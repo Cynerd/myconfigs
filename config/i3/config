@@ -17,6 +17,8 @@ bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --entry-type=name
 bindsym $mod+Shift+d exec --no-startup-id surf-menu
 bindsym $mod+Shift+p exec --no-startup-id surf-menu --socks
 
+# Passwords
+bindsym $mod+Shift+w exec --no-startup-id ~/.config/i3/scripts/pass
 # Notes
 bindsym $mod+Shift+n exec --no-startup-id ~/.config/i3/scripts/notes
 for_window [ title="notes-terminal-window" ] floating enable sticky enable
@@ -131,7 +133,7 @@ mode "$displays" {
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
-bindsym $mod+Shift+w mode "$displays"
+bindsym $mod+o mode "$displays"
 
 set $xshot Xshot: (w)indow or (d)desktop
 mode "$xshot" {

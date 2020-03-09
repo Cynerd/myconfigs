@@ -1,0 +1,6 @@
+#!/bin/sh
+find ~/.password-store -type f -printf '%P\n' | \
+	sed 's/\.gpg$//' | dmenu -p 'Pass:' | \
+	while read -r psw; do
+		pass -c "$psw"
+done
