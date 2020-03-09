@@ -20,6 +20,8 @@ bindsym $mod+Shift+p exec --no-startup-id surf-menu --socks
 # Notes
 bindsym $mod+Shift+n exec --no-startup-id ~/.config/i3/scripts/notes
 for_window [ title="notes-terminal-window" ] floating enable sticky enable
+# Calendar
+bindsym $mod+c exec urxvt -title "Calendar" -e ikhal
 
 # kill focused window
 bindsym $mod+q kill
