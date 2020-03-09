@@ -34,6 +34,7 @@ Plugin 'dhruvasagar/vim-table-mode'
 " Syntax
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'vim-scripts/iptables'
+Plugin 'nfnty/vim-nftables'
 Plugin 'neomutt/neomutt.vim'
 Plugin 'sirtaj/vim-openscad'
 Plugin 'tmhedberg/SimpylFold'
