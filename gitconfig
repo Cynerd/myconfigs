@@ -2,10 +2,15 @@
 	name = Karel Kočí
 	email = cynerd@email.cz
 	signingkey = A6BC8B8CEB31659B
-[push]
-	default = simple
 [core]
 	editor = vim
+[fetch]
+	recurseSubmodules = true
+	parallel = 8
+[pull]
+	rebase = true
+[push]
+	default = simple
 [commit]
 	gpgsign = true
 	verbose = true
