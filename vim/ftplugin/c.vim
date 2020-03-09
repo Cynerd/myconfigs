@@ -1,4 +1,4 @@
-let b:ale_linters = ['cppcheck', 'cquery']
+let b:ale_linters = ['cppcheck', 'cquery', 'flawfinder']
 let b:ale_fixers = ['remove_trailing_lines', 'trim_whitespace']
 "let g:ale_c_parse_compile_commands = 1
 
