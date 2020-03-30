@@ -124,7 +124,3 @@ fi
 if ask "wake-desktop" "Install wake-desktop"; then
 	inst local/bin/wake-desktop ~/.local/bin/wake-desktop
 fi
-
-if ask "backup" "Install backup script"; then
-	inst local/bin/system-backup ~/.local/bin/system-backup
-fi
