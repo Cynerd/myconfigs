@@ -10,7 +10,8 @@ status() {
 }
 
 start() {
-	~/.local/sbin/syncemail
+	true
+	#~/.local/sbin/syncemail
 }
 
 stop() {

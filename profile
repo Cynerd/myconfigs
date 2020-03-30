@@ -8,7 +8,7 @@ export EDITOR=vim
 # Start music player daemon
 ~/.service/mpd -q status || ~/.service/mpd start
 # Start email synchronization
-~/.local/sbin/syncemail
+#~/.local/sbin/syncemail
 # Start syncthing
 ~/.service/syncthing -q status || ~/.service/syncthing start
 
