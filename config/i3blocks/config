@@ -51,8 +51,8 @@ interval=2
 [temperature]
 interval=10
 
-[battery]
-command=~/.config/i3blocks/scripts/battery
+[battery2]
+markup=pango
 interval=30
 
 [email]
