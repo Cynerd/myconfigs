@@ -139,8 +139,8 @@ set $xshot Xshot: (w)indow or (d)desktop
 mode "$xshot" {
 	# Note: xshot window is for some reason broken.
 	# It won't run when not spawned in terminal
-	bindsym w exec xshot window, mode "default"
-	bindsym d exec --no-startup-id xshot desktop, mode "default"
+	bindsym --release w exec xshot window, mode "default"
+	bindsym --release d exec --no-startup-id xshot desktop, mode "default"
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
