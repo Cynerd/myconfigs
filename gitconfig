@@ -28,3 +28,8 @@
 	dump = cat-file -p
 	please = push --force-with-lease
 	cleanup = "!git branch --merged HEAD --format=\"%(refname:lstrip=2)\" | grep -vx master | xargs git branch -d"
+[sendemail]
+	identity = karel.koci@nic.cz
+	envelopeSender = auto
+	suppresscc = self
+	confirm = always
