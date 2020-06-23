@@ -41,6 +41,9 @@ Plugin 'tmhedberg/SimpylFold'
 Plugin 'fedorenchik/qt-support.vim'
 Plugin 'chr4/nginx.vim'
 Plugin 'LnL7/vim-nix'
+Plugin 'gisphm/vim-gitignore'
+" Files navigation
+Plugin 'kien/ctrlp.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call vundle#end()
 filetype plugin indent on
@@ -124,6 +127,14 @@ nnoremap <C-C><CR> :Explore<CR>
 nnoremap <C-C>l :bnext<CR>
 nnoremap <C-C>h :bprev<CR>
 nnoremap <C-C><C-C> :buffers<CR>:buffer<Space>
+
+" CtrlP
+let g:ctrlp_user_command = {
+\ 'types': {
+\    1: ['.git', 'git -C %s ls-files . -co --exclude-standard'],
+\  },
+\  'fallback': 'find %s -type f'
+\ }
 
 " Directory where *.swp files will be stored
 " Note that double slash is intensional, it tells vim to build complete path.
