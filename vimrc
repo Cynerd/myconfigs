@@ -135,6 +135,9 @@ let g:ctrlp_user_command = {
 \  },
 \  'fallback': 'find %s -type f'
 \ }
+let g:ctrlp_open_new_file = 'r'
+let g:ctrlp_arg_map = 1
+let g:ctrlp_default_input = 1
 
 " Directory where *.swp files will be stored
 " Note that double slash is intensional, it tells vim to build complete path.
