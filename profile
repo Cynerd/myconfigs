@@ -2,6 +2,10 @@
 export PATH="$HOME/.local/bin:$PATH"
 export EDITOR=vim
 
+# ct-ng configuration
+export CT_PREFIX_DIR='~/.local/${CT_TARGET}'
+export CT_LOCAL_TARBALLS_DIR="~/src/ct-ng"
+
 # Rest of the profile run only if login is from linux console
 [[ "$(tty)" != /dev/tty* ]] && return
 
