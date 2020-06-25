@@ -131,7 +131,7 @@ nnoremap <C-C><C-C> :buffers<CR>:buffer<Space>
 " CtrlP
 let g:ctrlp_user_command = {
 \ 'types': {
-\    1: ['.git', 'git -C %s ls-files . -co --exclude-standard'],
+\    1: ['.git', 'cd %s && git ls-files . -c --recurse-submodules && git ls-files . -o --exclude-standard'],
 \  },
 \  'fallback': 'find %s -type f'
 \ }
