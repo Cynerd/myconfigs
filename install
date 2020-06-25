@@ -60,13 +60,10 @@ if ask "dev" "Development tools configuration"; then
 	inst pylintrc ~/.pylintrc
 fi
 
-if ask "email-sync" "Install email synchronization"; then
-	inst local/bin/email-unread ~/.local/bin/email-unread
-	inst local/sbin/newmail-notify ~/.local/sbin/newmail-notify
-	inst_email_sync
-	# Contains:
-	# inst local/sbin/syncemail ~/.local/sbin/
-	# inst config/offlineimap/ ~/.config/offlineimap
+if ask "cal" "Install calendar and contacts"; then
+	inst config/khal/config ~/.config/khal/config
+	inst config/khard/khard.conf ~/.config/khard/khard.conf
+	inst private/vdirsyncer/ ~/.vdirsyncer
 fi
 
 if ask "mutt" "Install mutt configuration"; then
@@ -74,11 +71,17 @@ if ask "mutt" "Install mutt configuration"; then
 	inst lynxrc ~/.lynxrc
 	inst mutt/mailcap ~/.mutt/
 	inst mutt/color ~/.mutt/
-	inst_mutt_conf
-	# Contains:
-	# inst mutt/ ~/.mutt
-	# inst msmtprc ~/.msmtprc
+	inst private/mutt/ ~/.mutt
+	inst private/msmtprc ~/.msmtprc
 	mkdir -p ~/.cache/mutt # directory for temporaly html files
+fi
+
+if ask "sync" "Install synchronization"; then
+	inst local/bin/allsync ~/.local/bin/allsync
+	inst local/bin/email-unread ~/.local/bin/email-unread
+	inst local/sbin/newmail-notify ~/.local/sbin/newmail-notify
+	inst private/mbsyncrc ~/.mbsyncrc
+	inst_sync
 fi
 
 if ask "desktop" "Install desktop generic"; then
@@ -104,12 +107,6 @@ if ask "wayland" "Install Wayland (sway)"; then
 	inst Xresources ~/.Xdefaults # X resources for wayland session
 	inst config/sway/ ~/.config/sway
 	inst config/swaylock/ ~/.config/swaylock
-fi
-
-if ask "cal" "Install calendar and contacts"; then
-	inst config/khal/config ~/.config/khal/config
-	inst config/khard/khard.conf ~/.config/khard/khard.conf
-	inst private/vdirsyncer/ ~/.vdirsyncer
 fi
 
 if ask "surf" "Install Surf configuration"; then
