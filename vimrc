@@ -116,12 +116,12 @@ cmap w!! w !sudo tee >/dev/null %
 cabbrev E Explore
 let g:netrw_banner=0
 let g:netrw_liststyle=1
+let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+,'
 function GitIgnore()
 	" Possibly find and include all lower .gitignore files?
 	let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+,' . netrw_gitignore#Hide()
 endfunction
 command GitIgnore call GitIgnore()
-GitIgnore
 " Some fast buffer switching and opening of new files
 nnoremap <C-C><CR> :Explore<CR>
 nnoremap <C-C>l :bnext<CR>
