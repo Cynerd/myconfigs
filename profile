@@ -11,8 +11,6 @@ export CT_LOCAL_TARBALLS_DIR="~/src/ct-ng"
 
 # Start music player daemon
 ~/.service/mpd -q status || ~/.service/mpd start
-# Start email synchronization
-#~/.local/sbin/syncemail
 # Start syncthing
 ~/.service/syncthing -q status || ~/.service/syncthing start
 
