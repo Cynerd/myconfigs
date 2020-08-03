@@ -24,6 +24,9 @@ bindsym $mod+Shift+n exec --no-startup-id ~/.config/i3/scripts/notes
 for_window [ title="notes-terminal-window" ] floating enable sticky enable
 # Calendar
 bindsym $mod+c exec urxvt -title "Calendar" -e ikhal
+# Top
+bindsym $mod+t exec urxvt -e htop
+bindsym $mod+Shift+t exec urxvt -e sudo powertop
 
 # kill focused window
 bindsym $mod+q kill
