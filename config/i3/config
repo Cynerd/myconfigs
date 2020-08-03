@@ -1,5 +1,8 @@
 # i3 config file (v4)
 
+# As first thing lock session
+exec --no-startup-id myi3lock --login
+
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
