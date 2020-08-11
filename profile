@@ -10,9 +10,7 @@ export CT_LOCAL_TARBALLS_DIR="~/src/ct-ng"
 [[ "$(tty)" != /dev/tty* ]] && return
 
 # Start music player daemon
-~/.service/mpd -q status || ~/.service/mpd start
-# Start syncthing
-~/.service/syncthing -q status || ~/.service/syncthing start
+pgrep mpd >/dev/null || mpd ~/.config/mpd/mpd.conf
 
 # And if we are on first terminal also automatically start x server
 if [ "$(tty)" = "/dev/tty1" ]; then

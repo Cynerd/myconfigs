@@ -31,11 +31,6 @@ if ask "gnuscreen" "Install configurations for various utility tools"; then
 	inst screenrc ~/.screenrc
 fi
 
-if ask "services" "Install user services"; then
-	inst local/sbin/user-service.sh ~/.local/sbin/user-service.sh
-	inst service/ ~/.service/
-fi
-
 if ask "ssh" "Install SSH config"; then
 	inst private/ssh_config ~/.ssh/config
 fi
