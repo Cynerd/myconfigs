@@ -1,0 +1,4 @@
+# C development
+.gdbinit
+.ccls-cache/
+compile_commands.json

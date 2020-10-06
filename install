@@ -21,6 +21,8 @@ fi
 
 if ask "git" "Install GIT configuration"; then
 	inst gitconfig ~/.gitconfig
+	inst gitignore ~/.gitignore
+	git config --global core.excludesfile ~/.gitignore
 fi
 
 if ask "gpg" "Install GPG configuration"; then
