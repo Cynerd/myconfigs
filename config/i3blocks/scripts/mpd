@@ -20,15 +20,15 @@ case "$BLOCK_BUTTON" in
 		;;
 esac
 
-if [[ "$status" == *[*(playing|paused)]* ]]; then
+if [[ "$status" == **(playing|paused)* ]]; then
 	echo "$status" | head -1
 	echo
 	case "$status" in
-		*"[playing]"*)
-			echo "#ffff00"
-			;;
-		*"[paused]"*)
+		*playing*)
 			echo "#00ff00"
+			;;
+		*paused*)
+			echo "#ffff00"
 			;;
 	esac
 else
