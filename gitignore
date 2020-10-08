@@ -1,4 +1,17 @@
+# Ignore original and rejected files in general
+*.orig
+*.rej
+
+# Ignore patches in top level directory (common place where I generate them)
+/*.patch
+
+# Ignore backup files in general
+*~
+
 # C development
 .gdbinit
 .ccls-cache/
 compile_commands.json
+
+# Common python environment directory
+/env
