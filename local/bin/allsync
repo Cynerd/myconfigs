@@ -1,20 +1,18 @@
 #!/bin/sh
+set -eu
 
 sec() {
 	echo -e '\e[1;34m==========' "$@" '==========\e[0m'
 }
 
-
-run() {
-	sec "Mail"
-	mbsync -a
-	~/.local/sbin/newmail-notify
-
-	sec "Calendar and contacts"
-	vdirsyncer sync
+fail() {
+	echo -e '\e[1;31m---' "$@" '---' "($?)" '\e[0m'
 }
 
 
+sec "Mail"
+mbsync -a
+~/.local/sbin/newmail-notify || fail "Mail synchronization reported failure"
 
-
-run
+sec "Calendar and contacts"
+vdirsyncer sync || "Calendar and contacts synchronization reported failure"

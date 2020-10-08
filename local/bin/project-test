@@ -39,5 +39,5 @@ done
 while read -r rev; do
 	git checkout "$rev"
 	git submodule update
-	eval $@
+	eval "$@"
 done < <(git rev-list "$REF"..HEAD)

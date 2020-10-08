@@ -23,6 +23,7 @@ if ask "git" "Install GIT configuration"; then
 	inst gitconfig ~/.gitconfig
 	inst gitignore ~/.gitignore
 	git config --global core.excludesfile ~/.gitignore
+	inst local/bin/cznic-git-config ~/.local/bin/cznic-git-config
 fi
 
 if ask "gpg" "Install GPG configuration"; then
@@ -40,7 +41,6 @@ fi
 if ask "vim" "Install VIM scripts"; then
 	inst vimrc ~/.vimrc
 	inst vim/ ~/.vim
-	inst local/bin/vim-project-gen ~/.local/bin/vim-project-gen
 	mkdir -p ~/.cache/vim # directory for *.swp files
 	mkdir -p ~/.cache/vim-undo # directory for undo files
 	# Vim plugin manager
