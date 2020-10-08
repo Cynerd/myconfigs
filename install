@@ -22,7 +22,6 @@ fi
 if ask "git" "Install GIT configuration"; then
 	inst gitconfig ~/.gitconfig
 	inst gitignore ~/.gitignore
-	git config --global core.excludesfile ~/.gitignore
 	inst local/bin/cznic-git-config ~/.local/bin/cznic-git-config
 fi
 

@@ -4,6 +4,7 @@
 	signingkey = A6BC8B8CEB31659B
 [core]
 	editor = vim
+	excludesfile = /home/cynerd/.gitignore
 [fetch]
 	recurseSubmodules = true
 	parallel = 8
