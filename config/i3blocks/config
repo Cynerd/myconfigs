@@ -40,7 +40,6 @@ separator=false
 interval=2
 
 [wifi]
-command=~/.config/i3blocks/scripts/wifi
 interval=2
 
 [temperature]
