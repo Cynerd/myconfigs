@@ -20,7 +20,8 @@ case "$BLOCK_BUTTON" in
 		;;
 esac
 
-if [[ "$status" == **(playing|paused)* ]]; then
+if [ "$(echo "$status" | wc -l)" -gt 1 ] && \
+		[[ "$status" == **(playing|paused)* ]]; then
 	echo "$status" | head -1
 	echo
 	case "$status" in
