@@ -44,6 +44,8 @@ Plugin 'LnL7/vim-nix'
 Plugin 'gisphm/vim-gitignore'
 " Files navigation
 Plugin 'kien/ctrlp.vim'
+" Grammer
+Plugin 'rhysd/vim-grammarous'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call vundle#end()
 filetype plugin indent on
@@ -188,3 +190,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " ALE bidings
 nmap <leader>[ <Plug>(ale_go_to_definition)
 nmap <leader>] <Plug>(ale_go_to_definition_in_tab)
+
+" LanguageTool
+let g:grammarous#languagetool_cmd = 'languagetool'
