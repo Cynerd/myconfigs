@@ -80,7 +80,7 @@ if ask "desktop" "Install desktop generic"; then
 	inst gtk-3.0/ ~/.config/gtk-3.0/
 	inst config/Trolltech.conf ~/.config/Trolltech.conf
 	# User directories
-	inst config/user-dirs.dirs ~/.config/user-dirs.dirs
+	inst config/user-dirs.conf ~/.config/user-dirs.conf
 	# Generic i3/sway
 	inst config/dunst/ ~/.config/dunst
 	inst config/i3blocks/ ~/.config/i3blocks
