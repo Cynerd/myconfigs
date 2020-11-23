@@ -1,5 +1,4 @@
 #!/bin/sh
-
 cd ~/notes
 find * -type f | dmenu -p 'notes' | while read -r note; do
 	nohup \

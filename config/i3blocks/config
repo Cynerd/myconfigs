@@ -39,7 +39,13 @@ separator=false
 [bandwidth]
 interval=2
 
+[ssid]
+instance=wlp2s0
+interval=2
+separator=false
+
 [wifi]
+instance=wlp2s0
 interval=2
 
 [temperature]

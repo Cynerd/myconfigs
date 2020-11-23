@@ -12,30 +12,11 @@ font pango:DejaVu Sans Mono 8
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
-bindsym $mod+Return exec urxvt
-
-# start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --entry-type=name
-bindsym $mod+Shift+d exec --no-startup-id surf-menu
-bindsym $mod+Shift+p exec --no-startup-id surf-menu --socks
-
-# Passwords
-bindsym $mod+Shift+w exec --no-startup-id ~/.config/i3/scripts/pass
-# Notes
-bindsym $mod+Shift+n exec --no-startup-id ~/.config/i3/scripts/notes
-for_window [ title="notes-terminal-window" ] floating enable sticky enable
-# Calendar
-bindsym $mod+c exec urxvt -title "Calendar" -e ikhal
-# Top
-bindsym $mod+t exec urxvt -e htop
-bindsym $mod+Shift+t exec urxvt -e sudo powertop
-
 # kill focused window
 bindsym $mod+q kill
 
 # bar toggle, hide or show 
-bindsym $mod+m bar mode toggle
+bindsym $mod+b bar mode toggle
 
 # change focus
 bindsym $mod+h focus left
@@ -170,20 +151,45 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Pulse audio control
+##################################################################################
+# Start a terminal
+bindsym $mod+Return exec alacritty
+# Start Firefox
+bindsym $mod+Shift+Return exec firefox-bin
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --entry-type=name
+
+# Top
+bindsym $mod+t exec alacritty -e htop
+bindsym $mod+Shift+t exec alacritty -e sudo powertop
+# Passwords
+bindsym $mod+Shift+w exec --no-startup-id ~/.config/i3/scripts/pass
+# Calendar
+bindsym $mod+c exec alacritty -t "Calendar" -e ikhal
+# Notes
+bindsym $mod+Shift+n exec --no-startup-id ~/.config/i3/scripts/notes
+for_window [ title="notes-terminal-window" ] floating enable sticky enable
+# Mail client
+bindsym $mod+m exec alacritty -t "Mail client" -e alot
+
+# Audio control
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 5%+ unmute && pkill -RTMIN+10 i3blocks
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 5%- unmute && pkill -RTMIN+10 i3blocks
 bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle && pkill -RTMIN+10 i3blocks
-# Run pulsemixer
-bindsym $mod+p exec urxvt -title "Pulsemixer" -e pulsemixer
+# Run and configure pulsemixer
+bindsym $mod+p exec alacritty -t "Pulsemixer" -e pulsemixer
+for_window [ title="Pulsemixer" ] floating enable;
+for_window [ title="Pulsemixer" ] resize set 50 ppt 50 ppt
+for_window [ title="Pulsemixer" ] move position center
 # Run and configure synchronization
-bindsym $mod+i exec urxvt -title "Synchronization" -e allsync toggle
-bindsym $mod+Shift+i exec urxvt -title "Synchronization" -e allsync
+bindsym $mod+i exec alacritty -t "Synchronization" -e allsync
+bindsym $mod+Shift+i exec alacritty -t "Synchronization" -e allsync toggle
 for_window [ title="Synchronization" ] floating enable
 
 # Screen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 20
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20
 
 # Media player controls
 bindsym XF86AudioPlay exec --no-startup-id mpc toggle && pkill -RTMIN+12 i3blocks
@@ -191,20 +197,23 @@ bindsym XF86AudioStop exec --no-startup-id mpc stop && pkill -RTMIN+12 i3blocks
 bindsym XF86AudioNext exec --no-startup-id mpc next && pkill -RTMIN+12 i3blocks
 bindsym XF86AudioPrev exec --no-startup-id mpc prev && pkill -RTMIN+12 i3blocks
 # Run media player control app
-bindsym $mod+Shift+m exec urxvt -title "Music player daemon client" -e ncmpcpp
+bindsym $mod+Shift+m exec alacritty -t "Music player daemon client" -e ncmpcpp
+for_window [ title="Music player daemon client" ] floating enable;
+for_window [ title="Music player daemon client" ] resize set 70 ppt 70 ppt
+for_window [ title="Music player daemon client" ] move position center
 
+# Set Rambox to scratchpad
+for_window [class="Rambox"] move scratchpad
+# On-screen keyboard Florence
+for_window [class="Florence"] floating enable
 
+##################################################################################
 # Start i3blocks to display a workspace bar
 bar {
 	position top
 	status_command i3blocks
 	tray_output primary
 }
-
-# Set Pidgin to scratchpad
-for_window [class="Pidgin"] move scratchpad
-# On-screen keyboard Florence
-for_window [class="Florence"] floating enable
 
 # Start daemons
 exec --no-startup-id compton -b --vsync opengl
@@ -214,5 +223,5 @@ exec --no-startup-id dunst
 # Set background
 exec --no-startup-id i3background
 
-# Start pidgin
-exec pidgin
+# Start Rambox
+exec rambox
