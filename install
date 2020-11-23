@@ -56,27 +56,21 @@ if ask "dev" "Development tools configuration"; then
 	inst pylintrc ~/.pylintrc
 fi
 
-if ask "cal" "Install calendar and contacts"; then
-	inst config/khal/config ~/.config/khal/config
-	inst config/khard/khard.conf ~/.config/khard/khard.conf
-	inst private/vdirsyncer/ ~/.vdirsyncer
-fi
-
-if ask "mutt" "Install mutt configuration"; then
-	inst urlview ~/.urlview
-	inst lynxrc ~/.lynxrc
-	inst mutt/mailcap ~/.mutt/
-	inst mutt/color ~/.mutt/
-	inst private/mutt/ ~/.mutt
-	inst private/msmtprc ~/.msmtprc
-	mkdir -p ~/.cache/mutt # directory for temporaly html files
-fi
-
 if ask "sync" "Install synchronization"; then
 	inst local/bin/allsync ~/.local/bin/allsync
+
+	inst private/mbsyncrc ~/.mbsyncrc
+	inst private/notmuch-config ~/.notmuch-config
+	inst private/notmuch-tag-new ~/.notmuch-tag-new
 	inst local/bin/email-unread ~/.local/bin/email-unread
 	inst local/sbin/newmail-notify ~/.local/sbin/newmail-notify
-	inst private/mbsyncrc ~/.mbsyncrc
+	inst private/msmtprc ~/.msmtprc
+	inst private/astroid/config ~/.config/astroid/config
+
+	inst private/vdirsyncer/ ~/.vdirsyncer
+	inst config/khal/config ~/.config/khal/config
+	inst config/khard/khard.conf ~/.config/khard/khard.conf
+
 	inst_sync
 fi
 

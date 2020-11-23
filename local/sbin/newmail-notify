@@ -1,23 +1,17 @@
-#!/bin/bash
+#!/usr/bin/env python3
+import json
+import subprocess
 
-cd ~/.mail
+subproc = subprocess.run(["notmuch", "show", "--format=json", "--", "tag:new"], check=True, capture_output=True)
 
-if [ -f notify-notified ]; then
-	NOTIFIED=`cat notify-notified`
-	rm notify-notified
-fi
+mails = json.loads(subproc.stdout)
+print(len(mails))
 
-for account in `ls`; do
-	if cd "$account"/INBOX/new; then
-		for m in `ls`; do
-			echo $m
-			echo $m >> ~/.mail/notify-notified
-			if echo "$NOTIFIED" | grep "$m" >/dev/null; then continue; fi
-			FROM=`grep -E "^From: " "$m" | sed 's/^From: //' | perl -CS -MEncode -ne 'print decode("MIME-Header", $_)'`
-			TO=`grep -E "^To: " "$m" | sed 's/^To: //' | perl -CS -MEncode -ne 'print decode("MIME-Header", $_)'`
-			SUBJECT=`grep -E "^Subject: " "$m" | sed 's/^Subject: //' | perl -CS -MEncode -ne 'print decode("MIME-Header", $_)'`
-			notify-send "$TO: $FROM" "$SUBJECT"
-		done
-	fi
-	cd ~/.mail
-done
+for mail in mails:
+    headers = mail[0][0]["headers"]
+    if 'To' in headers:
+        summary = f"{headers['From']} -> {headers['To']}"
+    else:
+        summary = f"{headers['From']}"
+    body = headers["Subject"]
+    subprocess.run(["notify-send", summary, body], check=True)

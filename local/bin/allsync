@@ -5,14 +5,24 @@ sec() {
 	echo -e '\e[1;34m==========' "$@" '==========\e[0m'
 }
 
+ecode=0
 fail() {
 	echo -e '\e[1;31m---' "$@" '---' "($?)" '\e[0m'
+	ecode=1
 }
 
 
 sec "Mail"
-mbsync -a
-~/.local/sbin/newmail-notify || fail "Mail synchronization reported failure"
+mbsync -a || fail "Mail synchronization reported failure"
+notmuch new
+~/.local/sbin/newmail-notify
+notmuch tag --batch --input="$HOME/.notmuch-tag-new"
 
 sec "Calendar and contacts"
-vdirsyncer sync || "Calendar and contacts synchronization reported failure"
+vdirsyncer sync || fail "Calendar and contacts synchronization reported failure"
+
+sec "Passwords"
+pass git pull || fail "Passwords pull failed"
+pass git push || fail "Passwords push failed"
+
+exit $ecode

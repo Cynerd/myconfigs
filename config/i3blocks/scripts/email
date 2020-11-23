@@ -1,6 +1,19 @@
-#!/bin/sh
-# Note: we cut last character because output ends with new line
-OUT="$(email-unread -s | tr "\n" " " | sed 's/ $//')"
-echo "$OUT"
-echo "$OUT"
+#!/bin/bash
+filter=("tag:unread" "and" "not" "tag:killed")
+
+part=()
+all=0
+for mail in email gmail nic fel; do
+	counts="$(notmuch count -- "${filter[@]}" and "tag:$mail")"
+	[ "$counts" = "0" ] || \
+		part+=("$mail:$counts")
+	((all = all + counts))
+done
+
+echo "${part[@]}"
+if [ "$all" = "0" ]; then
+	echo
+else
+	echo "mails:$all"
+fi
 echo "#ffff00"
