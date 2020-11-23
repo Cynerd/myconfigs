@@ -161,7 +161,7 @@ let g:autotagTagsFile=".tags"
 
 " Enable mouse
 set mouse=a
-set ttymouse=urxvt
+set ttymouse=sgr
 " We are always on fast tty (maybe remove this on servers?)
 set ttyfast
 

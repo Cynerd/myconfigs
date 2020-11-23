@@ -99,6 +99,10 @@ if ask "wayland" "Install Wayland (sway)"; then
 	inst config/swaylock/ ~/.config/swaylock
 fi
 
+if ask "alacritty" "Install configurations for terminal emulator"; then
+	inst config/alacritty.yml ~/.config/alacritty.yml
+fi
+
 if ask "surf" "Install Surf configuration"; then
 	inst surf/script.js ~/.surf/script.js
 	inst surf/styles/default.css ~/.surf/styles/default.css
