@@ -171,7 +171,7 @@ bindsym $mod+c exec alacritty -t "Calendar" -e ikhal
 bindsym $mod+Shift+n exec --no-startup-id ~/.config/i3/scripts/notes
 for_window [ title="notes-terminal-window" ] floating enable sticky enable
 # Mail client
-bindsym $mod+m exec alacritty -t "Mail client" -e alot
+bindsym $mod+m exec astroid
 
 # Audio control
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 5%+ unmute && pkill -RTMIN+10 i3blocks
