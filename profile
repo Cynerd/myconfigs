@@ -6,6 +6,9 @@ export EDITOR=vim
 export CT_PREFIX_DIR='~/.local/${CT_TARGET}'
 export CT_LOCAL_TARBALLS_DIR="~/src/ct-ng"
 
+# Python caching
+export PYTHONPYCACHEPREFIX="$HOME/.cache/pycache"
+
 # Rest of the profile run only if login is from linux console
 [[ "$(tty)" != /dev/tty* ]] && return
 
