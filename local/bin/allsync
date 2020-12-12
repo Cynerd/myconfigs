@@ -10,7 +10,7 @@ i3_astroid() {
 	pkill -0 astroid || return 0
 	find "/run/user/$(id -u)/i3" "/tmp/i3-$(id -un)".* -name ipc-socket\* 2>/dev/null | \
 		while read -r socket; do
-			i3-msg -s "$socket" "exec" "astroid" "$@"
+			i3-msg -s "$socket" "exec astroid $*"
 	done
 }
 
@@ -97,7 +97,7 @@ sec "Mail"
 i3_astroid --start-polling
 mbsync -a || fail "Mail synchronization reported failure"
 notmuch new
-~/.local/sbin/newmail-notify
+~/.local/sbin/newmail-notify || fail "Mail notifications not sent"
 notmuch tag --batch --input="$HOME/.notmuch-tag-new"
 i3_astroid --stop-polling
 pkill -RTMIN+13 i3blocks
