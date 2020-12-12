@@ -103,11 +103,6 @@ if ask "alacritty" "Install configurations for terminal emulator"; then
 	inst config/alacritty.yml ~/.config/alacritty.yml
 fi
 
-if ask "surf" "Install Surf configuration"; then
-	inst surf/script.js ~/.surf/script.js
-	inst surf/styles/default.css ~/.surf/styles/default.css
-fi
-
 if ask "mpd" "Install MPD configuration"; then
 	inst config/mpd/ ~/.config/mpd
 fi
