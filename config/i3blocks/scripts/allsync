@@ -1,0 +1,6 @@
+#!/bin/bash
+if allsync enabled; then
+	echo "sync"
+	echo
+	echo "#ffff00"
+fi

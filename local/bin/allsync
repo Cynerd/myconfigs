@@ -1,5 +1,86 @@
-#!/bin/sh
+#!/bin/bash
 set -eu
+cronline="* * * * * /bin/sh -c 'AUTORUN=y /home/cynerd/.local/bin/allsync'"
+
+notify_i3block() {
+	pkill -RTMIN+13 i3blocks
+}
+
+i3_astroid() {
+	pkill -0 astroid || return 0
+	find "/run/user/$(id -u)/i3" "/tmp/i3-$(id -un)".* -name ipc-socket\* 2>/dev/null | \
+		while read -r socket; do
+			i3-msg -s "$socket" "exec" "astroid" "$@"
+	done
+}
+
+cron_enable() {
+	pass mail/cynerd@email.cz >/dev/null # Cache keys
+	{
+		crontab -l 
+		echo "$cronline"
+	} | crontab -
+	notify_i3block
+}
+
+cron_disable() {
+	crontab -l | grep -Fv "$cronline" | crontab -
+	notify_i3block
+}
+
+cron_enabled() {
+	crontab -l | grep -Fq "$cronline"
+}
+
+if [ "$#" -gt 0 ]; then
+	case "$1" in
+		enable)
+			cron_enable
+			;;
+		disable)
+			cron_disable
+			;;
+		enabled)
+			cron_enabled
+			;;
+		state)
+			if cron_enabled; then
+				echo "Enabled"
+			else
+				echo "Disabled"
+			fi
+			;;
+		toggle)
+			if cron_enabled; then
+				cron_disable
+			else
+				cron_enable
+			fi
+			;;
+		*)
+			echo "${0##*/}: Unknown argument: $1" >&2
+			exit 1
+			;;
+	esac
+	exit
+fi
+
+##################################################################################
+
+if [ "${AUTORUN:-n}" = "y" ]; then
+	exec &> >(logger -t "${0##*/}")
+
+	if [ "$(gpg-connect-agent 'KEYINFO C3D57FE2473E5CF5327C17874A73717E504E409A' /bye | awk '{print $7}')" != "1" ]; then
+		echo "Key not accessible. Disabling cron.." >&2
+		cron_disable
+		exit 1
+	fi
+fi
+
+if [ "${ALLSYNC_FLOCK:-n}" != "y" ]; then
+	ALLSYNC_FLOCK=y exec flock --exclusive "$HOME/.mail" "$0" "$@"
+fi
+
 
 sec() {
 	echo -e '\e[1;34m==========' "$@" '==========\e[0m'
@@ -13,10 +94,14 @@ fail() {
 
 
 sec "Mail"
+i3_astroid --start-polling
 mbsync -a || fail "Mail synchronization reported failure"
 notmuch new
 ~/.local/sbin/newmail-notify
 notmuch tag --batch --input="$HOME/.notmuch-tag-new"
+i3_astroid --stop-polling
+pkill -RTMIN+13 i3blocks
+notify_i3block
 
 sec "Calendar and contacts"
 vdirsyncer sync || fail "Calendar and contacts synchronization reported failure"

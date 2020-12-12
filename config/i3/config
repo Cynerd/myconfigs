@@ -184,7 +184,7 @@ for_window [ title="Pulsemixer" ] resize set 50 ppt 50 ppt
 for_window [ title="Pulsemixer" ] move position center
 # Run and configure synchronization
 bindsym $mod+i exec alacritty -t "Synchronization" -e allsync
-bindsym $mod+Shift+i exec alacritty -t "Synchronization" -e allsync toggle
+bindsym $mod+Shift+i exec --no-startup-id allsync toggle
 for_window [ title="Synchronization" ] floating enable
 
 # Screen brightness controls

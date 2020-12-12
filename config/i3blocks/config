@@ -55,9 +55,15 @@ interval=10
 markup=pango
 interval=30
 
+[allsync]
+command=~/.config/i3blocks/scripts/allsync
+interval=120
+signal=13
+
 [email]
 command=~/.config/i3blocks/scripts/email
 interval=30
+signal=13
 
 [time]
 command=date '+%Y-%m-%d %H:%M:%S'
