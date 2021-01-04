@@ -35,6 +35,7 @@ fi
 
 if ask "ssh" "Install SSH config"; then
 	inst private/ssh_config ~/.ssh/config
+	inst local/bin/sshvnc ~/.local/bin/sshvnc
 fi
 
 if ask "vim" "Install VIM scripts"; then

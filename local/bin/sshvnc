@@ -1,0 +1,17 @@
+#!/bin/bash
+set -eu
+
+target="$1"
+
+localport="5901"
+while lsof -i:$localport; do
+	localport=$((localport + 1))
+done
+
+ssh -L "$localport":localhost:5900 "$target" \
+	'x11vnc -bg -localhost -display :0'
+
+vncviewer "localhost:$localport"
+
+ssh "$target" 'x11vnc -remote stop -localhost -display :0'
+ssh -O cancel -L "$localport":localhost:5900 "$target"
