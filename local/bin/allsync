@@ -70,7 +70,7 @@ fi
 if [ "${AUTORUN:-n}" = "y" ]; then
 	exec &> >(logger -t "${0##*/}")
 
-	if [ "$(gpg-connect-agent 'KEYINFO CD075D7EF3A4F56769201CB9A186FB9DEC83A7A5' /bye | awk '{print $7}')" != "1" ]; then
+	if ! gpg-connect-agent 'KEYINFO --list' /bye | awk 'BEGIN {ec=1} $7 == "1" {ec=0} END {exit ec}'; then
 		echo "Key not accessible. Disabling cron.." >&2
 		cron_disable
 		exit 1
