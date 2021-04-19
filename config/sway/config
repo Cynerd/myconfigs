@@ -1,18 +1,15 @@
 # Sway config
 
-input "7805:12200:ROCCAT_ROCCAT_Suora" {
-	xkb_layout us
-	xkb_options grp:alt_space_toggle
-	xkb_options caps:escape
+input type:keyboard {
+	xkb_layout us,cz_qwerty
+	xkb_options grp:alt_space_toggle,caps:escape
 	xkb_numlock enabled
 }
 
 output "DP-1" {
-	mode 2560x1440
 	position 0 0
 }
 output "HDMI-A-1" {
-	mode 1920x1080
 	position 2560 0
 }
 
@@ -23,10 +20,10 @@ output '*' {
 ##################################################################################
 
 smart_borders on
-default_border normal 1
-default_floating_border normal 1
+default_border normal
 mouse_warping container
-font pango:DejaVu Sans Mono 7
+font pango:DejaVu Sans Mono 8
+titlebar_padding 3 1
 
 bar {
 	status_command i3blocks
@@ -41,18 +38,11 @@ set $mod Mod4
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
-bindsym $mod+Return exec urxvt
-
-# start dmenu (a program launcher)
-bindsym $mod+d exec i3-dmenu-desktop --entry-type=name
-bindsym $mod+Shift+d exec  surf-menu
-
 # kill focused window
 bindsym $mod+q kill
 
 # bar toggle, hide or show 
-bindsym $mod+m bar mode toggle
+bindsym $mod+b bar mode toggle
 
 # change focus
 bindsym $mod+h focus left
@@ -78,6 +68,7 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+Tab scratchpad show
 bindsym $mod+Shift+Tab move scratchpad
 
+workspace_layout tabbed
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
@@ -127,19 +118,16 @@ bindsym $mod+Shift+0 move container to workspace 10
 bindsym $mod+Shift+grave move container to workspace web
 bindsym $mod+Shift+underscore move container to workspace t
 
-# Set Pidgin to scratchpad
-for_window [class="Pidgin"] move scratchpad
-
 # reload the configuration file
 bindsym $mod+Shift+r reload
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-	bindsym l exec  i3lock -c 000000 && sleep 1 && xset dpms force off, mode "default"
-	bindsym e exec  i3-msg exit, mode "default"
-	bindsym s exec  sudo pm-suspend, mode "default"
-	bindsym r exec  sudo reboot, mode "default"
-	bindsym Shift+s exec  ~/.config/i3/scripts/shutdown, mode "default"  
+	bindsym l exec --no-startup-id loginctl lock-session $XDG_SESSION_ID, mode "default"
+	bindsym e exec --no-startup-id i3-msg exit, mode "default"
+	bindsym s exec --no-startup-id loginctl suspend, mode "default"
+	bindsym r exec --no-startup-id loginctl reboot, mode "default"
+	bindsym Shift+s exec --no-startup-id loginctl poweroff, mode "default"  
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
@@ -148,22 +136,38 @@ bindsym $mod+Shift+q mode "$mode_system"
 
 set $displays (d)efault, toggle: 1:eDP 2:HDMI 3:VGA
 mode "$displays" {
-	bindsym d exec  mxrandr, mode "default"
-	bindsym 1 exec  mxrandr toggle eDP1, mode "default"
-	bindsym 2 exec  mxrandr toggle HDMI1, mode "default"
-	bindsym 3 exec  mxrandr toggle VGA1, mode "default"
+	bindsym d exec --no-startup-id mxrandr, mode "default"
+	bindsym 1 exec --no-startup-id mxrandr toggle eDP1, mode "default"
+	bindsym 2 exec --no-startup-id mxrandr toggle HDMI1, mode "default"
+	bindsym 3 exec --no-startup-id mxrandr toggle VGA1, mode "default"
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
-bindsym $mod+Shift+w mode "$displays"
+bindsym $mod+o mode "$displays"
+
+set $xshot Xshot: (w)indow or (d)desktop
+mode "$xshot" {
+	# Note: xshot window is for some reason broken.
+	# It won't run when not spawned in terminal
+	bindsym --release w exec xshot window, mode "default"
+	bindsym --release d exec --no-startup-id xshot desktop, mode "default"
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+bindsym $mod+Shift+s mode "$xshot"
 
 # resize window
 mode "resize" {
 	bindsym h resize shrink width 10 px or 10 ppt
+	bindsym Shift+h resize shrink width 50 px or 50 ppt
 	bindsym j resize grow height 10 px or 10 ppt
+	bindsym Shift+j resize grow height 50 px or 50 ppt
 	bindsym k resize shrink height 10 px or 10 ppt
+	bindsym Shift+k resize shrink height 50 px or 50 ppt
 	bindsym l resize grow width 10 px or 10 ppt
+	bindsym Shift+l resize grow width 50 px or 50 ppt
 
 	# back to normal: Enter or Escape
 	bindsym Return mode "default"
@@ -171,30 +175,72 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Switch keyboard layout
-bindsym Mod1+space exec ~/.config/i3/scripts/keyboard_switch
+##################################################################################
+# Start a terminal
+bindsym $mod+Return exec alacritty
+# Start Firefox
+bindsym $mod+Shift+Return exec firefox-bin
 
-# Pulse audio control
-bindsym XF86AudioRaiseVolume exec  pactl set-sink-volume 0 +5% && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioLowerVolume exec  pactl set-sink-volume 0 -5% && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioMute exec  pactl set-sink-mute 0 toggle && pkill -RTMIN+10 i3blocks
+# start dmenu (a program launcher)
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --entry-type=name
+
+# Top
+bindsym $mod+t exec alacritty -e htop
+bindsym $mod+Shift+t exec alacritty -e sudo powertop
+# Passwords
+bindsym $mod+Shift+w exec --no-startup-id ~/.config/i3/scripts/pass
+# Calendar
+bindsym $mod+c exec alacritty -t "Calendar" -e ikhal
+# Notes
+bindsym $mod+Shift+n exec --no-startup-id ~/.config/i3/scripts/notes
+for_window [ title="notes-terminal-window" ] floating enable sticky enable
+# Mail client
+bindsym $mod+m exec astroid
+
+# Audio control
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 5%+ unmute && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 5%- unmute && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle && pkill -RTMIN+10 i3blocks
+# Run and configure pulsemixer
+bindsym $mod+p exec alacritty -t "Pulsemixer" -e pulsemixer
+for_window [ title="Pulsemixer" ] floating enable;
+for_window [ title="Pulsemixer" ] resize set 50 ppt 50 ppt
+for_window [ title="Pulsemixer" ] move position center
+# Run and configure synchronization
+bindsym $mod+i exec alacritty -t "Synchronization" -e allsync
+bindsym $mod+Shift+i exec --no-startup-id allsync toggle
+for_window [ title="Synchronization" ] floating enable
 
 # Screen brightness controls
-bindsym XF86MonBrightnessUp exec  xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec  xbacklight -dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 20
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20
 
 # Media player controls
-bindsym XF86AudioPlay exec  mpc toggle && pkill -RTMIN+12 i3blocks
-bindsym XF86AudioStop exec  mpc stop && pkill -RTMIN+12 i3blocks
-bindsym XF86AudioNext exec  mpc next && pkill -RTMIN+12 i3blocks
-bindsym XF86AudioPrev exec  mpc prev && pkill -RTMIN+12 i3blocks
+bindsym XF86AudioPlay exec --no-startup-id mpc toggle && pkill -RTMIN+12 i3blocks
+bindsym XF86AudioStop exec --no-startup-id mpc stop && pkill -RTMIN+12 i3blocks
+bindsym XF86AudioNext exec --no-startup-id mpc next && pkill -RTMIN+12 i3blocks
+bindsym XF86AudioPrev exec --no-startup-id mpc prev && pkill -RTMIN+12 i3blocks
 # Run media player control app
-bindsym $mod+Shift+m exec urxvt -title "Music player daemon client" -e ncmpcpp
+bindsym $mod+Shift+m exec alacritty -t "Music player daemon client" -e ncmpcpp
+for_window [ title="Music player daemon client" ] floating enable;
+for_window [ title="Music player daemon client" ] resize set 70 ppt 70 ppt
+for_window [ title="Music player daemon client" ] move position center
+
+# Set Rambox to scratchpad
+for_window [class="Rambox"] move scratchpad
+# On-screen keyboard Florence
+for_window [class="Florence"] floating enable
 
 ##################################################################################
+# Start various applications
+
 # Start daemons
-exec dunst
+exec --no-startup-id compton -b --vsync opengl
+exec --no-startup-id ibus-daemon -drx
+exec --no-startup-id xss-lock -l -n 'mylock-notifier-fade.sh' -- myi3lock
+exec --no-startup-id dunst
 # Set background
-# TODO
-# Start pidgin
-exec pidgin
+exec --no-startup-id i3background
+
+# Start Rambox
+exec rambox
