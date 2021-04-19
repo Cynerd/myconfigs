@@ -34,3 +34,5 @@
 	envelopeSender = auto
 	suppresscc = self
 	confirm = always
+[init]
+	defaultBranch = master
