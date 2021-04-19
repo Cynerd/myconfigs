@@ -18,6 +18,14 @@ export force_s3tc_enable=true
 # Fix firefox touchscreen gestures
 export MOZ_USE_XINPUT2=1
 
+if [ -d /etc/X11/xinit/xinitrc.d ] ; then
+	for f in /etc/X11/xinit/xinitrc.d/?* ; do
+		[ -x "$f" ] && . "$f"
+	done
+	unset f
+fi
+
+
 mxrandr
 
 exec i3
