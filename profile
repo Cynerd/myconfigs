@@ -32,6 +32,8 @@ read -r PROFILE_SELECTION
 if [ "$PROFILE_SELECTION" -eq 1 ]; then
 	exec startx -- "vt$XDG_VTNR"
 elif [ "$PROFILE_SELECTION" -eq 2 ]; then
+	export XDG_CURRENT_DESKTOP=sway
+	export MOZ_ENABLE_WAYLAND=1
 	exec sway
 fi
 unset PROFILE_SELECTION
