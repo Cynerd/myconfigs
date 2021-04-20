@@ -15,11 +15,16 @@ interval=once
 signal=10
 
 [cpu_usage]
-interval=10
-separator=false
+label=cpu: 
+interval=1
 
 [memory]
-interval=30
+interval=10
+
+[gpu]
+label=gpu: 
+command=~/.config/i3blocks/scripts/gpu
+interval=1
 
 [disk]
 label=/ 
