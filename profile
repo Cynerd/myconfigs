@@ -14,6 +14,8 @@ export PYTHONPYCACHEPREFIX="$HOME/.cache/pycache"
 
 # Start music player daemon
 pgrep mpd >/dev/null || mpd ~/.config/mpd/mpd.conf
+# Start ssh-agent
+eval "$(ssh-agent -s)"
 
 # And if we are on first terminal also automatically start x server
 if [ "$(tty)" = "/dev/tty1" ]; then
