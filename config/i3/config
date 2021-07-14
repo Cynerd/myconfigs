@@ -202,7 +202,8 @@ for_window [ title="Music player daemon client" ] floating enable;
 for_window [ title="Music player daemon client" ] resize set 70 ppt 70 ppt
 for_window [ title="Music player daemon client" ] move position center
 
-# Set Rambox to scratchpad
+# Set IM to scratchpad
+for_window [class="Ferdi"] move scratchpad
 for_window [class="Rambox"] move scratchpad
 # On-screen keyboard Florence
 for_window [class="Florence"] floating enable
@@ -223,5 +224,5 @@ exec --no-startup-id dunst
 # Set background
 exec --no-startup-id i3background
 
-# Start Rambox
-exec rambox
+# Start Ferdi
+exec ferdi
