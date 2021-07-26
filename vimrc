@@ -75,8 +75,8 @@ endfunction
 
 
 set number
-set colorcolumn=82
-set textwidth=82
+set colorcolumn=80
+set textwidth=80
 highlight ColorColumn ctermbg=DarkGray
 
 " Tabs setting. In default we want 4 spaces tab, but allows also 8 spaced tabs
