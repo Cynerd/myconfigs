@@ -205,6 +205,7 @@ for_window [ title="Music player daemon client" ] move position center
 # Set IM to scratchpad
 for_window [class="Ferdi"] move scratchpad
 for_window [class="Rambox"] move scratchpad
+for_window [class="Signal"] move scratchpad
 # On-screen keyboard Florence
 for_window [class="Florence"] floating enable
 
@@ -226,3 +227,4 @@ exec --no-startup-id i3background
 
 # Start Ferdi
 exec ferdi
+exec signal-desktop
