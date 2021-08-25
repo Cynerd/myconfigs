@@ -42,6 +42,7 @@ Plugin 'fedorenchik/qt-support.vim'
 Plugin 'chr4/nginx.vim'
 Plugin 'LnL7/vim-nix'
 Plugin 'gisphm/vim-gitignore'
+Plugin 'aliou/bats.vim'
 " Files navigation
 Plugin 'kien/ctrlp.vim'
 " Grammer
