@@ -43,6 +43,7 @@ Plugin 'chr4/nginx.vim'
 Plugin 'LnL7/vim-nix'
 Plugin 'gisphm/vim-gitignore'
 Plugin 'aliou/bats.vim'
+Plugin 'Glench/Vim-Jinja2-Syntax'
 " Files navigation
 Plugin 'kien/ctrlp.vim'
 " Grammer
