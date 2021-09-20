@@ -19,7 +19,7 @@
 
 # Locate current default interface, but use only wlp (wifi) or enp (ethernet)
 # TODO probably also add connection over phone
-IF=$(ip route | awk '/^default .* (wlp|enp)/ { print $5 ; exit }')
+IF=$(ip route | awk '/^default .* (wlp|wlo|enp)/ { print $5 ; exit }')
 
 #------------------------------------------------------------------------
 
