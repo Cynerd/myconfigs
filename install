@@ -91,7 +91,6 @@ if ask "xorg" "Install XOrg (i3)"; then
 	inst xinitrc ~/.xinitrc
 	inst Xresources ~/.Xresources
 	inst config/i3/ ~/.config/i3
-	inst local/bin/mxrandr ~/.local/bin/
 fi
 
 if ask "wayland" "Install Wayland (sway)"; then
