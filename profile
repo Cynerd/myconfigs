@@ -23,7 +23,7 @@ if [ "$(tty)" = "/dev/tty1" ]; then
 fi
 
 # Nix
-[ ! -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ] || \
+[ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ] && \
 	. "$HOME/.nix-profile/etc/profile.d/nix.sh" # added by Nix installer
 
 echo
