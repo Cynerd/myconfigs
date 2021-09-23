@@ -98,7 +98,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # Detect graphics output
-bindsym $mod+Shift+o exec --no-startup-id autorander --change
+bindsym $mod+Shift+o exec --no-startup-id autorandr --change
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
