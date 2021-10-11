@@ -14,6 +14,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'jasonccox/vim-wayland-clipboard'
 " Visual
 Plugin 'itchyny/lightline.vim'
 Plugin 'nathanaelkane/vim-indent-guides'

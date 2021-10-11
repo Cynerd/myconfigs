@@ -1,4 +1,6 @@
 # Sway config
+exec --no-startup-id myswaylock
+##################################################################################
 
 input type:keyboard {
 	xkb_layout us,cz_qwerty
@@ -6,15 +8,12 @@ input type:keyboard {
 	xkb_numlock enabled
 }
 
-output "DP-1" {
-	position 0 0
-}
-output "HDMI-A-1" {
-	position 2560 0
+input type:touchpad {
+	tap enabled
 }
 
 output '*' {
-	background '/usr/share/backgrounds/vim-card-black-2560x1440.png' fit
+	background '/usr/share/backgrounds/vim-card-black-1920x1080.png' fit
 }
 
 ##################################################################################
@@ -124,7 +123,7 @@ bindsym $mod+Shift+r reload
 set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
 	bindsym l exec --no-startup-id loginctl lock-session $XDG_SESSION_ID, mode "default"
-	bindsym e exec --no-startup-id i3-msg exit, mode "default"
+	bindsym e exec --no-startup-id swaymsg exit, mode "default"
 	bindsym s exec --no-startup-id loginctl suspend, mode "default"
 	bindsym r exec --no-startup-id loginctl reboot, mode "default"
 	bindsym Shift+s exec --no-startup-id loginctl poweroff, mode "default"  
@@ -133,18 +132,6 @@ mode "$mode_system" {
 	bindsym Escape mode "default"
 }
 bindsym $mod+Shift+q mode "$mode_system"
-
-set $displays (d)efault, toggle: 1:eDP 2:HDMI 3:VGA
-mode "$displays" {
-	bindsym d exec --no-startup-id mxrandr, mode "default"
-	bindsym 1 exec --no-startup-id mxrandr toggle eDP1, mode "default"
-	bindsym 2 exec --no-startup-id mxrandr toggle HDMI1, mode "default"
-	bindsym 3 exec --no-startup-id mxrandr toggle VGA1, mode "default"
-
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}
-bindsym $mod+o mode "$displays"
 
 set $xshot Xshot: (w)indow or (d)desktop
 mode "$xshot" {
@@ -226,8 +213,10 @@ for_window [ title="Music player daemon client" ] floating enable;
 for_window [ title="Music player daemon client" ] resize set 70 ppt 70 ppt
 for_window [ title="Music player daemon client" ] move position center
 
-# Set Rambox to scratchpad
+# Set IM to scratchpad
+for_window [class="Ferdi"] move scratchpad
 for_window [class="Rambox"] move scratchpad
+for_window [class="Signal"] move scratchpad
 # On-screen keyboard Florence
 for_window [class="Florence"] floating enable
 
@@ -235,12 +224,12 @@ for_window [class="Florence"] floating enable
 # Start various applications
 
 # Start daemons
-exec --no-startup-id compton -b --vsync opengl
-exec --no-startup-id ibus-daemon -drx
-exec --no-startup-id xss-lock -l -n 'mylock-notifier-fade.sh' -- myi3lock
+exec --no-startup-id kanshi
+#exec --no-startup-id ibus-daemon -drx
 exec --no-startup-id dunst
 # Set background
 exec --no-startup-id i3background
 
-# Start Rambox
-exec rambox
+# Start Ferdi
+exec ferdi
+exec signal-desktop
