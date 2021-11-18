@@ -13,5 +13,8 @@
 .ccls-cache/
 compile_commands.json
 
-# Common python environment directory
+# Python development
+__pycache__/
+*.py[cod]
 /env
+*.egg-info
