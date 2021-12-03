@@ -36,7 +36,6 @@ Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'vim-scripts/iptables'
 Plugin 'nfnty/vim-nftables'
-Plugin 'neomutt/neomutt.vim'
 Plugin 'sirtaj/vim-openscad'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'fedorenchik/qt-support.vim'
@@ -184,6 +183,9 @@ function LangToggle()
 endfunction
 setlocal spelllang=en_us
 map <F11> :call LangToggle()<cr>
+
+" NERDCommenter
+let g:NERDCreateDefaultMappings = 1
 
 " UltiSnips triggers
 let g:UltiSnipsExpandTrigger="<c-h>"
