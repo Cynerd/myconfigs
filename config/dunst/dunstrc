@@ -1,40 +1,30 @@
 [global]
-    font = "Monospace 8"
-    allow_markup = yes
-    format = "<b>%s %p</b>\n%b"
-    sort = yes
-    indicate_hidden = true
-    # geometry = "x5"
-    idle_threshold = 0
-    geometry = "280x5-0+19"
-    alignment = center
-    show_age_threshold = 60
-    sticky_history = yes
-    follow = mouse
-    word_wrap = yes
-    separator_height = 1
-    padding = 3
-    horizontal_padding = 3
-    separator_color = frame
-    startup_notification = false
-    dmenu = "/usr/bin/dmenu -p dunst: -nb #FFFFFF -nf #000000 -sb #94DBFF -sf #000000"
-    browser = surf
+	font = "Monospace 8"
+	allow_markup = yes
+	format = "<b>%s %p</b>\n%b"
+	sort = yes
+	indicate_hidden = true
+	idle_threshold = 0
+	alignment = center
+	show_age_threshold = 60
+	sticky_history = yes
+	follow = mouse
+	word_wrap = yes
+	separator_height = 1
+	padding = 3
+	horizontal_padding = 3
+	separator_color = frame
+	startup_notification = false
 
+	dmenu = "/usr/bin/dmenu -p dunst: -nb #FFFFFF -nf #000000 -sb #94DBFF -sf #000000"
 
-[frame]
-    width = 1
-    color = "#4c7899"
-
-[shortcuts]
-    close = ctrl+space
-    close_all = ctrl+shift+space
-    history = ctrl+grave
-    context = ctrl+shift+period
+	frame_width = 1
+	frame_color = "#4c7899"
 
 [urgency_low]
-    background = "#000000"
-    foreground = "#ffffff"
-    timeout = 30
+	background = "#000000"
+	foreground = "#ffffff"
+	timeout = 30
 
 [urgency_normal]
     background = "#000000"
@@ -45,32 +35,3 @@
     background = "#000000"
     foreground = "#ff9999"
     timeout = 0
-
-
-[libpurple_signed]
-    appname = libpurple
-    summary = *igned*
-    urgency = low
-    timeout = 3
-    background = "#ccff33"
-
-[libpurple_came_back]
-    appname = libpurple
-    summary = "*came*"
-    format = ""
-
-[libpurple_went_away]
-    appname = libpurple
-    summary = "*went*"
-    format = ""
-
-[libpurple_says]
-    appname = libpurple
-    summary = *ays*
-    urgency = critical
-    background = "#ccff33"
-
-[libpurple]
-    appname = libpurple
-    urgency = critical
-    background = "#ccff33"

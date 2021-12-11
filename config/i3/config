@@ -100,6 +100,12 @@ bindsym $mod+Shift+r restart
 # Detect graphics output
 bindsym $mod+Shift+o exec --no-startup-id autorandr --change
 
+# Notifications
+bindsym ctrl+space exec --no-startup-id dunstctl close
+bindsym ctrl+Shift+space exec --no-startup-id dunstctl close-all
+bindsym ctrl+grave exec --no-startup-id dunstctl history-pop
+bindsym ctrl+Shift+grave exec --no-startup-id dunstctl context
+
 set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
 	bindsym l exec --no-startup-id loginctl lock-session $XDG_SESSION_ID, mode "default"
