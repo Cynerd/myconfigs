@@ -57,3 +57,6 @@ colors:
 
 mouse:
   hide_when_typing: true
+
+key_bindings:
+  - { key: Return, mods: Control|Shift, action: SpawnNewInstance }
