@@ -1,0 +1,7 @@
+timeout 301 'swaymsg output "*" dpms off' resume 'swaymsg output "*" dpms on'
+
+timeout 300 'myswaylock'
+lock 'myswaylock'
+before-sleep 'myswaylock'
+
+unlock 'killall swaylock'

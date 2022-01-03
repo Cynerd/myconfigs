@@ -215,7 +215,6 @@ for_window [ title="Music player daemon client" ] move position center
 
 # Set IM to scratchpad
 for_window [class="Ferdi"] move scratchpad
-for_window [class="Rambox"] move scratchpad
 for_window [class="Signal"] move scratchpad
 # On-screen keyboard Florence
 for_window [class="Florence"] floating enable
@@ -224,8 +223,9 @@ for_window [class="Florence"] floating enable
 # Start various applications
 
 # Start daemons
+exec --no-startup-id swayidle
 exec --no-startup-id kanshi
-#exec --no-startup-id ibus-daemon -drx
+exec --no-startup-id ibus-daemon -drx
 exec --no-startup-id dunst
 # Set background
 exec --no-startup-id i3background

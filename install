@@ -98,6 +98,7 @@ if ask "wayland" "Install Wayland (sway)"; then
 	inst Xresources ~/.Xdefaults # X resources for wayland session
 	inst config/sway/ ~/.config/sway
 	inst config/swaylock/ ~/.config/swaylock
+	inst config/swayidle/ ~/.config/swayidle
 fi
 
 if ask "alacritty" "Install configurations for terminal emulator"; then
