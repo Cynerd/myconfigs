@@ -7,6 +7,7 @@ input type:keyboard {
 	xkb_options 'grp:alt_shift_toggle,caps:escape'
 	xkb_numlock enabled
 }
+bindsym Alt+space input '*' xkb_layout next
 
 input type:touchpad {
 	tap enabled
@@ -105,7 +106,7 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 bindsym $mod+grave workspace web
-bindsym $mod+underscore workspace t
+bindsym $mod+minus workspace t
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -119,7 +120,7 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 bindsym $mod+Shift+grave move container to workspace web
-bindsym $mod+Shift+underscore move container to workspace t
+bindsym $mod+Shift+minus move container to workspace t
 
 # reload the configuration file
 bindsym $mod+Shift+r reload
@@ -170,13 +171,14 @@ bindsym $mod+r mode "resize"
 # Start a terminal
 bindsym $mod+Return exec alacritty
 # Start Firefox
-bindsym $mod+Shift+Return exec firefox-bin
+bindsym $mod+Shift+Return exec firefox
 
 # start a program
 bindsym $mod+d exec --no-startup-id wofi -S drun
 
 # Type emoji
 bindsym $mod+period exec rofimoji --skin-tone neutral
+bindsym $mod+Shift+period exec rofimoji --skin-tone neutral --action copy
 
 # Top
 bindsym $mod+t exec alacritty -e htop
@@ -192,9 +194,9 @@ for_window [ title="notes-terminal-window" ] floating enable sticky enable
 bindsym $mod+m exec astroid
 
 # Audio control
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 5%+ unmute && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 5%- unmute && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+10 i3blocks
 # Run and configure pulsemixer
 bindsym $mod+p exec alacritty -t "Pulsemixer" -e pulsemixer
 for_window [ title="Pulsemixer" ] floating enable;
@@ -230,9 +232,13 @@ for_window [class="Florence"] floating enable
 # Start various applications
 
 # Start daemons
-exec --no-startup-id swayidle
 exec --no-startup-id kanshi
+exec --no-startup-id swayidle
+exec --no-startup-id /usr/libexec/xdg-desktop-portal-wlr
+exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1
+exec --no-startup-id gentoo-pipewire-launcher
 exec --no-startup-id dunst
+exec --no-startup-id /usr/lib64/libexec/kdeconnectd
 
 # Start Ferdi
 exec ferdi
