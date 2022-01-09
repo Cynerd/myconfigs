@@ -3,8 +3,8 @@ exec --no-startup-id myswaylock
 ##################################################################################
 
 input type:keyboard {
-	xkb_layout us,cz_qwerty
-	xkb_options grp:alt_space_toggle,caps:escape
+	xkb_layout 'us,cz_qwerty'
+	xkb_options 'grp:alt_shift_toggle,caps:escape'
 	xkb_numlock enabled
 }
 
@@ -13,8 +13,12 @@ input type:touchpad {
 }
 
 output '*' {
-	background '/usr/share/backgrounds/vim-card-black-1920x1080.png' fit
+	background '/usr/share/backgrounds/vim-card-black-2560x1440.png' fit
 }
+
+seat * xcursor_theme Adwaita
+seat * hide_cursor 10000
+seat * hide_cursor when-typing disable
 
 ##################################################################################
 
@@ -168,18 +172,21 @@ bindsym $mod+Return exec alacritty
 # Start Firefox
 bindsym $mod+Shift+Return exec firefox-bin
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --entry-type=name
+# start a program
+bindsym $mod+d exec --no-startup-id wofi -S drun
+
+# Type emoji
+bindsym $mod+period exec rofimoji --skin-tone neutral
 
 # Top
 bindsym $mod+t exec alacritty -e htop
 bindsym $mod+Shift+t exec alacritty -e sudo powertop
 # Passwords
-bindsym $mod+Shift+w exec --no-startup-id ~/.config/i3/scripts/pass
+bindsym $mod+Shift+w exec --no-startup-id ~/.config/sway/scripts/pass
 # Calendar
 bindsym $mod+c exec alacritty -t "Calendar" -e ikhal
 # Notes
-bindsym $mod+Shift+n exec --no-startup-id ~/.config/i3/scripts/notes
+bindsym $mod+Shift+n exec --no-startup-id ~/.config/sway/scripts/notes
 for_window [ title="notes-terminal-window" ] floating enable sticky enable
 # Mail client
 bindsym $mod+m exec astroid
@@ -225,10 +232,7 @@ for_window [class="Florence"] floating enable
 # Start daemons
 exec --no-startup-id swayidle
 exec --no-startup-id kanshi
-exec --no-startup-id ibus-daemon -drx
 exec --no-startup-id dunst
-# Set background
-exec --no-startup-id i3background
 
 # Start Ferdi
 exec ferdi

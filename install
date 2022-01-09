@@ -95,10 +95,14 @@ if ask "xorg" "Install XOrg (i3)"; then
 fi
 
 if ask "wayland" "Install Wayland (sway)"; then
+	inst local/bin/startsway ~/.local/bin/startsway
 	inst Xresources ~/.Xdefaults # X resources for wayland session
 	inst config/sway/ ~/.config/sway
 	inst config/swaylock/ ~/.config/swaylock
 	inst config/swayidle/ ~/.config/swayidle
+	inst config/wofi/ ~/.config/wofi
+	[ -f "private/kanshi/$(hostname)" ] \
+		&& inst "private/kanshi/$(hostname)" ~/.config/kanshi/config
 fi
 
 if ask "alacritty" "Install configurations for terminal emulator"; then

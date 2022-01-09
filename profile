@@ -27,16 +27,14 @@ if [ "$(tty)" = "/dev/tty1" ]; then
 	PROFILE_SELECTION=1
 else
 	echo
-	echo "(1) i3"
-	echo "(2) sway"
+	echo "(1) sway"
+	echo "(2) i3"
 	echo -n "Select or pass to shell: "
 	read -r PROFILE_SELECTION
 fi
 if [ "$PROFILE_SELECTION" -eq 1 ]; then
-	exec startx -- "vt$XDG_VTNR"
+	exec startsway
 elif [ "$PROFILE_SELECTION" -eq 2 ]; then
-	export XDG_CURRENT_DESKTOP=sway
-	export MOZ_ENABLE_WAYLAND=1
-	exec sway
+	exec startx -- "vt$XDG_VTNR"
 fi
 unset PROFILE_SELECTION

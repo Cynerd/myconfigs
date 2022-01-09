@@ -1,0 +1,17 @@
+#!/bin/sh
+set -eu
+
+# Declare the current desktop
+export XDG_CURRENT_DESKTOP=sway
+# Use GTK theme for QT applications
+export QT_QPA_PLATFORMTHEME=gtk2
+export QT_STYLE_OVERRIDE='gtk2'
+# Fix fullscreen game offscreen
+export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+# To fix missing textures on intel
+export force_s3tc_enable=true
+# Fix firefox touchscreen gestures and force wayland
+export MOZ_USE_XINPUT2=1
+export MOZ_ENABLE_WAYLAND=1
+
+exec dbus-launch --exit-with-session sway
