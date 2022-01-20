@@ -103,6 +103,8 @@ if ask "wayland" "Install Wayland (sway)"; then
 	inst config/wofi/ ~/.config/wofi
 	[ -f "private/kanshi/$(hostname)" ] \
 		&& inst "private/kanshi/$(hostname)" ~/.config/kanshi/config
+	inst config/xdg-desktop-portal-wlr/ ~/.config/xdg-desktop-portal-wlr
+	inst local/bin/wlr-select-screen ~/.local/bin/wlr-select-screen
 fi
 
 if ask "alacritty" "Install configurations for terminal emulator"; then

@@ -1,5 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 set -eu
+exec 1> >(logger -s -t "${0##*/}") 2>&1
 
 # Declare the current desktop
 export XDG_CURRENT_DESKTOP=sway
@@ -14,4 +15,4 @@ export force_s3tc_enable=true
 export MOZ_USE_XINPUT2=1
 export MOZ_ENABLE_WAYLAND=1
 
-exec dbus-launch --exit-with-session sway
+exec dbus-run-session sway

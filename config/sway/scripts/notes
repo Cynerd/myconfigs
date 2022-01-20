@@ -1,0 +1,5 @@
+#!/bin/sh
+cd ~/notes
+find * -type f | wofi -d -p 'notes' | while read -r note; do
+	nohup alacritty -e vim ~/notes/"$note" >/dev/null 2>&1 &
+done

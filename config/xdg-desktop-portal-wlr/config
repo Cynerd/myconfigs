@@ -1,0 +1,5 @@
+[screencast]
+output_name=Monitor
+max_fps=30
+chooser_type=dmenu
+chooser_cmd=wlr-select-screen

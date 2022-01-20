@@ -1,5 +1,8 @@
 # Sway config
+exec --no-startup-id dbus-update-activation-environment --all
+exec --no-startup-id gentoo-pipewire-launcher
 exec --no-startup-id myswaylock
+exec --no-startup-id swaybackground
 ##################################################################################
 
 input type:keyboard {
@@ -7,19 +10,16 @@ input type:keyboard {
 	xkb_options 'grp:alt_shift_toggle,caps:escape'
 	xkb_numlock enabled
 }
-bindsym Alt+space input '*' xkb_layout next
 
 input type:touchpad {
 	tap enabled
 }
 
-output '*' {
-	background '/usr/share/backgrounds/vim-card-black-2560x1440.png' fit
+seat '*' {
+	xcursor_theme Adwaita
+	hide_cursor 10000
+	hide_cursor when-typing disable
 }
-
-seat * xcursor_theme Adwaita
-seat * hide_cursor 10000
-seat * hide_cursor when-typing disable
 
 ##################################################################################
 
@@ -41,6 +41,7 @@ set $mod Mod4
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+tiling_drag disable
 
 # kill focused window
 bindsym $mod+q kill
@@ -95,35 +96,41 @@ bindsym $mod+Shift+x move workspace to output right
 bindsym $mod+Shift+z move workspace to output left
 
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
-bindsym $mod+grave workspace web
-bindsym $mod+minus workspace t
+bindsym --to-code $mod+1 workspace 1
+bindsym --to-code $mod+2 workspace 2
+bindsym --to-code $mod+3 workspace 3
+bindsym --to-code $mod+4 workspace 4
+bindsym --to-code $mod+5 workspace 5
+bindsym --to-code $mod+6 workspace 6
+bindsym --to-code $mod+7 workspace 7
+bindsym --to-code $mod+8 workspace 8
+bindsym --to-code $mod+9 workspace 9
+bindsym --to-code $mod+0 workspace 10
+bindsym --to-code $mod+grave workspace web
+bindsym --to-code $mod+minus workspace t
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
-bindsym $mod+Shift+grave move container to workspace web
-bindsym $mod+Shift+minus move container to workspace t
+bindsym --to-code $mod+Shift+1 move container to workspace 1
+bindsym --to-code $mod+Shift+2 move container to workspace 2
+bindsym --to-code $mod+Shift+3 move container to workspace 3
+bindsym --to-code $mod+Shift+4 move container to workspace 4
+bindsym --to-code $mod+Shift+5 move container to workspace 5
+bindsym --to-code $mod+Shift+6 move container to workspace 6
+bindsym --to-code $mod+Shift+7 move container to workspace 7
+bindsym --to-code $mod+Shift+8 move container to workspace 8
+bindsym --to-code $mod+Shift+9 move container to workspace 9
+bindsym --to-code $mod+Shift+0 move container to workspace 10
+bindsym --to-code $mod+Shift+grave move container to workspace web
+bindsym --to-code $mod+Shift+minus move container to workspace t
 
 # reload the configuration file
 bindsym $mod+Shift+r reload
+
+# Notifications
+bindsym --to-code ctrl+space exec --no-startup-id dunstctl close
+bindsym --to-code ctrl+Shift+space exec --no-startup-id dunstctl close-all
+bindsym --to-code ctrl+grave exec --no-startup-id dunstctl history-pop
+bindsym --to-code ctrl+Shift+grave exec --no-startup-id dunstctl context
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
@@ -167,6 +174,15 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+set $mode_layout Set keyboard layout (u)s or (c)z
+mode "$mode_layout" {
+	bindsym u input type:keyboard xkb_layout us, mode "default"
+	bindsym c input type:keyboard xkb_layout cz_qwerty, mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+bindsym --to-code $mod+slash mode "$mode_layout"
+
 ##################################################################################
 # Start a terminal
 bindsym $mod+Return exec alacritty
@@ -174,11 +190,11 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+Return exec firefox
 
 # start a program
-bindsym $mod+d exec --no-startup-id wofi -S drun
+bindsym $mod+d exec --no-startup-id wofi -Imi -S drun
 
 # Type emoji
-bindsym $mod+period exec rofimoji --skin-tone neutral
-bindsym $mod+Shift+period exec rofimoji --skin-tone neutral --action copy
+bindsym --to-code $mod+period exec rofimoji --skin-tone neutral
+bindsym --to-code $mod+Shift+period exec rofimoji --skin-tone neutral --action copy
 
 # Top
 bindsym $mod+t exec alacritty -e htop
@@ -234,9 +250,6 @@ for_window [class="Florence"] floating enable
 # Start daemons
 exec --no-startup-id kanshi
 exec --no-startup-id swayidle
-exec --no-startup-id /usr/libexec/xdg-desktop-portal-wlr
-exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1
-exec --no-startup-id gentoo-pipewire-launcher
 exec --no-startup-id dunst
 exec --no-startup-id /usr/lib64/libexec/kdeconnectd
 

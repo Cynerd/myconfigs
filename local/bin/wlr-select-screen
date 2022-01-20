@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+
+screens="$(cat)"
+if [ "$(echo "$screens" | wc -l)" -gt 1 ]; then
+	echo "$screens" | wofi -d -p "Select screen to share"
+else
+	echo "$screens"
+fi
