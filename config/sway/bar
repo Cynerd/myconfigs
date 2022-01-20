@@ -1,0 +1,6 @@
+# vim: ft=swayconfig
+bar {
+	status_command i3blocks
+	position top
+	font pango:DejaVu Sans Mono 8
+}

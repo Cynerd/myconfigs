@@ -1,0 +1,10 @@
+# vim: ft=swayconfig
+exec --no-startup-id {
+	kanshi
+	swayidle
+	dunst
+	/usr/lib64/libexec/kdeconnectd
+}
+
+for_window [class="Ferdi"] move scratchpad
+exec ferdi

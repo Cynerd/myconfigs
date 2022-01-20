@@ -1,0 +1,17 @@
+# vim: ft=swayconfig
+
+input type:keyboard {
+	xkb_layout 'us,cz_qwerty'
+	xkb_options 'grp:alt_shift_toggle,caps:escape'
+	xkb_numlock enabled
+}
+
+input type:touchpad {
+	tap enabled
+}
+
+seat '*' {
+	xcursor_theme Adwaita
+	hide_cursor 10000
+	hide_cursor when-typing disable
+}

@@ -1,0 +1,91 @@
+# vim: ft=swayconfig
+
+# Change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# Move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# Split in horizontal orientation
+bindsym $mod+g split h
+# Split in vertical orientation
+bindsym $mod+v split v
+
+# Enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# Scratchpad
+bindsym $mod+Tab scratchpad show
+bindsym $mod+Shift+Tab move scratchpad
+
+# Change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+# focus the child container
+bindsym $mod+Shift+a focus child
+
+# Output moving
+bindsym $mod+x move container to output right
+bindsym $mod+z move container to output left
+bindsym $mod+Shift+x move workspace to output right
+bindsym $mod+Shift+z move workspace to output left
+
+# switch to workspace
+bindsym --to-code $mod+1 workspace 1
+bindsym --to-code $mod+2 workspace 2
+bindsym --to-code $mod+3 workspace 3
+bindsym --to-code $mod+4 workspace 4
+bindsym --to-code $mod+5 workspace 5
+bindsym --to-code $mod+6 workspace 6
+bindsym --to-code $mod+7 workspace 7
+bindsym --to-code $mod+8 workspace 8
+bindsym --to-code $mod+9 workspace 9
+bindsym --to-code $mod+0 workspace 10
+bindsym --to-code $mod+grave workspace web
+bindsym --to-code $mod+minus workspace t
+
+# move focused container to workspace
+bindsym --to-code $mod+Shift+1 move container to workspace 1
+bindsym --to-code $mod+Shift+2 move container to workspace 2
+bindsym --to-code $mod+Shift+3 move container to workspace 3
+bindsym --to-code $mod+Shift+4 move container to workspace 4
+bindsym --to-code $mod+Shift+5 move container to workspace 5
+bindsym --to-code $mod+Shift+6 move container to workspace 6
+bindsym --to-code $mod+Shift+7 move container to workspace 7
+bindsym --to-code $mod+Shift+8 move container to workspace 8
+bindsym --to-code $mod+Shift+9 move container to workspace 9
+bindsym --to-code $mod+Shift+0 move container to workspace 10
+bindsym --to-code $mod+Shift+grave move container to workspace web
+bindsym --to-code $mod+Shift+minus move container to workspace t
+
+# Resize window
+mode "resize" {
+	bindsym h resize shrink width 10 px or 10 ppt
+	bindsym Shift+h resize shrink width 50 px or 50 ppt
+	bindsym j resize grow height 10 px or 10 ppt
+	bindsym Shift+j resize grow height 50 px or 50 ppt
+	bindsym k resize shrink height 10 px or 10 ppt
+	bindsym Shift+k resize shrink height 50 px or 50 ppt
+	bindsym l resize grow width 10 px or 10 ppt
+	bindsym Shift+l resize grow width 50 px or 50 ppt
+
+	# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"

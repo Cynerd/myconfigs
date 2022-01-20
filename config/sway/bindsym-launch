@@ -1,0 +1,28 @@
+# vim: ft=swayconfig
+# Start a terminal
+bindsym $mod+Return exec alacritty
+# Start Firefox
+bindsym $mod+Shift+Return exec firefox
+
+# start a program
+bindsym $mod+d exec --no-startup-id wofi -Imi -S drun
+
+
+# Top
+bindsym $mod+t exec alacritty -e htop
+bindsym $mod+Shift+t exec alacritty -e sudo powertop
+# Passwords
+bindsym $mod+Shift+w exec --no-startup-id ~/.config/sway/scripts/pass
+# Calendar
+bindsym $mod+c exec alacritty -t "Calendar" -e ikhal
+# Notes
+bindsym $mod+Shift+n exec --no-startup-id ~/.config/sway/scripts/notes
+for_window [ title="notes-terminal-window" ] floating enable sticky enable
+# Mail client
+bindsym $mod+m exec astroid
+
+
+# Run and configure synchronization
+bindsym $mod+i exec alacritty -t "Synchronization" -e allsync
+bindsym $mod+Shift+i exec --no-startup-id allsync toggle
+for_window [ title="Synchronization" ] floating enable

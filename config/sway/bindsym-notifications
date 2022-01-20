@@ -1,0 +1,5 @@
+# vim: ft=swayconfig
+bindsym --to-code ctrl+space exec --no-startup-id dunstctl close
+bindsym --to-code ctrl+Shift+space exec --no-startup-id dunstctl close-all
+bindsym --to-code ctrl+grave exec --no-startup-id dunstctl history-pop
+bindsym --to-code ctrl+Shift+grave exec --no-startup-id dunstctl context

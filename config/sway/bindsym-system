@@ -1,0 +1,13 @@
+# vim: ft=swayconfig
+set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+	bindsym l exec --no-startup-id loginctl lock-session $XDG_SESSION_ID, mode "default"
+	bindsym e exec --no-startup-id swaymsg exit, mode "default"
+	bindsym s exec --no-startup-id loginctl suspend, mode "default"
+	bindsym r exec --no-startup-id loginctl reboot, mode "default"
+	bindsym Shift+s exec --no-startup-id loginctl poweroff, mode "default"  
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+bindsym $mod+Shift+q mode "$mode_system"

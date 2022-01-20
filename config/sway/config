@@ -1,27 +1,12 @@
-# Sway config
+# vim: ft=swayconfig
 exec --no-startup-id dbus-update-activation-environment --all
 exec --no-startup-id gentoo-pipewire-launcher
 exec --no-startup-id myswaylock
 exec --no-startup-id swaybackground
-##################################################################################
-
-input type:keyboard {
-	xkb_layout 'us,cz_qwerty'
-	xkb_options 'grp:alt_shift_toggle,caps:escape'
-	xkb_numlock enabled
-}
-
-input type:touchpad {
-	tap enabled
-}
-
-seat '*' {
-	xcursor_theme Adwaita
-	hide_cursor 10000
-	hide_cursor when-typing disable
-}
-
-##################################################################################
+################################################################################
+include gsettings
+include inputs
+################################################################################
 
 smart_borders on
 default_border normal
@@ -29,230 +14,23 @@ mouse_warping container
 font pango:DejaVu Sans Mono 8
 titlebar_padding 3 1
 
-bar {
-	status_command i3blocks
-	position top
-	font pango:DejaVu Sans Mono 8
-}
+workspace_layout tabbed
 
-##################################################################################
-
+################################################################################
 set $mod Mod4
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 tiling_drag disable
 
-# kill focused window
+# Kill focused window
 bindsym $mod+q kill
-
-# bar toggle, hide or show 
+# Bar toggle
 bindsym $mod+b bar mode toggle
-
-# change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
-
-# move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
-
-# split in horizontal orientation
-bindsym $mod+g split h
-# split in vertical orientation
-bindsym $mod+v split v
-
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
-
-# Scratchpad
-bindsym $mod+Tab scratchpad show
-bindsym $mod+Shift+Tab move scratchpad
-
-workspace_layout tabbed
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
-# focus the parent container
-bindsym $mod+a focus parent
-# focus the child container
-bindsym $mod+Shift+a focus child
-
-# Output moving
-bindsym $mod+x move container to output right
-bindsym $mod+z move container to output left
-bindsym $mod+Shift+x move workspace to output right
-bindsym $mod+Shift+z move workspace to output left
-
-# switch to workspace
-bindsym --to-code $mod+1 workspace 1
-bindsym --to-code $mod+2 workspace 2
-bindsym --to-code $mod+3 workspace 3
-bindsym --to-code $mod+4 workspace 4
-bindsym --to-code $mod+5 workspace 5
-bindsym --to-code $mod+6 workspace 6
-bindsym --to-code $mod+7 workspace 7
-bindsym --to-code $mod+8 workspace 8
-bindsym --to-code $mod+9 workspace 9
-bindsym --to-code $mod+0 workspace 10
-bindsym --to-code $mod+grave workspace web
-bindsym --to-code $mod+minus workspace t
-
-# move focused container to workspace
-bindsym --to-code $mod+Shift+1 move container to workspace 1
-bindsym --to-code $mod+Shift+2 move container to workspace 2
-bindsym --to-code $mod+Shift+3 move container to workspace 3
-bindsym --to-code $mod+Shift+4 move container to workspace 4
-bindsym --to-code $mod+Shift+5 move container to workspace 5
-bindsym --to-code $mod+Shift+6 move container to workspace 6
-bindsym --to-code $mod+Shift+7 move container to workspace 7
-bindsym --to-code $mod+Shift+8 move container to workspace 8
-bindsym --to-code $mod+Shift+9 move container to workspace 9
-bindsym --to-code $mod+Shift+0 move container to workspace 10
-bindsym --to-code $mod+Shift+grave move container to workspace web
-bindsym --to-code $mod+Shift+minus move container to workspace t
-
 # reload the configuration file
 bindsym $mod+Shift+r reload
 
-# Notifications
-bindsym --to-code ctrl+space exec --no-startup-id dunstctl close
-bindsym --to-code ctrl+Shift+space exec --no-startup-id dunstctl close-all
-bindsym --to-code ctrl+grave exec --no-startup-id dunstctl history-pop
-bindsym --to-code ctrl+Shift+grave exec --no-startup-id dunstctl context
+include bindsym-*
 
-set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
-mode "$mode_system" {
-	bindsym l exec --no-startup-id loginctl lock-session $XDG_SESSION_ID, mode "default"
-	bindsym e exec --no-startup-id swaymsg exit, mode "default"
-	bindsym s exec --no-startup-id loginctl suspend, mode "default"
-	bindsym r exec --no-startup-id loginctl reboot, mode "default"
-	bindsym Shift+s exec --no-startup-id loginctl poweroff, mode "default"  
-
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}
-bindsym $mod+Shift+q mode "$mode_system"
-
-set $xshot Xshot: (w)indow or (d)desktop
-mode "$xshot" {
-	# Note: xshot window is for some reason broken.
-	# It won't run when not spawned in terminal
-	bindsym --release w exec xshot window, mode "default"
-	bindsym --release d exec --no-startup-id xshot desktop, mode "default"
-
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}
-bindsym $mod+Shift+s mode "$xshot"
-
-# resize window
-mode "resize" {
-	bindsym h resize shrink width 10 px or 10 ppt
-	bindsym Shift+h resize shrink width 50 px or 50 ppt
-	bindsym j resize grow height 10 px or 10 ppt
-	bindsym Shift+j resize grow height 50 px or 50 ppt
-	bindsym k resize shrink height 10 px or 10 ppt
-	bindsym Shift+k resize shrink height 50 px or 50 ppt
-	bindsym l resize grow width 10 px or 10 ppt
-	bindsym Shift+l resize grow width 50 px or 50 ppt
-
-	# back to normal: Enter or Escape
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}
-bindsym $mod+r mode "resize"
-
-set $mode_layout Set keyboard layout (u)s or (c)z
-mode "$mode_layout" {
-	bindsym u input type:keyboard xkb_layout us, mode "default"
-	bindsym c input type:keyboard xkb_layout cz_qwerty, mode "default"
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}
-bindsym --to-code $mod+slash mode "$mode_layout"
-
-##################################################################################
-# Start a terminal
-bindsym $mod+Return exec alacritty
-# Start Firefox
-bindsym $mod+Shift+Return exec firefox
-
-# start a program
-bindsym $mod+d exec --no-startup-id wofi -Imi -S drun
-
-# Type emoji
-bindsym --to-code $mod+period exec rofimoji --skin-tone neutral
-bindsym --to-code $mod+Shift+period exec rofimoji --skin-tone neutral --action copy
-
-# Top
-bindsym $mod+t exec alacritty -e htop
-bindsym $mod+Shift+t exec alacritty -e sudo powertop
-# Passwords
-bindsym $mod+Shift+w exec --no-startup-id ~/.config/sway/scripts/pass
-# Calendar
-bindsym $mod+c exec alacritty -t "Calendar" -e ikhal
-# Notes
-bindsym $mod+Shift+n exec --no-startup-id ~/.config/sway/scripts/notes
-for_window [ title="notes-terminal-window" ] floating enable sticky enable
-# Mail client
-bindsym $mod+m exec astroid
-
-# Audio control
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+10 i3blocks
-# Run and configure pulsemixer
-bindsym $mod+p exec alacritty -t "Pulsemixer" -e pulsemixer
-for_window [ title="Pulsemixer" ] floating enable;
-for_window [ title="Pulsemixer" ] resize set 50 ppt 50 ppt
-for_window [ title="Pulsemixer" ] move position center
-# Run and configure synchronization
-bindsym $mod+i exec alacritty -t "Synchronization" -e allsync
-bindsym $mod+Shift+i exec --no-startup-id allsync toggle
-for_window [ title="Synchronization" ] floating enable
-
-# Screen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 20
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20
-
-# Media player controls
-bindsym XF86AudioPlay exec --no-startup-id mpc toggle && pkill -RTMIN+12 i3blocks
-bindsym XF86AudioStop exec --no-startup-id mpc stop && pkill -RTMIN+12 i3blocks
-bindsym XF86AudioNext exec --no-startup-id mpc next && pkill -RTMIN+12 i3blocks
-bindsym XF86AudioPrev exec --no-startup-id mpc prev && pkill -RTMIN+12 i3blocks
-# Run media player control app
-bindsym $mod+Shift+m exec alacritty -t "Music player daemon client" -e ncmpcpp
-for_window [ title="Music player daemon client" ] floating enable;
-for_window [ title="Music player daemon client" ] resize set 70 ppt 70 ppt
-for_window [ title="Music player daemon client" ] move position center
-
-# Set IM to scratchpad
-for_window [class="Ferdi"] move scratchpad
-for_window [class="Signal"] move scratchpad
-# On-screen keyboard Florence
-for_window [class="Florence"] floating enable
-
-##################################################################################
-# Start various applications
-
-# Start daemons
-exec --no-startup-id kanshi
-exec --no-startup-id swayidle
-exec --no-startup-id dunst
-exec --no-startup-id /usr/lib64/libexec/kdeconnectd
-
-# Start Ferdi
-exec ferdi
-exec signal-desktop
+################################################################################
+include daemons
