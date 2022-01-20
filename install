@@ -76,28 +76,19 @@ if ask "sync" "Install synchronization"; then
 	inst_sync
 fi
 
-if ask "desktop" "Install desktop generic"; then
+if ask "desktop" "Install desktop"; then
 	# Theme
 	inst gtk-2.0/gtkrc ~/.gtkrc-2.0
 	inst gtk-3.0/ ~/.config/gtk-3.0/
 	inst config/Trolltech.conf ~/.config/Trolltech.conf
 	# User directories
 	inst config/user-dirs.conf ~/.config/user-dirs.dirs
-	# Generic i3/sway
+	# Sway
+	inst local/bin/startsway ~/.local/bin/startsway
+	inst config/sway/ ~/.config/sway
+	inst Xdefaults ~/.Xdefaults
 	inst config/dunst/ ~/.config/dunst
 	inst config/i3blocks/ ~/.config/i3blocks
-fi
-
-if ask "xorg" "Install XOrg (i3)"; then
-	inst xinitrc ~/.xinitrc
-	inst Xresources ~/.Xresources
-	inst config/i3/ ~/.config/i3
-fi
-
-if ask "wayland" "Install Wayland (sway)"; then
-	inst local/bin/startsway ~/.local/bin/startsway
-	inst Xresources ~/.Xdefaults # X resources for wayland session
-	inst config/sway/ ~/.config/sway
 	inst config/swaylock/ ~/.config/swaylock
 	inst config/swayidle/ ~/.config/swayidle
 	inst config/wofi/ ~/.config/wofi
