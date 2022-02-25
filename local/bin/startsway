@@ -14,5 +14,7 @@ export force_s3tc_enable=true
 # Fix firefox touchscreen gestures and force wayland
 export MOZ_USE_XINPUT2=1
 export MOZ_ENABLE_WAYLAND=1
+# Java application do not display properly
+export _JAVA_AWT_WM_NONREPARENTING=1
 
 exec dbus-run-session sway

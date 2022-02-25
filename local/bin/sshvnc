@@ -9,9 +9,9 @@ while lsof -i:$localport; do
 done
 
 ssh -L "$localport":localhost:5900 "$target" \
-	'x11vnc -bg -localhost -display :0'
+	'start-stop-daemon -v -w 1000 -bmp "/var/run/user/$(id -u)/sshvnc.pid" -e WAYLAND_DISPLAY=wayland-1 -S wayvnc localhost 5900'
 
 vncviewer "localhost:$localport"
 
-ssh "$target" 'x11vnc -remote stop -localhost -display :0'
+ssh "$target" 'start-stop-daemon -v -p /var/run/user/$(id -u)/sshvnc.pid -K wayvnc'
 ssh -O cancel -L "$localport":localhost:5900 "$target"

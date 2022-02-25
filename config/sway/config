@@ -4,9 +4,10 @@ exec --no-startup-id gentoo-pipewire-launcher
 exec --no-startup-id myswaylock
 exec --no-startup-id swaybackground
 ################################################################################
-include gsettings
 include inputs
+include gsettings
 ################################################################################
+include bar
 
 smart_borders on
 default_border normal

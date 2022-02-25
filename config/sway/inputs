@@ -8,10 +8,23 @@ input type:keyboard {
 
 input type:touchpad {
 	tap enabled
+	middle_emulation enabled
 }
 
 seat '*' {
 	xcursor_theme Adwaita
 	hide_cursor 10000
 	hide_cursor when-typing disable
+}
+
+## Susan inputs ################################################################
+input '9610:33:HAILUCK_CO.,LTD_USB_KEYBOARD_Mouse' {
+	middle_emulation enabled
+	scroll_method on_button_down
+}
+input '10182:275:GXTP7386:00_27C6:0113_Stylus' {
+	calibration_matrix 0 -1 1 1 0 0
+}
+input '10182:275:GXTP7386:00_27C6:0113' {
+	calibration_matrix 0 -1 1 1 0 0
 }
