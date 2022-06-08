@@ -42,6 +42,7 @@ interval=2
 separator=false
 
 [bandwidth]
+command=~/.config/i3blocks/scripts/bandwidth
 interval=2
 
 [ssid]
