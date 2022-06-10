@@ -38,7 +38,7 @@ if [[ -z $INTERFACE ]] && [[ -n $BLOCK_INSTANCE ]]; then
   INTERFACE=$BLOCK_INSTANCE
 elif [[ -z $INTERFACE ]]; then
   for version in 4 6; do
-    INTERFACE=$(ip -$version r | sed -n 's/^default.*dev \([^ ]*\).*/\1/p')
+    INTERFACE=$(ip -$version r | sed -n 's/^default.*dev \([^ ]*\).*/\1/p' | head -1)
     [ -z "$INTERFACE" ] || break
   done
 fi

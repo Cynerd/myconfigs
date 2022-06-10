@@ -1,4 +1,2 @@
-#!/bin/bash
+#!/usr/bin/env bash
 echo "$(cat /sys/class/drm/card0/device/gpu_busy_percent)%"
-echo
-echo

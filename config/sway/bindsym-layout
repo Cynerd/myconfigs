@@ -9,5 +9,5 @@ mode "$mode_layout" {
 bindsym --to-code $mod+slash mode "$mode_layout"
 
 # Type emoji
-bindsym --to-code $mod+period exec rofimoji --skin-tone neutral
-bindsym --to-code $mod+Shift+period exec rofimoji --skin-tone neutral --action copy
+bindsym --to-code $mod+period exec rofimoji --selector wofi --skin-tone neutral
+bindsym --to-code $mod+Shift+period exec rofimoji --selector wofi --skin-tone neutral --action copy

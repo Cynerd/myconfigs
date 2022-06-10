@@ -1,16 +1,14 @@
 # i3blocks config file
-command=/usr/libexec/i3blocks/$BLOCK_NAME
+command=~/.config/i3blocks/scripts/$BLOCK_NAME
 separator_block_width=10
 markup=none
 
 [mpd]
-command=~/.config/i3blocks/scripts/mpd
 interval=5
 signal=12
 
-[volume]
+[volume-pipewire]
 label=♪ 
-instance=Master
 interval=once
 signal=10
 
@@ -23,7 +21,6 @@ interval=10
 
 [gpu]
 label=gpu: 
-command=~/.config/i3blocks/scripts/gpu
 interval=1
 
 [disk]
@@ -37,12 +34,10 @@ instance=/home2
 interval=30
 
 [iface]
-command=~/.config/i3blocks/scripts/iface
 interval=2
 separator=false
 
 [bandwidth]
-command=~/.config/i3blocks/scripts/bandwidth
 interval=2
 
 [ssid]
@@ -62,12 +57,10 @@ markup=pango
 interval=30
 
 [allsync]
-command=~/.config/i3blocks/scripts/allsync
 interval=120
 signal=13
 
 [email]
-command=~/.config/i3blocks/scripts/email
 interval=30
 signal=13
 

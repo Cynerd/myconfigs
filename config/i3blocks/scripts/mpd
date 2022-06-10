@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 status="$(mpc -f "♫ %artist%, %album%, %title%" status)"
 

@@ -53,7 +53,6 @@ Plugin 'rhysd/vim-grammarous'
 call vundle#end()
 filetype plugin indent on
 
-colorscheme elflord
 syntax on
 
 set exrc
@@ -76,6 +75,8 @@ function FoldText()
 	return getline(v:foldstart) . '  '
 endfunction
 
+
+set backspace=indent,eol,start
 
 set number
 set colorcolumn=80

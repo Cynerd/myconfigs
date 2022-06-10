@@ -20,7 +20,7 @@
 # Use the provided interface, otherwise the device used for the default route.
 IF="${IFACE:-$BLOCK_INSTANCE}"
 for version in 4 6; do
-	IF="${IF:-$(ip -$version route  | sed -n 's/^default.*dev \([^ ]*\).*/\1/p')}"
+	IF="${IF:-$(ip -$version route  | sed -n 's/^default.*dev \([^ ]*\).*/\1/p' | head -1)}"
 done
 
 # Exit if there is no default route

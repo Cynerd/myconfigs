@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-cd `dirname $0`
+cd "$(dirname "$0")" || exit 1
 
 git submodule update --init --recursive || (echo "Submodule update failed!"; exit 5)
 
@@ -34,6 +34,7 @@ if ask "gnuscreen" "Install configurations for various utility tools"; then
 fi
 
 if ask "ssh" "Install SSH config"; then
+	mkdir -p ~/.cache/ssh # directory for sockets
 	inst private/ssh_config ~/.ssh/config
 	inst local/bin/sshvnc ~/.local/bin/sshvnc
 fi
@@ -60,6 +61,9 @@ fi
 
 if ask "sync" "Install synchronization"; then
 	inst local/bin/allsync ~/.local/bin/allsync
+	if [ "$(ps -o comm= 1)" = "systemd" ]; then
+		inst config/systemd/user/allsync.{service,timer} ~/.config/systemd/user/
+	fi
 
 	inst private/mbsyncrc ~/.mbsyncrc
 	inst private/notmuch-config ~/.notmuch-config

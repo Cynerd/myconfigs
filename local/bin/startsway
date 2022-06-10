@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -eu
 exec 1> >(logger -s -t "${0##*/}") 2>&1
 
@@ -17,4 +17,9 @@ export MOZ_ENABLE_WAYLAND=1
 # Java application do not display properly
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-exec dbus-run-session sway
+dbus="dbus-run-session"
+if command -v systemctl >/dev/null; then
+	dbus=""
+fi
+
+exec $dbus sway

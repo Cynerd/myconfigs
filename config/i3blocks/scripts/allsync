@@ -1,6 +1,9 @@
-#!/bin/bash
-if allsync enabled; then
+#!/usr/bin/env bash
+if allsync enabled 2>/dev/null; then
 	echo "sync"
+else
 	echo
-	echo "#ffff00"
 fi
+
+echo
+echo "#ffff00"
