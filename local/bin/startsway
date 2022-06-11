@@ -18,7 +18,7 @@ export MOZ_ENABLE_WAYLAND=1
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 dbus="dbus-run-session"
-if command -v systemctl >/dev/null; then
+if [ "$(ps -o comm= 1)" = "systemd" ]; then
 	dbus=""
 fi
 
