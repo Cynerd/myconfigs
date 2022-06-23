@@ -126,4 +126,8 @@ sec "Passwords"
 pass git pull || fail "Passwords pull failed"
 pass git push || fail "Passwords push failed"
 
-exit $ecode
+if [ "${AUTORUN:-n}" = "y" ]; then
+	echo "Reported failure exit code: $ecode" >&2
+else
+   	exit $ecode
+fi

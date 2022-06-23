@@ -7,4 +7,4 @@ exec --no-startup-id {
 }
 
 for_window [class="Ferdi"] move scratchpad
-exec ferdi
+exec ferdium
