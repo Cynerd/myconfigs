@@ -1,0 +1,6 @@
+[Unit]
+Description=Allsync
+
+[Service]
+ExecStart="/home/cynerd/.local/bin/allsync"
+Environment="AUTORUN=y"
