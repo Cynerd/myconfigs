@@ -113,7 +113,7 @@ sec "Mail"
 i3_astroid --start-polling
 mbsync -a || fail "Mail synchronization reported failure"
 notmuch new
-~/.local/sbin/newmail-notify || fail "Mail notifications not sent"
+#~/.local/sbin/newmail-notify || fail "Mail notifications not sent"
 notmuch tag --batch --input="$HOME/.notmuch-tag-new"
 i3_astroid --stop-polling
 pkill -RTMIN+13 i3blocks

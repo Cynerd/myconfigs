@@ -50,6 +50,9 @@ if ask "vim" "Install VIM scripts"; then
 		git clone "https://github.com/VundleVim/Vundle.vim.git" ~/.vim/bundle/Vundle.vim
 	}
 	vim +PluginUpdate +qall
+	# cs spelling
+	mkdir -p ~/.vim/spell
+	curl "http://ftp.vim.org/vim/runtime/spell/cs.utf-8.spl" > ~/.vim/spell/cs.utf-8.spl
 fi
 
 if ask "dev" "Development tools configuration"; then
@@ -62,7 +65,8 @@ fi
 if ask "sync" "Install synchronization"; then
 	inst local/bin/allsync ~/.local/bin/allsync
 	if [ "$(ps -o comm= 1)" = "systemd" ]; then
-		inst config/systemd/user/allsync.{service,timer} ~/.config/systemd/user/
+		inst config/systemd/user/allsync.service ~/.config/systemd/user/
+		inst config/systemd/user/allsync.timer ~/.config/systemd/user/
 	fi
 
 	inst private/mbsyncrc ~/.mbsyncrc
