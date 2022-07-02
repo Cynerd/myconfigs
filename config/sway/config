@@ -1,11 +1,10 @@
 # vim: ft=swayconfig
 exec --no-startup-id dbus-update-activation-environment --all
-exec --no-startup-id gentoo-pipewire-launcher
 exec --no-startup-id myswaylock
 exec --no-startup-id swaybackground
 ################################################################################
 include inputs
-include gsettings
+include theme
 ################################################################################
 include bar
 

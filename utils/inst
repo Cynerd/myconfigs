@@ -117,6 +117,9 @@ doinst() {
 }
 
 inst() {
+	if [ !  -e "$1" ]; then
+		echo "Missing file to be installed: $1" >&2
+	fi
 	if [ -e "$2" ]; then
 		# If output exists, execute diff instead
 		checkdiff $1 $2

@@ -15,48 +15,53 @@ font:
   size: 8
 
 colors:
-   primary:
-     background: '#000000'
-     foreground: '#ffffff'
-   normal:
-     black:   '#000000'
-     red:     '#cd0000'
-     green:   '#00cd00'
-     yellow:  '#cdcd00'
-     blue:    '#6060ee'
-     magenta: '#cd00cd'
-     cyan:    '#00cdcd'
-     white:   '#e5e5e5'
-   bright:
-     black:   '#7f7f7f'
-     red:     '#ff0000'
-     green:   '#00ff00'
-     yellow:  '#ffff00'
-     blue:    '#5c5cff'
-     magenta: '#ff00ff'
-     cyan:    '#00ffff'
-     white:   '#ffffff'
-  #search:
-    # Allowed values are CellForeground and CellBackground, which reference the
-    # affected cell, or hexadecimal colors like #ff00ff.
-    #matches:
-    #  foreground: '#000000'
-    #  background: '#ffffff'
-    #bar:
-    #  background: '#c5c8c6'
-    #  foreground: '#1d1f21'
-  #selection:
-  #  text: CellBackground
-  #  background: CellForeground
-
-
-#selection:
-  #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
-  # When set to `true`, selected text will be copied to the primary clipboard.
-  #save_to_clipboard: false
-
-#mouse:
-#  hide_when_typing: true
+  primary:
+    background: '#2e3440'
+    foreground: '#d8dee9'
+    dim_foreground: '#a5abb6'
+  cursor:
+    text: '#2e3440'
+    cursor: '#d8dee9'
+  vi_mode_cursor:
+    text: '#2e3440'
+    cursor: '#d8dee9'
+  selection:
+    text: CellForeground
+    background: '#4c566a'
+  search:
+    matches:
+      foreground: CellBackground
+      background: '#88c0d0'
+    bar:
+      background: '#434c5e'
+      foreground: '#d8dee9'
+  normal:
+    black: '#3b4252'
+    red: '#bf616a'
+    green: '#a3be8c'
+    yellow: '#ebcb8b'
+    blue: '#81a1c1'
+    magenta: '#b48ead'
+    cyan: '#88c0d0'
+    white: '#e5e9f0'
+  bright:
+    black: '#4c566a'
+    red: '#bf616a'
+    green: '#a3be8c'
+    yellow: '#ebcb8b'
+    blue: '#81a1c1'
+    magenta: '#b48ead'
+    cyan: '#8fbcbb'
+    white: '#eceff4'
+  dim:
+    black: '#373e4d'
+    red: '#94545d'
+    green: '#809575'
+    yellow: '#b29e75'
+    blue: '#68809a'
+    magenta: '#8c738c'
+    cyan: '#6d96a5'
+    white: '#aeb3bb'
 
 key_bindings:
   - { key: Return, mods: Control|Shift, action: SpawnNewInstance }

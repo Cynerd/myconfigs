@@ -16,6 +16,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'jasonccox/vim-wayland-clipboard'
 " Visual
+Plugin 'arcticicestudio/nord-vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'airblade/vim-gitgutter'
@@ -69,7 +70,6 @@ set modeline
 set encoding=utf-8
 
 set foldmethod=syntax
-highlight Folded ctermbg=Black ctermfg=Yellow
 set foldtext=FoldText()
 function FoldText()
 	return getline(v:foldstart) . '  '
@@ -78,10 +78,12 @@ endfunction
 
 set backspace=indent,eol,start
 
+colorscheme nord
+let g:lightline = { 'colorscheme': 'nord' }
+
 set number
 set colorcolumn=80
 set textwidth=80
-highlight ColorColumn ctermbg=DarkGray
 
 " Tabs setting. In default we want 4 spaces tab, but allows also 8 spaced tabs
 set noexpandtab
