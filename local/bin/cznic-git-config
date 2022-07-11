@@ -1,4 +1,0 @@
-#!/bin/sh
-git config --local user.name "Karel Kočí"
-git config --local user.email "karel.koci@nic.cz"
-git config --local sendemail.identity "karel.koci@nic.cz"
