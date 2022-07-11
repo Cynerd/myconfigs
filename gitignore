@@ -10,7 +10,7 @@
 
 # C development
 .gdbinit
-.ccls-cache/
+.cache/
 compile_commands.json
 
 # Python development
