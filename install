@@ -114,10 +114,6 @@ if ask "mpd" "Install MPD configuration"; then
 	inst config/mpd/ ~/.config/mpd
 fi
 
-if ask "nix" "Install nix configuration"; then
-	inst config/nix/ ~/.config/nix
-fi
-
 if ask "wake-desktop" "Install wake-desktop"; then
 	inst local/bin/wake-desktop ~/.local/bin/wake-desktop
 fi
