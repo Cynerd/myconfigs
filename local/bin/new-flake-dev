@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -eu
+if [ -f ./flake.nix ]; then
+	echo "There is already existing flake.nix file!" >&2
+	exit 1
+fi
+cat >./flake.nix <<EOF
+{
+  outputs = { self, nixpkgs, flake-utils, personal }:
+  with flake-utils.lib;
+  eachDefaultSystem (system: let
+    pkgs = nixpkgs.legacyPackages.${system};
+  in {
+    devShells = filterPackages system {
+      default = pkgs.mkShell {
+        packages = with pkgs; [
+          clang-tools
+          gcc gdb pkg-config
+          cppcheck flawfinder bear
+          meson
+        ];
+        inputsFrom = with pkgs; [
+          personal.devShells.${system}.default
+        ];
+      };
+    };
+  });
+}
+EOF
