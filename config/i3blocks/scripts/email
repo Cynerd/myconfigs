@@ -3,7 +3,7 @@ filter=("tag:unread" "and" "not" "tag:killed")
 
 part=()
 all=0
-for mail in email gmail nic fel; do
+for mail in email gmail elektroline fel; do
 	counts="$(notmuch count -- "${filter[@]}" and "tag:$mail")"
 	[ "$counts" = "0" ] || \
 		part+=("$mail:$counts")
