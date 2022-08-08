@@ -1,0 +1,9 @@
+#!/bin/sh
+# Using SOCS:
+# /proxy:socks5://127.0.0.1:8123
+exec xfreerdp \
+	-decorations /w:1537 /h:903 /kbd:0x00000409 \
+	/d:ELEKTROLINE /u:kkoci \
+	/bpp:24 /audio-mode:0 /sound:sys:alsa /network:lan /rfx /cert-ignore \
+	+clipboard /port:3389 \
+	/v:elvirt00.elektroline.cz /p:"$(pass elektroline.cz/kkoci)"

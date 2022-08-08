@@ -4,7 +4,7 @@ if [ -f ./flake.nix ]; then
 	echo "There is already existing flake.nix file!" >&2
 	exit 1
 fi
-cat >./flake.nix <<EOF
+cat >./flake.nix <<"EOF"
 {
   outputs = { self, nixpkgs, flake-utils, personal }:
   with flake-utils.lib;

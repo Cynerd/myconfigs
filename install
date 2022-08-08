@@ -22,7 +22,6 @@ fi
 if ask "git" "Install GIT configuration"; then
 	inst gitconfig ~/.gitconfig
 	inst gitignore ~/.gitignore
-	inst local/bin/elektroline-git-config ~/.local/bin/elektroline-git-config
 fi
 
 if ask "gpg" "Install GPG configuration"; then
@@ -113,6 +112,12 @@ fi
 
 if ask "mpd" "Install MPD configuration"; then
 	inst config/mpd/ ~/.config/mpd
+fi
+
+if ask "elektroline" "Install Elektroline scripts"; then
+	inst local/bin/elektroline-git-config ~/.local/bin/elektroline-git-config
+	inst local/bin/elektroline-windows ~/.local/bin/elektroline-windows
+	inst local/bin/elektroline00 ~/.local/bin/elektroline00
 fi
 
 if ask "wake-desktop" "Install wake-desktop"; then
