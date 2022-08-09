@@ -28,8 +28,9 @@ if ask "gpg" "Install GPG configuration"; then
 	inst gnupg/gpg.conf ~/.gnupg/gpg.conf
 fi
 
-if ask "gnuscreen" "Install configurations for various utility tools"; then
+if ask "clituls" "Install configurations for various CLI utility tools"; then
 	inst screenrc ~/.screenrc
+	inst config/mc/mc.ext ~/.config/mc/mc.ext
 fi
 
 if ask "ssh" "Install SSH config"; then
