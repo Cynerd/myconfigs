@@ -1,7 +1,14 @@
-#!/bin/sh
+#!/usr/bin/env bash
+set -eu
+
+declare -a args
 # Using SOCS:
-# /proxy:socks5://127.0.0.1:8123
+if [ "${1:-}" = "socks" ]; then
+	args+=("/proxy:socks5://127.0.0.1:8123")
+fi
+
 exec xfreerdp \
+	"${args[@]}" \
 	-decorations /w:1537 /h:903 /kbd:0x00000409 \
 	/d:ELEKTROLINE /u:kkoci \
 	/bpp:24 /audio-mode:0 /sound:sys:alsa /network:lan /rfx /cert-ignore \
