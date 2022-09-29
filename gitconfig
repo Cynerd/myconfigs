@@ -28,6 +28,7 @@
 	type = cat-file -t
 	dump = cat-file -p
 	please = push --force-with-lease
+	fclean = "!git clean -xdff && git submodule foreach git clean -xdff && :"
 	cleanup = "!git branch --merged HEAD --format=\"%(refname:lstrip=2)\" | grep -vx master | xargs git branch -d"
 [sendemail]
 	identity = karel.koci@nic.cz
