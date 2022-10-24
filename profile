@@ -10,8 +10,10 @@ export CT_LOCAL_TARBALLS_DIR="~/src/ct-ng"
 export PYTHONPYCACHEPREFIX="$HOME/.cache/pycache"
 
 # Nix
-[ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ] && \
-	. "$HOME/.nix-profile/etc/profile.d/nix.sh" # added by Nix installer
+for profile in "$HOME"/.nix-profile/etc/profile.d/*; do
+	[ -f "$profile" ] || continue
+	source "$profile"
+done
 
 
 # Rest of the profile run only if login is from linux console

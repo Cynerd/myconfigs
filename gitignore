@@ -8,6 +8,9 @@
 # Ignore backup files in general
 *~
 
+# Ignore default meson output in general
+result
+
 # C development
 .gdbinit
 .cache/
