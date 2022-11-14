@@ -1,5 +1,2 @@
 [FORMAT]
 max-line-length = 80
-
-[MESSAGES CONTROL]
-disable = C0326,W503
