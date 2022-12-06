@@ -1,2 +1,0 @@
-#!/bin/sh
-exec ssh turris.adamkovi etherwake -i br-lan 70:85:c2:4a:59:f2

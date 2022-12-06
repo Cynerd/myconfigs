@@ -122,6 +122,9 @@ if ask "elektroline" "Install Elektroline scripts"; then
 	inst local/bin/elektroline00 ~/.local/bin/elektroline00
 fi
 
-if ask "wake-desktop" "Install wake-desktop"; then
-	inst local/bin/wake-desktop ~/.local/bin/wake-desktop
+if ask "wake" "Install wake-* scripts"; then
+	[ "$(hostname)" = "ridcully" ] || \
+		inst local/bin/wake-ridcully ~/.local/bin/wake-ridcully
+	[ "$(hostname)" = "errol" ] || \
+		inst local/bin/wake-errol ~/.local/bin/wake-errol
 fi

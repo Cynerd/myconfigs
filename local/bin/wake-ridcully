@@ -1,0 +1,2 @@
+#!/bin/sh
+exec ssh omnia.adm etherwake -i br-lan 70:85:c2:4a:59:f2

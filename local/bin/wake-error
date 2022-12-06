@@ -1,0 +1,2 @@
+#!/bin/sh
+exec ssh omnia.spt etherwake -i br-lan a8:a1:59:10:32:c4
