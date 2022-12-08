@@ -21,6 +21,8 @@
 	frame_width = 1
 	frame_color = "#4c7899"
 
+	origin = top-center
+
 [urgency_low]
 	background = "#000000"
 	foreground = "#ffffff"
