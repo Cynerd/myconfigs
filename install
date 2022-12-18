@@ -30,7 +30,7 @@ fi
 
 if ask "clituls" "Install configurations for various CLI utility tools"; then
 	inst screenrc ~/.screenrc
-	inst config/mc/mc.ext ~/.config/mc/mc.ext
+	inst local/share/mc/skins/nord16M.ini ~/.local/share/mc/skins/nord16M.ini
 fi
 
 if ask "ssh" "Install SSH config"; then
