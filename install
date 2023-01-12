@@ -56,6 +56,7 @@ if ask "vim" "Install VIM scripts"; then
 fi
 
 if ask "dev" "Development tools configuration"; then
+	inst config/clangd/ ~/.config/clangd
 	inst pdbrc ~/.pdbrc
 	inst config/pycodestyle ~/.config/pycodestyle
 	inst flake8 ~/.flake8
