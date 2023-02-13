@@ -5,6 +5,8 @@
 [core]
 	editor = vim
 	excludesfile = /home/cynerd/.gitignore
+[checkout]
+	defaultRemote=origin
 [fetch]
 	recurseSubmodules = true
 	parallel = 8
