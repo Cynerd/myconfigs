@@ -6,7 +6,9 @@ set nocompatible
 
 " Ale (completion enablement has to be before plugin load)
 let g:ale_completion_enabled = 1
-let g:ale_set_highlights = 0
+let g:ale_set_baloons = 1
+let g:ale_floating_preview = 1
+" let g:ale_set_highlights = 0
 set completeopt=menu,menuone,preview,noselect,noinsert
 
 filetype off
