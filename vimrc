@@ -12,7 +12,7 @@ let g:ale_floating_preview = 1
 set completeopt=menu,menuone,preview,noselect,noinsert
 
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
+set runtimepath+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plugin 'VundleVim/Vundle.vim'
@@ -161,11 +161,11 @@ highlight GitGutterDelete ctermfg=1
 
 " Setup table-mode to markdown compliant
 " Note: to start use "\ t m"
-let g:table_mode_corner="|"
+let g:table_mode_corner='|'
 
 set tags=./.tags,.tags
 " Setup autotag to look for .tags file
-let g:autotagTagsFile=".tags"
+let g:autotagTagsFile='.tags'
 
 " Enable mouse
 set mouse=a
@@ -179,12 +179,12 @@ nmap <F9> :TagbarOpen fc<cr>
 " Spell checking
 map <F10> :setlocal spell!<cr>
 function LangToggle()
-	if &spelllang != "en_us"
+	if &spelllang !=? 'en_us'
 		setlocal spelllang=en_us
-		echo "spelllang=en_us"
+		echo 'spelllang=en_us'
 	else
 		setlocal spelllang=cs
-		echo "spelllang=cs"
+		echo 'spelllang=cs'
 	endif
 endfunction
 setlocal spelllang=en_us
@@ -194,9 +194,9 @@ map <F11> :call LangToggle()<cr>
 let g:NERDCreateDefaultMappings = 1
 
 " UltiSnips triggers
-let g:UltiSnipsExpandTrigger="<c-h>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsExpandTrigger='<c-h>'
+let g:UltiSnipsJumpForwardTrigger='<c-j>'
+let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 
 " ALE bidings
 nmap <leader>[ <Plug>(ale_go_to_definition)
