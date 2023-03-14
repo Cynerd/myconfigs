@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
-set -eu
+set -eux
 
 target="$1"
 
-localport="5901"
+localport="5911"
 while lsof -i:$localport; do
 	localport=$((localport + 1))
 done
 
-ssh -L "$localport":localhost:5900 "$target" \
-	'start-stop-daemon -v -w 1000 -bmp "/var/run/user/$(id -u)/sshvnc.pid" -e WAYLAND_DISPLAY=wayland-1 -S wayvnc localhost 5900'
+ssh -L "$localport":localhost:5901 "$target" \
+	'systemctl --user start wayvnc1.service'
 
 vncviewer "localhost:$localport"
 
-ssh "$target" 'start-stop-daemon -v -p /var/run/user/$(id -u)/sshvnc.pid -K wayvnc'
-ssh -O cancel -L "$localport":localhost:5900 "$target"
+ssh "$target" 'systemctl --user stop wayvnc1.service'
+ssh -O cancel -L "$localport":localhost:5901 "$target"

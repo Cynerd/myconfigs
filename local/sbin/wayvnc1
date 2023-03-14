@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+export WAYLAND_DISPLAY=wayland-1
+exec wayvnc localhost 5901

@@ -1,0 +1,5 @@
+[Unit]
+Description=wayvnc for wayland display 1
+
+[Service]
+ExecStart="/home/cynerd/.local/sbin/wayvnc1"

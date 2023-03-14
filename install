@@ -36,7 +36,12 @@ fi
 if ask "ssh" "Install SSH config"; then
 	mkdir -p ~/.cache/ssh # directory for sockets
 	inst private/ssh_config ~/.ssh/config
-	inst local/bin/sshvnc ~/.local/bin/sshvnc
+fi
+
+if ask "wayvnc" "Install wayland access"; then
+	inst local/bin/sshvnc ~/.local/bin/
+	inst local/sbin/wayvnc1 ~/.local/sbin/
+	inst config/systemd/user/wayvnc1.service ~/.config/systemd/user/
 fi
 
 if ask "vim" "Install VIM scripts"; then
