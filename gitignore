@@ -22,3 +22,4 @@ __pycache__/
 *.py[cod]
 /env
 *.egg-info
+.coverage
