@@ -8,14 +8,13 @@
 # Ignore backup files in general
 *~
 
-# Ignore default meson output in general
-result
+# Ignore default nix output in general
+result*
 
 # C development
+build
 .gdbinit
 .cache/
-compile_commands.json
-compile_commands.events.json
 
 # Python development
 __pycache__/
