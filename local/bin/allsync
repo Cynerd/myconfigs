@@ -109,6 +109,10 @@ fail() {
 }
 
 
+sec "Passwords"
+pass git pull || fail "Passwords pull failed"
+pass git push || fail "Passwords push failed"
+
 sec "Mail"
 i3_astroid --start-polling
 mbsync -a || fail "Mail synchronization reported failure"
@@ -121,10 +125,6 @@ notify_i3block
 
 sec "Calendar and contacts"
 vdirsyncer sync || fail "Calendar and contacts synchronization reported failure"
-
-sec "Passwords"
-pass git pull || fail "Passwords pull failed"
-pass git push || fail "Passwords push failed"
 
 if [ "${AUTORUN:-n}" = "y" ]; then
 	echo "Reported failure exit code: $ecode" >&2
