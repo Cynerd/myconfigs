@@ -84,6 +84,7 @@ if ask "sync" "Install synchronization"; then
 	inst local/sbin/newmail-notify ~/.local/sbin/newmail-notify
 	inst private/msmtprc ~/.msmtprc
 	inst private/astroid/config ~/.config/astroid/config
+	inst config/astroid/ui/ ~/.config/astroid/ui
 
 	inst private/vdirsyncer/ ~/.vdirsyncer
 	inst config/khal/config ~/.config/khal/config
