@@ -15,6 +15,7 @@ result*
 build
 .gdbinit
 .cache/
+vgcore.*
 
 # Python development
 __pycache__/
