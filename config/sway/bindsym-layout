@@ -1,8 +1,8 @@
 # vim: ft=swayconfig
 set $mode_layout Set keyboard layout (u)s or (c)z
 mode "$mode_layout" {
-	bindsym u input type:keyboard xkb_layout us, mode "default"
-	bindsym c input type:keyboard xkb_layout cz_qwerty, mode "default"
+	bindsym u input type:keyboard xkb_variant basic, input type:keyboard xkb_layout us, mode "default"
+	bindsym c input type:keyboard xkb_layout cz, input type:keyboard xkb_variant qwerty, mode "default"
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
