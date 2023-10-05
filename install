@@ -68,6 +68,7 @@ if ask "dev" "Development tools configuration"; then
 	inst pylintrc ~/.pylintrc
 	inst config/mypy/ ~/.config/mypy
 	inst local/bin/new-flake-dev ~/.local/bin/new-flake-dev
+	inst shvcli.ini ~/.shvcli.ini
 fi
 
 if ask "sync" "Install synchronization"; then
