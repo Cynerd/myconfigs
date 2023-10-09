@@ -11,3 +11,14 @@ mode "$mode_system" {
 	bindsym Escape mode "default"
 }
 bindsym $mod+Shift+q mode "$mode_system"
+
+
+set $screenshot Screenshot: (s)elect or (d)desktop
+mode "$screenshot" {
+	bindsym --release d exec --no-startup-id grim, mode "default"
+	bindsym --release s exec --no-startup-id sh -c "slurp | grim -g -", mode "default"
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+bindsym $mod+Shift+s mode "$screenshot"
