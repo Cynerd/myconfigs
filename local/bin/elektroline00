@@ -19,9 +19,10 @@ while getopts "u" opt; do
 done
 
 if [ "$umount" = "n" ]; then
-	sudo mkdir -p "$path"/{company,elektro_doc}
+	sudo mkdir -p "$path"/{company,elektro_doc,czelldata}
 	sudo mount.cifs -o username=kkoci "//Elektroline00/company" "$path/company"
 	sudo mount.cifs -o username=kkoci "//Elektroline00/elektro_doc" "$path/elektro_doc"
+	sudo mount.cifs -o username=kkoci "//czelldata/Share" "$path/czelldata"
 else
 	sudo umount "$path/company" "$path/elektro_doc"
 fi
