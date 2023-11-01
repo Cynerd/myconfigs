@@ -28,6 +28,11 @@ if ask "gpg" "Install GPG configuration"; then
 	inst gnupg/gpg.conf ~/.gnupg/gpg.conf
 fi
 
+if ask "nix" "Install Nix configuration"; then
+	inst config/nix/ ~/.config/nix
+	inst private/config/nix/builders ~/.config/nix/builders
+fi
+
 if ask "clituls" "Install configurations for various CLI utility tools"; then
 	inst screenrc ~/.screenrc
 	inst local/share/mc/skins/nord16M.ini ~/.local/share/mc/skins/nord16M.ini
