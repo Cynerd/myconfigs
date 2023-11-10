@@ -100,10 +100,16 @@ if ask "sync" "Install synchronization"; then
 fi
 
 if ask "desktop" "Install desktop"; then
+	# Force some dconf settings
+	gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+	gsettings set org.gnome.desktop.interface font-name 'Cantarell 8'
+	gsettings set org.gnome.desktop.interface gtk-key-theme 'Emacs'
+	gsettings set org.gnome.desktop.interface gtk-theme 'Nordic-darker-standard-buttons'
+	gsettings set org.gnome.desktop.interface icon-theme 'Delft'
 	# Theme
 	inst gtk-2.0/gtkrc ~/.gtkrc-2.0
-	inst gtk-3.0/ ~/.config/gtk-3.0/
 	inst config/Trolltech.conf ~/.config/Trolltech.conf
+	# TODO download https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic-darker-standard-buttons.tar.xz
 	# User directories
 	inst config/user-dirs.conf ~/.config/user-dirs.dirs
 	# Sway
