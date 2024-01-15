@@ -128,7 +128,7 @@ if ask "desktop" "Install desktop"; then
 fi
 
 if ask "alacritty" "Install configurations for terminal emulator"; then
-	inst config/alacritty.yml ~/.config/alacritty.yml
+	inst config/alacritty.toml ~/.config/alacritty.toml
 fi
 
 if ask "mpd" "Install MPD configuration"; then
