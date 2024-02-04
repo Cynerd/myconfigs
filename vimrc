@@ -200,8 +200,16 @@ let g:UltiSnipsJumpForwardTrigger='<c-j>'
 let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 
 " ALE bidings
-nmap <leader>[ <Plug>(ale_go_to_definition)
-nmap <leader>] <Plug>(ale_go_to_definition_in_tab)
+nmap <leader>] <Plug>(ale_go_to_definition_in_split)
+nmap <leader>[ <Plug>(ale_go_to_implementation_in_split)
+nmap <leader>[ <Plug>(ale_go_to_type_definition_in_split)
+nmap <leader>f <Plug>(ale_fix)
+
+" Copy line location
+" TODO this should work but it doesn't for some reason
+" nmap <leader><leader>c :let @+=expand("%:p") . ":" . line(".")<cr>
+nmap <leader><leader>c :exec "!wl-copy '" . expand("%:p") . ":" . line(".") . "'"<cr><cr>
+
 
 " LanguageTool
 let g:grammarous#languagetool_cmd = 'languagetool'

@@ -74,6 +74,7 @@ if ask "dev" "Development tools configuration"; then
 	inst config/mypy/ ~/.config/mypy
 	inst local/bin/new-flake-dev ~/.local/bin/new-flake-dev
 	inst shvcli.ini ~/.shvcli.ini
+	curl "https://github.com/cyrus-and/gdb-dashboard/raw/master/.gdbinit" > ~/.gdbinit
 fi
 
 if ask "sync" "Install synchronization"; then
