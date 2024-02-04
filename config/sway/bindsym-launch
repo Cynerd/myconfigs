@@ -9,7 +9,7 @@ bindsym $mod+d exec --no-startup-id wofi -Imi -S drun
 
 
 # Top
-bindsym $mod+t exec alacritty -e htop
+bindsym $mod+t exec alacritty -e btop
 bindsym $mod+Shift+t exec alacritty -e sudo powertop
 # Passwords
 bindsym $mod+Shift+w exec --no-startup-id ~/.config/sway/scripts/pass
