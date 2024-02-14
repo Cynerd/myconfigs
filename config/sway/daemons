@@ -3,7 +3,7 @@ exec --no-startup-id {
 	kanshi
 	swayidle
 	dunst
-	/usr/lib64/libexec/kdeconnectd
+	nextcloud
 }
 
 for_window [class="Ferdi"] move scratchpad
