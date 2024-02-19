@@ -16,6 +16,7 @@ build
 .gdbinit
 .cache/
 vgcore.*
+.gdb_history
 
 # Python development
 __pycache__/
