@@ -2,7 +2,10 @@
 
 cd "$(dirname "$0")" || exit 1
 
-git submodule update --init --recursive || (echo "Submodule update failed!"; exit 5)
+git submodule update --init --recursive || (
+	echo "Submodule update failed!"
+	exit 5
+)
 
 # Source inst and diff function
 . ./utils/inst
@@ -49,20 +52,15 @@ if ask "wayvnc" "Install wayland access"; then
 	inst config/systemd/user/wayvnc1.service ~/.config/systemd/user/
 fi
 
-if ask "vim" "Install VIM scripts"; then
-	inst vimrc ~/.vimrc
-	inst vim/ ~/.vim
-	mkdir -p ~/.cache/vim # directory for *.swp files
-	mkdir -p ~/.cache/vim-undo # directory for undo files
-	# Vim plugin manager
-	[ -d ~/.vim/bundle/Vundle.vim ] || {
-		mkdir -p ~/.vim/bundle
-		git clone "https://github.com/VundleVim/Vundle.vim.git" ~/.vim/bundle/Vundle.vim
-	}
-	vim +PluginUpdate +qall
+if ask "nvim" "Install NeoVIM scripts"; then
+	inst config/nvim/ ~/.config/nvim
+	mkdir -p ~/.cache/nvim      # directory for *.swp files
+	mkdir -p ~/.cache/nvim-undo # directory for undo files
+	nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 	# cs spelling
-	mkdir -p ~/.vim/spell
-	curl "http://ftp.vim.org/vim/runtime/spell/cs.utf-8.spl" > ~/.vim/spell/cs.utf-8.spl
+	mkdir -p ~/.local/share/nvim/site/spell
+	curl "http://ftp.vim.org/vim/runtime/spell/cs.utf-8.spl" \
+		>~/.local/share/nvim/site/spell/cs.utf-8.spl
 fi
 
 if ask "dev" "Development tools configuration"; then
@@ -74,7 +72,7 @@ if ask "dev" "Development tools configuration"; then
 	inst config/mypy/ ~/.config/mypy
 	inst local/bin/new-flake-dev ~/.local/bin/new-flake-dev
 	inst shvcli.ini ~/.shvcli.ini
-	curl "https://github.com/cyrus-and/gdb-dashboard/raw/master/.gdbinit" > ~/.gdbinit
+	curl "https://github.com/cyrus-and/gdb-dashboard/raw/master/.gdbinit" >~/.gdbinit
 fi
 
 if ask "sync" "Install synchronization"; then
@@ -122,8 +120,8 @@ if ask "desktop" "Install desktop"; then
 	inst config/swaylock/ ~/.config/swaylock
 	inst config/swayidle/ ~/.config/swayidle
 	inst config/wofi/ ~/.config/wofi
-	[ -f "private/kanshi/$(hostname)" ] \
-		&& inst "private/kanshi/$(hostname)" ~/.config/kanshi/config
+	[ -f "private/kanshi/$(hostname)" ] &&
+		inst "private/kanshi/$(hostname)" ~/.config/kanshi/config
 	inst config/xdg-desktop-portal-wlr/ ~/.config/xdg-desktop-portal-wlr
 	inst local/bin/wlr-select-screen ~/.local/bin/wlr-select-screen
 fi
@@ -143,8 +141,8 @@ if ask "elektroline" "Install Elektroline scripts"; then
 fi
 
 if ask "wake" "Install wake-* scripts"; then
-	[ "$(hostname)" = "ridcully" ] || \
+	[ "$(hostname)" = "ridcully" ] ||
 		inst local/bin/wake-ridcully ~/.local/bin/wake-ridcully
-	[ "$(hostname)" = "errol" ] || \
+	[ "$(hostname)" = "errol" ] ||
 		inst local/bin/wake-errol ~/.local/bin/wake-errol
 fi

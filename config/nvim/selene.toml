@@ -1,0 +1,4 @@
+std = "selene-vim"
+
+[lints]
+mixed_table = "allow"
