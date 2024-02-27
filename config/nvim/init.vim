@@ -24,8 +24,8 @@ set wildmenu
 set modeline
 set encoding=utf-8
 
-
 set backspace=indent,eol,start
+set completeopt=menu,menuone,preview,noselect,noinsert
 
 colorscheme nord
 let g:lightline = { 'colorscheme': 'nord' }
@@ -117,12 +117,19 @@ nmap <leader>f <Plug>(ale_fix)
 
 " Telescope
 nnoremap <c-c><c-c> :Telescope buffers<cr>
-nnoremap <expr> <c-p> ":lua require'telescope.builtin'.git_files{}<cr>".expand('%:h')."/"
+nnoremap <expr> <c-p> ":call TelescopeFiles()<cr>".expand('%:h')."/"
 nnoremap <c-s-p> :Telescope lsp_document_symbols<cr>
 nmap <leader>] :Telescope lsp_definitions<cr>
 nmap <leader><leader>] :Telescope lsp_type_definitions<cr>
 nmap <leader>[ :Telescope lsp_implementations<cr>
 nmap <leader><leader>[ :Telescope lsp_references<cr>
+function TelescopeFiles()
+	if stridx(system('git rev-parse --is-inside-work-tree 2>/dev/null || true'), 'true') != -1
+		lua require('telescope.builtin').git_files{use_file_path=true,git_command={"sh","-c","git ls-files -c --recurse-submodules && git ls-files -o --exclude-standard"}}
+	else
+		lua require('telescope.builtin').find_files{}
+	endif
+endfunction
 
 " Copy line location
 " TODO this should work but it doesn't for some reason

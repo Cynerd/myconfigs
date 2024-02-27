@@ -39,7 +39,7 @@ dodiff() {
 	if $FORCE; then
 		doinst "$1" "$OUT"
 	else
-		vimdiff "$1" "$OUT"
+		nvim -d "$1" "$OUT"
 	fi
 }
 

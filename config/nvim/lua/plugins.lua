@@ -45,53 +45,56 @@ require("packer").startup(function(use)
 	use("tpope/vim-repeat")
 	use("dhruvasagar/vim-table-mode")
 
--- Indent blanklike character specificaiton
-local highlight = { "CursorColumn", "Whitespace" }
-require("ibl").setup({
-	indent = { highlight = highlight, char = "" },
-	whitespace = {
-		highlight = highlight,
-		remove_blankline_trail = false,
-	},
-	scope = { enabled = false },
-})
--- Treesitter
-require("nvim-treesitter.configs").setup({
-	ensure_installed = {
-		"c",
-		"lua",
-		"kconfig",
-		"make",
-		"markdown",
-		"meson",
-		"ninja",
-		"ini",
-		"gitcommit",
-		"git_rebase",
-		"git_config",
-		"nix",
-		"python",
-		"toml",
-		"vim",
-		"vimdoc",
-		"yaml",
-	},
-	highlight = {
-		enable = true,
-		additional_vim_regex_highlighting = false,
-	},
-})
+	-- Indent blanklike character specificaiton
+	local highlight = { "CursorColumn", "Whitespace" }
+	require("ibl").setup({
+		indent = { highlight = highlight, char = "" },
+		whitespace = {
+			highlight = highlight,
+			remove_blankline_trail = false,
+		},
+		scope = { enabled = false },
+	})
+	-- Treesitter
+	require("nvim-treesitter.configs").setup({
+		ensure_installed = {
+			"c",
+			"lua",
+			"kconfig",
+			"make",
+			"markdown",
+			"markdown_inline",
+			"meson",
+			"ninja",
+			"ini",
+			"gitcommit",
+			"git_rebase",
+			"git_config",
+			"nix",
+			"python",
+			"toml",
+			"vim",
+			"vimdoc",
+			"yaml",
+		},
+		highlight = {
+			enable = true,
+			-- TODO why we must set this to true?
+			additional_vim_regex_highlighting = true,
+		},
+	})
 
--- LSP
-local lspconfig = require("lspconfig")
-lspconfig.clangd.setup({})
-lspconfig.rnix.setup({})
-lspconfig.pylsp.setup({})
-lspconfig.bashls.setup({})
+	-- LSP
+	local lspconfig = require("lspconfig")
+	lspconfig.clangd.setup({})
+	lspconfig.rnix.setup({})
+	lspconfig.pylsp.setup({})
+	lspconfig.bashls.setup({})
 
--- Telescope
-require('mytelescope')
+	-- Telescope
+	require("mytelescope")
 
--- Gitlab
-require("diffview").setup()
-require("gitlab").setup()
+	-- Gitlab
+	require("diffview").setup()
+	require("gitlab").setup()
+end)

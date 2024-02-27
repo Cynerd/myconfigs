@@ -3,7 +3,7 @@
 	email = cynerd@email.cz
 	signingkey = A6BC8B8CEB31659B
 [core]
-	editor = vim
+	editor = nvim
 	excludesfile = /home/cynerd/.gitignore
 [checkout]
 	defaultRemote=origin
