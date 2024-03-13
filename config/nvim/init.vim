@@ -28,11 +28,36 @@ set backspace=indent,eol,start
 set completeopt=menu,menuone,preview,noselect,noinsert
 
 colorscheme nord
-let g:lightline = { 'colorscheme': 'nord' }
+let g:lightline = {
+\  'colorscheme': 'nord',
+\  'active': {
+\    'left': [
+\      [ 'mode', 'paste' ],
+\      [ 'lsp_info', 'lsp_hints', 'lsp_errors', 'lsp_warnings', 'lsp_ok' ],
+\      [ 'lsp_status' ],
+\      [ 'readonly', 'filename', 'modified' ],
+\    ]
+\  },
+\  'component': {
+\    'lineinfo': ' %3l:%-2v',
+\  },
+\  'component_function': {
+\    'readonly': 'LightlineReadonly',
+\  },
+\  'separator': { 'left': '', 'right': '' },
+\  'subseparator': { 'left': '', 'right': '' }
+\  }
+function! LightlineReadonly()
+  return &readonly ? '' : ''
+endfunction
+call lightline#lsp#register()
+set laststatus=2
+set noshowmode
 
 set number
 set colorcolumn=80
 set textwidth=80
+nmap <c-/> :noh<cr>
 
 
 " Tabs setting. In default we want 4 spaces tab, but allows also 8 spaced tabs
@@ -74,6 +99,9 @@ nnoremap <c-c><CR> :Explore<cr>
 nnoremap <c-c>l :bnext<cr>
 nnoremap <c-c>h :bprev<cr>
 
+" Format
+nmap <leader>f :lua require("conform").format()<cr>
+
 " Setup gitgutter
 set updatetime=100
 highlight GitGutterAdd ctermfg=2
@@ -83,9 +111,6 @@ highlight GitGutterDelete ctermfg=1
 " Setup table-mode to markdown compliant
 " Note: to start use "\ t m"
 let g:table_mode_corner='|'
-
-" Open tagbar with <F9>
-nmap <F9> :TagbarOpen fc<cr>
 
 " Spell checking
 map <F10> :setlocal spell!<cr>
@@ -109,20 +134,15 @@ let g:UltiSnipsExpandTrigger='<c-h>'
 let g:UltiSnipsJumpForwardTrigger='<c-j>'
 let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 
-" ALE
-let g:ale_set_baloons = 1
-let g:ale_floating_preview = 1
-let g:ale_use_neovim_diagnostics_api = 1
-nmap <leader>f <Plug>(ale_fix)
-
 " Telescope
 nnoremap <c-c><c-c> :Telescope buffers<cr>
-nnoremap <expr> <c-p> ":call TelescopeFiles()<cr>".expand('%:h')."/"
+nnoremap <c-p> :call TelescopeFiles()<cr>
 nnoremap <c-s-p> :Telescope lsp_document_symbols<cr>
 nmap <leader>] :Telescope lsp_definitions<cr>
 nmap <leader><leader>] :Telescope lsp_type_definitions<cr>
 nmap <leader>[ :Telescope lsp_implementations<cr>
 nmap <leader><leader>[ :Telescope lsp_references<cr>
+nmap <F9> :Telescope diagnostics bufnr=0<cr>
 function TelescopeFiles()
 	if stridx(system('git rev-parse --is-inside-work-tree 2>/dev/null || true'), 'true') != -1
 		lua require('telescope.builtin').git_files{use_file_path=true,git_command={"sh","-c","git ls-files -c --recurse-submodules && git ls-files -o --exclude-standard"}}
@@ -132,7 +152,4 @@ function TelescopeFiles()
 endfunction
 
 " Copy line location
-" TODO this should work but it doesn't for some reason
-" nmap <leader><leader>c :let @+=expand("%:p") . ":" . line(".")<cr>
-nmap <leader><leader>c :exec "!wl-copy '" . expand("%:p") . ":" . line(".") . "'"<cr><cr>
-
+nmap <leader><leader>c :let @+=expand("%:p") . ":" . line(".")<cr>
