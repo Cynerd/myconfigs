@@ -1,0 +1,4 @@
+# vim: ft=swayconfig
+# Type emoji
+bindsym --to-code $mod+period exec rofimoji --selector wofi --skin-tone neutral
+bindsym --to-code $mod+Shift+period exec rofimoji --selector wofi --skin-tone neutral --files all
