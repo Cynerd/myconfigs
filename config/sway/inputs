@@ -1,7 +1,7 @@
 # vim: ft=swayconfig
 
 input type:keyboard {
-	xkb_layout 'us'
+	xkb_layout 'us,cz(qwerty)'
 	xkb_options 'grp:alt_shift_toggle,caps:escape'
 	xkb_numlock enabled
 }
