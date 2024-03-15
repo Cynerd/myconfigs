@@ -97,7 +97,7 @@ require("packer").startup(function(use)
 				lua = { "selene", "editorconfig-checker" },
 				markdown = { "vale" },
 				nix = { "statix", "deadnix", "nix", "editorconfig-checker" },
-				python = { "pylint", "mypy", "pydocstyle", "editorconfig-checker" },
+				python = { "ruff", "mypy", "editorconfig-checker" },
 				sh = { "shellcheck", "editorconfig-checker" },
 			}
 			lint.linters.deadnix = {
@@ -143,8 +143,9 @@ require("packer").startup(function(use)
 					json = { "jq", "trim_newlines", "twim_whitespace" },
 					lua = { "stylua", "trim_newlines", "twim_whitespace" },
 					nix = { "alejandra", "trim_newlines", "twim_whitespace" },
-					python = { "isort", "black", "trim_newlines", "twim_whitespace" },
+					python = { "ruff_fix", "ruff_format", "trim_newlines", "twim_whitespace" },
 					sh = { "shfmt", "trim_newlines", "twim_whitespace" },
+					typst = { "typstfmt", "trim_newlines", "twim_whitespace" },
 					yaml = { "yq", "trim_newlines", "twim_whitespace" },
 				},
 			})
@@ -154,6 +155,14 @@ require("packer").startup(function(use)
 	use("honza/vim-snippets")
 	use("craigemery/vim-autotag")
 	use("scrooloose/nerdcommenter")
+	-- Additional integrations -------------------------------------------------
+	use({
+		"chomosuke/typst-preview.nvim",
+		tag = "v0.1.*",
+		run = function()
+			require("typst-preview").update()
+		end,
+	})
 	-- Movement, format and others ---------------------------------------------
 	use("tpope/vim-surround")
 	use("tpope/vim-repeat")
@@ -166,8 +175,9 @@ require("packer").startup(function(use)
 
 	-- LSP ---------------------------------------------------------------------
 	local lspconfig = require("lspconfig")
+	lspconfig.bashls.setup({})
 	lspconfig.clangd.setup({})
 	lspconfig.nil_ls.setup({})
 	lspconfig.pylsp.setup({})
-	lspconfig.bashls.setup({})
+	lspconfig.typst_lsp.setup({})
 end)
