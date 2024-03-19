@@ -1,6 +1,10 @@
 # First global user configuration
 export PATH="$HOME/.local/bin:$PATH"
-export EDITOR=vim
+if command -v nvim >/dev/null; then
+	export EDITOR=nvim
+else
+	export EDITOR=vim
+fi
 
 # ct-ng configuration
 export CT_PREFIX_DIR='~/.local/${CT_TARGET}'

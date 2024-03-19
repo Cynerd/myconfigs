@@ -112,15 +112,17 @@ require("packer").startup(function(use)
 						local ok, decoded = pcall(vim.json.decode, line)
 						if ok and decoded.file ~= nil then
 							for _, result in ipairs(decoded.results) do
-								table.insert(diagnostics, {
-									lnum = result.line,
-									end_lnum = result.line,
-									col = result.column,
-									end_col = result.endColumn,
-									severity = vim.diagnostic.severity.HINT,
-									source = "deadnix",
-									message = result.message,
-								})
+								if result.line ~= nil then
+									table.insert(diagnostics, {
+										lnum = result.line,
+										end_lnum = result.line,
+										col = result.column,
+										end_col = result.endColumn,
+										severity = vim.diagnostic.severity.HINT,
+										source = "deadnix",
+										message = result.message,
+									})
+								end
 							end
 						end
 					end

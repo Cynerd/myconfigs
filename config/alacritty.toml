@@ -1,4 +1,4 @@
-#import = ["/home/cynerd/.config/alacritty/themes/themes/alabaster.toml"]
+#import = ["~/.config/alacritty/themes/themes/alabaster.toml"]
 
 [colors.bright]
 black = "#4c566a"
