@@ -136,20 +136,13 @@ let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 
 " Telescope
 nnoremap <c-c><c-c> :Telescope buffers<cr>
-nnoremap <c-p> :call TelescopeFiles()<cr>
+nnoremap <c-p> :lua require('mytelescopefiles')()<cr>
 nnoremap <c-s-p> :Telescope lsp_document_symbols<cr>
 nmap <leader>] :Telescope lsp_definitions<cr>
 nmap <leader><leader>] :Telescope lsp_type_definitions<cr>
 nmap <leader>[ :Telescope lsp_implementations<cr>
 nmap <leader><leader>[ :Telescope lsp_references<cr>
 nmap <F9> :Telescope diagnostics bufnr=0<cr>
-function TelescopeFiles()
-	if stridx(system('git rev-parse --is-inside-work-tree 2>/dev/null || true'), 'true') != -1
-		lua require('telescope.builtin').git_files{use_file_path=true,git_command={"sh","-c","git ls-files -c --recurse-submodules && git ls-files -o --exclude-standard"}}
-	else
-		lua require('telescope.builtin').find_files{}
-	endif
-endfunction
 
 " Copy line location
 nmap <leader><leader>c :let @+=expand("%:p") . ":" . line(".")<cr>
