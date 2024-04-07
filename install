@@ -24,6 +24,7 @@ fi
 
 if ask "git" "Install GIT configuration"; then
 	inst gitconfig ~/.gitconfig
+	inst gitconfig-elektroline ~/.gitconfig-elektroline
 	inst gitignore ~/.gitignore
 fi
 

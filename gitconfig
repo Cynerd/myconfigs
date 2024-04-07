@@ -1,15 +1,17 @@
 [user]
 	name = Karel Kočí
 	email = cynerd@email.cz
-	signingkey = A6BC8B8CEB31659B
+	signingkey = B8788B4BCF4F1190288F95C0FCEF2F764FA7A632
 [core]
 	editor = nvim
 	excludesfile = /home/cynerd/.gitignore
+	fsmonitor = true
 [checkout]
 	defaultRemote=origin
 [fetch]
 	recurseSubmodules = true
 	parallel = 8
+	writeCommitGraph = true
 [pull]
 	rebase = true
 [push]
@@ -23,13 +25,22 @@
 [merge]
 	tool = vimdiff
 [mergetool "vimdiff"]
-  cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+	cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[rebase]
+	updateRefs = true
+[rerere]
+	enabled = true
+[branch]
+	sort = committerdate
+[maintenance]
+	strategy = incremental
 [alias]
 	co = checkout
 	ci = commit
 	st = status
 	br = branch
 	wt = worktree
+	sta = stash --all
 	type = cat-file -t
 	dump = cat-file -p
 	please = push --force-with-lease
@@ -43,3 +54,8 @@
 	confirm = always
 [init]
 	defaultBranch = master
+[column]
+	ui = auto
+
+[includeIf "gitdir:~/elektroline/"]
+	path = ~/.gitconfig-elektroline
