@@ -3,7 +3,6 @@ exec --no-startup-id {
 	kanshi
 	swayidle
 	dunst
-	nextcloud
 }
 
 for_window [class="Ferdi"] move scratchpad

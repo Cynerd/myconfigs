@@ -16,6 +16,8 @@ titlebar_padding 3 1
 
 workspace_layout tabbed
 
+for_window [shell=".*"] inhibit_idle fullscreen
+
 ################################################################################
 set $mod Mod4
 
