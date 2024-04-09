@@ -5,14 +5,11 @@ return function()
 	local root, ret = utils.get_os_command_output({ "git", "rev-parse", "--show-toplevel" }, vim.fn.expand("%:h"))
 	if ret == 0 then
 		ts.git_files({
+			cwd = root[1],
 			git_command = {
 				"sh",
 				"-c",
-				"git -C "
-					.. root[1]
-					.. " ls-files -c --recurse-submodules && git -C "
-					.. root[1]
-					.. " ls-files -o --exclude-standard",
+				"git ls-files -c --recurse-submodules && git ls-files -o --exclude-standard",
 			},
 		})
 	else
