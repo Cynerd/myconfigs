@@ -105,7 +105,8 @@ if ask "desktop" "Install desktop"; then
 	gsettings set org.gnome.desktop.interface font-name 'Cantarell 8'
 	gsettings set org.gnome.desktop.interface gtk-key-theme 'Emacs'
 	gsettings set org.gnome.desktop.interface gtk-theme 'Nordic-darker-standard-buttons'
-	gsettings set org.gnome.desktop.interface icon-theme 'Delft'
+	gsettings set org.gnome.desktop.interface icon-theme 'Nordzy'
+	gsettings set org.gnome.desktop.interface cursor-theme 'Nordzy-cursors'
 	# Theme
 	inst gtk-2.0/gtkrc ~/.gtkrc-2.0
 	inst config/Trolltech.conf ~/.config/Trolltech.conf
