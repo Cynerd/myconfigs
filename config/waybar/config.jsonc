@@ -1,0 +1,118 @@
+{
+	"ipc": true,
+	"reload_style_on_change": true,
+"modules-left": ["sway/language", "sway/workspaces", "sway/mode", "privacy", "systemd-failed-units"],
+    "modules-center": ["group/clock", "custom/email","mpd"],
+    "modules-right": ["wireplumber", "cpu", "memory", "disk#root", "disk#home", "network", "group/hardware", "tray"],
+	"group/clock": {
+		"orientation": "horizontal",
+		"modules": [
+			"clock", "idle_inhibitor"
+		],
+		"drawer": { }
+	},
+	"group/hardware": {
+		"orientation": "horizontal",
+		"modules": [
+			/*"battery", "backlight", "bluetooth", */
+			"temperature"
+		],
+		"drawer": { }
+	},
+
+
+	"cpu": {
+		"interval": 2,
+		"format": "{usage}% "
+	},
+	"memory": {
+		"interval": 10,
+		"format": "{used}/{total}GiB "
+	},
+    "disk#root": {
+		"format": "/ {free}",
+        "path": "/"
+    },
+    "disk#home": {
+		"format": "/home2 {free}",
+        "path": "/home2"
+    },
+	"clock": {
+		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+		"format": "{:%F %T}",
+		"format-alt": "{:%F %T}",
+		"interval": 1
+	},
+	"idle_inhibitor": {
+		"format": "{icon}",
+		"format-icons": {
+			"activated": "󰔡",
+			"deactivated": "󰔢"
+		}
+	},
+	"wireplumber": {
+		"format": "{volume}% {icon}",
+		"format-muted": "Muted 󰓄",
+		"format-icons": ["󰓃", "", ""],
+		"on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+	},
+
+	"network": {
+		"format": "󰈀 {ipaddr}/{cidr} ⇅{bandwidthTotalBytes}",
+		"format-wifi": " {essid}({signalStrength}%) {ipaddr}/{cidr} ⇅{bandwidthTotalBytes}",
+		"tooltip-format": "{ifname} via {gwaddr} ↑{bandwidthUpBytes} ↓{bandwidthDownBytes}",
+		"interval": 1
+	},
+
+    "battery": {
+        "format": "{capacity}% {icon}",
+        "format-icons": ["", "", "", "", ""]
+    },
+	"temperature": {
+		"hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+		"critical-threshold": 80,
+		"format-critical": "{temperatureC}°C ",
+		"format": "{temperatureC}°C "
+	},
+	"bluetooth": {
+		"format": " {status}",
+		"format-disabled": "", // an empty format will hide the module
+		"format-connected": " {num_connections} connected",
+		"tooltip-format": "{controller_alias}\t{controller_address}",
+		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+	},
+
+	"mpd": {
+		"format-stopped": "",
+		"format-paused": "{album} - {artist} - {title}",
+		"on-click": "mpc toggle >/dev/null",
+		"on-click-right": "mpc stop >/dev/null",
+		"on-click-backward": "mpc prev >/dev/null",
+		"on-click-forward": "mpc next >/dev/null"
+	},
+	"privacy": {
+		"icon-spacing": 4,
+		"icon-size": 12,
+		"transition-duration": 250,
+		"modules": [
+			{
+				"type": "screenshare",
+				"tooltip": true,
+				"tooltip-icon-size": 24
+			},
+			{
+				"type": "audio-in",
+				"tooltip": true,
+				"tooltip-icon-size": 24
+			}
+		]
+	},
+
+	"custom/email": {
+		"exec": "~/.config/waybar/email.sh",
+		"interval": 30,
+		"signal": 13
+	}
+}
+}

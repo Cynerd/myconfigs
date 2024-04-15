@@ -2,8 +2,8 @@
 set -eu
 cronline="* * * * * /bin/sh -c 'AUTORUN=y /home/cynerd/.local/bin/allsync'"
 
-notify_i3block() {
-	pkill -RTMIN+13 i3blocks
+notify_bar() {
+	pkill -RTMIN+13 waybar
 }
 
 i3_astroid() {
@@ -24,7 +24,7 @@ cron_enable() {
 	else
 		systemctl --user start allsync.timer
 	fi
-	notify_i3block
+	notify_bar
 }
 
 cron_disable() {
@@ -33,7 +33,7 @@ cron_disable() {
 	else
 		systemctl --user stop allsync.timer
 	fi
-	notify_i3block
+	notify_bar
 }
 
 cron_enabled() {
@@ -120,8 +120,8 @@ notmuch new
 #~/.local/sbin/newmail-notify || fail "Mail notifications not sent"
 notmuch tag --batch --input="$HOME/.notmuch-tag-new"
 i3_astroid --stop-polling
-pkill -RTMIN+13 i3blocks
-notify_i3block
+pkill -RTMIN+13 swaybar
+notify_bar
 
 sec "Calendar and contacts"
 vdirsyncer sync || fail "Calendar and contacts synchronization reported failure"

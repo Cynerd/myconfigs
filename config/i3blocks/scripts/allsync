@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-if allsync enabled 2>/dev/null; then
-	echo "sync"
-else
-	echo
-fi
-
-echo
-echo "#ffff00"

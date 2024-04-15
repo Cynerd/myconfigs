@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 filter=("tag:unread" "and" "not" "tag:killed")
 
+if allsync enabled 2>/dev/null; then
+	sync="󰑤"
+else
+	sync=""
+fi
+
 part=()
-all=0
 for mail in email gmail elektroline fel; do
 	counts="$(notmuch count -- "${filter[@]}" and "tag:$mail")"
 	[ "$counts" = "0" ] || \
 		part+=("$mail:$counts")
-	((all = all + counts))
 done
 
-echo "${part[@]}"
-if [ "$all" = "0" ]; then
-	echo
-else
-	echo "mails:$all"
-fi
-echo "#ffff00"
+echo "$sync" "${part[@]}"
+echo
+echo "#email"

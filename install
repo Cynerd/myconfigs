@@ -118,7 +118,7 @@ if ask "desktop" "Install desktop"; then
 	inst config/sway/ ~/.config/sway
 	inst Xdefaults ~/.Xdefaults
 	inst config/dunst/ ~/.config/dunst
-	inst config/i3blocks/ ~/.config/i3blocks
+	inst config/swaybar/ ~/.config/swaybar
 	inst config/swaylock/ ~/.config/swaylock
 	inst config/swayidle/ ~/.config/swayidle
 	inst config/wofi/ ~/.config/wofi
