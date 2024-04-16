@@ -117,17 +117,16 @@ sec "Mail"
 i3_astroid --start-polling
 mbsync -a || fail "Mail synchronization reported failure"
 notmuch new
-#~/.local/sbin/newmail-notify || fail "Mail notifications not sent"
+~/.local/sbin/newmail-notify || fail "Mail notifications not sent"
 notmuch tag --batch --input="$HOME/.notmuch-tag-new"
 i3_astroid --stop-polling
-pkill -RTMIN+13 swaybar
 notify_bar
 
-sec "Calendar and contacts"
-vdirsyncer sync || fail "Calendar and contacts synchronization reported failure"
+#sec "Calendar and contacts"
+#vdirsyncer sync || fail "Calendar and contacts synchronization reported failure"
 
 if [ "${AUTORUN:-n}" = "y" ]; then
 	echo "Reported failure exit code: $ecode" >&2
 else
-   	exit $ecode
+	exit $ecode
 fi

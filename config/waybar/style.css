@@ -236,8 +236,7 @@
     background: @mode;
 }
 
-#wireplumber { /* Unsused but kept for those who needs it */
-    background: @nord_bg_blue;
+#wireplumber {
     color: #D8DEE9;
 	min-width: 1em;
 	padding: 0px 0.6em 0px 0.4em;

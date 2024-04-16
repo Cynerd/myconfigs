@@ -1,4 +1,5 @@
 {
+	// TODO gpu
 	"ipc": true,
 	"reload_style_on_change": true,
 "modules-left": ["sway/language", "sway/workspaces", "sway/mode", "privacy", "systemd-failed-units"],
@@ -14,7 +15,7 @@
 	"group/hardware": {
 		"orientation": "horizontal",
 		"modules": [
-			/*"battery", "backlight", "bluetooth", */
+			//"battery", "backlight", "bluetooth",
 			"temperature"
 		],
 		"drawer": { }
