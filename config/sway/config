@@ -6,7 +6,6 @@ exec --no-startup-id swaybackground
 include inputs
 include theme
 ################################################################################
-bar swaybar_command waybar
 
 smart_borders on
 default_border normal
