@@ -122,6 +122,7 @@ if ask "desktop" "Install desktop"; then
 	inst config/swaylock/ ~/.config/swaylock
 	inst config/swayidle/ ~/.config/swayidle
 	inst config/wofi/ ~/.config/wofi
+	inst config/systemd/user/waybar.service ~/.config/systemd/user/waybar.service
 	[ -f "private/kanshi/$(hostname)" ] &&
 		inst "private/kanshi/$(hostname)" ~/.config/kanshi/config
 	inst config/xdg-desktop-portal-wlr/ ~/.config/xdg-desktop-portal-wlr
