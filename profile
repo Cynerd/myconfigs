@@ -19,6 +19,15 @@ for profile in "$HOME"/.nix-profile/etc/profile.d/*; do
 	source "$profile"
 done
 
+# GLab
+if command -v glab >/dev/null; then
+	if [[ -n "${BASH_VERSINFO:-}" ]]; then
+		source <(glab completion -s bash)
+	elif [[ -n "${ZSH_VERSION:-}" ]]; then
+		source <(glab completion -s zsh)
+		compdef _glab glab
+	fi
+fi
 
 # Rest of the profile run only if login is from linux console
 [[ "$(tty)" != /dev/tty* ]] && return
