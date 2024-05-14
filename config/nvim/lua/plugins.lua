@@ -114,8 +114,8 @@ require("packer").startup(function(use)
 							for _, result in ipairs(decoded.results) do
 								if result.line ~= nil then
 									table.insert(diagnostics, {
-										lnum = result.line,
-										end_lnum = result.line,
+										lnum = result.line - 1,
+										end_lnum = result.line - 1,
 										col = result.column,
 										end_col = result.endColumn,
 										severity = vim.diagnostic.severity.HINT,
