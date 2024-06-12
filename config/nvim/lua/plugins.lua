@@ -93,7 +93,7 @@ require("packer").startup(function(use)
 		config = function()
 			local lint = require("lint")
 			lint.linters_by_ft = {
-				c = { "cppcheck", "flawfinder", "editorconfig-checker" },
+				c = { "clangtidy", "editorconfig-checker" },
 				lua = { "selene", "editorconfig-checker" },
 				markdown = { "vale" },
 				nix = { "statix", "deadnix", "nix", "editorconfig-checker" },
