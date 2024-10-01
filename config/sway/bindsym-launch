@@ -19,7 +19,7 @@ bindsym $mod+Shift+w exec --no-startup-id ~/.config/sway/scripts/pass
 bindsym $mod+Shift+n exec --no-startup-id ~/.config/sway/scripts/notes
 for_window [ title="notes-terminal-window" ] floating enable sticky enable
 # Mail client
-bindsym $mod+m exec astroid
+bindsym $mod+m exec dodo
 
 
 # Run and configure synchronization
