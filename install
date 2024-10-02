@@ -91,7 +91,6 @@ if ask "sync" "Install synchronization"; then
 	inst private/msmtprc ~/.msmtprc
 	inst config/dodo/config.py ~/.config/dodo/config.py
 	inst private/astroid/config ~/.config/astroid/config
-	inst config/astroid/ui/ ~/.config/astroid/ui
 
 	inst private/vdirsyncer/ ~/.vdirsyncer
 	inst config/khal/config ~/.config/khal/config
