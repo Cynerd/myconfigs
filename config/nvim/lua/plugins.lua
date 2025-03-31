@@ -23,6 +23,7 @@ local treesitter_formaters = {
 	"vim",
 	"vimdoc",
 	"yaml",
+	"xml",
 }
 
 require("packer").startup(function(use)
@@ -149,6 +150,7 @@ require("packer").startup(function(use)
 					sh = { "shfmt", "trim_newlines", "twim_whitespace" },
 					typst = { "typstfmt", "trim_newlines", "twim_whitespace" },
 					yaml = { "yq", "trim_newlines", "twim_whitespace" },
+					xml = { "xmllint", "trim_newlines", "twim_whitespace" },
 				},
 			})
 		end,

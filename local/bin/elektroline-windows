@@ -9,8 +9,8 @@ fi
 
 exec xfreerdp \
 	"${args[@]}" \
-	-decorations /w:1537 /h:903 /kbd:0x00000409 \
+	-decorations /w:1700 /h:1000 \
 	/d:ELEKTROLINE /u:kkoci \
-	/bpp:24 /audio-mode:0 /sound:sys:alsa /network:lan /rfx /cert-ignore \
+	/bpp:24 /audio-mode:0 /sound:sys:alsa /network:lan /rfx \
 	+clipboard /port:3389 \
 	/v:elvirt00.elektroline.cz /p:"$(pass elektroline.cz/kkoci)"

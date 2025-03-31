@@ -24,3 +24,4 @@ __pycache__/
 /env
 *.egg-info
 .coverage
+/dist

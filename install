@@ -60,8 +60,10 @@ if ask "nvim" "Install NeoVIM scripts"; then
 	nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 	# cs spelling
 	mkdir -p ~/.local/share/nvim/site/spell
-	curl "http://ftp.vim.org/vim/runtime/spell/cs.utf-8.spl" \
+	curl "https://ftp.nluug.nl/pub/vim/runtime/spell/cs.utf-8.spl" \
 		>~/.local/share/nvim/site/spell/cs.utf-8.spl
+	curl "https://ftp.nluug.nl/pub/vim/runtime/spell/cs.utf-8.sug" \
+		>~/.local/share/nvim/site/spell/cs.utf-8.sug
 fi
 
 if ask "dev" "Development tools configuration"; then
@@ -138,6 +140,7 @@ if ask "mpd" "Install MPD configuration"; then
 fi
 
 if ask "elektroline" "Install Elektroline scripts"; then
+	inst shvcli.toml ~/.shvcli.toml
 	inst local/bin/elektroline-git-config ~/.local/bin/elektroline-git-config
 	inst local/bin/elektroline-windows ~/.local/bin/elektroline-windows
 	inst local/bin/elektroline00 ~/.local/bin/elektroline00
