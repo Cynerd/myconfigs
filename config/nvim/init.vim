@@ -55,8 +55,8 @@ set laststatus=2
 set noshowmode
 
 set number
-set colorcolumn=80
 set textwidth=80
+set colorcolumn=+0
 nmap <c-/> :noh<cr>
 
 
