@@ -98,6 +98,8 @@ if ask "sync" "Install synchronization"; then
 	inst config/khal/config ~/.config/khal/config
 	inst config/khard/khard.conf ~/.config/khard/khard.conf
 
+	inst local/bin/cloud ~/.local/bin/cloud
+
 	inst_sync
 fi
 
