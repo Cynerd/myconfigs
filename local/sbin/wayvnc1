@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 export WAYLAND_DISPLAY=wayland-1
+export SWAYSOCK="/run/user/${UID=$(id -u)}/sway-ipc.$UID.$(pgrep -x sway).sock"
+swaymsg output '*' power on
 exec wayvnc localhost 5901
