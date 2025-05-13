@@ -4,46 +4,11 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 	vim.cmd([[packadd packer.nvim]])
 end
 
-local treesitter_formaters = {
-	"c",
-	"lua",
-	"kconfig",
-	"make",
-	"markdown",
-	"markdown_inline",
-	"meson",
-	"ninja",
-	"ini",
-	"gitcommit",
-	"git_rebase",
-	"git_config",
-	"nix",
-	"python",
-	"toml",
-	"vim",
-	"vimdoc",
-	"yaml",
-	"xml",
-}
-
 require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 	-- Visual ------------------------------------------------------------------
 	use("shaunsingh/nord.nvim")
 	use("MunifTanjim/nui.nvim")
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
-		config = function()
-			require("nvim-treesitter.configs").setup({
-				ensure_installed = treesitter_formaters,
-				highlight = {
-					enable = true,
-					additional_vim_regex_highlighting = false,
-				},
-			})
-		end,
-	})
 	use({
 		"lukas-reineke/indent-blankline.nvim",
 		config = function()
