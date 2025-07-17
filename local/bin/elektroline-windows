@@ -9,7 +9,7 @@ fi
 
 exec xfreerdp \
 	"${args[@]}" \
-	-decorations /w:1700 /h:1000 \
+	-decorations /dynamic-resolution \
 	/d:ELEKTROLINE /u:kkoci \
 	/bpp:24 /audio-mode:0 /sound:sys:alsa /network:lan /rfx \
 	+clipboard /port:3389 \
