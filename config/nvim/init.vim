@@ -138,6 +138,7 @@ let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 nnoremap <c-c><c-c> :Telescope buffers<cr>
 nnoremap <c-p> :lua require('mytelescopefiles')()<cr>
 nnoremap <c-s-p> :Telescope lsp_document_symbols<cr>
+nnoremap <c-s-g> :Telescope live_grep<cr>
 nmap <leader>] :Telescope lsp_definitions<cr>
 nmap <leader><leader>] :Telescope lsp_type_definitions<cr>
 nmap <leader>[ :Telescope lsp_implementations<cr>
