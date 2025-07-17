@@ -145,6 +145,7 @@ if ask "elektroline" "Install Elektroline scripts"; then
 	inst shvcli.toml ~/.shvcli.toml
 	inst local/bin/elektroline-git-config ~/.local/bin/elektroline-git-config
 	inst local/bin/elektroline-windows ~/.local/bin/elektroline-windows
+	inst local/share/applications/elektroline-windows.desktop ~/.local/share/applications/elektroline-windows.desktop
 	inst local/bin/elektroline00 ~/.local/bin/elektroline00
 fi
 

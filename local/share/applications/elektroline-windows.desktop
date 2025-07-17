@@ -1,0 +1,6 @@
+[Desktop Entry]
+Version=1.0
+Name=Elektroline Windows
+Exec="/home/cynerd/.local/bin/elektroline-windows" %U
+Terminal=false
+Type=Application
