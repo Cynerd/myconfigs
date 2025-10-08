@@ -19,6 +19,12 @@ for profile in "$HOME"/.nix-profile/etc/profile.d/*; do
 	source "$profile"
 done
 
+# Guix
+export GUIX_PROFILE="/home/cynerd/.guix-profile"
+if [[ -d "$GUIX_PROFILE" ]]; then
+	source "$GUIX_PROFILE/etc/profile"
+fi
+
 # Rest of the profile run only if login is from linux console
 [[ "$(tty)" != /dev/tty* ]] && return
 
