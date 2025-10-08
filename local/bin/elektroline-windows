@@ -13,4 +13,4 @@ exec xfreerdp \
 	/d:ELEKTROLINE /u:kkoci \
 	/bpp:24 /audio-mode:0 /sound:sys:alsa /network:lan /rfx \
 	+clipboard /port:3389 \
-	/v:elvirt00.elektroline.cz /p:"$(pass elektroline.cz/kkoci)"
+	/v:czellts.elektroline.cz /p:"$(pass elektroline.cz/kkoci)"
