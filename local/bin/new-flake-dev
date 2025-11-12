@@ -6,24 +6,32 @@ if [ -f ./flake.nix ]; then
 fi
 cat >./flake.nix <<"EOF"
 {
-  outputs = { self, nixpkgs, flake-utils, personal }:
-  with flake-utils.lib;
-  eachDefaultSystem (system: let
-    pkgs = nixpkgs.legacyPackages.${system};
+  outputs = {
+    self,
+    systems,
+    nixpkgs,
+  }: let
+    inherit (nixpkgs.lib) genAttrs;
+    forSystems = genAttrs (import systems);
+    withPkgs = func: forSystems (system: func self.legacyPackages.${system});
   in {
-    devShells = filterPackages system {
-      default = pkgs.mkShell {
-        packages = with pkgs; [
-          clang-tools
-          gcc gdb pkg-config
-          cppcheck flawfinder bear
-          meson
-        ];
-        inputsFrom = with pkgs; [
-          personal.devShells.${system}.default
-        ];
-      };
-    };
-  });
+    devShells = withPkgs (pkgs: {
+      default = with pkgs;
+        mkShell {
+          packages = [
+            # TODO development packages
+          ];
+          inputsFrom = [
+            # TODO other packages development is done for
+          ];
+        };
+    });
+
+    formatter = withPkgs (pkgs: pkgs.alejandra);
+
+    legacyPackages =
+      forSystems (system:
+        nixpkgs.legacyPackages.${system}.extend self.overlays.default);
+  };
 }
 EOF
