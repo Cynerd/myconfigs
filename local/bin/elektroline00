@@ -19,10 +19,17 @@ while getopts "u" opt; do
 done
 
 if [ "$umount" = "n" ]; then
+	mount_cifs() {
+		sudo --preserve-env=PASSWD mount.cifs -o username=kkoci,uid=1000 "$1" "$path/$2"
+		echo "Mounted $path/$2"
+	}
+
 	sudo mkdir -p "$path"
-	sudo mount.cifs -o username=kkoci,uid=1000 "//czelldata.elektroline.cz/Share" "$path/share"
-	sudo mount.cifs -o username=kkoci "//10.0.0.3/company" "$path/company"
-	sudo mount.cifs -o username=kkoci "//10.0.0.3/elektro_doc" "$path/elektro_doc"
+	export PASSWD
+	PASSWD="$(pass elektroline.cz/kkoci)"
+	mount_cifs "//czelldata.elektroline.cz/Share" "share"
+	mount_cifs "//10.0.0.3/company" "company"
+	mount_cifs "//10.0.0.3/elektro_doc" "elektro_doc"
 else
 	sudo umount "$path"/{share,company,elektro_doc}
 fi
