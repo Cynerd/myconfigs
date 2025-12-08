@@ -38,6 +38,7 @@ if ask "nix" "Install Nix configuration"; then
 fi
 
 if ask "guix" "Install Guix configuration"; then
+	inst guile ~/.guile
 	inst config/guix/channels.scm ~/.config/guix/channels.scm
 fi
 
