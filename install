@@ -42,7 +42,8 @@ if ask "guix" "Install Guix configuration"; then
 	inst config/guix/channels.scm ~/.config/guix/channels.scm
 fi
 
-if ask "clituls" "Install configurations for various CLI utility tools"; then
+if ask "cliutils" "Install configurations for various CLI utility tools"; then
+	inst infokey ~/.infokey
 	inst screenrc ~/.screenrc
 	inst local/share/mc/skins/nord16M.ini ~/.local/share/mc/skins/nord16M.ini
 fi
