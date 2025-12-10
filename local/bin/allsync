@@ -8,17 +8,17 @@ notify_bar() {
 
 i3_astroid() {
 	pkill -0 astroid || return 0
-	find "/run/user/$(id -u)/i3" "/tmp/i3-$(id -un)".* -name ipc-socket\* 2>/dev/null | \
+	find "/run/user/$(id -u)/i3" "/tmp/i3-$(id -un)".* -name ipc-socket\* 2>/dev/null |
 		while read -r socket; do
 			i3-msg -s "$socket" "exec astroid $*"
-	done
+		done
 }
 
 cron_enable() {
 	pass mail/cynerd@email.cz >/dev/null # Cache keys
 	if command -v crontab >/dev/null; then
 		{
-			crontab -l 
+			crontab -l
 			echo "$cronline"
 		} | crontab -
 	else
@@ -46,33 +46,33 @@ cron_enabled() {
 
 if [ "$#" -gt 0 ]; then
 	case "$1" in
-		enable)
-			cron_enable
-			;;
-		disable)
+	enable)
+		cron_enable
+		;;
+	disable)
+		cron_disable
+		;;
+	enabled)
+		cron_enabled
+		;;
+	state)
+		if cron_enabled; then
+			echo "Enabled"
+		else
+			echo "Disabled"
+		fi
+		;;
+	toggle)
+		if cron_enabled; then
 			cron_disable
-			;;
-		enabled)
-			cron_enabled
-			;;
-		state)
-			if cron_enabled; then
-				echo "Enabled"
-			else
-				echo "Disabled"
-			fi
-			;;
-		toggle)
-			if cron_enabled; then
-				cron_disable
-			else
-				cron_enable
-			fi
-			;;
-		*)
-			echo "${0##*/}: Unknown argument: $1" >&2
-			exit 1
-			;;
+		else
+			cron_enable
+		fi
+		;;
+	*)
+		echo "${0##*/}: Unknown argument: $1" >&2
+		exit 1
+		;;
 	esac
 	exit
 fi
@@ -97,7 +97,6 @@ if [ "${ALLSYNC_FLOCK:-n}" != "y" ]; then
 	exit 1
 fi
 
-
 sec() {
 	echo -e '\e[1;34m==========' "$@" '==========\e[0m'
 }
@@ -107,7 +106,6 @@ fail() {
 	echo -e '\e[1;31m---' "$@" '---' "($?)" '\e[0m'
 	ecode=1
 }
-
 
 sec "Passwords"
 pass git pull || fail "Passwords pull failed"

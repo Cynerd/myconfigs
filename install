@@ -8,7 +8,9 @@ git submodule update --init --recursive || (
 )
 
 # Source inst and diff function
+. ./utils/ask
 . ./utils/inst
+. ./utils/guix
 
 # Load if we force changes (implies no interaction)
 [ "$1" = "-f" ] && FORCE=true || FORCE=false
@@ -37,9 +39,11 @@ if ask "nix" "Install Nix configuration"; then
 	inst private/config/nix/builders ~/.config/nix/builders
 fi
 
-if ask "guix" "Install Guix configuration"; then
+if hascmd guix && ask "guix" "Install Guix configuration"; then
 	inst guile ~/.guile
 	inst config/guix/channels.scm ~/.config/guix/channels.scm
+	guix_install \
+		guile guile-colorized guile-readline guile-lsp-server
 fi
 
 if ask "cliutils" "Install configurations for various CLI utility tools"; then

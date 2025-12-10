@@ -1,6 +1,6 @@
 #!/bin/sh
-find ~/.password-store -name .git -prune -o -type f -printf '%P\n' | \
-	sed 's/\.gpg$//' | wofi -d -p 'Pass:' | \
+find ~/.password-store -name .git -prune -o -type f -printf '%P\n' |
+	sed 's/\.gpg$//' | wofi -d -p 'Pass:' |
 	while read -r psw; do
 		pass -c "$psw"
-done
+	done

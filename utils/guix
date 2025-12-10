@@ -1,0 +1,16 @@
+# Functions used for interactive installation of new changes to running system
+# vim: ft=sh
+
+guix_install() {
+	local installed
+	installed="$(guix package --list-installed)"
+	local -a toinstall
+	for pkg in "$@"; do
+		if awk -v ec=0 -v "PKG=$pkg" '$1 == PKG { ec = 1; } END { exit ec; }' <<<"$installed"; then
+			toinstall+=("$pkg")
+		fi
+	done
+	if [[ "${#toinstall[@]}" -gt 0 ]]; then
+		guix install "${toinstall[@]}"
+	fi
+}

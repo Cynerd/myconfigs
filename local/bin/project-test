@@ -15,21 +15,21 @@ print_help() {
 
 while [ -n "$1" ]; do
 	case $1 in
-		-r|--ref)
-			shift
-			REF=$1
-			;;
-		-c|--count)
-			shift
-			REF=HEAD~$1
-			;;
-		--)
-			shift
-			break
-			;;
-		*)
-			break
-			;;
+	-r | --ref)
+		shift
+		REF=$1
+		;;
+	-c | --count)
+		shift
+		REF=HEAD~$1
+		;;
+	--)
+		shift
+		break
+		;;
+	*)
+		break
+		;;
 	esac
 	shift
 done

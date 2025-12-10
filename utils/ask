@@ -1,0 +1,24 @@
+# vim: ft=sh
+
+# Ask if given section should be installed
+# First argument is name (take care not to use special characters for regulard
+# expression) and second argument is a question
+ask() {
+	local ignore_file
+	ignore_file=".ignore-$(hostname)"
+	[ -f "$ignore_file" ] && grep -q "^$1$" "$ignore_file" && return 1
+	if $FORCE; then
+		echo "\e[1;34m$2\e[0m"
+		# Fall trough with 0 exit (always yes)
+	else
+		echo -e -n "\e[1;34m$2? (Y/n) \e[0m"
+		local reply
+		read -r reply
+		echo "$reply" | grep -qE '^[Yy]?$'
+	fi
+}
+
+# Check if command is available
+hascmd() {
+	command -v "$1" >/dev/null 2>&1
+}

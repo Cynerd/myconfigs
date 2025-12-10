@@ -1,45 +1,29 @@
 # Functions used for interactive installation of new changes to running system
 # vim: ft=sh
 
-# Ask if given section should be installed
-# First argument is name (take care not to use special characters for regulard
-# expression) and second argument is a question
-ask() {
-	local ignore_file=".ignore-$(hostname)"
-	[ -f "$ignore_file" ] && grep -q "^$1$" "$ignore_file" && return 1
-	if $FORCE; then
-		echo "\e[1;34m$2\e[0m"
-		# Fall trough with 0 exit (always yes)
-	else
-		echo -e -n "\e[1;34m$2? (Y/n) \e[0m"
-		local reply
-		read -r reply
-		echo "$reply" | grep -qE '^[Yy]?$'
-	fi
-}
-
 dodiff() {
+	local out
 	if [ -d "$2" ]; then
 		# If we just copying some file to directory
-		OUT=$2/$(basename "$1")
+		out="$2/$(basename "$1")"
 	else
-		OUT=$2
+		out="$2"
 	fi
-	if ! [ -f "$OUT" ]; then
-		echo -e "\e[1;33mNot installed:\e[0m $1 => $OUT"
+	if ! [ -f "$out" ]; then
+		echo -e "\e[1;33mNot installed:\e[0m $1 => $out"
 		if ask "Install?"; then
-			doinst "$1" "$OUT"
+			doinst "$1" "$out"
 		fi
 		return
 	fi
-	if cmp "$1" "$OUT" >/dev/null 2>&1; then
-		echo -e "\e[1;32mNo difference detected:\e[0m $OUT"
+	if cmp "$1" "$out" >/dev/null 2>&1; then
+		echo -e "\e[1;32mNo difference detected:\e[0m $out"
 		return
 	fi
 	if $FORCE; then
-		doinst "$1" "$OUT"
+		doinst "$1" "$out"
 	else
-		nvim -d "$1" "$OUT"
+		nvim -d "$1" "$out"
 	fi
 }
 
@@ -48,11 +32,12 @@ dodiff() {
 # commands not on deployed tree but on tree in this repository, so we need specify
 # work tree on command line every time we want target deployed work tree.
 gitrepo_relink() {
-	local GITD="gitdir: $PWD/.git$(sed "s/^gitdir: [./]*git//" "$1")"
+	local gitdir
+	gitdir="gitdir: $PWD/.git$(sed "s/^gitdir: [./]*git//" "$1")"
 	# We check that we are pointing to correct path just because of making message correct
-	if ! grep -q "$GITD" "$2"; then
+	if ! grep -q "$gitdir" "$2"; then
 		echo -e "\e[1;34mPointing git repository $2 to this repository\e[0m"
-		echo "$GITD" > "$2"
+		echo "$gitdir" >"$2"
 	fi
 	# else probably not a git repository or who knows.
 }
@@ -69,12 +54,12 @@ checkdiff() {
 			exit 1
 		fi
 		# Got trough all files ignoring git repositories
-		for f in `find "$1" \( -type d -exec test -e '{}'/.git \; \) -prune -o -type f -print`; do
+		for f in $(find "$1" \( -type d -exec test -e '{}'/.git \; \) -prune -o -type f -print); do
 			F="${f#$1}"
 			dodiff "$1/$F" "$2/$F"
 		done
 		# Check if we have all directories ignoring those in git repositories
-		for d in `find "$1" -type d -print -exec test -e '{}'/.git \; -prune`; do
+		for d in $(find "$1" -type d -print -exec test -e '{}'/.git \; -prune); do
 			D="${d#$1}"
 			if [ ! -d "$2/$D" ]; then
 				echo -e "\e[1;33mDirectory not installed:\e[0m $1/$D => $2/$D"
@@ -84,7 +69,7 @@ checkdiff() {
 			fi
 		done
 		# Now checkout git repositories
-		for g in `find "$1" -type d -exec test -e '{}'/.git \; -print -prune`; do
+		for g in $(find "$1" -type d -exec test -e '{}'/.git \; -print -prune); do
 			G="$2/${g#$1}"
 			gitrepo_relink "$g/.git" "$G/.git" # Always reling .git just to be sure
 			PREV="$(pwd)"
@@ -111,13 +96,13 @@ doinst() {
 	mkdir -p "$(dirname "$2")"
 	rsync -rlpt $1 $2
 	# Now edit all .git files in target directory
-	for g in `find "$1" -name '.git' -type f`; do
+	for g in $(find "$1" -name '.git' -type f); do
 		gitrepo_relink "$g" "$2/${g#$1}"
 	done
 }
 
 inst() {
-	if [ !  -e "$1" ]; then
+	if [ ! -e "$1" ]; then
 		echo "Missing file to be installed: $1" >&2
 	fi
 	if [ -e "$2" ]; then
