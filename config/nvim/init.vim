@@ -108,10 +108,6 @@ highlight GitGutterAdd ctermfg=2
 highlight GitGutterChange ctermfg=3
 highlight GitGutterDelete ctermfg=1
 
-" Setup table-mode to markdown compliant
-" Note: to start use "\ t m"
-let g:table_mode_corner='|'
-
 " Spell checking
 map <F10> :setlocal spell!<cr>
 function LangToggle()
