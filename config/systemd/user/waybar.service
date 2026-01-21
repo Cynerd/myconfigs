@@ -1,8 +1,0 @@
-[Unit]
-Description=Waybar
-
-[Service]
-ExecStart="/run/current-system/sw/bin/waybar"
-
-[Install]
-WantedBy="graphical-session.target"

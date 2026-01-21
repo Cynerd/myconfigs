@@ -2,6 +2,7 @@
 exec --no-startup-id {
 	kanshi
 	swayidle
+	waybar
 	dunst
 }
 
