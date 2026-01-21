@@ -14,9 +14,10 @@ export MOZ_ENABLE_WAYLAND=1
 # Java application do not display properly
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-dbus="dbus-run-session"
 if [ "$(ps -o comm= 1)" = "systemd" ]; then
-	dbus=""
+	launch="systemd-cat --identifier=sway --stderr-priority=err"
+else
+	launch="dbus-run-session"
 fi
 
-exec $dbus sway
+exec $launch sway
