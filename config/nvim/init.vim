@@ -99,6 +99,9 @@ nnoremap <c-c><CR> :Explore<cr>
 nnoremap <c-c>l :bnext<cr>
 nnoremap <c-c>h :bprev<cr>
 
+" Table mode
+let g:table_mode_syntax = 0
+
 " Format
 nmap <leader>f :lua require("conform").format()<cr>
 

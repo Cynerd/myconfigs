@@ -127,9 +127,9 @@ require("packer").startup(function(use)
 	-- Additional integrations -------------------------------------------------
 	use({
 		"chomosuke/typst-preview.nvim",
-		tag = "v0.1.*",
-		run = function()
-			require("typst-preview").update()
+		tag = "v1.*",
+		config = function()
+			require("typst-preview").setup({})
 		end,
 	})
 	-- Movement, format and others ---------------------------------------------
