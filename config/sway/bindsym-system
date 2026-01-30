@@ -13,10 +13,12 @@ mode "$mode_system" {
 bindsym $mod+Shift+q mode "$mode_system"
 
 
-set $screenshot Screenshot: (s)elect or (d)desktop
+set $screenshot Screenshot: (s)elect or (w)indow or (o)tput or (d)desktop
 mode "$screenshot" {
-	bindsym --release d exec --no-startup-id grim, mode "default"
-	bindsym --release s exec --no-startup-id sh -c "slurp | grim -g -", mode "default"
+	bindsym --locked s exec --no-startup-id ~/.config/sway/scripts/screenshot select, mode "default"
+	bindsym --locked w exec --no-startup-id ~/.config/sway/scripts/screenshot window, mode "default"
+	bindsym --locked o exec --no-startup-id ~/.config/sway/scripts/screenshot output, mode "default"
+	bindsym --locked d exec --no-startup-id ~/.config/sway/scripts/screenshot desktop, mode "default"
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"

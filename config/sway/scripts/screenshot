@@ -1,0 +1,19 @@
+#!/bin/sh
+case "${1:-}" in
+desktop)
+	exec grim
+	;;
+output)
+	exec grim -o "$(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')"
+	;;
+window)
+	exec grim -g "$(swaymsg -t get_tree |
+		jq -j '.. | select(.type?) | select(.focused).rect | "\(.x),\(.y) \(.width)x\(.height)"')"
+	# TODO the second variant is newer but doesn't work with my version of sway
+	exec grim -T "$(swaymsg -t get_tree |
+		jq -j '.. | select(.type?) | select(.focused).foreign_toplevel_identifier')"
+	;;
+select)
+	exec grim -g "$(slurp)"
+	;;
+esac

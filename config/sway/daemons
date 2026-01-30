@@ -8,3 +8,4 @@ exec --no-startup-id {
 
 for_window [class="Ferdi"] move scratchpad
 exec ferdium
+exec sh -c 'if commad -v openrgb >/dev/null; then exec openrgb --startminimized; fi'
