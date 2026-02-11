@@ -2,7 +2,9 @@
 localhost = "tcp://admin@localhost?password=admin!123"
 test = "tcp://test@localhost?password=test"
 brcg2 = "tcp://cli@localhost"
+nirvanaa = "tcp://kkoci@nirvana.elektroline.cz:3755?oauth2=y"
 
 [hosts-shell]
-nirvana = "tcp://kkoci@nirvana.elektroline.cz:3756?password=$(pass elektroline.cz/nirvana/kkoci)"
+nirvana = "tcp://kkoci@nirvana.elektroline.cz:3755?password=$(pass elektroline.cz/nirvana/kkoci)"
+nirvana-old = "tcp://kkoci@nirvana.elektroline.cz:3756?password=$(pass elektroline.cz/nirvana/kkoci)"
 ats = "tcp://atsshv@czellats.elektroline.cz?password=$(pass elektroline.cz/czellats/atsshv)"
