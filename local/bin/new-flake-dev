@@ -11,10 +11,15 @@ cat >./flake.nix <<"EOF"
     systems,
     nixpkgs,
   }: let
-    inherit (nixpkgs.lib) genAttrs;
+    inherit (nixpkgs.lib) genAttrs composeManyExtensions;
     forSystems = genAttrs (import systems);
     withPkgs = func: forSystems (system: func self.legacyPackages.${system});
   in {
+    overlays = {
+      packages = final: prev: {};
+      default = composeManyExtensions [self.overlays.packages];
+    };
+
     devShells = withPkgs (pkgs: {
       default = with pkgs;
         mkShell {
