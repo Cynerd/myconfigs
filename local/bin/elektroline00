@@ -20,6 +20,7 @@ done
 
 if [ "$umount" = "n" ]; then
 	mount_cifs() {
+		sudo mkdir -p "$path/$2"
 		sudo --preserve-env=PASSWD mount.cifs -o username=kkoci,uid=1000 "$1" "$path/$2"
 		echo "Mounted $path/$2"
 	}
