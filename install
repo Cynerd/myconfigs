@@ -103,7 +103,6 @@ if ask "sync" "Install synchronization"; then
 	inst local/bin/email-unread ~/.local/bin/email-unread
 	inst local/sbin/newmail-notify ~/.local/sbin/newmail-notify
 	inst config/dodo/config.py ~/.config/dodo/config.py
-	inst private/astroid/config ~/.config/astroid/config
 
 	inst private/vdirsyncer/ ~/.vdirsyncer
 	inst config/khal/config ~/.config/khal/config
