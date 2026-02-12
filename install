@@ -93,14 +93,16 @@ if ask "sync" "Install synchronization"; then
 	if [ "$(ps -o comm= 1)" = "systemd" ]; then
 		inst config/systemd/user/allsync.service ~/.config/systemd/user/
 		inst config/systemd/user/allsync.timer ~/.config/systemd/user/
+		inst config/systemd/user/davmail.service ~/.config/systemd/user/
 	fi
 
 	inst private/mbsyncrc ~/.mbsyncrc
+	inst private/msmtprc ~/.msmtprc
+	inst private/davmail.service ~/.davmail.service
 	inst private/notmuch-config ~/.notmuch-config
 	inst private/notmuch-tag-new ~/.notmuch-tag-new
 	inst local/bin/email-unread ~/.local/bin/email-unread
 	inst local/sbin/newmail-notify ~/.local/sbin/newmail-notify
-	inst private/msmtprc ~/.msmtprc
 	inst config/dodo/config.py ~/.config/dodo/config.py
 	inst private/astroid/config ~/.config/astroid/config
 

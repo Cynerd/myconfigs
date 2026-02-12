@@ -1,14 +1,16 @@
 import dodo
 
-dodo.settings.smtp_accounts = ["email", "gmail", "fel"]
+dodo.settings.smtp_accounts = ["email", "gmail", "ell", "fel"]
 dodo.settings.email_address = {
     "email": "Karel Kočí <cynerd@email.cz>",
     "gmail": "Karel Kočí <citrisin@gmail.com>",
+    "ell": "Karel Kočí <kkoci@elektroline.cz>",
     "fel": "Karel Kočí <kocikare@fel.cvut.cz>",
 }
 dodo.settings.sent_dir = {
     "email": "~/.mail/email/sent/",
     "gmail": "~/.mail/gmail/Drafts/",
+    "ell": "~/.mail/ell/Sent/",
     "fel": "~/.mail/fel/Sent/",
 }
 dodo.settings.gnupg_keyid = "2B1F70F95F1B48DA2265A7FAA6BC8B8CEB31659B"

@@ -1,0 +1,5 @@
+[Unit]
+Description=DavMail
+
+[Service]
+ExecStart="/run/current-system/sw/bin/davmail"

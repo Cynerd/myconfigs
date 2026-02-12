@@ -23,6 +23,7 @@ cron_enable() {
 		} | crontab -
 	else
 		systemctl --user start allsync.timer
+		systemctl --user start davmail.timer
 	fi
 	notify_bar
 }
@@ -112,12 +113,10 @@ pass git pull || fail "Passwords pull failed"
 pass git push || fail "Passwords push failed"
 
 sec "Mail"
-i3_astroid --start-polling
 mbsync -a || fail "Mail synchronization reported failure"
 notmuch new
 ~/.local/sbin/newmail-notify || fail "Mail notifications not sent"
 notmuch tag --batch --input="$HOME/.notmuch-tag-new"
-i3_astroid --stop-polling
 notify_bar
 
 #sec "Calendar and contacts"
