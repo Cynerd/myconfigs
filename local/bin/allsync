@@ -23,7 +23,7 @@ cron_enable() {
 		} | crontab -
 	else
 		systemctl --user start allsync.timer
-		systemctl --user start davmail.timer
+		systemctl --user start davmail.service
 	fi
 	notify_bar
 }

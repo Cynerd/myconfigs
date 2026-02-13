@@ -97,7 +97,7 @@ if ask "sync" "Install synchronization"; then
 
 	inst private/mbsyncrc ~/.mbsyncrc
 	inst private/msmtprc ~/.msmtprc
-	inst private/davmail.service ~/.davmail.service
+	inst private/davmail.properties ~/.davmail.properties
 	inst private/notmuch-config ~/.notmuch-config
 	inst private/notmuch-tag-new ~/.notmuch-tag-new
 	inst local/bin/email-unread ~/.local/bin/email-unread
