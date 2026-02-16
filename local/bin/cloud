@@ -19,8 +19,21 @@ while getopts "u" opt; do
 done
 
 if [ "$umount" = "n" ]; then
+	url="https://cloud.cynerd.cz/remote.php/dav/files/cynerd"
+	conf="$(mktemp)"
+	secrets="$(mktemp)"
+	trap 'rm -f "$conf" "$secrets"' EXIT HUP INT QUIT SEGV PIPE TERM
+	cat >"$conf" <<-EOF
+		[$path]
+		secrets ${secrets}
+		use_locks 0
+	EOF
+	chmod 600 "$secrets"
+	echo "$url cynerd $(pass cynerd.cz/nextcloud/davfs)" >"$secrets"
+	sudo chown root "$secrets"
 	sudo mkdir -p "$path"
-	sudo mount.davfs -o uid=1000,username=cynerd "https://cloud.cynerd.cz/remote.php/dav/files/cynerd" "$path"
+	sudo mount.davfs -o "conf=${conf}" -o uid=1000 "$url" "$path"
+	sudo rm -f "$secrets"
 else
 	sudo umount "$path"
 fi
