@@ -70,9 +70,9 @@ if ask "nvim" "Install NeoVIM scripts"; then
 	nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 	# cs spelling
 	mkdir -p ~/.local/share/nvim/site/spell
-	curl "https://ftp.nluug.nl/pub/vim/runtime/spell/cs.utf-8.spl" \
+	curl -L "https://ftp.nluug.nl/pub/vim/runtime/spell/cs.utf-8.spl" \
 		>~/.local/share/nvim/site/spell/cs.utf-8.spl
-	curl "https://ftp.nluug.nl/pub/vim/runtime/spell/cs.utf-8.sug" \
+	curl -L "https://ftp.nluug.nl/pub/vim/runtime/spell/cs.utf-8.sug" \
 		>~/.local/share/nvim/site/spell/cs.utf-8.sug
 fi
 
