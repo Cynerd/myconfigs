@@ -27,6 +27,7 @@ set encoding=utf-8
 set backspace=indent,eol,start
 set completeopt=menu,menuone,preview,noselect,noinsert
 
+" colorscheme vim
 colorscheme nord
 let g:lightline = {
 \  'colorscheme': 'nord',

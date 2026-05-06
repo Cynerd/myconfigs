@@ -52,7 +52,6 @@ require("packer").startup(function(use)
 		end,
 	})
 	-- Programming -------------------------------------------------------------
-	use("neovim/nvim-lspconfig")
 	use("p00f/clangd_extensions.nvim")
 	use({
 		"mfussenegger/nvim-lint",
@@ -107,15 +106,16 @@ require("packer").startup(function(use)
 		config = function()
 			require("conform").setup({
 				formatters_by_ft = {
-					c = { "clang-format", "trim_newlines", "twim_whitespace" },
-					json = { "jq", "trim_newlines", "twim_whitespace" },
-					lua = { "stylua", "trim_newlines", "twim_whitespace" },
-					nix = { "alejandra", "trim_newlines", "twim_whitespace" },
-					python = { "ruff_fix", "ruff_format", "trim_newlines", "twim_whitespace" },
-					sh = { "shfmt", "trim_newlines", "twim_whitespace" },
-					typst = { "typstfmt", "trim_newlines", "twim_whitespace" },
-					yaml = { "yq", "trim_newlines", "twim_whitespace" },
-					xml = { "xmllint", "trim_newlines", "twim_whitespace" },
+					c = { "clang-format", "trim_newlines", "trim_whitespace" },
+					json = { "jq", "trim_newlines", "trim_whitespace" },
+					lua = { "stylua", "trim_newlines", "trim_whitespace" },
+					nix = { "alejandra", "trim_newlines", "trim_whitespace" },
+					python = { "ruff_fix", "ruff_format", "trim_newlines", "trim_whitespace" },
+					sh = { "shfmt", "trim_newlines", "trim_whitespace" },
+					typst = { "typstyle", "trim_newlines", "trim_whitespace" },
+					rst = { "docstrfmt", "trim_newlines" },
+					yaml = { "yq", "trim_newlines", "trim_whitespace" },
+					xml = { "xmllint", "trim_newlines", "trim_whitespace" },
 				},
 			})
 		end,
@@ -124,6 +124,14 @@ require("packer").startup(function(use)
 	use("honza/vim-snippets")
 	use("craigemery/vim-autotag")
 	use("scrooloose/nerdcommenter")
+	-- LSP ---------------------------------------------------------------------
+	use("neovim/nvim-lspconfig")
+	vim.lsp.enable("bashls")
+	vim.lsp.enable("clangd")
+	vim.lsp.enable("nil_ls")
+	vim.lsp.enable("pylsp")
+	vim.lsp.enable("tinymist")
+	vim.lsp.enable("guile_ls")
 	-- Additional integrations -------------------------------------------------
 	use({
 		"chomosuke/typst-preview.nvim",
@@ -141,12 +149,5 @@ require("packer").startup(function(use)
 	use("LnL7/vim-nix")
 	use("kaarmu/typst.vim")
 	use("aliou/bats.vim")
-
-	-- LSP ---------------------------------------------------------------------
-	vim.lsp.enable("bashls")
-	vim.lsp.enable("clangd")
-	vim.lsp.enable("nil_ls")
-	vim.lsp.enable("pylsp")
-	vim.lsp.enable("tinymist")
-	vim.lsp.enable("guile_ls")
+	use("HiPhish/guile.vim")
 end)
