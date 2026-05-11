@@ -111,11 +111,11 @@ require("packer").startup(function(use)
 					lua = { "stylua", "trim_newlines", "trim_whitespace" },
 					nix = { "alejandra", "trim_newlines", "trim_whitespace" },
 					python = { "ruff_fix", "ruff_format", "trim_newlines", "trim_whitespace" },
+					rst = { "docstrfmt", "trim_newlines" },
 					sh = { "shfmt", "trim_newlines", "trim_whitespace" },
 					typst = { "typstyle", "trim_newlines", "trim_whitespace" },
-					rst = { "docstrfmt", "trim_newlines" },
-					yaml = { "yq", "trim_newlines", "trim_whitespace" },
 					xml = { "xmllint", "trim_newlines", "trim_whitespace" },
+					yaml = { "yq", "trim_newlines", "trim_whitespace" },
 				},
 			})
 		end,
