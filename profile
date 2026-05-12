@@ -20,10 +20,10 @@ for profile in "$HOME"/.nix-profile/etc/profile.d/*; do
 done
 
 # Guix
-export GUIX_PROFILE="/home/cynerd/.guix-profile"
-if [[ -d "$GUIX_PROFILE" ]]; then
-	source "$GUIX_PROFILE/etc/profile"
-fi
+GUIX_PROFILE="$HOME/.config/guix/current"
+! [[ -d "$GUIX_PROFILE" ]] || source "$GUIX_PROFILE/etc/profile"
+GUIX_PROFILE="$HOME/.guix-profile"
+! [[ -d "$GUIX_PROFILE" ]] || source "$GUIX_PROFILE/etc/profile"
 
 # Rest of the profile run only if login is from linux console
 [[ "$(tty)" != /dev/tty* ]] && return
